@@ -49,7 +49,11 @@ header .sub{color:var(--pencil);font-size:16px;margin:6px 0 0}
 .drawer .n{font-size:20px;font-weight:700}
 .drawer .c{font-size:14px;color:var(--pencil)}
 
+.shelf{margin-top:30px}
+.shelf h3{font-size:22px;margin:0 0 -6px;font-weight:700;display:inline-block;padding:0 6px;background:linear-gradient(transparent 55%,var(--hl) 55%)}
 .panel{margin-top:30px;min-height:120px}
+ul.items li.sub{border:none;padding:16px 0 2px;font-size:15px;color:var(--pencil);letter-spacing:.08em}
+ul.items li.sub::before{content:"";}
 .hint{color:var(--pencil);display:flex;align-items:flex-start;gap:8px;font-size:17px}
 .hint svg{width:70px;height:50px;stroke:var(--pencil);fill:none;stroke-width:2;stroke-linecap:round;flex:none}
 .panel h2{font-size:28px;margin:0 0 2px;font-weight:700}
@@ -92,7 +96,7 @@ footer{margin-top:50px;color:var(--pencil);font-size:14px;border-top:1.5px dashe
     <button class="toggle" id="stu" aria-pressed="false">只看給學生的</button>
   </div>
 
-  <nav class="drawers" id="drawers" aria-label="分類"></nav>
+  <nav id="drawers" aria-label="分類"></nav>
   <section class="panel" id="panel" aria-live="polite"></section>
 
   <footer>滑鼠在抽屜上停一下，有東西。<br>標「Claude」的頁面預設只有自己打得開，給學生前要先設成分享。</footer>
@@ -103,6 +107,7 @@ const GH = "https://huangisright.github.io/";
 const A = id => "https://claude.ai/code/artifact/" + id;
 
 const DOODLES = {
+  hand:'<path d="M8 40 L30 12 L52 38 Z"/><circle cx="30" cy="12" r="3.2"/><path d="M33 15 L41 9"/><path d="M41 9 L39 4 M41 9 L46 7"/><path d="M20 28 C26 25 34 25 40 27"/>',
   home:'<path d="M7 25 L30 7 L53 24"/><path d="M12 22 L13 42 L48 41 L47 21"/><path d="M26 41 L26 29 L34 29.5 L34 41"/>',
   tools:'<path d="M13 40 L36 16"/><circle cx="41" cy="11" r="6.5"/><path d="M19 13 L44 39"/><path d="M44 39 L47 43 L42 42 Z"/>',
   geo:'<path d="M9 41 L30 7 L52 40 L10 41.5"/><circle cx="30.5" cy="29" r="9"/><circle cx="30.5" cy="29" r="1"/>',
@@ -113,11 +118,48 @@ const DOODLES = {
 };
 
 const SECTIONS = [
-  { id:"hub", name:"總站", dz:"home", note:"所有路最後都通到這裡。", items:[
-    { t:"IsRight 工具箱", d:"出卷、轉 Word、點名、IGP、密室……", u:GH+"isright-tools/", src:"gh" },
-    { t:"數理資優班　互動探索站", d:"每份學習單對應的探索站，七上到八下", u:GH+"GiftedMath/", src:"gh", stu:1 },
+  { id:"math", shelf:"教材", name:"數學互動操作", dz:"hand", note:"手動一次，勝過看十次。", items:[
+    { t:"互動探索站（總目錄）", d:"可搜尋、可依年級篩選", u:GH+"GiftedMath/", src:"gh", stu:1 },
+    { t:"章後延伸報告", d:"", u:GH+"GiftedMath/extend.html", src:"gh", stu:1 },
+    { h:"七上" },
+    { t:"一條數線，兩把尺", d:"", u:GH+"GiftedMath/units/g7a-ch1-number-line.html", src:"gh", stu:1 },
+    { t:"拆開來看", d:"", u:GH+"GiftedMath/units/g7a-ch2-skeleton.html", src:"gh", stu:1 },
+    { t:"把數線捲起來", d:"", u:GH+"GiftedMath/units/g7a-ch2-modular.html", src:"gh", stu:1 },
+    { t:"分母是單位", d:"", u:GH+"GiftedMath/units/g7a-ch2-fraction-unit.html", src:"gh", stu:1 },
+    { t:"先給它一個名字", d:"", u:GH+"GiftedMath/units/g7a-ch3-naming.html", src:"gh", stu:1 },
+    { h:"七下" },
+    { t:"一條不夠", d:"", u:GH+"GiftedMath/units/g7b-ch1-simultaneous.html", src:"gh", stu:1 },
+    { t:"一個數不夠", d:"", u:GH+"GiftedMath/units/g7b-ch2-coordinates.html", src:"gh", stu:1 },
+    { t:"換一個基準看", d:"", u:GH+"GiftedMath/units/g7b-ch3-ratio.html", src:"gh", stu:1 },
+    { t:"答案是一整段", d:"", u:GH+"GiftedMath/units/g7b-ch4-inequality.html", src:"gh", stu:1 },
+    { t:"誰能代表大家", d:"", u:GH+"GiftedMath/units/g7b-ch5-statistics.html", src:"gh", stu:1 },
+    { t:"正對著看", d:"", u:GH+"GiftedMath/units/g7b-ch6-geometry.html", src:"gh", stu:1 },
+    { h:"八上" },
+    { t:"把十換成 x", d:"", u:GH+"GiftedMath/units/g8a-ch1-polynomial.html", src:"gh", stu:1 },
+    { t:"不要乘，用數的", d:"", u:GH+"GiftedMath/units/g8a-s1-1-binomial.html", src:"gh", stu:1 },
+    { t:"把面積翻回邊長", d:"", u:GH+"GiftedMath/units/g8a-ch2-sqrt-pythagoras.html", src:"gh", stu:1 },
+    { t:"拆成乘法才看得見", d:"", u:GH+"GiftedMath/units/g8a-ch3-factoring.html", src:"gh", stu:1 },
+    { t:"係數才是主角", d:"", u:GH+"GiftedMath/units/g8a-ch3-genfunc-1.html", src:"gh", stu:1 },
+    { t:"一直加下去", d:"", u:GH+"GiftedMath/units/g8a-ch3-genfunc-2.html", src:"gh", stu:1 },
+    { t:"變回你會解的樣子", d:"", u:GH+"GiftedMath/units/g8a-ch4-quadratic.html", src:"gh", stu:1 },
+    { t:"中間的那個人在哪裡", d:"", u:GH+"GiftedMath/units/g8a-ch5-statistics.html", src:"gh", stu:1 },
+    { h:"八下" },
+    { t:"規則才是數列", d:"", u:GH+"GiftedMath/units/g8b-ch1-sequences.html", src:"gh", stu:1 },
+    { t:"裡面有一個小的自己", d:"", u:GH+"GiftedMath/units/g8b-ch1-recursion.html", src:"gh", stu:1 },
+    { t:"它不會改口", d:"", u:GH+"GiftedMath/units/g8b-ch2-functions.html", src:"gh", stu:1 },
+    { t:"不能再動了", d:"", u:GH+"GiftedMath/units/g8b-ch3-triangle.html", src:"gh", stu:1 },
+    { t:"那條線本來不在圖上", d:"", u:GH+"GiftedMath/units/g8b-ch4-parallel.html", src:"gh", stu:1 },
+    { h:"九上" },
+    { t:"兩個角就夠了", d:"", u:GH+"GiftedMath/units/g9a-ch1-similar.html", src:"gh", stu:1 },
+    { t:"怎麼看都一樣", d:"", u:GH+"GiftedMath/units/g9a-ch2-circle.html", src:"gh", stu:1 },
+    { t:"不是剛好", d:"", u:GH+"GiftedMath/units/g9a-ch3-proof.html", src:"gh", stu:1 },
+    { h:"九下" },
+    { t:"同一條，搬了家", d:"", u:GH+"GiftedMath/units/g9b-ch1-quadratic.html", src:"gh", stu:1 },
+    { t:"算出來之前，先問", d:"", u:GH+"GiftedMath/units/g9b-ch2-statprob.html", src:"gh", stu:1 },
+    { t:"多出來的那個方向", d:"", u:GH+"GiftedMath/units/g9b-ch3-solids.html", src:"gh", stu:1 },
   ]},
-  { id:"tools", name:"課堂工具", dz:"tools", note:"為了少做一件重複的事，花三天寫一個工具。值得。", items:[
+  { id:"tools", shelf:"工具與行政", name:"課堂工具", dz:"tools", note:"為了少做一件重複的事，花三天寫一個工具。值得。", items:[
+    { t:"IsRight 工具箱（總目錄）", d:"", u:GH+"isright-tools/", src:"gh" },
     { t:"題目變形工坊", d:"參數化出卷", u:GH+"isright-tools/question-variant/", src:"gh" },
     { t:"考卷轉 Word", d:"Markdown＋LaTeX 轉 docx", u:GH+"isright-tools/exam-to-word/", src:"gh" },
     { t:"點名表產生器", d:"", u:GH+"isright-tools/roll-call/", src:"gh" },
@@ -127,7 +169,7 @@ const SECTIONS = [
     { t:"搶登記發射台", d:"", u:GH+"isright-tools/grab-launcher/", src:"gh" },
     { t:"鍵盤路徑勘查", d:"", u:GH+"isright-tools/key-path/", src:"gh" },
   ]},
-  { id:"geo", name:"幾何明珠", dz:"geo", note:"每一頁都在問同一件事：什麼沒有變？", items:[
+  { id:"geo", shelf:"教材", name:"幾何明珠", dz:"geo", note:"每一頁都在問同一件事：什麼沒有變？", items:[
     { t:"幾何明珠群島 3D", d:"課程地圖", u:A("93aaf12d-82d1-4ad3-b24f-6f22861d702c"), src:"claude", stu:1 },
     { t:"幾何明珠群島 2D", d:"課程地圖", u:A("54a6d027-f96e-4587-8ac5-083b3a00d2c3"), src:"claude", stu:1 },
     ...[
@@ -157,15 +199,24 @@ const SECTIONS = [
       ["最後一題","5ffdf0d3-3662-493d-9a42-e0d25cbbedbb"],
     ].map(([t,id]) => ({ t, d:"", u:A(id), src:"claude", stu:1 })),
   ]},
-  { id:"iso", name:"金門等時線", dz:"iso", note:"金門很小，但走路還是要很久。", items:[
+  { id:"iso", shelf:"教材", name:"金門等時線", dz:"iso", note:"金門很小，但走路還是要很久。", items:[
+    { h:"互動版（GitHub，學生可直接開）" },
+    { t:"金門有多大？（互動版總覽）", d:"", u:GH+"GiftedMath/units/tp-kinmen-isochrone.html", src:"gh", stu:1 },
+    { t:"走 10 分鐘，到得了哪裡？", d:"", u:GH+"GiftedMath/units/tp-kinmen-1-school.html", src:"gh", stu:1 },
+    { t:"坐一段公車，範圍會變成什麼形狀？", d:"", u:GH+"GiftedMath/units/tp-kinmen-2-bus.html", src:"gh", stu:1 },
+    { t:"退潮了，走哪條路最快？", d:"", u:GH+"GiftedMath/units/tp-kinmen-3-jiangong.html", src:"gh", stu:1 },
+    { t:"兩輛救護車，誰先到？", d:"", u:GH+"GiftedMath/units/tp-kinmen-4-who-first.html", src:"gh", stu:1 },
+    { t:"金門大橋通車以後，烈嶼變近了多少？", d:"", u:GH+"GiftedMath/units/tp-kinmen-5-bridge.html", src:"gh", stu:1 },
+    { t:"金門離哪裡比較近？", d:"", u:GH+"GiftedMath/units/tp-kinmen-6-time-map.html", src:"gh", stu:1 },
     { t:"金門等時線地圖", d:"", u:GH+"eqaul-line/kinmen_isochrones.html", src:"gh", stu:1 },
+    { h:"Claude 版與教師資料" },
     { t:"金門有多大？等時線單元", d:"", u:A("eae66d4e-f333-40ca-b7ee-e2fcc88648aa"), src:"claude", stu:1 },
     { t:"烈嶼有多遠？", d:"", u:A("49adb96b-f729-443e-b89a-c24bf3a885f4"), src:"claude", stu:1 },
     { t:"誰先到？", d:"", u:A("3281a00c-db0c-4036-b516-e86f460a45b8"), src:"claude", stu:1 },
     { t:"金門有多大？課程分享", d:"給老師的分享版", u:A("15701c55-5034-49f3-8f98-e25d2887f7a3"), src:"claude" },
     { t:"等時線單元規劃：從金城國中出發", d:"教師規劃", u:A("b4ebf8d0-023b-4eb5-921c-8f27b3e58793"), src:"claude" },
   ]},
-  { id:"escape", name:"密室逃脫", dz:"door", note:"學生解謎的時間，永遠是你預估的一半或兩倍。", items:[
+  { id:"escape", shelf:"教材", name:"密室逃脫", dz:"door", note:"學生解謎的時間，永遠是你預估的一半或兩倍。", items:[
     { t:"數位密室逃脫（學生端）", d:"", u:GH+"isright-tools/escape-room/", src:"gh", stu:1 },
     { t:"數位密室逃脫（教師監看台）", d:"", u:GH+"isright-tools/escape-room/teacher.html", src:"gh" },
     { t:"閩南建築與僑鄉記憶：落番密室逃脫", d:"金門介紹密室", u:GH+"ksecret/", src:"gh", stu:1 },
@@ -175,12 +226,12 @@ const SECTIONS = [
     { t:"密室逃脫在資優教育", d:"", u:A("5d659fec-2645-425f-857c-424deb21fa65"), src:"claude" },
     { t:"推廣提案自我檢驗單", d:"", u:A("0bfa0d23-0b60-4df3-8a4e-1951cbd88f9d"), src:"claude" },
   ]},
-  { id:"misc", name:"其他課堂頁面", dz:"wind", note:"分類不了的，通常是最有趣的。", items:[
+  { id:"misc", shelf:"教材", name:"其他課堂頁面", dz:"wind", note:"分類不了的，通常是最有趣的。", items:[
     { t:"虛擬風洞模擬系統", d:"", u:GH+"virtual_wind_tunnel/", src:"gh", stu:1 },
     { t:"露出來的那一塊 平板關卡", d:"", u:A("aa817bd3-1568-4e9a-a9e6-a5d73a81cb3f"), src:"claude", stu:1 },
     { t:"誰是全部？平板關卡", d:"", u:A("a2837f5a-1bee-4c60-b926-c1cfc5ed9ec2"), src:"claude", stu:1 },
   ]},
-  { id:"admin", name:"資優行政與科展", dz:"list", note:"這一格存在，是為了讓其他格能存在。", items:[
+  { id:"admin", shelf:"工具與行政", name:"資優行政與科展", dz:"list", note:"這一格存在，是為了讓其他格能存在。", items:[
     { t:"資優生 IGP 年度作業手冊", d:"", u:A("559a2285-2ebe-4740-a5eb-f6a63696226a"), src:"claude" },
     { t:"科展與獨研發表檢核表", d:"", u:A("2af5aa19-282c-49ba-996a-ca6e7082f5ee"), src:"claude", stu:1 },
   ]},
@@ -192,13 +243,26 @@ let current = null, stuOnly = false;
 const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const visible = it => !stuOnly || it.stu;
 
+const real = s => s.items.filter(it => !it.h && visible(it));
 function drawDrawers(){
-  drawers.innerHTML = SECTIONS.map(s => {
-    const n = s.items.filter(visible).length;
-    return `<button class="drawer${current===s.id?" on":""}" data-id="${s.id}" title="${esc(s.note)}" aria-expanded="${current===s.id}" ${n?"":"disabled style=\"opacity:.35;cursor:default\""}>
-      <svg viewBox="0 0 60 48" aria-hidden="true">${DOODLES[s.dz]}</svg>
-      <span class="n">${s.name}</span><span class="c">${n} 個</span></button>`;
-  }).join("");
+  const shelves = [...new Set(SECTIONS.map(s => s.shelf))];
+  drawers.innerHTML = shelves.map(sh => `<div class="shelf"><h3>${sh}</h3><div class="drawers">` +
+    SECTIONS.filter(s => s.shelf === sh).map(s => {
+      const n = real(s).length;
+      return `<button class="drawer${current===s.id?" on":""}" data-id="${s.id}" title="${esc(s.note)}" aria-expanded="${current===s.id}" ${n?"":"disabled style=\"opacity:.35;cursor:default\""}>
+        <svg viewBox="0 0 60 48" aria-hidden="true">${DOODLES[s.dz]}</svg>
+        <span class="n">${s.name}</span><span class="c">${n} 個</span></button>`;
+    }).join("") + `</div></div>`).join("");
+}
+function listHTML(items){
+  const out = []; let pending = null;
+  for (const it of items){
+    if (it.h){ pending = it.h; continue; }
+    if (!visible(it)) continue;
+    if (pending){ out.push(`<li class="sub">${esc(pending)}</li>`); pending = null; }
+    out.push(li(it));
+  }
+  return out.join("");
 }
 
 function li(it, from){
@@ -216,7 +280,7 @@ function drawPanel(){
   if (term){
     const hits = [];
     SECTIONS.forEach(s => s.items.forEach(it => {
-      if (visible(it) && (it.t+it.d+s.name).toLowerCase().includes(term)) hits.push([it, s.name]);
+      if (!it.h && visible(it) && (it.t+it.d+s.name).toLowerCase().includes(term)) hits.push([it, s.name]);
     }));
     panel.innerHTML = `<h2>找「${esc(q.value.trim())}」</h2>${scribble}` + (hits.length
       ? `<ul class="items">${hits.map(([it,n]) => li(it,n)).join("")}</ul>`
@@ -228,8 +292,7 @@ function drawPanel(){
     panel.innerHTML = `<div class="hint"><svg viewBox="0 0 70 50" aria-hidden="true"><path d="M60 46 C50 30 30 30 18 14"/><path d="M18 14 L19 25"/><path d="M18 14 L29 16"/></svg><span>點一個抽屜打開。</span></div>`;
     return;
   }
-  const items = s.items.filter(visible);
-  panel.innerHTML = `<h2>${s.name}</h2><p class="note">${esc(s.note)}</p>${scribble}<ul class="items">${items.map(it => li(it)).join("")}</ul>`;
+  panel.innerHTML = `<h2>${s.name}</h2><p class="note">${esc(s.note)}</p>${scribble}<ul class="items">${listHTML(s.items)}</ul>`;
 }
 
 function render(){ drawDrawers(); drawPanel(); }
