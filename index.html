@@ -5,90 +5,129 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>IsRight 入口</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f6f4ef; --card:#ffffff; --ink:#1f2328; --mute:#6a6f76; --line:#e3dfd6;
-  --accent:#1f6f5c; --accent-soft:#e2efe9; --stu:#b4532a; --stu-soft:#f7e6dc;
+  --paper:#fdfcf8; --ink:#1b1b1b; --pencil:#77756f; --faint:#d9d6cc; --marker:#d4472b; --hl:#fff2a8;
+  --wob:255px 15px 225px 15px/15px 225px 15px 255px;
+  --wob2:15px 255px 15px 225px/225px 15px 255px 15px;
 }
 @media (prefers-color-scheme: dark){
-  :root{ --bg:#16181b; --card:#1f2226; --ink:#e8e6e1; --mute:#9aa0a6; --line:#30343a;
-    --accent:#6cc3a8; --accent-soft:#1f3530; --stu:#e8956b; --stu-soft:#3a2a22; }
+  :root{ --paper:#1c1d1f; --ink:#ecebe6; --pencil:#9c9a93; --faint:#3a3b3e; --marker:#ff7a5c; --hl:#4a4320; }
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);
-  font:16px/1.55 -apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif}
-.wrap{max-width:980px;margin:0 auto;padding:28px 16px 60px}
-header h1{margin:0;font-size:26px;letter-spacing:.02em}
-header p{margin:4px 0 0;color:var(--mute);font-size:14px}
-.bar{position:sticky;top:0;z-index:5;background:var(--bg);padding:14px 0 10px;margin-top:10px;
-  display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-bottom:1px solid var(--line)}
-#q{flex:1 1 220px;min-width:0;padding:9px 12px;border:1px solid var(--line);border-radius:10px;
-  background:var(--card);color:var(--ink);font-size:15px}
-.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:7px 12px;
-  border-radius:999px;font-size:14px;cursor:pointer}
-.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
-.chip[data-f="stu"].on{background:var(--stu);border-color:var(--stu)}
-section{margin-top:26px}
-section h2{font-size:15px;color:var(--mute);font-weight:600;margin:0 0 10px;letter-spacing:.05em}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;
-  display:flex;flex-direction:column;gap:6px}
-.card a.t{color:var(--ink);font-weight:600;text-decoration:none}
-.card a.t:hover{color:var(--accent)}
-.card .d{color:var(--mute);font-size:13px;flex:1}
-.row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
-.tag{font-size:11px;padding:2px 7px;border-radius:6px;background:var(--accent-soft);color:var(--accent)}
-.tag.stu{background:var(--stu-soft);color:var(--stu)}
-.tag.priv{background:transparent;border:1px dashed var(--line);color:var(--mute)}
-.copy{margin-left:auto;border:none;background:none;color:var(--mute);font-size:12px;cursor:pointer;padding:2px 4px}
-.copy:hover{color:var(--accent)}
-.empty{color:var(--mute);padding:30px 0;text-align:center;display:none}
-footer{margin-top:40px;color:var(--mute);font-size:12px}
+html{background:var(--paper)}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font:18px/1.6 "LXGW WenKai TC","Kaiti TC","KaiTi",serif}
+.wrap{max-width:860px;margin:0 auto;padding:36px 16px 70px}
+a{color:inherit}
+
+header{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap}
+header h1{margin:0;font-size:40px;font-weight:700;letter-spacing:.02em;line-height:1.1}
+header .sub{color:var(--pencil);font-size:16px;margin:6px 0 0}
+.doodle-me{width:64px;height:64px;flex:none}
+
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:26px 0 8px}
+#q{flex:1 1 220px;min-width:0;font:inherit;font-size:17px;color:var(--ink);background:transparent;
+  border:2px solid var(--ink);border-radius:var(--wob);padding:8px 14px;outline:none}
+#q:focus{background:var(--hl)}
+.toggle{font:inherit;font-size:16px;color:var(--ink);background:transparent;cursor:pointer;
+  border:2px solid var(--ink);border-radius:var(--wob2);padding:7px 14px}
+.toggle.on{background:var(--ink);color:var(--paper)}
+
+.drawers{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:18px;margin-top:22px}
+.drawer{font:inherit;color:var(--ink);background:transparent;cursor:pointer;text-align:left;
+  border:2.5px solid var(--ink);border-radius:var(--wob);padding:14px 14px 12px;
+  display:flex;flex-direction:column;gap:4px;position:relative;transition:transform .12s}
+.drawer:nth-child(even){border-radius:var(--wob2)}
+.drawer:hover{transform:rotate(-1deg)}
+.drawer:nth-child(even):hover{transform:rotate(1deg)}
+.drawer.on{background:var(--hl)}
+.drawer svg{width:60px;height:48px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.drawer .n{font-size:20px;font-weight:700}
+.drawer .c{font-size:14px;color:var(--pencil)}
+
+.panel{margin-top:30px;min-height:120px}
+.hint{color:var(--pencil);display:flex;align-items:flex-start;gap:8px;font-size:17px}
+.hint svg{width:70px;height:50px;stroke:var(--pencil);fill:none;stroke-width:2;stroke-linecap:round;flex:none}
+.panel h2{font-size:28px;margin:0 0 2px;font-weight:700}
+.panel .note{color:var(--pencil);font-size:15px;margin:0 0 14px}
+.scribble{height:10px;width:180px;margin:0 0 14px}
+.scribble path{stroke:var(--marker);stroke-width:3;fill:none;stroke-linecap:round}
+ul.items{list-style:none;margin:0;padding:0}
+ul.items li{display:flex;align-items:baseline;gap:10px;padding:9px 2px;border-bottom:1.5px dashed var(--faint);flex-wrap:wrap}
+ul.items li::before{content:"→";color:var(--pencil);flex:none}
+ul.items a{text-decoration:none;font-size:19px;background-image:linear-gradient(var(--ink),var(--ink));
+  background-size:0 2px;background-repeat:no-repeat;background-position:0 100%;transition:background-size .2s}
+ul.items a:hover{background-size:100% 2px}
+.d{color:var(--pencil);font-size:15px}
+.tag{font-size:13px;color:var(--marker);border:1.5px solid var(--marker);border-radius:var(--wob2);padding:0 7px;line-height:1.6}
+.tag.c{color:var(--pencil);border-color:var(--pencil);border-style:dashed}
+.copy{margin-left:auto;font:inherit;font-size:14px;color:var(--pencil);background:none;border:none;cursor:pointer;text-decoration:underline dotted}
+.copy:hover{color:var(--ink)}
+.from{font-size:13px;color:var(--pencil)}
+
+footer{margin-top:50px;color:var(--pencil);font-size:14px;border-top:1.5px dashed var(--faint);padding-top:14px}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <h1>IsRight 入口</h1>
-    <p>教學頁面、課堂工具與給學生的連結，集中在這裡。</p>
+    <svg class="doodle-me" viewBox="0 0 64 64" style="stroke:var(--ink);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round" aria-hidden="true">
+      <circle cx="32" cy="13" r="8"/>
+      <path d="M32 21 L32.5 42"/><path d="M32.5 42 L24 59"/><path d="M32.5 42 L41 58"/>
+      <path d="M32 28 L20 35"/><path d="M32 28 L47 21"/>
+      <path d="M47 21 L58 6 L61 22 Z"/>
+    </svg>
+    <div>
+      <h1>IsRight 的入口</h1>
+      <p class="sub">教學頁面、課堂工具，還有要丟給學生的連結。</p>
+    </div>
   </header>
 
-  <div class="bar">
-    <input id="q" type="search" placeholder="搜尋名稱或說明…" autocomplete="off">
-    <button class="chip on" data-f="all">全部</button>
-    <button class="chip" data-f="stu">給學生</button>
-    <button class="chip" data-f="tool">工具</button>
+  <div class="tools">
+    <input id="q" type="search" placeholder="找東西……" autocomplete="off" aria-label="搜尋">
+    <button class="toggle" id="stu" aria-pressed="false">只看給學生的</button>
   </div>
 
-  <main id="main"></main>
-  <p class="empty" id="empty">沒有符合的頁面</p>
+  <nav class="drawers" id="drawers" aria-label="分類"></nav>
+  <section class="panel" id="panel" aria-live="polite"></section>
 
-  <footer>
-    「給學生」＝可以直接傳給學生的連結。標「Claude」的頁面預設只有自己看得到，要給學生前先在 Claude 裡設為分享。
-  </footer>
+  <footer>滑鼠在抽屜上停一下，有東西。<br>標「Claude」的頁面預設只有自己打得開，給學生前要先設成分享。</footer>
 </div>
 
 <script>
 const GH = "https://huangisright.github.io/";
 const A = id => "https://claude.ai/code/artifact/" + id;
 
-// stu: 給學生；tool: 工具；src: "gh" 公開網站 / "claude" Claude Artifact
+const DOODLES = {
+  home:'<path d="M7 25 L30 7 L53 24"/><path d="M12 22 L13 42 L48 41 L47 21"/><path d="M26 41 L26 29 L34 29.5 L34 41"/>',
+  tools:'<path d="M13 40 L36 16"/><circle cx="41" cy="11" r="6.5"/><path d="M19 13 L44 39"/><path d="M44 39 L47 43 L42 42 Z"/>',
+  geo:'<path d="M9 41 L30 7 L52 40 L10 41.5"/><circle cx="30.5" cy="29" r="9"/><circle cx="30.5" cy="29" r="1"/>',
+  iso:'<ellipse cx="30" cy="25" rx="25" ry="17"/><ellipse cx="29" cy="26" rx="16" ry="10.5"/><ellipse cx="29" cy="26" rx="7" ry="4.5"/><circle cx="29" cy="26" r="1.2"/>',
+  door:'<path d="M16 43 L15.5 7 L44 6 L45 43"/><circle cx="38" cy="24" r="3"/><path d="M38 27 L38 32"/><path d="M8 43 L53 43"/>',
+  wind:'<path d="M5 15 C18 10 33 20 46 13 C52 10 54 17 49 18"/><path d="M9 26 C24 21 38 30 54 23"/><path d="M5 37 C19 32 33 41 45 35 C51 32 53 39 48 40"/>',
+  list:'<path d="M9 9 L17 9 L17 17 L9 17 Z"/><path d="M11 13 L13 15.5 L19 7"/><path d="M24 13 L52 12"/><path d="M9 25 L17 25 L17 33 L9 33 Z"/><path d="M11 29 L13 31.5 L19 23"/><path d="M24 29 L46 29.5"/><path d="M9 41 L17 41 L17 47 L9 47"/><path d="M24 44 L50 43"/>'
+};
+
 const SECTIONS = [
-  { name: "總站", items: [
-    { t:"IsRight 工具箱", d:"題目變形、考卷轉 Word、點名表、IGP、密室、搶登記等小工具", u:GH+"isright-tools/", src:"gh", tool:1 },
+  { id:"hub", name:"總站", dz:"home", note:"所有路最後都通到這裡。", items:[
+    { t:"IsRight 工具箱", d:"出卷、轉 Word、點名、IGP、密室……", u:GH+"isright-tools/", src:"gh" },
     { t:"數理資優班　互動探索站", d:"每份學習單對應的探索站，七上到八下", u:GH+"GiftedMath/", src:"gh", stu:1 },
   ]},
-  { name: "課堂工具", items: [
-    { t:"題目變形工坊", d:"參數化出卷", u:GH+"isright-tools/question-variant/", src:"gh", tool:1 },
-    { t:"考卷轉 Word", d:"Markdown＋LaTeX 轉 docx", u:GH+"isright-tools/exam-to-word/", src:"gh", tool:1 },
-    { t:"點名表產生器", d:"", u:GH+"isright-tools/roll-call/", src:"gh", tool:1 },
-    { t:"IGP 產生器", d:"資料只在瀏覽器處理", u:GH+"isright-tools/igp/", src:"gh", tool:1 },
-    { t:"上課檢核表", d:"", u:GH+"class-check-tool/", src:"gh", tool:1 },
-    { t:"數學題庫工坊", d:"", u:A("96a8020d-fe13-44c8-ae36-f8907cad2fe2"), src:"claude", tool:1 },
-    { t:"搶登記發射台", d:"", u:GH+"isright-tools/grab-launcher/", src:"gh", tool:1 },
-    { t:"鍵盤路徑勘查", d:"", u:GH+"isright-tools/key-path/", src:"gh", tool:1 },
+  { id:"tools", name:"課堂工具", dz:"tools", note:"為了少做一件重複的事，花三天寫一個工具。值得。", items:[
+    { t:"題目變形工坊", d:"參數化出卷", u:GH+"isright-tools/question-variant/", src:"gh" },
+    { t:"考卷轉 Word", d:"Markdown＋LaTeX 轉 docx", u:GH+"isright-tools/exam-to-word/", src:"gh" },
+    { t:"點名表產生器", d:"", u:GH+"isright-tools/roll-call/", src:"gh" },
+    { t:"IGP 產生器", d:"資料只在瀏覽器處理", u:GH+"isright-tools/igp/", src:"gh" },
+    { t:"上課檢核表", d:"", u:GH+"class-check-tool/", src:"gh" },
+    { t:"數學題庫工坊", d:"", u:A("96a8020d-fe13-44c8-ae36-f8907cad2fe2"), src:"claude" },
+    { t:"搶登記發射台", d:"", u:GH+"isright-tools/grab-launcher/", src:"gh" },
+    { t:"鍵盤路徑勘查", d:"", u:GH+"isright-tools/key-path/", src:"gh" },
   ]},
-  { name: "幾何明珠", items: [
+  { id:"geo", name:"幾何明珠", dz:"geo", note:"每一頁都在問同一件事：什麼沒有變？", items:[
     { t:"幾何明珠群島 3D", d:"課程地圖", u:A("93aaf12d-82d1-4ad3-b24f-6f22861d702c"), src:"claude", stu:1 },
     { t:"幾何明珠群島 2D", d:"課程地圖", u:A("54a6d027-f96e-4587-8ac5-083b3a00d2c3"), src:"claude", stu:1 },
     ...[
@@ -116,19 +155,19 @@ const SECTIONS = [
       ["圓上六個點","bd53fbeb-dbe8-4d8f-ab65-b8b458eaa51b"],
       ["翻譯過來的句子","1c725fa5-9cf2-4b31-ba4c-9153fac8a095"],
       ["最後一題","5ffdf0d3-3662-493d-9a42-e0d25cbbedbb"],
-    ].map(([t,id]) => ({ t, d:"動態頁", u:A(id), src:"claude", stu:1 })),
+    ].map(([t,id]) => ({ t, d:"", u:A(id), src:"claude", stu:1 })),
   ]},
-  { name: "金門等時線", items: [
-    { t:"金門等時線地圖", d:"公開版地圖", u:GH+"eqaul-line/kinmen_isochrones.html", src:"gh", stu:1 },
+  { id:"iso", name:"金門等時線", dz:"iso", note:"金門很小，但走路還是要很久。", items:[
+    { t:"金門等時線地圖", d:"", u:GH+"eqaul-line/kinmen_isochrones.html", src:"gh", stu:1 },
     { t:"金門有多大？等時線單元", d:"", u:A("eae66d4e-f333-40ca-b7ee-e2fcc88648aa"), src:"claude", stu:1 },
     { t:"烈嶼有多遠？", d:"", u:A("49adb96b-f729-443e-b89a-c24bf3a885f4"), src:"claude", stu:1 },
     { t:"誰先到？", d:"", u:A("3281a00c-db0c-4036-b516-e86f460a45b8"), src:"claude", stu:1 },
     { t:"金門有多大？課程分享", d:"給老師的分享版", u:A("15701c55-5034-49f3-8f98-e25d2887f7a3"), src:"claude" },
     { t:"等時線單元規劃：從金城國中出發", d:"教師規劃", u:A("b4ebf8d0-023b-4eb5-921c-8f27b3e58793"), src:"claude" },
   ]},
-  { name: "密室逃脫", items: [
+  { id:"escape", name:"密室逃脫", dz:"door", note:"學生解謎的時間，永遠是你預估的一半或兩倍。", items:[
     { t:"數位密室逃脫（學生端）", d:"", u:GH+"isright-tools/escape-room/", src:"gh", stu:1 },
-    { t:"數位密室逃脫（教師監看台）", d:"", u:GH+"isright-tools/escape-room/teacher.html", src:"gh", tool:1 },
+    { t:"數位密室逃脫（教師監看台）", d:"", u:GH+"isright-tools/escape-room/teacher.html", src:"gh" },
     { t:"閩南建築與僑鄉記憶：落番密室逃脫", d:"金門介紹密室", u:GH+"ksecret/", src:"gh", stu:1 },
     { t:"氣候變遷密室逃脫｜列印道具", d:"", u:A("33d43376-6b5f-4e48-a7c3-800965df353b"), src:"claude" },
     { t:"密室工坊使用教學", d:"", u:A("73556ed5-22a0-401e-b16d-fa3f703777a1"), src:"claude" },
@@ -136,63 +175,89 @@ const SECTIONS = [
     { t:"密室逃脫在資優教育", d:"", u:A("5d659fec-2645-425f-857c-424deb21fa65"), src:"claude" },
     { t:"推廣提案自我檢驗單", d:"", u:A("0bfa0d23-0b60-4df3-8a4e-1951cbd88f9d"), src:"claude" },
   ]},
-  { name: "其他課堂頁面", items: [
+  { id:"misc", name:"其他課堂頁面", dz:"wind", note:"分類不了的，通常是最有趣的。", items:[
     { t:"虛擬風洞模擬系統", d:"", u:GH+"virtual_wind_tunnel/", src:"gh", stu:1 },
     { t:"露出來的那一塊 平板關卡", d:"", u:A("aa817bd3-1568-4e9a-a9e6-a5d73a81cb3f"), src:"claude", stu:1 },
     { t:"誰是全部？平板關卡", d:"", u:A("a2837f5a-1bee-4c60-b926-c1cfc5ed9ec2"), src:"claude", stu:1 },
   ]},
-  { name: "資優行政與科展", items: [
-    { t:"資優生 IGP 年度作業手冊", d:"", u:A("559a2285-2ebe-4740-a5eb-f6a63696226a"), src:"claude", tool:1 },
+  { id:"admin", name:"資優行政與科展", dz:"list", note:"這一格存在，是為了讓其他格能存在。", items:[
+    { t:"資優生 IGP 年度作業手冊", d:"", u:A("559a2285-2ebe-4740-a5eb-f6a63696226a"), src:"claude" },
     { t:"科展與獨研發表檢核表", d:"", u:A("2af5aa19-282c-49ba-996a-ca6e7082f5ee"), src:"claude", stu:1 },
   ]},
 ];
 
-const main = document.getElementById("main");
-let filter = "all";
+const $ = s => document.querySelector(s);
+const drawers = $("#drawers"), panel = $("#panel"), q = $("#q"), stuBtn = $("#stu");
+let current = null, stuOnly = false;
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const visible = it => !stuOnly || it.stu;
 
-function render(){
-  const q = document.getElementById("q").value.trim().toLowerCase();
-  main.innerHTML = "";
-  let total = 0;
-  for (const s of SECTIONS){
-    const items = s.items.filter(it =>
-      (filter==="all" || (filter==="stu" && it.stu) || (filter==="tool" && it.tool)) &&
-      (!q || (it.t + it.d + s.name).toLowerCase().includes(q)));
-    if (!items.length) continue;
-    total += items.length;
-    const sec = document.createElement("section");
-    sec.innerHTML = `<h2>${s.name}</h2><div class="grid"></div>`;
-    const g = sec.querySelector(".grid");
-    for (const it of items){
-      const c = document.createElement("div");
-      c.className = "card";
-      c.innerHTML = `
-        <a class="t" href="${it.u}" target="_blank" rel="noopener">${it.t}</a>
-        ${it.d ? `<div class="d">${it.d}</div>` : ""}
-        <div class="row">
-          ${it.stu ? '<span class="tag stu">給學生</span>' : ""}
-          ${it.tool ? '<span class="tag">工具</span>' : ""}
-          ${it.src==="claude" ? '<span class="tag priv">Claude</span>' : ""}
-          <button class="copy" data-u="${it.u}">複製連結</button>
-        </div>`;
-      g.appendChild(c);
-    }
-    main.appendChild(sec);
-  }
-  document.getElementById("empty").style.display = total ? "none" : "block";
+function drawDrawers(){
+  drawers.innerHTML = SECTIONS.map(s => {
+    const n = s.items.filter(visible).length;
+    return `<button class="drawer${current===s.id?" on":""}" data-id="${s.id}" title="${esc(s.note)}" aria-expanded="${current===s.id}" ${n?"":"disabled style=\"opacity:.35;cursor:default\""}>
+      <svg viewBox="0 0 60 48" aria-hidden="true">${DOODLES[s.dz]}</svg>
+      <span class="n">${s.name}</span><span class="c">${n} 個</span></button>`;
+  }).join("");
 }
 
-document.querySelectorAll(".chip").forEach(b => b.onclick = () => {
-  document.querySelectorAll(".chip").forEach(x => x.classList.remove("on"));
-  b.classList.add("on"); filter = b.dataset.f; render();
+function li(it, from){
+  return `<li><a href="${it.u}" target="_blank" rel="noopener">${esc(it.t)}</a>
+    ${it.d?`<span class="d">${esc(it.d)}</span>`:""}
+    ${from?`<span class="from">／${from}</span>`:""}
+    ${it.stu?'<span class="tag">給學生</span>':""}
+    ${it.src==="claude"?'<span class="tag c">Claude</span>':""}
+    <button class="copy" data-u="${it.u}">複製連結</button></li>`;
+}
+const scribble = '<svg class="scribble" viewBox="0 0 180 10" aria-hidden="true"><path d="M2 6 C40 2 70 9 110 5 S160 3 178 6"/></svg>';
+
+function drawPanel(){
+  const term = q.value.trim().toLowerCase();
+  if (term){
+    const hits = [];
+    SECTIONS.forEach(s => s.items.forEach(it => {
+      if (visible(it) && (it.t+it.d+s.name).toLowerCase().includes(term)) hits.push([it, s.name]);
+    }));
+    panel.innerHTML = `<h2>找「${esc(q.value.trim())}」</h2>${scribble}` + (hits.length
+      ? `<ul class="items">${hits.map(([it,n]) => li(it,n)).join("")}</ul>`
+      : `<p class="note">什麼都沒有。也許它還在你的腦袋裡，還沒做出來。</p>`);
+    return;
+  }
+  const s = SECTIONS.find(x => x.id === current);
+  if (!s){
+    panel.innerHTML = `<div class="hint"><svg viewBox="0 0 70 50" aria-hidden="true"><path d="M60 46 C50 30 30 30 18 14"/><path d="M18 14 L19 25"/><path d="M18 14 L29 16"/></svg><span>點一個抽屜打開。</span></div>`;
+    return;
+  }
+  const items = s.items.filter(visible);
+  panel.innerHTML = `<h2>${s.name}</h2><p class="note">${esc(s.note)}</p>${scribble}<ul class="items">${items.map(it => li(it)).join("")}</ul>`;
+}
+
+function render(){ drawDrawers(); drawPanel(); }
+
+drawers.addEventListener("click", e => {
+  const b = e.target.closest(".drawer"); if (!b || b.disabled) return;
+  current = current === b.dataset.id ? null : b.dataset.id;
+  q.value = "";
+  try { history.replaceState(null, "", current ? "#"+current : location.pathname); } catch(_){}
+  render();
+  if (current) panel.scrollIntoView({behavior:"smooth", block:"nearest"});
 });
-document.getElementById("q").oninput = render;
-main.addEventListener("click", e => {
+q.addEventListener("input", drawPanel);
+stuBtn.addEventListener("click", () => {
+  stuOnly = !stuOnly;
+  stuBtn.classList.toggle("on", stuOnly);
+  stuBtn.setAttribute("aria-pressed", stuOnly);
+  render();
+});
+panel.addEventListener("click", e => {
   const b = e.target.closest(".copy"); if (!b) return;
   navigator.clipboard.writeText(b.dataset.u).then(() => {
-    b.textContent = "已複製"; setTimeout(() => b.textContent = "複製連結", 1200);
+    b.textContent = "複製了"; setTimeout(() => b.textContent = "複製連結", 1200);
   }).catch(() => prompt("複製這個連結：", b.dataset.u));
 });
+
+const h = location.hash.slice(1);
+if (SECTIONS.some(s => s.id === h)) current = h;
 render();
 </script>
 </body>
