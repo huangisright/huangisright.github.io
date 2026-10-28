@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>IsRight 入口</title>
+<style>
+:root{
+  --bg:#f6f4ef; --card:#ffffff; --ink:#1f2328; --mute:#6a6f76; --line:#e3dfd6;
+  --accent:#1f6f5c; --accent-soft:#e2efe9; --stu:#b4532a; --stu-soft:#f7e6dc;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#16181b; --card:#1f2226; --ink:#e8e6e1; --mute:#9aa0a6; --line:#30343a;
+    --accent:#6cc3a8; --accent-soft:#1f3530; --stu:#e8956b; --stu-soft:#3a2a22; }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.55 -apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:28px 16px 60px}
+header h1{margin:0;font-size:26px;letter-spacing:.02em}
+header p{margin:4px 0 0;color:var(--mute);font-size:14px}
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);padding:14px 0 10px;margin-top:10px;
+  display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-bottom:1px solid var(--line)}
+#q{flex:1 1 220px;min-width:0;padding:9px 12px;border:1px solid var(--line);border-radius:10px;
+  background:var(--card);color:var(--ink);font-size:15px}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:7px 12px;
+  border-radius:999px;font-size:14px;cursor:pointer}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.chip[data-f="stu"].on{background:var(--stu);border-color:var(--stu)}
+section{margin-top:26px}
+section h2{font-size:15px;color:var(--mute);font-weight:600;margin:0 0 10px;letter-spacing:.05em}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;
+  display:flex;flex-direction:column;gap:6px}
+.card a.t{color:var(--ink);font-weight:600;text-decoration:none}
+.card a.t:hover{color:var(--accent)}
+.card .d{color:var(--mute);font-size:13px;flex:1}
+.row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.tag{font-size:11px;padding:2px 7px;border-radius:6px;background:var(--accent-soft);color:var(--accent)}
+.tag.stu{background:var(--stu-soft);color:var(--stu)}
+.tag.priv{background:transparent;border:1px dashed var(--line);color:var(--mute)}
+.copy{margin-left:auto;border:none;background:none;color:var(--mute);font-size:12px;cursor:pointer;padding:2px 4px}
+.copy:hover{color:var(--accent)}
+.empty{color:var(--mute);padding:30px 0;text-align:center;display:none}
+footer{margin-top:40px;color:var(--mute);font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>IsRight 入口</h1>
+    <p>教學頁面、課堂工具與給學生的連結，集中在這裡。</p>
+  </header>
+
+  <div class="bar">
+    <input id="q" type="search" placeholder="搜尋名稱或說明…" autocomplete="off">
+    <button class="chip on" data-f="all">全部</button>
+    <button class="chip" data-f="stu">給學生</button>
+    <button class="chip" data-f="tool">工具</button>
+  </div>
+
+  <main id="main"></main>
+  <p class="empty" id="empty">沒有符合的頁面</p>
+
+  <footer>
+    「給學生」＝可以直接傳給學生的連結。標「Claude」的頁面預設只有自己看得到，要給學生前先在 Claude 裡設為分享。
+  </footer>
+</div>
+
+<script>
+const GH = "https://huangisright.github.io/";
+const A = id => "https://claude.ai/code/artifact/" + id;
+
+// stu: 給學生；tool: 工具；src: "gh" 公開網站 / "claude" Claude Artifact
+const SECTIONS = [
+  { name: "總站", items: [
+    { t:"IsRight 工具箱", d:"題目變形、考卷轉 Word、點名表、IGP、密室、搶登記等小工具", u:GH+"isright-tools/", src:"gh", tool:1 },
+    { t:"數理資優班　互動探索站", d:"每份學習單對應的探索站，七上到八下", u:GH+"GiftedMath/", src:"gh", stu:1 },
+  ]},
+  { name: "課堂工具", items: [
+    { t:"題目變形工坊", d:"參數化出卷", u:GH+"isright-tools/question-variant/", src:"gh", tool:1 },
+    { t:"考卷轉 Word", d:"Markdown＋LaTeX 轉 docx", u:GH+"isright-tools/exam-to-word/", src:"gh", tool:1 },
+    { t:"點名表產生器", d:"", u:GH+"isright-tools/roll-call/", src:"gh", tool:1 },
+    { t:"IGP 產生器", d:"資料只在瀏覽器處理", u:GH+"isright-tools/igp/", src:"gh", tool:1 },
+    { t:"上課檢核表", d:"", u:GH+"class-check-tool/", src:"gh", tool:1 },
+    { t:"數學題庫工坊", d:"", u:A("96a8020d-fe13-44c8-ae36-f8907cad2fe2"), src:"claude", tool:1 },
+    { t:"搶登記發射台", d:"", u:GH+"isright-tools/grab-launcher/", src:"gh", tool:1 },
+    { t:"鍵盤路徑勘查", d:"", u:GH+"isright-tools/key-path/", src:"gh", tool:1 },
+  ]},
+  { name: "幾何明珠", items: [
+    { t:"幾何明珠群島 3D", d:"課程地圖", u:A("93aaf12d-82d1-4ad3-b24f-6f22861d702c"), src:"claude", stu:1 },
+    { t:"幾何明珠群島 2D", d:"課程地圖", u:A("54a6d027-f96e-4587-8ac5-083b3a00d2c3"), src:"claude", stu:1 },
+    ...[
+      ["最短的那一圈","de0ce247-f61a-4623-8428-f5f236acc307"],
+      ["三條路接成一條","77ce21d5-5714-46a8-9993-be04b6cee206"],
+      ["離 A 是離 B 的兩倍","5164c6df-215c-4c7b-9e11-422bddd0a417"],
+      ["從頂點到底邊的那一條","12d308e1-97e0-4da1-9dba-8d543beee854"],
+      ["切下來的那一塊","beae9083-1770-413b-b74d-37c3d0125da6"],
+      ["又交在一點","1b37aa82-a242-4fd1-9837-68708a1db889"],
+      ["一條線穿過去","42b46362-91af-43d1-83e5-827ab01efd9b"],
+      ["三組對邊，交在一條線上","1bcdd0ef-d9bc-4039-a716-f8a92c916a55"],
+      ["三個點排成一列","e8d897a6-ae73-40d7-8c14-75f3c1049fb7"],
+      ["九個點，一個圓","c675ca7d-f7c7-424f-abe3-20ff4db04938"],
+      ["三個尖，一條線","a8a4d6ec-4d3b-4955-a839-147f096e563d"],
+      ["乘起來還是那個數","a6d5360f-df6f-4358-b3cd-bfe195df9bd6"],
+      ["站在兩個圓中間","cf49d3df-46e7-421b-9925-664c69e46bc1"],
+      ["中點兩邊一樣長","e5b2ec88-b8f4-48c9-b65b-8045778ad3d4"],
+      ["對角線乘起來","8bff8737-97ce-40bb-9f33-4c3e4950f413"],
+      ["轉兩次","25a2ab32-e56e-4368-9647-402d2c95e13c"],
+      ["三個中心","f4edd794-23f3-4b50-a5cb-54c1a5e6bfe8"],
+      ["中點又是正三角形","1b969405-2331-46bd-aafc-bc2a166af825"],
+      ["轉回原樣","0ec33b79-f23e-49de-a4da-3581b2fcf8bc"],
+      ["畫出來的地板","0bc3b020-5af4-47af-9fc3-563d83c4840d"],
+      ["一個數都不用算","f1241e2f-d075-4d46-8e88-da2568fec188"],
+      ["圓上六個點","bd53fbeb-dbe8-4d8f-ab65-b8b458eaa51b"],
+      ["翻譯過來的句子","1c725fa5-9cf2-4b31-ba4c-9153fac8a095"],
+      ["最後一題","5ffdf0d3-3662-493d-9a42-e0d25cbbedbb"],
+    ].map(([t,id]) => ({ t, d:"動態頁", u:A(id), src:"claude", stu:1 })),
+  ]},
+  { name: "金門等時線", items: [
+    { t:"金門等時線地圖", d:"公開版地圖", u:GH+"eqaul-line/kinmen_isochrones.html", src:"gh", stu:1 },
+    { t:"金門有多大？等時線單元", d:"", u:A("eae66d4e-f333-40ca-b7ee-e2fcc88648aa"), src:"claude", stu:1 },
+    { t:"烈嶼有多遠？", d:"", u:A("49adb96b-f729-443e-b89a-c24bf3a885f4"), src:"claude", stu:1 },
+    { t:"誰先到？", d:"", u:A("3281a00c-db0c-4036-b516-e86f460a45b8"), src:"claude", stu:1 },
+    { t:"金門有多大？課程分享", d:"給老師的分享版", u:A("15701c55-5034-49f3-8f98-e25d2887f7a3"), src:"claude" },
+    { t:"等時線單元規劃：從金城國中出發", d:"教師規劃", u:A("b4ebf8d0-023b-4eb5-921c-8f27b3e58793"), src:"claude" },
+  ]},
+  { name: "密室逃脫", items: [
+    { t:"數位密室逃脫（學生端）", d:"", u:GH+"isright-tools/escape-room/", src:"gh", stu:1 },
+    { t:"數位密室逃脫（教師監看台）", d:"", u:GH+"isright-tools/escape-room/teacher.html", src:"gh", tool:1 },
+    { t:"閩南建築與僑鄉記憶：落番密室逃脫", d:"金門介紹密室", u:GH+"ksecret/", src:"gh", stu:1 },
+    { t:"氣候變遷密室逃脫｜列印道具", d:"", u:A("33d43376-6b5f-4e48-a7c3-800965df353b"), src:"claude" },
+    { t:"密室工坊使用教學", d:"", u:A("73556ed5-22a0-401e-b16d-fa3f703777a1"), src:"claude" },
+    { t:"密室工坊 v4 平台設計", d:"", u:A("a08f27d9-9bab-4fad-8b09-3dcd58fe6e46"), src:"claude" },
+    { t:"密室逃脫在資優教育", d:"", u:A("5d659fec-2645-425f-857c-424deb21fa65"), src:"claude" },
+    { t:"推廣提案自我檢驗單", d:"", u:A("0bfa0d23-0b60-4df3-8a4e-1951cbd88f9d"), src:"claude" },
+  ]},
+  { name: "其他課堂頁面", items: [
+    { t:"虛擬風洞模擬系統", d:"", u:GH+"virtual_wind_tunnel/", src:"gh", stu:1 },
+    { t:"露出來的那一塊 平板關卡", d:"", u:A("aa817bd3-1568-4e9a-a9e6-a5d73a81cb3f"), src:"claude", stu:1 },
+    { t:"誰是全部？平板關卡", d:"", u:A("a2837f5a-1bee-4c60-b926-c1cfc5ed9ec2"), src:"claude", stu:1 },
+  ]},
+  { name: "資優行政與科展", items: [
+    { t:"資優生 IGP 年度作業手冊", d:"", u:A("559a2285-2ebe-4740-a5eb-f6a63696226a"), src:"claude", tool:1 },
+    { t:"科展與獨研發表檢核表", d:"", u:A("2af5aa19-282c-49ba-996a-ca6e7082f5ee"), src:"claude", stu:1 },
+  ]},
+];
+
+const main = document.getElementById("main");
+let filter = "all";
+
+function render(){
+  const q = document.getElementById("q").value.trim().toLowerCase();
+  main.innerHTML = "";
+  let total = 0;
+  for (const s of SECTIONS){
+    const items = s.items.filter(it =>
+      (filter==="all" || (filter==="stu" && it.stu) || (filter==="tool" && it.tool)) &&
+      (!q || (it.t + it.d + s.name).toLowerCase().includes(q)));
+    if (!items.length) continue;
+    total += items.length;
+    const sec = document.createElement("section");
+    sec.innerHTML = `<h2>${s.name}</h2><div class="grid"></div>`;
+    const g = sec.querySelector(".grid");
+    for (const it of items){
+      const c = document.createElement("div");
+      c.className = "card";
+      c.innerHTML = `
+        <a class="t" href="${it.u}" target="_blank" rel="noopener">${it.t}</a>
+        ${it.d ? `<div class="d">${it.d}</div>` : ""}
+        <div class="row">
+          ${it.stu ? '<span class="tag stu">給學生</span>' : ""}
+          ${it.tool ? '<span class="tag">工具</span>' : ""}
+          ${it.src==="claude" ? '<span class="tag priv">Claude</span>' : ""}
+          <button class="copy" data-u="${it.u}">複製連結</button>
+        </div>`;
+      g.appendChild(c);
+    }
+    main.appendChild(sec);
+  }
+  document.getElementById("empty").style.display = total ? "none" : "block";
+}
+
+document.querySelectorAll(".chip").forEach(b => b.onclick = () => {
+  document.querySelectorAll(".chip").forEach(x => x.classList.remove("on"));
+  b.classList.add("on"); filter = b.dataset.f; render();
+});
+document.getElementById("q").oninput = render;
+main.addEventListener("click", e => {
+  const b = e.target.closest(".copy"); if (!b) return;
+  navigator.clipboard.writeText(b.dataset.u).then(() => {
+    b.textContent = "已複製"; setTimeout(() => b.textContent = "複製連結", 1200);
+  }).catch(() => prompt("複製這個連結：", b.dataset.u));
+});
+render();
+</script>
+</body>
+</html>
