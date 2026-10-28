@@ -8,9 +8,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&display=swap" rel="stylesheet">
+<link href="fonts/isright-hand.css" rel="stylesheet">
 <style>
 :root{
   --paper:#fdfcf8; --ink:#1b1b1b; --pencil:#77756f; --faint:#d9d6cc; --marker:#d4472b; --hl:#fff2a8;
+  --title:"IsRight Hand","LXGW WenKai TC","Kaiti TC","KaiTi",serif;
   --wob:255px 15px 225px 15px/15px 225px 15px 255px;
   --wob2:15px 255px 15px 225px/225px 15px 255px 15px;
 }
@@ -25,7 +27,7 @@ body{margin:0;background:var(--paper);color:var(--ink);
 a{color:inherit}
 
 header{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap}
-header h1{margin:0;font-size:40px;font-weight:700;letter-spacing:.02em;line-height:1.1}
+header h1{font-family:var(--title);margin:0;font-size:40px;font-weight:700;letter-spacing:.02em;line-height:1.1}
 header .sub{color:var(--pencil);font-size:16px;margin:6px 0 0}
 .doodle-me{width:64px;height:64px;flex:none}
 
@@ -46,17 +48,17 @@ header .sub{color:var(--pencil);font-size:16px;margin:6px 0 0}
 .drawer:nth-child(even):hover{transform:rotate(1deg)}
 .drawer.on{background:var(--hl)}
 .drawer svg{width:60px;height:48px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-.drawer .n{font-size:20px;font-weight:700}
+.drawer .n{font-family:var(--title);font-size:22px;font-weight:700}
 .drawer .c{font-size:14px;color:var(--pencil)}
 
 .shelf{margin-top:30px}
-.shelf h3{font-size:22px;margin:0 0 -6px;font-weight:700;display:inline-block;padding:0 6px;background:linear-gradient(transparent 55%,var(--hl) 55%)}
+.shelf h3{font-family:var(--title);font-size:24px;margin:0 0 -6px;font-weight:700;display:inline-block;padding:0 6px;background:linear-gradient(transparent 55%,var(--hl) 55%)}
 .panel{margin-top:30px;min-height:120px}
 ul.items li.sub{border:none;padding:16px 0 2px;font-size:15px;color:var(--pencil);letter-spacing:.08em}
 ul.items li.sub::before{content:"";}
 .hint{color:var(--pencil);display:flex;align-items:flex-start;gap:8px;font-size:17px}
 .hint svg{width:70px;height:50px;stroke:var(--pencil);fill:none;stroke-width:2;stroke-linecap:round;flex:none}
-.panel h2{font-size:28px;margin:0 0 2px;font-weight:700}
+.panel h2{font-family:var(--title);font-size:30px;margin:0 0 2px;font-weight:700}
 .panel .note{color:var(--pencil);font-size:15px;margin:0 0 14px}
 .scribble{height:10px;width:180px;margin:0 0 14px}
 .scribble path{stroke:var(--marker);stroke-width:3;fill:none;stroke-linecap:round}
