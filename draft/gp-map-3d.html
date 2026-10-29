@@ -1,0 +1,543 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>幾何明珠群島 3D</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;600;700&display=swap">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<style>/* layout: full-bleed map, floating header card top-left, drawer right (bottom sheet on phones) */
+:root{
+  --sea:#c3e4e6; --sea-deep:#94cbd0; --ink:#1d3a40; --ink-soft:#4f6a6e; --paper:#f6f8f4;
+  --sand:#e7dcc0; --land:#8fbf78; --land-hi:#b4d68e; --accent:#c4572e; --route:#2f6f86; --fog:#7d9599;
+  --card:#ffffffee; --line:#1d3a4022;
+  --f-display:"LXGW WenKai TC","Kaiti TC","STKaiti",serif;
+  --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --sea:#0f2a33; --sea-deep:#0a1f27; --ink:#e3eeec; --ink-soft:#9fb7b8; --paper:#132830;
+  --sand:#7d7356; --land:#4f6d4c; --land-hi:#62845c; --accent:#e58a5f; --route:#7fc3d8; --fog:#58737a;
+  --card:#152c34ee; --line:#e3eeec22; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --sea:#0f2a33; --sea-deep:#0a1f27; --ink:#e3eeec; --ink-soft:#9fb7b8; --paper:#132830;
+  --sand:#7d7356; --land:#4f6d4c; --land-hi:#62845c; --accent:#e58a5f; --route:#7fc3d8; --fog:#58737a;
+  --card:#152c34ee; --line:#e3eeec22; color-scheme:dark}
+html,body{height:100%}
+body{background:var(--sea);color:var(--ink);font-family:var(--f-body);overflow:hidden}
+#stage{position:fixed;inset:0}
+.hud{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));left:max(12px,env(safe-area-inset-left,0px));
+  display:flex;flex-direction:column;gap:8px;z-index:5;max-width:calc(100% - 24px)}
+.brand{background:var(--card);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+.brand h1{margin:0;font-family:var(--f-display);font-size:22px;letter-spacing:.04em;font-weight:700}
+.brand p{margin:2px 0 0;font-size:12px;color:var(--ink-soft)}
+.modes{display:flex;gap:6px;flex-wrap:wrap}
+.seg{display:inline-flex;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px}
+.seg button{border:0;background:none;color:var(--ink-soft);font:600 13px var(--f-body);padding:6px 12px;border-radius:999px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.seg button:focus-visible,.drawer button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.legend{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:12px;color:var(--ink-soft);display:flex;gap:12px;flex-wrap:wrap}
+.legend i{display:inline-block;width:18px;height:0;border-top:2px solid var(--ink);vertical-align:middle;margin-right:4px}
+.legend i.h{border-top:2px dashed var(--route)}
+.legend i.lh{width:8px;height:8px;border:0;border-radius:50%;background:var(--accent)}
+.drawer{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));right:max(12px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));
+  width:340px;max-width:calc(100% - 24px);background:var(--card);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:12px;
+  z-index:6;display:flex;flex-direction:column;overflow:hidden;transition:transform .25s ease}
+.drawer[hidden]{display:none!important}
+.drawer header{padding:14px 16px 10px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:flex-start}
+.drawer header .k{font-size:11px;letter-spacing:.12em;color:var(--accent);font-weight:700}
+.drawer header h2{margin:2px 0 0;font-family:var(--f-display);font-size:24px;line-height:1.2;text-wrap:balance}
+.drawer header .x{margin-left:auto;border:0;background:none;color:var(--ink-soft);font-size:22px;cursor:pointer;line-height:1}
+.drawer .body{padding:12px 16px 18px;overflow:auto;display:flex;flex-direction:column;gap:12px;font-size:14px;line-height:1.65}
+.tnote{border-left:3px solid var(--accent);padding:6px 10px;background:color-mix(in srgb,var(--accent) 8%,transparent);font-size:13px;color:var(--ink)}
+.tnote b{color:var(--accent)}
+.sec{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;align-items:start;padding:10px 0;border-top:1px solid var(--line)}
+.sec .n{font:700 12px var(--f-body);color:var(--paper);background:var(--ink);border-radius:6px;padding:2px 6px;margin-top:3px;font-variant-numeric:tabular-nums}
+.sec h3{margin:0;font-family:var(--f-display);font-size:18px;font-weight:700}
+.sec .files{grid-column:2;display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:2px 9px;color:var(--ink-soft);background:none}
+.chip.off{opacity:.7;border-style:dashed}
+.sec button.go{all:unset;cursor:pointer}
+.rt{border-top:1px solid var(--line);padding-top:10px;display:flex;flex-direction:column;gap:4px}
+.rt .lab{font-family:var(--f-display);font-size:17px}
+.rt small{color:var(--ink-soft)}
+.btn{align-self:flex-start;border:1px solid var(--ink);background:none;color:var(--ink);font:600 13px var(--f-body);border-radius:8px;padding:5px 10px;cursor:pointer}
+.btn.on{background:var(--ink);color:var(--paper)}
+.muted{color:var(--ink-soft);font-size:13px}
+.q{font-family:var(--f-display);font-size:19px;line-height:1.6}
+.who{display:flex;gap:8px;flex-wrap:wrap}
+.person{display:flex;flex-direction:column;align-items:flex-start;gap:0;border:1px solid var(--line);background:color-mix(in srgb,var(--sand) 35%,transparent);color:var(--ink);border-radius:10px;padding:6px 10px;cursor:pointer;font:inherit}
+.person b{font-family:var(--f-display);font-size:16px}
+.person span{font-size:11px;color:var(--ink-soft)}
+.label.bubble{position:absolute;transform:translate(-50%,-100%);background:var(--paper);color:var(--ink);border:1.5px solid var(--ink);border-radius:12px;padding:5px 10px;font:15px var(--f-display);white-space:nowrap;pointer-events:none;box-shadow:0 2px 0 var(--line);transition:opacity .4s}
+.bubble::after{content:"";position:absolute;left:50%;bottom:-7px;width:10px;height:10px;background:var(--paper);border-right:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);transform:translateX(-50%) rotate(45deg)}
+.pname{font:600 11px var(--f-body);color:var(--ink);background:color-mix(in srgb,var(--paper) 80%,transparent);border-radius:4px;padding:0 4px}
+.label{position:absolute;transform:translate(-50%,-50%);pointer-events:none;white-space:nowrap;font-family:var(--f-display);color:var(--ink);text-shadow:0 0 4px var(--sea),0 0 8px var(--sea)}
+.foot{position:fixed;left:max(12px,env(safe-area-inset-left,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:4;font-size:12px;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:6px 10px;max-width:calc(100% - 24px)}
+@media (max-width:700px){
+  .drawer{top:auto;left:max(8px,env(safe-area-inset-left,0px));right:max(8px,env(safe-area-inset-right,0px));width:auto;max-width:none;height:58%;bottom:calc(8px + env(safe-area-inset-bottom,0px))}
+  .brand h1{font-size:19px}
+  .legend{display:none}
+}
+@media (prefers-reduced-motion:reduce){.drawer{transition:none}}
+</style>
+<div id="stage"></div>
+<div class="hud">
+  <div class="brand"><h1>幾何明珠群島</h1><p id="sub"></p></div>
+  <div class="modes">
+    <div class="seg" role="group" aria-label="視角">
+      <button type="button" data-mode="student" aria-pressed="true">學生視角</button>
+      <button type="button" data-mode="teacher" aria-pressed="false">教師視角</button>
+    </div>
+  </div>
+  <div class="legend"><span><i></i>主航線（上課順序）</span><span><i class="h"></i>隱藏航線</span><span><i class="lh"></i>燈塔</span></div>
+</div>
+<aside class="drawer" id="drawer" hidden aria-live="polite"></aside>
+
+<div class="foot">樣品・拖曳旋轉、右鍵或雙指平移、滾輪縮放・檔案連結尚未上線</div>
+<script>// 幾何明珠群島：共用資料（2D 與 3D 兩版共用）
+// 學生視角只看 student / 節次標題；教師視角才看 teacher / 航線標籤。
+const COURSE = {
+  islands: [
+    { id: 1, num: '一', student: '不變島', teacher: '單元一　面積會加', core: '面積可加性：全課唯一的起手工具', chapters: '16、1 §1.2、5 §5.2',
+      pos: [170, 190], r: 78, hue: 0,
+      sections: [ ['1-1', '一個不會變的數'], ['1-2', '空白搬了家'], ['1-3', '三條線，交在一點'] ] },
+    { id: 2, num: '二', student: '捷徑島', teacher: '單元二　把折線拉直', core: '變換首次登場：反射與旋轉是動作', chapters: '2、24',
+      pos: [395, 120], r: 70,
+      sections: [ ['2-1', '光走的那一條'], ['2-2', '最短的那一圈'], ['2-3', '三條路接成一條'] ] },
+    { id: 3, num: '三', student: '比值群礁', teacher: '單元三　比的語言', core: '長度難比，改用比值；比值有乘法結構', chapters: '8、9、3 §3.1–3.2',
+      pos: [610, 200], r: 64,
+      sections: [ ['3-1', '離 A 是離 B 的兩倍'], ['3-2', '從頂點到底邊的那一條'], ['3-3', '切下來的那一塊'] ] },
+    { id: 4, num: '四', student: '交會島', teacher: '單元四　乘積等於一', core: '三比值相乘為 1；正負號決定共線或共點', chapters: '4、5、10、23 §23.2',
+      pos: [835, 150], r: 72,
+      sections: [ ['4-1', '又交在一點'], ['4-2', '一條線穿過去'], ['4-3', '三組對邊，交在一條線上'] ] },
+    { id: 5, num: '五', student: '九點島', teacher: '單元五　位似', core: '一個變換解釋一整串巧合', chapters: '11、15',
+      pos: [870, 420], r: 70,
+      sections: [ ['5-1', '三個點排成一列'], ['5-2', '九個點，一個圓'], ['5-3', '三個尖，一條線'] ] },
+    { id: 6, num: '六', student: '雙圓島', teacher: '單元六　圓的冪', core: '新的守恆量：點對圓的冪與位置無關', chapters: '13、7、22、21',
+      pos: [640, 500], r: 80,
+      sections: [ ['6-1', '乘起來還是那個數'], ['6-2', '站在兩個圓中間'], ['6-3', '中點兩邊一樣長'], ['6-4', '對角線乘起來'] ] },
+    { id: 7, num: '七', student: '迴旋島', teacher: '單元七　旋轉的合成', core: '兩旋轉合起來還是旋轉，接群論', chapters: '18、19、20（僅展示）',
+      pos: [400, 470], r: 80,
+      sections: [ ['7-1', '轉兩次'], ['7-2', '三個中心'], ['7-3', '中點又是正三角形'], ['7-4', '轉回原樣'] ] },
+    { id: 8, num: '八', student: '無尺島', teacher: '單元八　丟掉長度', core: '拿掉度量之後還剩什麼', chapters: '23 §23.3、25、26',
+      pos: [160, 450], r: 86,
+      sections: [ ['8-1', '畫出來的地板'], ['8-2', '一個數都不用算'], ['8-3', '圓上六個點'], ['8-4', '翻譯過來的句子'], ['8-5', '最後一題'] ] },
+  ],
+  // 隱藏航線：同一招在不同島再出現。學生視角預設看不到，教師可逐條「揭開」。
+  routes: [
+    { id: 'r1', from: '1-3', to: '4-1', cls: '切三塊 → 繞一圈乘起來', acad: '面積法證塞瓦（塞瓦是載體）→ 塞瓦本身成為工具', note: '兩節的分工不可對調：命名事件在單元一第 3 節。' },
+    { id: 'r2', from: '1-1', to: '2-3', cls: '一個不會變的數，又出現了', acad: '維維安尼 → 費馬點（解法 1 同時用維維安尼與拿破崙）', note: '書中第 16、18、24 章邏輯上是同一單元。' },
+    { id: 'r3', from: '2-1', to: '2-3', cls: '這兩招是同一招嗎？', acad: '反射拉直兩段 vs 旋轉 60° 拉直三段', note: '目的相同、動作不同：適合做 ★★ 任務。' },
+    { id: 'r4', from: '2-3', to: '7-1', cls: '轉出一個正三角形', acad: '旋轉 60° → 旋轉的合成（拿破崙）', note: '' },
+    { id: 'r5', from: '1-1', to: '4-2', cls: '讓正負號管構型', acad: '有向線段：維維安尼 ★（P 跑到外面）→ 梅氏的正負號', note: '' },
+    { id: 'r6', from: '4-3', to: '8-1', cls: '三組對邊，再訪', acad: '笛沙格 → 推廣到三維（證明比原定理還簡單）', note: '' },
+    { id: 'r7', from: '6-1', to: '6-2', cls: '乘積不會變', acad: '圓冪 → 兩圓的冪相等（根軸）', note: '' },
+  ],
+  // 貫串線「驗證 vs 理解」：三座燈塔
+  lighthouses: [
+    { island: 1, angle: -40, q: '勾股定理已知的證法超過 400 種。當你有 400 個理由時，「證明」是在做什麼？', t: '單元一末' },
+    { island: 4, angle: 30, q: '一個定理從提出到出現簡潔的證法，隔了 140 年。這 140 年裡，大家憑什麼相信它？', t: '單元四末：斯坦納–雷米歐司定理（§17.4 附反例）' },
+    { island: 8, angle: 200, q: '算出 30° 和畫出那一條線，差在哪裡？', t: '單元八末：第 27 章 Langley 型難題' },
+  ],
+  // 島上的數學家。say＝頭上冒出的泡泡（短）；quote＝面板上的名言與出處；story＝學生可讀的數學史（不出現工具名）；teacher＝教師備註
+  people: [
+    { id: 'liuhui', island: 1, name: '劉徽', years: '三世紀・魏晉', place: '中國', look: { robe: '#3d5a80', hat: 'box', hatColor: '#222' },
+      say: '析理以辭，解體用圖。', quote: '析理以辭，解體用圖。', src: '《九章算術注》序',
+      story: '他替一本已經流傳幾百年的算書寫註解，常常不只說「怎麼算」，還畫圖說「為什麼對」。他喜歡把圖形拆開、搬一搬、再拼回去。', teacher: '出入相補原理，與單元一第 2 節的拼圖同源；可接東西方島。' },
+    { id: 'viviani', island: 1, name: '維維安尼', years: '1622–1703', place: '義大利・佛羅倫斯', look: { robe: '#7a4b2a', hat: 'beret', hatColor: '#2b2b2b' },
+      say: '我是伽利略最後的學生。', quote: '', src: '',
+      story: '伽利略晚年失明，他當過伽利略的助手，後來寫了伽利略的第一本傳記。這座島上那個「不會變的數」，就以他命名。', teacher: '維維安尼定理（單元一第 1 節）。書中第 16 章。' },
+    { id: 'heron', island: 2, name: '希羅', years: '約一世紀', place: '埃及・亞歷山卓', look: { robe: '#e0c36a', hat: 'none', hatColor: '#fff' },
+      say: '光很懶，它挑最短的路走。', quote: '', src: '泡泡是改寫，不是原文',
+      story: '他發明過自動門、蒸汽轉球，也寫過一本談鏡子的書。他注意到光從鏡子彈回來時，走的剛好是最短的那條路。', teacher: '《反射光學》。海倫最短路徑，單元二第 1 節。' },
+    { id: 'fermat', island: 2, name: '費馬', years: '1607–1665', place: '法國・土魯斯', look: { robe: '#5b2a3c', hat: 'wig', hatColor: '#d9d2c3' },
+      say: '這裡空白太小，寫不下。', quote: '我發現了一個真正奇妙的證明，可惜這裡的空白太小，寫不下。', src: '寫在丟番圖《算術》的頁邊（約 1637，大意）',
+      story: '他的正職是法官，數學是業餘。他寫信問朋友：三角形裡哪一點到三個頂點的距離加起來最短？這封信難倒了不少人。', teacher: '費馬點（單元二第 3 節）。名言出自費馬最後定理，與本島無關，只是人物介紹。' },
+    { id: 'euclid', island: 3, name: '歐幾里得', years: '約西元前 300 年', place: '埃及・亞歷山卓', look: { robe: '#f2efe6', hat: 'none', hatColor: '#fff' },
+      say: '學幾何，沒有王者之路。', quote: '學幾何沒有王者之路。', src: '相傳是他回答國王的話（普羅克洛記載，真偽有爭議）',
+      story: '他的《幾何原本》從幾條最簡單的規定出發，一步一步推出幾百個結果，是史上印刷次數數一數二多的書。', teacher: '' },
+    { id: 'kepler', island: 3, name: '克卜勒', years: '1571–1630', place: '德國', look: { robe: '#2f4f4f', hat: 'tophat', hatColor: '#1a1a1a' },
+      say: '幾何有兩大寶藏。', quote: '幾何學有兩大寶藏：一是畢氏定理，一是把線段分成中末比。前者可比黃金，後者可比珠寶。', src: '常見引述，出自他的著作（譯文為大意）',
+      story: '他用了二十年對著觀測資料一直算，才發現行星的軌道不是圓，是橢圓。', teacher: '黃金分割（第 3 章 §3.1–3.2）。' },
+    { id: 'ceva', island: 4, name: '塞瓦', years: '1647–1734', place: '義大利・曼托瓦', look: { robe: '#4a6fa5', hat: 'beret', hatColor: '#7a1f1f' },
+      say: '六百年前就有人想過了？', quote: '', src: '',
+      story: '1678 年他出了一本講直線的書。後來的人發現，書裡最有名的那個結果，早在十一世紀西班牙薩拉戈薩的一位國王兼數學家穆塔曼的書裡就證過了。', teacher: '塞瓦定理（單元四）。伊本・胡德（al-Mu’taman ibn Hud）早已證明，可做東西方航線。' },
+    { id: 'menelaus', island: 4, name: '梅涅勞斯', years: '約 70–140', place: '亞歷山卓・羅馬', look: { robe: '#c9a96e', hat: 'none', hatColor: '#fff' },
+      say: '我其實在算星星。', quote: '', src: '',
+      story: '他研究的是畫在球面上的三角形，目的是為了天文。後來大家把他的結果搬回平面上用。', teacher: '梅氏定理，原在《球面學》。' },
+    { id: 'euler', island: 5, name: '歐拉', years: '1707–1783', place: '瑞士・俄羅斯・普魯士', look: { robe: '#6c4f8c', hat: 'turban', hatColor: '#f0e6d0' },
+      say: '我看不見了，還是一直算。', quote: '讀歐拉，讀歐拉，他是我們所有人的老師。', src: '拉普拉斯評歐拉（後人轉述）',
+      story: '史上產量最高的數學家之一。晚年雙眼幾乎全盲，靠口述讓別人抄寫，產量反而更多。', teacher: '歐拉線（單元五第 1 節）。' },
+    { id: 'feuerbach', island: 5, name: '費爾巴哈', years: '1800–1834', place: '德國', look: { robe: '#3b6e4e', hat: 'tophat', hatColor: '#222' },
+      say: '九個點，竟然在同一個圓上。', quote: '', src: '',
+      story: '1822 年，二十二歲的中學老師發表了一篇論文，裡面有一個經過九個點的圓，還發現它剛好和另外幾個圓相切。', teacher: '九點圓與費爾巴哈定理（單元五第 2 節）。' },
+    { id: 'ptolemy', island: 6, name: '托勒密', years: '約 100–170', place: '埃及・亞歷山卓', look: { robe: '#b5543c', hat: 'none', hatColor: '#fff' },
+      say: '仰望星空時，腳就離開了地面。', quote: '我知道自己終將一死、朝生暮死；但當我追索群星繞行的軌跡，雙腳便不再踏著大地。', src: '傳為托勒密所作的短詩，收於《希臘詩選》（譯文為大意）',
+      story: '他寫的天文書用了一千多年。為了算星星的位置，他做了一張「弦表」，裡面藏著一個關於圓內四邊形的漂亮等式。', teacher: '托勒密定理（單元六第 4 節）。' },
+    { id: 'wallace', island: 6, name: '華萊士', years: '1768–1843', place: '蘇格蘭', look: { robe: '#2e4057', hat: 'tophat', hatColor: '#111' },
+      say: '那條線，其實是我發表的。', quote: '', src: '',
+      story: '有一條線被冠上別人的名字，但在那位前輩的著作裡從來找不到它。1797 年發表它的，其實是他。數學史上，名字掛錯人的事很常見。', teacher: '西姆松線實為華萊士 1797 年發表。' },
+    { id: 'napoleon', island: 7, name: '拿破崙', years: '1769–1821', place: '法國', look: { robe: '#1f3a6b', hat: 'bicorne', hatColor: '#111' },
+      say: '數學和國家一起興盛。', quote: '數學的進步與完善，和國家的繁榮息息相關。', src: '相傳（常見引述）',
+      story: '他喜歡和數學家往來，也真的懂幾何。島上有個以他命名的結果，但到底是不是他發現的，歷史學家一直有疑問。', teacher: '拿破崙定理（單元七）；歸屬存疑。' },
+    { id: 'galois', island: 7, name: '伽羅瓦', years: '1811–1832', place: '法國', look: { robe: '#8b2f2f', hat: 'none', hatColor: '#fff' },
+      say: '我沒有時間了。', quote: '我沒有時間了。', src: '決鬥前一夜，寫在手稿頁邊',
+      story: '二十歲就過世。他研究「哪些操作湊在一起還是同一類操作」，這個想法後來長成了一整門數學。', teacher: '群論接口（單元七 → 群論教材）。' },
+    { id: 'pascal', island: 8, name: '帕斯卡', years: '1623–1662', place: '法國', look: { robe: '#222', hat: 'wig', hatColor: '#6b4a2b' },
+      say: '我十六歲時找到的。', quote: '心有其理，是理性所不知的。', src: '《思想錄》',
+      story: '十六歲寫出一篇只有一頁的論文，主角是圓上的六個點。他還做過一台機械計算機，幫當稅務官的爸爸算帳。', teacher: '帕斯卡定理（單元八第 3 節）。' },
+    { id: 'desargues', island: 8, name: '笛沙格', years: '1591–1661', place: '法國・里昂', look: { robe: '#5e6b3a', hat: 'beret', hatColor: '#333' },
+      say: '我是建築師，研究畫出來的地板。', quote: '', src: '',
+      story: '他想弄懂畫家怎麼把地板畫得有深度。他的書只印了很少本，幾乎失傳，兩百年後才有人找到抄本。', teacher: '笛沙格定理（單元四第 3 節、單元八第 1 節）。' },
+  ],
+  bottle: { island: 1, q: '牆上的謎：如果每一點的距離和都一樣，這個三角形一定是正三角形嗎？鑰匙你已經有了。', t: '逆定理 16.7。引理 1 用的正是「極端一點」，留給兩年後的他們摘下來。' },
+};
+
+const SECTION_INDEX = {};
+COURSE.islands.forEach(isl => isl.sections.forEach(([id, title], i) => {
+  SECTION_INDEX[id] = { id, title, island: isl, i };
+}));
+function fileBase(sec) {
+  return `幾何明珠 單元${sec.island.num}-${sec.id.split('-')[1]} ${sec.title}`;
+}
+
+// 共用介面：視角切換、抽屜面板、航線揭開狀態
+const UI = (() => {
+  const store = { get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+                  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
+  const state = { mode: store.get('gp-mode', 'student'), revealed: new Set(store.get('gp-revealed', [])), current: null };
+  const subs = [];
+  const emit = () => subs.forEach(f => f(state));
+  const $ = s => document.querySelector(s);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const T = () => state.mode === 'teacher';
+
+  function setMode(m) {
+    state.mode = m; store.set('gp-mode', m);
+    document.querySelectorAll('[data-mode]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === m)));
+    $('#sub').textContent = T() ? '教師視角：單元名、隱藏航線、燈塔出處都會顯示' : '學生視角：點一座島，看看上面有什麼';
+    emit(); if (state.current) open(state.current);
+  }
+  function toggleRoute(id) {
+    state.revealed.has(id) ? state.revealed.delete(id) : state.revealed.add(id);
+    store.set('gp-revealed', [...state.revealed]); emit(); if (state.current) open(state.current);
+  }
+  function visibleRoutes() { return COURSE.routes.filter(r => T() || state.revealed.has(r.id)); }
+
+  function sectionHTML(id) {
+    const s = SECTION_INDEX[id];
+    return `<div class="sec"><span class="n">${s.island.num}-${id.split('-')[1]}</span>
+      <div><h3>${esc(s.title)}</h3></div>
+      <div class="files"><span class="chip off" title="${esc(fileBase(s))}_動態頁_離線.html">動態頁</span>
+      <span class="chip off">學生版</span>${T() ? '<span class="chip off">教師版</span>' : ''}</div></div>`;
+  }
+  function routeHTML(r) {
+    const a = SECTION_INDEX[r.from], b = SECTION_INDEX[r.to];
+    const on = state.revealed.has(r.id);
+    return `<div class="rt"><span class="lab">${esc(a.island.student)} ${a.island.num}-${r.from.split('-')[1]} ⇢ ${esc(b.island.student)} ${b.island.num}-${r.to.split('-')[1]}</span>
+      ${T() ? `<small>課堂名：${esc(r.cls)}</small><small>教師備註：${esc(r.acad)}</small>${r.note ? `<small>${esc(r.note)}</small>` : ''}
+      <button class="btn ${on ? 'on' : ''}" data-reveal="${r.id}">${on ? '已向學生揭開（再按收回）' : '向學生揭開這條航線'}</button>`
+        : `<small>有人發現：這兩個地方用的是同一招。</small>`}</div>`;
+  }
+
+  function open(item) {
+    state.current = item;
+    const d = $('#drawer'); let k = '', h = '', body = '';
+    if (item.type === 'island') {
+      const isl = COURSE.islands.find(i => i.id === item.id);
+      k = `第 ${isl.num} 島`; h = isl.student;
+      if (T()) body += `<div class="tnote"><b>${esc(isl.teacher)}</b><br>${esc(isl.core)}<br><span class="muted">主要章次：${esc(isl.chapters)}</span></div>`;
+      const ppl = COURSE.people.filter(p => p.island === isl.id);
+      if (ppl.length) body += `<div class="who">${ppl.map(p => `<button class="person" data-person="${p.id}"><b>${esc(p.name)}</b><span>${esc(p.years)}</span></button>`).join('')}</div>`;
+      body += isl.sections.map(([id]) => sectionHTML(id)).join('');
+      const rs = visibleRoutes().filter(r => SECTION_INDEX[r.from].island === isl || SECTION_INDEX[r.to].island === isl);
+      if (rs.length) body += `<div class="muted" style="margin-top:6px">從這座島出發的隱藏航線</div>` + rs.map(routeHTML).join('');
+      else if (!T()) body += `<p class="muted">這座島和其他島之間，還沒有人發現新的航線。</p>`;
+    } else if (item.type === 'route') {
+      const r = COURSE.routes.find(x => x.id === item.id); k = '隱藏航線'; h = T() ? r.cls : '同一招，兩個地方';
+      body = routeHTML(r);
+    } else if (item.type === 'lighthouse') {
+      const L = COURSE.lighthouses[item.idx]; k = '燈塔'; h = '驗證還是理解？';
+      body = `<p class="q">${esc(L.q)}</p>` + (T() ? `<div class="tnote">${esc(L.t)}</div>` : '');
+    } else if (item.type === 'person') {
+      const P = COURSE.people.find(x => x.id === item.id); const isl = COURSE.islands.find(i => i.id === P.island);
+      k = `${isl.student}的居民`; h = P.name;
+      body = `<div class="muted">${esc(P.years)}・${esc(P.place)}</div>`;
+      if (P.quote) body += `<p class="q">「${esc(P.quote)}」</p><div class="muted">— ${esc(P.src)}</div>`;
+      body += `<p>${esc(P.story)}</p>`;
+      if (T() && P.teacher) body += `<div class="tnote">${esc(P.teacher)}</div>`;
+      body += `<button class="btn" data-isl="${isl.id}">去看${esc(isl.student)}</button>`;
+    } else if (item.type === 'bottle') {
+      k = '漂流瓶'; h = '牆上的謎'; body = `<p class="q">${esc(COURSE.bottle.q)}</p>` + (T() ? `<div class="tnote">${esc(COURSE.bottle.t)}</div>` : '');
+    }
+    d.innerHTML = `<header><div><div class="k">${esc(k)}</div><h2>${esc(h)}</h2></div><button class="x" aria-label="關閉">×</button></header><div class="body">${body}</div>`;
+    d.hidden = false;
+    d.querySelector('.x').onclick = close;
+    d.querySelectorAll('[data-reveal]').forEach(b => b.onclick = () => toggleRoute(b.dataset.reveal));
+    d.querySelectorAll('[data-person]').forEach(b => b.onclick = () => open({ type: 'person', id: b.dataset.person }));
+    d.querySelectorAll('[data-isl]').forEach(b => b.onclick = () => open({ type: 'island', id: +b.dataset.isl }));
+    emit();
+  }
+  function close() { state.current = null; $('#drawer').hidden = true; emit(); }
+
+  function init() {
+    document.querySelectorAll('[data-mode]').forEach(b => b.onclick = () => setMode(b.dataset.mode));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+    setMode(state.mode);
+  }
+  return { state, init, open, close, onChange: f => subs.push(f), visibleRoutes, isTeacher: T };
+})();
+</script>
+<script type="module">// 3D 漫遊版：Three.js，旋轉縮放，點島或石柱開面板
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const stage = document.getElementById('stage');
+let renderer;
+try { renderer = new THREE.WebGLRenderer({ antialias: true }); }
+catch (e) { stage.innerHTML = '<p style="padding:120px 24px;text-align:center">這台裝置無法顯示 3D（WebGL 未開啟）。請改用 2D 海圖版。</p>'; UI.init(); throw e; }
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+stage.appendChild(renderer.domElement);
+renderer.domElement.style.touchAction = 'none';
+const overlay = document.createElement('div'); overlay.style.cssText = 'position:absolute;inset:0;pointer-events:none;overflow:hidden';
+stage.appendChild(overlay);
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(42, 1, 0.5, 600);
+const HOME = { pos: new THREE.Vector3(0, 78, 70), target: new THREE.Vector3(0, 0, 2) };
+camera.position.copy(HOME.pos);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.target.copy(HOME.target); controls.enableDamping = true; controls.maxPolarAngle = 1.32; controls.minDistance = 18; controls.maxDistance = 320;
+controls.screenSpacePanning = false;
+
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const mats = {};
+const M = (key, opts = {}) => (mats[key] = mats[key] || new THREE.MeshStandardMaterial({ flatShading: true, roughness: .9, ...opts }));
+function applyTheme() {
+  const sea = new THREE.Color(css('--sea'));
+  scene.background = sea; scene.fog = new THREE.Fog(sea, 220, 460);
+  M('sea').color.set(css('--sea-deep')); M('shallow').color.set(css('--sea'));
+  M('sand').color.set(css('--sand')); M('land').color.set(css('--land')); M('hill').color.set(css('--land-hi'));
+  M('stone').color.set(css('--paper')); M('accent').color.set(css('--accent')); M('route').color.set(css('--route'));
+  M('ink').color.set(css('--ink'));
+  if (mainLine) mainLine.material.color.set(css('--ink'));
+}
+
+scene.add(new THREE.HemisphereLight(0xffffff, 0x445566, 1.1));
+const sun = new THREE.DirectionalLight(0xfff2dd, 1.6); sun.position.set(-40, 80, 30); sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048); Object.assign(sun.shadow.camera, { left: -70, right: 70, top: 50, bottom: -50 }); scene.add(sun);
+
+const sea = new THREE.Mesh(new THREE.PlaneGeometry(700, 700, 1, 1), M('sea', { flatShading: false, roughness: .6, metalness: .05 }));
+sea.rotation.x = -Math.PI / 2; sea.receiveShadow = true; scene.add(sea);
+
+const to3 = ([x, y]) => new THREE.Vector3((x - 520) / 10, 0, (y - 310) / 10);
+let seed = 11; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+
+function lumpy(radius, height, ph, segs = 56) {
+  const g = new THREE.CylinderGeometry(radius * .92, radius, height, segs, 2);
+  const p = g.attributes.position;
+  for (let i = 0; i < p.count; i++) {
+    const x = p.getX(i), z = p.getZ(i), a = Math.atan2(z, x);
+    const k = 1 + 0.12 * Math.sin(3 * a + ph[0]) + 0.08 * Math.sin(5 * a + ph[1]) + 0.05 * Math.sin(9 * a + ph[2]);
+    p.setX(i, x * k); p.setZ(i, z * k * .82);
+  }
+  g.computeVertexNormals(); return g;
+}
+
+const pickables = []; const labels = []; const secTop = {};
+const addLabel = (html, cls, getPos) => { const d = document.createElement('div'); d.className = 'label ' + (cls || ''); d.innerHTML = html; overlay.appendChild(d); const L = { el: d, getPos }; labels.push(L); return L; };
+
+COURSE.islands.forEach(isl => {
+  const c = to3(isl.pos), r = isl.r / 10, ph = [rnd() * 6, rnd() * 6, rnd() * 6];
+  const grp = new THREE.Group(); grp.position.copy(c); scene.add(grp);
+  const shallow = new THREE.Mesh(lumpy(r * 1.35, .1, ph), M('shallow', { transparent: true, opacity: .55, flatShading: false }));
+  shallow.position.y = .05; grp.add(shallow);
+  const beach = new THREE.Mesh(lumpy(r, .9, ph), M('sand')); beach.position.y = .45;
+  const land = new THREE.Mesh(lumpy(r * .82, 1.6, ph), M('land')); land.position.y = 1.4;
+  const hillG = new THREE.ConeGeometry(r * .42, 3.6 + rnd() * 2, 9, 1); hillG.translate(0, 0, 0);
+  const hill = new THREE.Mesh(hillG, M('hill')); hill.position.set(-r * .05, 3.6, -r * .1);
+  [beach, land, hill].forEach(m => { m.castShadow = m.receiveShadow = true; m.userData.pick = { type: 'island', id: isl.id }; pickables.push(m); grp.add(m); });
+  // trees
+  for (let i = 0; i < 6; i++) {
+    const a = rnd() * Math.PI * 2, rr = r * (.55 + rnd() * .2);
+    const t = new THREE.Mesh(new THREE.ConeGeometry(.45, 1.6, 6), M('hill'));
+    t.position.set(Math.cos(a) * rr, 2.9, Math.sin(a) * rr * .8); t.castShadow = true; grp.add(t);
+  }
+  const n = isl.sections.length;
+  isl.sections.forEach(([id], i) => {
+    const a = -Math.PI / 2 + (i - (n - 1) / 2) * (Math.PI * 2 / Math.max(n, 3)) * .9;
+    const rr = r * .48, x = rr * Math.cos(a) * 1.15, z = (rr * Math.sin(a) * .9 + .4);
+    const pillar = new THREE.Mesh(new THREE.CylinderGeometry(.42, .55, 2.2, 8), M('stone'));
+    pillar.position.set(x, 3.3, z); pillar.castShadow = true; pillar.userData.pick = { type: 'island', id: isl.id }; pickables.push(pillar); grp.add(pillar);
+    const cap = new THREE.Mesh(new THREE.OctahedronGeometry(.42), M('accent')); cap.position.set(x, 4.75, z); grp.add(cap);
+    const top = new THREE.Vector3(x, 4.8, z).add(c); secTop[id] = top;
+    addLabel(`<span style="font:700 11px var(--f-body);background:var(--ink);color:var(--paper);border-radius:5px;padding:1px 5px">${isl.num}-${id.split('-')[1]}</span>`, 'num', () => top.clone().add(new THREE.Vector3(0, 1.3, 0)));
+  });
+  const nameL = addLabel('', 'iname', () => c.clone().add(new THREE.Vector3(0, 0, r * .82 + 3.2)));
+  isl._nameL = nameL;
+});
+
+// main ferry route
+let mainLine;
+const mainPts = [];
+COURSE.islands.forEach((isl, i, arr) => {
+  const p = to3(isl.pos); p.y = .4; mainPts.push(p);
+  if (i < arr.length - 1) {
+    const q = to3(arr[i + 1].pos); const m = p.clone().add(q).multiplyScalar(.5); const d = q.clone().sub(p);
+    mainPts.push(new THREE.Vector3(m.x - d.z * .18, .4, m.z + d.x * .18));
+  }
+});
+const mainCurve = new THREE.CatmullRomCurve3(mainPts, false, 'centripetal');
+mainLine = new THREE.Line(new THREE.BufferGeometry().setFromPoints(mainCurve.getPoints(600)), new THREE.LineDashedMaterial({ dashSize: 1.1, gapSize: .7, transparent: true, opacity: .55 }));
+mainLine.computeLineDistances(); scene.add(mainLine);
+// ferry
+const ferry = new THREE.Group();
+const hull = new THREE.Mesh(new THREE.BoxGeometry(2.4, .6, 1), M('accent')); hull.position.y = .3; ferry.add(hull);
+const cabin = new THREE.Mesh(new THREE.BoxGeometry(1, .7, .8), M('stone')); cabin.position.set(-.2, .9, 0); ferry.add(cabin);
+ferry.traverse(m => m.castShadow = true); scene.add(ferry);
+
+// lighthouses
+const beams = [];
+COURSE.lighthouses.forEach((lh, idx) => {
+  const isl = COURSE.islands.find(i => i.id === lh.island); const a = lh.angle * Math.PI / 180, r = isl.r / 10;
+  const p = to3(isl.pos).add(new THREE.Vector3(Math.cos(a) * r * 1.02, 0, Math.sin(a) * r * .84));
+  const g = new THREE.Group(); g.position.copy(p); scene.add(g);
+  const tower = new THREE.Mesh(new THREE.CylinderGeometry(.45, .75, 4.4, 10), M('stone')); tower.position.y = 2.6;
+  const band = new THREE.Mesh(new THREE.CylinderGeometry(.6, .66, .6, 10), M('accent')); band.position.y = 2.2;
+  const lamp = new THREE.Mesh(new THREE.SphereGeometry(.5, 12, 8), new THREE.MeshBasicMaterial({ color: 0xffd27a })); lamp.position.y = 5.1;
+  [tower, band, lamp].forEach(m => { m.castShadow = true; m.userData.pick = { type: 'lighthouse', idx }; pickables.push(m); g.add(m); });
+  const light = new THREE.PointLight(0xffc066, 6, 14); light.position.y = 5.2; g.add(light); beams.push(light);
+});
+// bottle
+const bottle = new THREE.Mesh(new THREE.CapsuleGeometry(.35, 1, 4, 8), new THREE.MeshStandardMaterial({ color: 0x5fa7a0, transparent: true, opacity: .8, roughness: .2 }));
+{ const isl = COURSE.islands[0]; const p = to3([isl.pos[0] - isl.r * 1.55, isl.pos[1] + isl.r * .9]); bottle.position.set(p.x, .4, p.z); bottle.rotation.z = 1.2; bottle.userData.pick = { type: 'bottle' }; pickables.push(bottle); scene.add(bottle); }
+
+// hidden routes
+const hiddenGroup = new THREE.Group(); scene.add(hiddenGroup);
+let routeLabels = [];
+function drawHidden() {
+  hiddenGroup.clear(); routeLabels.forEach(l => { l.el.remove(); labels.splice(labels.indexOf(l), 1); }); routeLabels = [];
+  UI.visibleRoutes().forEach(r => {
+    const a = secTop[r.from], b = secTop[r.to]; const mid = a.clone().add(b).multiplyScalar(.5); mid.y = 7 + a.distanceTo(b) * .22;
+    const curve = new THREE.QuadraticBezierCurve3(a, mid, b);
+    const unrevealed = !UI.state.revealed.has(r.id);
+    const tube = new THREE.Mesh(new THREE.TubeGeometry(curve, 48, .16, 6), new THREE.MeshBasicMaterial({ color: css('--route'), transparent: true, opacity: unrevealed ? .45 : .9 }));
+    tube.userData.pick = { type: 'route', id: r.id }; hiddenGroup.add(tube);
+    const hit = new THREE.Mesh(new THREE.TubeGeometry(curve, 24, .8, 5), new THREE.MeshBasicMaterial({ visible: false }));
+    hit.userData.pick = { type: 'route', id: r.id }; hiddenGroup.add(hit);
+    const cur = UI.state.current; const near = cur && ((cur.type === 'route' && cur.id === r.id) || (cur.type === 'island' && (SECTION_INDEX[r.from].island.id === cur.id || SECTION_INDEX[r.to].island.id === cur.id)));
+    if (UI.isTeacher() && near) {
+      const L = addLabel(`<span style="font-size:12px;color:var(--route)">${r.cls}${unrevealed ? '（未揭開）' : ''}</span>`, 'rlab', () => curve.getPoint(.5).add(new THREE.Vector3(0, .9, 0)));
+      routeLabels.push(L);
+    }
+  });
+  COURSE.islands.forEach(isl => {
+    isl._nameL.el.innerHTML = `<div style="text-align:center"><div style="font-size:20px;font-weight:700">${isl.student}</div>${UI.isTeacher() ? `<div style="font:11px var(--f-body);color:var(--accent)">${isl.teacher}</div>` : ''}</div>`;
+  });
+}
+UI.onChange(drawHidden);
+
+// mathematicians walking around
+const people3 = [];
+const skin = new THREE.MeshStandardMaterial({ color: 0xf1c9a5, flatShading: true });
+const dark = new THREE.MeshBasicMaterial({ color: 0x1b1b1b });
+function hatMesh(type, color) {
+  const m = new THREE.MeshStandardMaterial({ color, flatShading: true }); const g = new THREE.Group();
+  if (type === 'box') { const b = new THREE.Mesh(new THREE.BoxGeometry(.5, .4, .5), m); b.position.y = 2.2; g.add(b); }
+  else if (type === 'beret') { const b = new THREE.Mesh(new THREE.SphereGeometry(.44, 12, 8), m); b.scale.set(1, .38, 1); b.position.set(-.05, 2.08, 0); g.add(b); }
+  else if (type === 'wig') { const b = new THREE.Mesh(new THREE.SphereGeometry(.47, 12, 10), m); b.position.set(-.12, 1.86, 0); g.add(b); }
+  else if (type === 'tophat') { const b = new THREE.Mesh(new THREE.CylinderGeometry(.3, .3, .6, 12), m); b.position.y = 2.38; const br = new THREE.Mesh(new THREE.CylinderGeometry(.5, .5, .05, 14), m); br.position.y = 2.08; g.add(b, br); }
+  else if (type === 'turban') { const b = new THREE.Mesh(new THREE.TorusGeometry(.32, .16, 8, 14), m); b.rotation.x = Math.PI / 2; b.position.y = 2.05; const t = new THREE.Mesh(new THREE.SphereGeometry(.3, 10, 8), m); t.position.y = 2.2; g.add(b, t); }
+  else if (type === 'bicorne') { const b = new THREE.Mesh(new THREE.BoxGeometry(.3, .38, 1), m); b.position.y = 2.18; g.add(b); }
+  else { const b = new THREE.Mesh(new THREE.SphereGeometry(.4, 12, 8, 0, Math.PI * 2, 0, Math.PI / 2.2), new THREE.MeshStandardMaterial({ color: 0x3a2a1f, flatShading: true })); b.position.set(-.04, 1.78, 0); g.add(b); }
+  return g;
+}
+COURSE.people.forEach((P, k) => {
+  const isl = COURSE.islands.find(i => i.id === P.island);
+  const g = new THREE.Group();
+  const robe = new THREE.Mesh(new THREE.ConeGeometry(.58, 1.55, 9), new THREE.MeshStandardMaterial({ color: P.look.robe, flatShading: true })); robe.position.y = .78;
+  const head = new THREE.Mesh(new THREE.SphereGeometry(.4, 14, 10), skin); head.position.y = 1.78;
+  const e1 = new THREE.Mesh(new THREE.SphereGeometry(.06, 6, 6), dark), e2 = e1.clone(); e1.position.set(.35, 1.84, .13); e2.position.set(.35, 1.84, -.13);
+  g.add(robe, head, e1, e2, hatMesh(P.look.hat, P.look.hatColor));
+  g.traverse(m => { if (m.isMesh) { m.castShadow = true; m.userData.pick = { type: 'person', id: P.id }; pickables.push(m); } });
+  g.scale.setScalar(2.1);
+  const c = to3(isl.pos), r = isl.r / 10;
+  const rp = () => { const a = Math.random() * Math.PI * 2, d = Math.sqrt(Math.random()) * r * .6; return new THREE.Vector3(c.x + Math.cos(a) * d, 2.2, c.z + Math.sin(a) * d * .8); };
+  g.position.copy(rp()); scene.add(g);
+  const st = { P, g, target: rp(), wait: Math.random() * 2, rp, phase: k };
+  st.name = addLabel(`<span class="pname">${P.name}</span>`, '', () => g.position.clone().add(new THREE.Vector3(0, 5.4, 0)));
+  people3.push(st);
+});
+let bubble = null, nextBubble = 1.5;
+function updatePeople(t, dt) {
+  people3.forEach(s => {
+    if (s.wait > 0) { s.wait -= dt; s.g.position.y = 2.2; return; }
+    const d = s.target.clone().sub(s.g.position); d.y = 0; const L = d.length();
+    if (L < .2) { s.wait = 1 + Math.random() * 3; s.target = s.rp(); return; }
+    d.normalize(); s.g.position.addScaledVector(d, Math.min(L, dt * 1.1));
+    s.g.rotation.y = Math.atan2(-d.z, d.x); s.g.position.y = 2.2 + Math.abs(Math.sin(t * 8 + s.phase)) * .18;
+  });
+  nextBubble -= dt;
+  if (nextBubble <= 0) {
+    if (bubble) { bubble.el.remove(); labels.splice(labels.indexOf(bubble), 1); }
+    const s = people3[Math.floor(Math.random() * people3.length)];
+    bubble = addLabel(s.P.say, 'bubble', () => s.g.position.clone().add(new THREE.Vector3(0, 6.6, 0)));
+    nextBubble = 4.5;
+  }
+}
+
+// picking
+const ray = new THREE.Raycaster(), ndc = new THREE.Vector2(); let down = null;
+renderer.domElement.addEventListener('pointerdown', e => down = [e.clientX, e.clientY]);
+renderer.domElement.addEventListener('pointerup', e => {
+  if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 6) return;
+  const rc = renderer.domElement.getBoundingClientRect();
+  ndc.set((e.clientX - rc.left) / rc.width * 2 - 1, -(e.clientY - rc.top) / rc.height * 2 + 1);
+  ray.setFromCamera(ndc, camera);
+  const hit = ray.intersectObjects([...pickables, ...hiddenGroup.children], false).find(h => h.object.userData.pick);
+  if (hit) { const p = hit.object.userData.pick; UI.open(p); if (p.type === 'island') flyTo(to3(COURSE.islands.find(i => i.id === p.id).pos)); }
+});
+renderer.domElement.addEventListener('pointermove', e => {
+  const rc = renderer.domElement.getBoundingClientRect();
+  ndc.set((e.clientX - rc.left) / rc.width * 2 - 1, -(e.clientY - rc.top) / rc.height * 2 + 1);
+  ray.setFromCamera(ndc, camera);
+  renderer.domElement.style.cursor = ray.intersectObjects([...pickables, ...hiddenGroup.children], false).some(h => h.object.userData.pick) ? 'pointer' : 'grab';
+});
+
+// camera fly
+let fly = null;
+function flyTo(target, dist = stage.clientWidth < 700 ? 85 : 42) {
+  const dir = camera.position.clone().sub(controls.target).normalize();
+  fly = { t: 0, p0: camera.position.clone(), t0: controls.target.clone(), p1: target.clone().add(dir.multiplyScalar(dist)), t1: target.clone() };
+}
+const homeBtn = document.createElement('button'); homeBtn.className = 'btn'; homeBtn.type = 'button'; homeBtn.textContent = '回到全景';
+homeBtn.style.cssText = 'background:var(--card)';
+homeBtn.onclick = () => { fly = { t: 0, p0: camera.position.clone(), t0: controls.target.clone(), p1: HOME.pos.clone(), t1: HOME.target.clone() }; };
+document.querySelector('.modes').appendChild(homeBtn);
+
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const v = new THREE.Vector3();
+function resize() { const w = stage.clientWidth, h = stage.clientHeight; renderer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix(); if (w < 700 && !fly) { /* phones: pull back */ } }
+addEventListener('resize', resize);
+const clock = new THREE.Clock();
+function loop() {
+  const t = clock.getElapsedTime(), dt = clock.getDelta();
+  if (fly) { fly.t = Math.min(1, fly.t + .025); const k = fly.t < .5 ? 2 * fly.t * fly.t : 1 - Math.pow(-2 * fly.t + 2, 2) / 2; camera.position.lerpVectors(fly.p0, fly.p1, k); controls.target.lerpVectors(fly.t0, fly.t1, k); if (fly.t >= 1) fly = null; }
+  controls.update();
+  const s = reduce ? .06 : (t / 70) % 1; const fp = mainCurve.getPointAt(s), ft = mainCurve.getTangentAt(s);
+  ferry.position.set(fp.x, reduce ? 0 : Math.sin(t * 2) * .08, fp.z); ferry.rotation.y = Math.atan2(-ft.z, ft.x);
+  if (!reduce) { beams.forEach((b, i) => b.intensity = 4 + 3 * Math.sin(t * 2 + i)); bottle.position.y = .35 + Math.sin(t * 1.4) * .12; bottle.rotation.x = Math.sin(t) * .2; }
+  const dtt = Math.min(.05, t - (loop.last ?? t)); loop.last = t;
+  if (!reduce) updatePeople(t, dtt);
+  renderer.render(scene, camera);
+  const w = stage.clientWidth, h = stage.clientHeight;
+  labels.forEach(L => { v.copy(L.getPos()).project(camera); const vis = v.z < 1 && Math.abs(v.x) < 1.1 && Math.abs(v.y) < 1.1; L.el.style.display = vis ? '' : 'none'; if (vis) { L.el.style.left = ((v.x + 1) / 2 * w) + 'px'; L.el.style.top = ((1 - v.y) / 2 * h) + 'px'; } });
+  requestAnimationFrame(loop);
+}
+applyTheme();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { applyTheme(); drawHidden(); });
+new MutationObserver(() => { applyTheme(); drawHidden(); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+resize();
+if (stage.clientWidth < 700) { HOME.pos.set(0, 200, 150); camera.position.copy(HOME.pos); }
+UI.init();
+loop();
+</script>
+</body></html>

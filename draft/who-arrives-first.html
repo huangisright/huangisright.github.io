@@ -1,0 +1,507 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>誰先到？</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: 投影用工具頁。左邊是金門示意平面（1 公里方格），右邊是控制與數據；手機改成上下堆疊。 */
+:root {
+  --bg: #EEF3F2;          /* 海霧白 */
+  --panel: #FAFCFB;
+  --line: #CBD8D6;
+  --grid: #D9E3E1;
+  --ink: #13303A;         /* 深海藍黑 */
+  --muted: #4F6B72;
+  --a: #1E6E8E;           /* 甲：海藍 */
+  --b: #B9532A;           /* 乙：紅磚 */
+  --tie: #13303A;
+  --c1: #1E6E8E; --c2: #B9532A; --c3: #3F7F3A; --c4: #7A4E9A; --c5: #A37A12; --c6: #2F6F6A;
+  --font-display: "Noto Serif TC", "Songti TC", serif;
+  --font-body: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --font-num: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1C21; --panel: #142830; --line: #2A434B; --grid: #1D3139;
+    --ink: #E2ECEA; --muted: #9DB5B8; --a: #5DB2D4; --b: #E58A5F; --tie: #E2ECEA;
+    --c1: #5DB2D4; --c2: #E58A5F; --c3: #7FC274; --c4: #B892D8; --c5: #D9B048; --c6: #5FC0B6;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1C21; --panel: #142830; --line: #2A434B; --grid: #1D3139;
+  --ink: #E2ECEA; --muted: #9DB5B8; --a: #5DB2D4; --b: #E58A5F; --tie: #E2ECEA;
+  --c1: #5DB2D4; --c2: #E58A5F; --c3: #7FC274; --c4: #B892D8; --c5: #D9B048; --c6: #5FC0B6;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px 32px;
+}
+.wrap { max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; }
+h1 { font-family: var(--font-display); font-size: clamp(30px, 4vw, 44px); line-height: 1.15; margin: 0; text-wrap: balance; }
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.tab {
+  font: inherit; font-size: 15px; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line);
+  background: var(--panel); color: var(--ink); cursor: pointer;
+}
+.tab[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.lead { margin: 0; color: var(--muted); max-width: 70ch; }
+.main { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 16px; align-items: start; }
+@media (max-width: 900px) { .main { grid-template-columns: minmax(0, 1fr); } }
+.stage { position: relative; min-width: 0; }
+canvas { display: block; width: 100%; aspect-ratio: 3 / 2; max-width: 100%; border-radius: 12px; border: 1px solid var(--line); background: var(--panel); touch-action: none; cursor: grab; }
+canvas.dragging { cursor: grabbing; }
+.scale-note { margin: 6px 2px 0; font-size: 13px; color: var(--muted); }
+.side { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.box { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; }
+.box h2 { font-size: 14px; letter-spacing: 0.08em; color: var(--muted); margin: 0; font-weight: 500; }
+.row { display: grid; grid-template-columns: 6.5em minmax(0, 1fr) 5.2em; align-items: center; gap: 10px; }
+input[type="range"] { width: 100%; min-width: 0; accent-color: var(--ink); }
+.num { font-family: var(--font-num); font-variant-numeric: tabular-nums; }
+.val { text-align: right; white-space: nowrap; }
+.who { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; align-items: baseline; }
+.who dt { color: var(--muted); }
+.who dd { margin: 0; text-align: right; }
+.verdict { font-size: 22px; font-weight: 700; }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: 1px; }
+.btns { display: flex; gap: 8px; flex-wrap: wrap; }
+button.act {
+  font: inherit; font-size: 15px; padding: 9px 16px; border-radius: 8px; border: 1px solid var(--ink);
+  background: var(--ink); color: var(--bg); cursor: pointer;
+}
+button.act.ghost { background: transparent; color: var(--ink); }
+button:focus-visible, .tab:focus-visible, summary:focus-visible, input:focus-visible { outline: 3px solid var(--a); outline-offset: 2px; }
+.ask { margin: 0; font-family: var(--font-display); font-size: 20px; line-height: 1.4; }
+.stats { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin: 0; }
+.stats dt { color: var(--muted); }
+.stats dd { margin: 0; text-align: right; }
+details.more { border-top: 1px dashed var(--line); padding-top: 10px; }
+details.more summary { cursor: pointer; color: var(--muted); font-size: 14px; }
+.checks { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+.checks label { display: flex; gap: 8px; align-items: center; cursor: pointer; }
+.hint { font-size: 13px; color: var(--muted); margin: 0; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>誰先到？</h1>
+    <div class="tabs" role="group" aria-label="情境">
+      <button class="tab" id="tab-lions" type="button" aria-pressed="false">風獅爺守護範圍</button>
+      <button class="tab" id="tab-ems" type="button" aria-pressed="true">兩個救護據點</button>
+    </div>
+  </header>
+  <p class="lead" id="lead"></p>
+
+  <div class="main">
+    <div class="stage">
+      <canvas id="cv" aria-label="金門示意平面，可拖曳據點與地點"></canvas>
+      <p class="scale-note">示意平面，每格 1 公里，位置為示意。拖曳圖上的點即可移動。</p>
+    </div>
+
+    <div class="side">
+      <div class="box" id="box-speed">
+        <h2>車速與出發</h2>
+        <div class="row"><label for="va"><span class="dot" style="background:var(--a)"></span>甲車速</label><input id="va" type="range" min="10" max="90" step="5" value="40"><span class="num val" id="va-v"></span></div>
+        <div class="row"><label for="vb"><span class="dot" style="background:var(--b)"></span>乙車速</label><input id="vb" type="range" min="10" max="90" step="5" value="40"><span class="num val" id="vb-v"></span></div>
+        <div class="row"><label for="wait">乙先等多久</label><input id="wait" type="range" min="0" max="10" step="1" value="0"><span class="num val" id="wait-v"></span></div>
+      </div>
+
+      <div class="box" id="box-probe">
+        <h2 id="probe-title">事故地點</h2>
+        <div class="verdict" id="verdict"></div>
+        <dl class="who" id="probe-list"></dl>
+      </div>
+
+      <div class="box">
+        <h2>很多很多點</h2>
+        <div class="btns">
+          <button class="act" id="run" type="button">隨機跑 1000 個點</button>
+          <button class="act ghost" id="clear" type="button">清除</button>
+        </div>
+        <dl class="stats" id="stats"></dl>
+        <p class="ask" id="ask" hidden></p>
+        <details class="more">
+          <summary>更多</summary>
+          <div class="checks">
+            <label><input type="checkbox" id="fill"> 塗滿整片</label>
+            <label><input type="checkbox" id="edge"> 畫出分界</label>
+            <label id="special-wrap"><input type="checkbox" id="special"> 標出特別的點</label>
+          </div>
+          <p class="hint">分界與特別的點，留到大家說出理由之後再打開。</p>
+        </details>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const W = 8, H = 16 / 3;            // 示意平面 8 × 5.3 公里
+  const WALK = 4;                     // 風獅爺情境：步行 4 km/h
+  const TIE = 0.03;                   // 兩邊相差不到 3% 算「幾乎同時／幾乎一樣近」
+  const tieEms = (a, b) => Math.abs(a - b) < TIE * Math.max(a, b);
+  const tieLion = nt => nt.d2 - nt.d1 < TIE * nt.d2;
+
+  const cv = document.getElementById('cv');
+  const ctx = cv.getContext('2d');
+  const $ = id => document.getElementById(id);
+
+  const state = {
+    mode: 'ems',
+    ems: { A: { x: 1.0, y: 2.6 }, B: { x: 4.0, y: 2.6 }, P: { x: 3.4, y: 1.1 } },
+    lions: [
+      { x: 1.2, y: 1.3 }, { x: 3.5, y: 1.1 }, { x: 6.1, y: 1.6 },
+      { x: 1.9, y: 3.9 }, { x: 4.4, y: 3.5 }, { x: 6.8, y: 4.1 }
+    ],
+    probe: { x: 2.9, y: 2.5 },
+    samples: [],
+    drag: null
+  };
+
+  let colors = {};
+  function readColors() {
+    const cs = getComputedStyle(document.documentElement);
+    ['bg','panel','line','grid','ink','muted','a','b','tie','c1','c2','c3','c4','c5','c6'].forEach(k => {
+      colors[k] = cs.getPropertyValue('--' + k).trim();
+    });
+  }
+
+  const dist = (p, q) => Math.hypot(p.x - q.x, p.y - q.y);
+  const va = () => +$('va').value, vb = () => +$('vb').value, wait = () => +$('wait').value;
+  // 到達時間（分鐘）
+  const tA = p => dist(p, state.ems.A) / va() * 60;
+  const tB = p => dist(p, state.ems.B) / vb() * 60 + wait();
+  const gapEms = p => tA(p) - tB(p);
+
+  function nearestTwo(p) {
+    let best = -1, second = -1, d1 = Infinity, d2 = Infinity;
+    state.lions.forEach((L, i) => {
+      const d = dist(p, L);
+      if (d < d1) { d2 = d1; second = best; d1 = d; best = i; }
+      else if (d < d2) { d2 = d; second = i; }
+    });
+    return { best, second, d1, d2 };
+  }
+
+  // ---------- 畫布 ----------
+  let cssW = 0, cssH = 0, scale = 1;
+  function resize() {
+    const r = cv.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    cssW = r.width; cssH = r.width * H / W;
+    cv.width = Math.round(cssW * dpr); cv.height = Math.round(cssH * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    scale = cssW / W;
+    draw();
+  }
+  const sx = x => x * scale, sy = y => y * scale;
+  const fromEvent = e => {
+    const r = cv.getBoundingClientRect();
+    return { x: (e.clientX - r.left) / scale, y: (e.clientY - r.top) / scale };
+  };
+
+  function drawGrid() {
+    ctx.fillStyle = colors.panel; ctx.fillRect(0, 0, cssW, cssH);
+    ctx.strokeStyle = colors.grid; ctx.lineWidth = 1;
+    for (let x = 1; x < W; x++) { ctx.beginPath(); ctx.moveTo(sx(x) + 0.5, 0); ctx.lineTo(sx(x) + 0.5, cssH); ctx.stroke(); }
+    for (let y = 1; y < H; y++) { ctx.beginPath(); ctx.moveTo(0, sy(y) + 0.5); ctx.lineTo(cssW, sy(y) + 0.5); ctx.stroke(); }
+    // 比例尺
+    ctx.strokeStyle = colors.muted; ctx.lineWidth = 2;
+    const x0 = cssW - sx(1) - 14, y0 = cssH - 14;
+    ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x0 + sx(1), y0); ctx.moveTo(x0, y0 - 5); ctx.lineTo(x0, y0 + 0); ctx.moveTo(x0 + sx(1), y0 - 5); ctx.lineTo(x0 + sx(1), y0); ctx.stroke();
+    ctx.fillStyle = colors.muted; ctx.font = '12px ' + getComputedStyle(document.body).fontFamily;
+    ctx.textAlign = 'center'; ctx.fillText('1 公里', x0 + sx(0.5), y0 - 8);
+  }
+
+  function withAlpha(hex, a) {
+    const h = hex.replace('#', '');
+    const n = parseInt(h.length === 3 ? h.split('').map(c => c + c).join('') : h, 16);
+    return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`;
+  }
+
+  function drawFill() {
+    const step = Math.max(3, Math.round(cssW / 160));
+    for (let px = 0; px < cssW; px += step) {
+      for (let py = 0; py < cssH; py += step) {
+        const p = { x: (px + step / 2) / scale, y: (py + step / 2) / scale };
+        let c;
+        if (state.mode === 'ems') c = gapEms(p) < 0 ? colors.a : colors.b;
+        else c = colors['c' + (nearestTwo(p).best + 1)];
+        ctx.fillStyle = withAlpha(c, 0.16);
+        ctx.fillRect(px, py, step, step);
+      }
+    }
+  }
+
+  // 分界：在格點上找函數變號，用線性內插連線（marching squares）
+  function drawEdge() {
+    ctx.strokeStyle = colors.tie; ctx.lineWidth = 2.5; ctx.setLineDash([]);
+    if (state.mode === 'ems') { contour(gapEms); return; }
+    // 很多據點：對每一對相鄰的據點畫「兩者一樣近、且沒有更近的」部分
+    const n = state.lions.length;
+    for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) {
+      const Li = state.lions[i], Lj = state.lions[j];
+      contour(p => dist(p, Li) - dist(p, Lj), p => {
+        const nt = nearestTwo(p);
+        return (nt.best === i && nt.second === j) || (nt.best === j && nt.second === i);
+      });
+    }
+  }
+
+  function contour(f, keep) {
+    const nx = 180, ny = 120, dx = W / nx, dy = H / ny;
+    const v = new Float64Array((nx + 1) * (ny + 1));
+    for (let j = 0; j <= ny; j++) for (let i = 0; i <= nx; i++) v[j * (nx + 1) + i] = f({ x: i * dx, y: j * dy });
+    ctx.beginPath();
+    for (let j = 0; j < ny; j++) for (let i = 0; i < nx; i++) {
+      const p00 = v[j * (nx + 1) + i], p10 = v[j * (nx + 1) + i + 1], p01 = v[(j + 1) * (nx + 1) + i], p11 = v[(j + 1) * (nx + 1) + i + 1];
+      const pts = [];
+      const edge = (a, b, ax, ay, bx, by) => {
+        if ((a < 0) !== (b < 0)) { const t = a / (a - b); pts.push({ x: ax + (bx - ax) * t, y: ay + (by - ay) * t }); }
+      };
+      const x0 = i * dx, y0 = j * dy, x1 = x0 + dx, y1 = y0 + dy;
+      edge(p00, p10, x0, y0, x1, y0);
+      edge(p10, p11, x1, y0, x1, y1);
+      edge(p01, p11, x0, y1, x1, y1);
+      edge(p00, p01, x0, y0, x0, y1);
+      if (pts.length >= 2) {
+        const mid = { x: (pts[0].x + pts[1].x) / 2, y: (pts[0].y + pts[1].y) / 2 };
+        if (keep && !keep(mid)) continue;
+        ctx.moveTo(sx(pts[0].x), sy(pts[0].y)); ctx.lineTo(sx(pts[1].x), sy(pts[1].y));
+        if (pts.length === 4) { ctx.moveTo(sx(pts[2].x), sy(pts[2].y)); ctx.lineTo(sx(pts[3].x), sy(pts[3].y)); }
+      }
+    }
+    ctx.stroke();
+  }
+
+  // 特別的點：兩據點車速不同且不用等時，分界所圍的中心與半徑；車速相同時，兩據點連線的中點。
+  function specialPoint() {
+    if (state.mode !== 'ems' || wait() !== 0) return null;
+    const A = state.ems.A, B = state.ems.B, k = va() / vb();
+    if (k === 1) return { kind: 'mid', x: (A.x + B.x) / 2, y: (A.y + B.y) / 2 };
+    const k2 = k * k;
+    return {
+      kind: 'center',
+      x: (A.x - k2 * B.x) / (1 - k2),
+      y: (A.y - k2 * B.y) / (1 - k2),
+      r: k * dist(A, B) / Math.abs(1 - k2)
+    };
+  }
+
+  function drawSpecial() {
+    const s = specialPoint(); if (!s) return;
+    ctx.fillStyle = colors.tie; ctx.strokeStyle = colors.tie; ctx.lineWidth = 1.5;
+    ctx.setLineDash([5, 5]);
+    if (s.kind === 'center') {
+      ctx.beginPath(); ctx.moveTo(sx(s.x), sy(s.y)); ctx.lineTo(sx(s.x + s.r), sy(s.y)); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(sx(state.ems.A.x), sy(state.ems.A.y)); ctx.lineTo(sx(s.x), sy(s.y)); ctx.stroke();
+    } else {
+      ctx.beginPath(); ctx.moveTo(sx(state.ems.A.x), sy(state.ems.A.y)); ctx.lineTo(sx(state.ems.B.x), sy(state.ems.B.y)); ctx.stroke();
+    }
+    ctx.setLineDash([]);
+    ctx.beginPath(); ctx.arc(sx(s.x), sy(s.y), 5, 0, Math.PI * 2); ctx.fill();
+  }
+
+  function drawSamples() {
+    for (const s of state.samples) {
+      ctx.fillStyle = s.c;
+      ctx.beginPath(); ctx.arc(sx(s.x), sy(s.y), s.tie ? 3.2 : 2.2, 0, Math.PI * 2); ctx.fill();
+      if (s.tie) { ctx.strokeStyle = colors.tie; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(sx(s.x), sy(s.y), 6, 0, Math.PI * 2); ctx.stroke(); }
+    }
+  }
+
+  function station(p, c, label, r) {
+    ctx.fillStyle = c; ctx.strokeStyle = colors.panel; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.arc(sx(p.x), sy(p.y), r, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = colors.panel; ctx.font = '700 ' + Math.round(r * 1.05) + 'px ' + getComputedStyle(document.body).fontFamily;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(label, sx(p.x), sy(p.y) + 1);
+    ctx.textBaseline = 'alphabetic';
+  }
+
+  function drawProbe(p) {
+    const x = sx(p.x), y = sy(p.y);
+    ctx.strokeStyle = colors.ink; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.moveTo(x - 9, y); ctx.lineTo(x + 9, y); ctx.moveTo(x, y - 9); ctx.lineTo(x, y + 9); ctx.stroke();
+    ctx.beginPath(); ctx.arc(x, y, 12, 0, Math.PI * 2); ctx.stroke();
+  }
+
+  function drawLinks(p, list) {
+    ctx.setLineDash([4, 5]); ctx.lineWidth = 1.5;
+    for (const [q, c] of list) { ctx.strokeStyle = c; ctx.beginPath(); ctx.moveTo(sx(p.x), sy(p.y)); ctx.lineTo(sx(q.x), sy(q.y)); ctx.stroke(); }
+    ctx.setLineDash([]);
+  }
+
+  function draw() {
+    if (!cssW) return;
+    drawGrid();
+    if ($('fill').checked) drawFill();
+    drawSamples();
+    if ($('edge').checked) drawEdge();
+    if ($('special').checked) drawSpecial();
+    const r = Math.max(13, Math.min(18, cssW / 45));
+    if (state.mode === 'ems') {
+      const { A, B, P } = state.ems;
+      drawLinks(P, [[A, colors.a], [B, colors.b]]);
+      station(A, colors.a, '甲', r); station(B, colors.b, '乙', r);
+      drawProbe(P);
+    } else {
+      const nt = nearestTwo(state.probe);
+      drawLinks(state.probe, [[state.lions[nt.best], colors['c' + (nt.best + 1)]], [state.lions[nt.second], colors['c' + (nt.second + 1)]]]);
+      state.lions.forEach((L, i) => station(L, colors['c' + (i + 1)], String(i + 1), r));
+      drawProbe(state.probe);
+    }
+  }
+
+  // ---------- 數據面板 ----------
+  const f1 = n => n.toFixed(1), f2 = n => n.toFixed(2);
+  function updatePanel() {
+    $('va-v').textContent = va() + ' km/h';
+    $('vb-v').textContent = vb() + ' km/h';
+    $('wait-v').textContent = wait() + ' 分';
+    if (state.mode === 'ems') {
+      const P = state.ems.P, a = tA(P), b = tB(P), dA = dist(P, state.ems.A), dB = dist(P, state.ems.B);
+      const g = a - b;
+      $('verdict').innerHTML = tieEms(a, b) ? '幾乎同時到' :
+        (g < 0 ? '<span class="dot" style="background:var(--a)"></span>甲先到' : '<span class="dot" style="background:var(--b)"></span>乙先到');
+      $('probe-list').innerHTML =
+        `<dt>甲到這裡</dt><dd class="num">${f1(a)} 分</dd>` +
+        `<dt>乙到這裡</dt><dd class="num">${f1(b)} 分</dd>` +
+        `<dt>到甲的距離</dt><dd class="num">${f2(dA)} 公里</dd>` +
+        `<dt>到乙的距離</dt><dd class="num">${f2(dB)} 公里</dd>` +
+        `<dt>到甲 ÷ 到乙</dt><dd class="num">${f2(dA / dB)}</dd>` +
+        `<dt>到甲 − 到乙</dt><dd class="num">${f2(dA - dB)} 公里</dd>`;
+    } else {
+      const nt = nearestTwo(state.probe);
+      $('verdict').innerHTML = tieLion(nt) ? '兩尊幾乎一樣近' :
+        `<span class="dot" style="background:var(--c${nt.best + 1})"></span>第 ${nt.best + 1} 尊守護`;
+      $('probe-list').innerHTML =
+        `<dt>最近：第 ${nt.best + 1} 尊</dt><dd class="num">${f2(nt.d1)} 公里</dd>` +
+        `<dt>次近：第 ${nt.second + 1} 尊</dt><dd class="num">${f2(nt.d2)} 公里</dd>` +
+        `<dt>走路到最近那尊</dt><dd class="num">${f1(nt.d1 / WALK * 60)} 分</dd>`;
+    }
+    updateStats();
+  }
+
+  function updateStats() {
+    const n = state.samples.length, el = $('stats'), ask = $('ask');
+    if (!n) { el.innerHTML = '<dt>還沒有點</dt><dd></dd>'; ask.hidden = true; return; }
+    const ties = state.samples.filter(s => s.tie);
+    let html = `<dt>已經檢查</dt><dd class="num">${n} 個點</dd>`;
+    if (state.mode === 'ems') {
+      const nA = state.samples.filter(s => s.win === 'A').length;
+      html += `<dt>甲先到</dt><dd class="num">${nA}</dd><dt>乙先到</dt><dd class="num">${n - nA - ties.length}</dd>`;
+      html += `<dt>幾乎同時（圈起來的點）</dt><dd class="num">${ties.length}</dd>`;
+      if (ties.length) {
+        const ratios = ties.map(s => s.ratio), diffs = ties.map(s => s.diff);
+        html += `<dt>圈起來的點：到甲 ÷ 到乙</dt><dd class="num">${f2(Math.min(...ratios))} ～ ${f2(Math.max(...ratios))}</dd>`;
+        html += `<dt>圈起來的點：到甲 − 到乙</dt><dd class="num">${f2(Math.min(...diffs))} ～ ${f2(Math.max(...diffs))}</dd>`;
+      }
+    } else {
+      const counts = state.lions.map(() => 0);
+      state.samples.forEach(s => { if (!s.tie) counts[s.win]++; });
+      counts.forEach((c, i) => { html += `<dt><span class="dot" style="background:var(--c${i + 1})"></span>第 ${i + 1} 尊</dt><dd class="num">${c}</dd>`; });
+      html += `<dt>兩尊幾乎一樣近（圈起來的點）</dt><dd class="num">${ties.length}</dd>`;
+    }
+    el.innerHTML = html;
+    ask.textContent = `電腦確認了 ${n} 個點，你還需要什麼？`;
+    ask.hidden = false;
+  }
+
+  function runSamples() {
+    for (let k = 0; k < 1000; k++) {
+      const p = { x: Math.random() * W, y: Math.random() * H };
+      if (state.mode === 'ems') {
+        const g = gapEms(p), dA = dist(p, state.ems.A), dB = dist(p, state.ems.B);
+        const tie = tieEms(tA(p), tB(p));
+        state.samples.push({ ...p, tie, win: g < 0 ? 'A' : 'B', c: g < 0 ? colors.a : colors.b, ratio: dA / dB, diff: dA - dB });
+      } else {
+        const nt = nearestTwo(p);
+        state.samples.push({ ...p, tie: tieLion(nt), win: nt.best, c: colors['c' + (nt.best + 1)] });
+      }
+    }
+    $('run').textContent = '再跑 1000 個點';
+    draw(); updateStats();
+  }
+
+  function clearSamples() {
+    state.samples = [];
+    $('run').textContent = '隨機跑 1000 個點';
+    updateStats();
+  }
+
+  // ---------- 情境 ----------
+  const LEADS = {
+    ems: '兩個救護據點同時接到通報，各派一輛車。拖曳十字標記換個事故地點，看看是哪一輛先到；再改改兩邊的車速。',
+    lions: '每一處都由離它最近的那尊風獅爺守護。拖曳十字標記看看誰在守護它；也可以搬動風獅爺。'
+  };
+  function setMode(m) {
+    state.mode = m;
+    $('tab-ems').setAttribute('aria-pressed', m === 'ems');
+    $('tab-lions').setAttribute('aria-pressed', m === 'lions');
+    $('lead').textContent = LEADS[m];
+    $('box-speed').hidden = m !== 'ems';
+    $('special-wrap').hidden = m !== 'ems';
+    $('probe-title').textContent = m === 'ems' ? '事故地點' : '這個地點';
+    clearSamples(); updatePanel(); draw();
+  }
+
+  // ---------- 拖曳 ----------
+  function hit(p) {
+    const tol = 22 / scale;
+    const cand = state.mode === 'ems'
+      ? [['P', state.ems.P], ['A', state.ems.A], ['B', state.ems.B]]
+      : [['P', state.probe], ...state.lions.map((L, i) => [i, L])];
+    let best = null, bd = tol;
+    for (const [k, q] of cand) { const d = dist(p, q); if (d < bd) { bd = d; best = k; } }
+    return best;
+  }
+  function target(k) {
+    if (state.mode === 'ems') return state.ems[k];
+    return k === 'P' ? state.probe : state.lions[k];
+  }
+  cv.addEventListener('pointerdown', e => {
+    const p = fromEvent(e); const k = hit(p);
+    if (k === null) {
+      // 點空白處：把十字標記移過去
+      const t = target('P'); t.x = p.x; t.y = p.y; state.drag = 'P';
+    } else state.drag = k;
+    cv.setPointerCapture(e.pointerId); cv.classList.add('dragging');
+    updatePanel(); draw();
+  });
+  cv.addEventListener('pointermove', e => {
+    if (state.drag === null) return;
+    const p = fromEvent(e), t = target(state.drag);
+    t.x = Math.min(W - 0.05, Math.max(0.05, p.x)); t.y = Math.min(H - 0.05, Math.max(0.05, p.y));
+    if (state.drag !== 'P' && state.samples.length) clearSamples();
+    updatePanel(); draw();
+  });
+  const end = () => { state.drag = null; cv.classList.remove('dragging'); };
+  cv.addEventListener('pointerup', end); cv.addEventListener('pointercancel', end);
+
+  ['va', 'vb', 'wait'].forEach(id => $(id).addEventListener('input', () => { clearSamples(); updatePanel(); draw(); }));
+  ['fill', 'edge', 'special'].forEach(id => $(id).addEventListener('change', draw));
+  $('run').addEventListener('click', runSamples);
+  $('clear').addEventListener('click', () => { clearSamples(); draw(); });
+  $('tab-ems').addEventListener('click', () => setMode('ems'));
+  $('tab-lions').addEventListener('click', () => setMode('lions'));
+
+  const recolor = () => { readColors(); state.samples.forEach(s => { s.c = state.mode === 'ems' ? (s.win === 'A' ? colors.a : colors.b) : colors['c' + (s.win + 1)]; }); draw(); };
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', recolor);
+  new MutationObserver(recolor).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  new ResizeObserver(resize).observe(cv);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+
+  readColors();
+  setMode('ems');
+  resize();
+})();
+</script>
+
+</body></html>

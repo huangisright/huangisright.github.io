@@ -1,0 +1,674 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>乘法公式的來時路與去向</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700;900&family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+  :root{
+    --paper:#F5F8F9;
+    --card:#FFFFFF;
+    --grid:rgba(31,111,139,.13);
+    --ink:#14232A;
+    --ink-soft:#4A5F69;
+    --ink-faint:#7E9099;
+    --line:#D3E0E4;
+    --indigo:#1F6F8B;
+    --indigo-soft:rgba(31,111,139,.10);
+    --ochre:#C05D22;
+    --ochre-soft:rgba(192,93,34,.12);
+    --moss:#5F7F33;
+    --moss-soft:rgba(95,127,51,.13);
+    --shadow:0 1px 2px rgba(20,35,42,.06),0 8px 24px -16px rgba(20,35,42,.35);
+    --font-body:"Noto Sans TC",system-ui,"PingFang TC","Microsoft JhengHei",sans-serif;
+    --font-display:"Noto Serif TC",Georgia,"Songti TC",serif;
+    --font-math:"IBM Plex Mono","Noto Serif TC",Georgia,serif;
+    color-scheme:light;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --paper:#0E1A20;
+      --card:#152530;
+      --grid:rgba(126,192,214,.10);
+      --ink:#E6EFF2;
+      --ink-soft:#A9BFC8;
+      --ink-faint:#7A939D;
+      --line:#26404C;
+      --indigo:#6FBBD6;
+      --indigo-soft:rgba(111,187,214,.14);
+      --ochre:#E58B4E;
+      --ochre-soft:rgba(229,139,78,.16);
+      --moss:#9DBE62;
+      --moss-soft:rgba(157,190,98,.16);
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px -18px rgba(0,0,0,.8);
+      color-scheme:dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0E1A20;
+    --card:#152530;
+    --grid:rgba(126,192,214,.10);
+    --ink:#E6EFF2;
+    --ink-soft:#A9BFC8;
+    --ink-faint:#7A939D;
+    --line:#26404C;
+    --indigo:#6FBBD6;
+    --indigo-soft:rgba(111,187,214,.14);
+    --ochre:#E58B4E;
+    --ochre-soft:rgba(229,139,78,.16);
+    --moss:#9DBE62;
+    --moss-soft:rgba(157,190,98,.16);
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px -18px rgba(0,0,0,.8);
+    color-scheme:dark;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    background-color:var(--paper);
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:26px 26px;
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:40px 20px 96px}
+
+  /* ---------- header ---------- */
+  header.masthead{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-top:4px solid var(--indigo);
+    border-radius:2px;
+    padding:30px 32px 26px;
+    box-shadow:var(--shadow);
+  }
+  .eyebrow{
+    font-family:var(--font-mono,var(--font-math));
+    font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--indigo);margin:0 0 10px;font-weight:600;
+  }
+  h1{
+    font-family:var(--font-display);font-weight:900;
+    font-size:clamp(28px,5.2vw,42px);line-height:1.25;margin:0;
+    letter-spacing:.01em;text-wrap:balance;
+  }
+  .subtitle{margin:12px 0 0;color:var(--ink-soft);font-size:15.5px;max-width:60ch}
+  .namebar{
+    display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:24px;padding-top:18px;
+    border-top:1px dashed var(--line);font-size:13.5px;color:var(--ink-faint);
+  }
+  .namebar span{display:inline-flex;align-items:baseline;gap:8px}
+  .namebar i{font-style:normal;display:inline-block;min-width:96px;border-bottom:1px solid var(--line)}
+
+  /* ---------- timeline rail ---------- */
+  .rail{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+    margin:26px 0 8px;border:1px solid var(--line);background:var(--card);border-radius:2px;overflow:hidden;
+  }
+  .rail div{padding:12px 14px;border-right:1px solid var(--line)}
+  .rail div:last-child{border-right:0}
+  .rail b{display:block;font-family:var(--font-math);font-size:11px;letter-spacing:.16em;color:var(--ink-faint);font-weight:400}
+  .rail span{font-size:14px;font-weight:500}
+  .rail .now{background:var(--indigo-soft)}
+  .rail .now span{color:var(--indigo)}
+
+  /* ---------- sections ---------- */
+  section{
+    background:var(--card);border:1px solid var(--line);border-radius:2px;
+    padding:28px 32px 30px;margin-top:22px;box-shadow:var(--shadow);
+  }
+  .sec-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:6px}
+  .sec-num{
+    flex:none;font-family:var(--font-math);font-size:12px;font-weight:600;
+    color:var(--card);background:var(--indigo);padding:3px 8px;border-radius:2px;margin-top:8px;
+  }
+  h2{font-family:var(--font-display);font-weight:700;font-size:23px;line-height:1.4;margin:4px 0 0;text-wrap:balance}
+  .sec-note{color:var(--ink-soft);font-size:14.5px;margin:8px 0 22px}
+  h3{
+    font-family:var(--font-display);font-size:17.5px;font-weight:700;margin:30px 0 10px;
+    padding-bottom:6px;border-bottom:1px solid var(--line);
+  }
+  h4{font-size:15px;font-weight:700;margin:22px 0 8px;color:var(--indigo)}
+  p{margin:10px 0}
+  ul,ol{padding-left:1.3em;margin:10px 0}
+  li{margin:6px 0}
+
+  /* ---------- math ---------- */
+  .m{font-family:var(--font-math);font-style:italic;font-size:1.02em;white-space:nowrap}
+  .m sup,.m sub{font-style:normal;font-size:.72em}
+  .m .n{font-style:normal}
+  .formula{
+    display:block;text-align:center;font-family:var(--font-math);font-size:clamp(16px,3.4vw,20px);
+    font-style:italic;padding:16px 12px;margin:14px 0;background:var(--indigo-soft);
+    border-left:3px solid var(--indigo);border-radius:2px;overflow-x:auto;
+  }
+  .formula sup{font-style:normal;font-size:.72em}
+  .formula .n{font-style:normal}
+  mark{background:var(--ochre-soft);color:var(--ochre);padding:0 3px;border-radius:2px;font-weight:600}
+
+  /* ---------- question blocks ---------- */
+  .qs{display:grid;gap:0;margin:14px 0 4px;border-top:1px solid var(--line)}
+  .q{
+    display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start;
+    padding:11px 4px;border-bottom:1px solid var(--line);
+  }
+  .q > b{
+    font-family:var(--font-math);font-size:13px;font-weight:600;color:var(--ink-faint);
+    padding-top:2px;font-variant-numeric:tabular-nums;
+  }
+  .q .ask{margin:0}
+  .q .work{
+    display:block;margin-top:8px;border-bottom:1px dotted var(--line);height:22px;
+  }
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:0 28px}
+  @media(max-width:640px){.two{grid-template-columns:1fr}}
+  .hint{font-size:13px;color:var(--ink-faint);margin-top:4px}
+
+  /* ---------- callouts ---------- */
+  .box{
+    border:1px solid var(--line);border-left:3px solid var(--ochre);background:var(--ochre-soft);
+    padding:16px 18px;margin:18px 0;border-radius:2px;
+  }
+  .box .lab{
+    font-family:var(--font-math);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--ochre);font-weight:600;display:block;margin-bottom:6px;
+  }
+  .box.moss{border-left-color:var(--moss);background:var(--moss-soft)}
+  .box.moss .lab{color:var(--moss)}
+  .box p:last-child{margin-bottom:0}
+
+  details{
+    border:1px solid var(--line);border-radius:2px;margin:14px 0;background:var(--paper);
+  }
+  details summary{
+    cursor:pointer;padding:10px 14px;font-size:14px;font-weight:500;color:var(--indigo);
+    list-style:none;display:flex;align-items:center;gap:8px;
+  }
+  details summary::-webkit-details-marker{display:none}
+  details summary::before{content:"＋";font-family:var(--font-math);font-size:13px}
+  details[open] summary::before{content:"－"}
+  details summary:focus-visible{outline:2px solid var(--indigo);outline-offset:2px}
+  details .body{padding:2px 18px 16px;font-size:14.5px;color:var(--ink-soft)}
+  details .body .formula{font-size:16px}
+
+  /* ---------- interactive ---------- */
+  .lab-panel{
+    border:1px solid var(--line);border-radius:2px;padding:20px;margin:18px 0;
+    display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;background:var(--paper);
+  }
+  @media(max-width:640px){.lab-panel{grid-template-columns:1fr}}
+  .lab-panel svg{max-width:100%;height:auto;display:block;margin:0 auto}
+  .tile{cursor:pointer;transition:opacity .2s}
+  .tile:hover{opacity:.82}
+  .tile-lab{font-family:var(--font-math);font-style:italic;font-size:15px;pointer-events:none}
+  .tile-lab tspan{font-style:normal;font-size:11px}
+  .readout{font-size:14px;color:var(--ink-soft);min-height:3em}
+  .readout b{color:var(--ink);font-family:var(--font-math);font-style:italic}
+  button.btn{
+    font-family:var(--font-body);font-size:13.5px;font-weight:500;color:var(--indigo);
+    background:var(--card);border:1px solid var(--indigo);border-radius:2px;
+    padding:7px 14px;cursor:pointer;transition:background .15s,color .15s;
+  }
+  button.btn:hover{background:var(--indigo);color:var(--card)}
+  button.btn:focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
+  .btnrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+  .moving{transition:transform .85s cubic-bezier(.5,.05,.2,1);transform-box:view-box;transform-origin:0 0}
+  @media(prefers-reduced-motion:reduce){.moving{transition:none}}
+
+  /* ---------- pascal ---------- */
+  .pascal{display:flex;flex-direction:column;align-items:center;gap:6px;margin:16px 0 6px}
+  .prow{display:flex;gap:6px}
+  .pcell{
+    width:42px;height:34px;display:grid;place-items:center;cursor:pointer;
+    font-family:var(--font-math);font-size:14px;font-variant-numeric:tabular-nums;
+    border:1px solid var(--line);background:var(--card);border-radius:2px;
+    transition:background .15s,color .15s,border-color .15s;color:var(--ink);
+  }
+  .pcell:hover{border-color:var(--indigo)}
+  .pcell.sel{background:var(--ochre);color:#fff;border-color:var(--ochre)}
+  .pcell.par{background:var(--indigo-soft);border-color:var(--indigo);color:var(--indigo)}
+  .prow .rowlab{
+    width:64px;height:34px;display:grid;place-items:center;font-family:var(--font-math);
+    font-size:12px;color:var(--ink-faint);font-style:italic;
+  }
+  .prow .rowlab .n{font-style:normal}
+  .pmsg{text-align:center;font-size:14px;color:var(--ink-soft);min-height:2.6em;padding:0 8px}
+  .pmsg b{font-family:var(--font-math);color:var(--ink)}
+
+  table{border-collapse:collapse;width:100%;font-size:14.5px;margin:14px 0}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--indigo-soft);color:var(--indigo);font-weight:600;font-size:13px;letter-spacing:.04em}
+  td.blank{height:38px}
+
+  footer{margin-top:30px;text-align:center;font-size:12.5px;color:var(--ink-faint);font-family:var(--font-math)}
+</style>
+
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">數理資優班 · 代數專題學習單</p>
+  <h1>乘法公式的來時路與去向</h1>
+  <p class="subtitle">三個公式，一條路。往回走，它們只是分配律換了個樣子；往前走，它們長成巴斯卡三角、二項式定理，還有一堆你以為不相干的因式分解技巧。</p>
+  <div class="namebar">
+    <span>班級 <i></i></span><span>座號 <i></i></span><span>姓名 <i></i></span><span>日期 <i></i></span>
+  </div>
+</header>
+
+<div class="rail">
+  <div><b>PAST</b><span>七年級：分配律・整式乘法</span></div>
+  <div class="now"><b>NOW</b><span>八年級：三個乘法公式</span></div>
+  <div><b>NEXT</b><span>因式分解・二項式定理・數論</span></div>
+</div>
+
+<!-- ============ 1 往前回顧 ============ -->
+<section>
+  <div class="sec-head"><span class="sec-num">往前</span><h2>你早就有的三把工具</h2></div>
+  <p class="sec-note">乘法公式不是新東西。動手做完這三題，你會發現後面所有公式都只是這三把工具的組合。</p>
+
+  <h3>工具一　分配律：把括號拆開的唯一理由</h3>
+  <span class="formula"><span class="n">a</span>(<span class="n">b</span> + <span class="n">c</span>) = <span class="n">ab</span> + <span class="n">ac</span></span>
+  <div class="qs">
+    <div class="q"><b>1</b><div><p class="ask">展開 <span class="m">3(2x − 5)</span></p><span class="work"></span></div></div>
+    <div class="q"><b>2</b><div><p class="ask">展開 <span class="m">−2x(x − 4y)</span></p><span class="work"></span></div></div>
+  </div>
+
+  <h3>工具二　兩個括號相乘：其實是分配律用兩次</h3>
+  <span class="formula">(<span class="n">a</span> + <span class="n">b</span>)(<span class="n">c</span> + <span class="n">d</span>) = <span class="n">ac</span> + <span class="n">ad</span> + <span class="n">bc</span> + <span class="n">bd</span></span>
+  <div class="qs">
+    <div class="q"><b>3</b><div><p class="ask">展開 <span class="m">(x + 2)(x + 5)</span></p><span class="work"></span></div></div>
+    <div class="q"><b>4</b><div><p class="ask">展開 <span class="m">(x + 3)(x − 3)</span>，並把過程完整寫出來（先別用公式）</p><span class="work"></span><span class="work"></span></div></div>
+  </div>
+
+  <h3>工具三　面積模型：把代數看成一塊地</h3>
+  <p>一塊長 <span class="m">c + d</span>、寬 <span class="m">a + b</span> 的長方形，用兩條線分成四小塊 —— 這張圖就是上面那條式子的圖形版本。<strong>整張學習單，每次卡住就回來畫這張圖。</strong></p>
+  <div class="box moss">
+    <span class="lab">回顧檢核</span>
+    <p>問題 4 的答案是 <span class="m">x<sup>2</sup> − 9</span>，中間的 <span class="m">−3x</span> 和 <span class="m">+3x</span> 消掉了。<strong>把「消掉」這件事記住</strong>，它就是等一下平方差公式的全部秘密。</p>
+  </div>
+</section>
+
+<!-- ============ 2 核心 ============ -->
+<section>
+  <div class="sec-head"><span class="sec-num">核心</span><h2>三個公式，其實只有一個</h2></div>
+  <p class="sec-note">課本給你三條公式要背。做完這一節，你應該只需要記住一條 —— 另外兩條是它的變形。</p>
+
+  <h3>公式一　和的平方</h3>
+  <p>用工具二自己推一次，<strong>不要看課本</strong>：<span class="m">(a + b)<sup>2</sup> = (a + b)(a + b) =</span></p>
+  <div class="qs"><div class="q"><b>5</b><div><span class="work"></span><span class="work"></span></div></div></div>
+  <span class="formula">(<span class="n">a</span> + <span class="n">b</span>)<sup>2</sup> = <span class="n">a</span><sup>2</sup> + 2<span class="n">ab</span> + <span class="n">b</span><sup>2</sup></span>
+
+  <div class="lab-panel">
+    <svg viewBox="0 0 260 260" width="260" height="260" role="img" aria-label="邊長 a 加 b 的正方形被切成四塊：a平方、兩塊 ab、b平方">
+      <g id="areaModel">
+        <rect class="tile" data-k="a2" x="10" y="10" width="160" height="160" fill="var(--indigo-soft)" stroke="var(--indigo)"></rect>
+        <rect class="tile" data-k="ab1" x="170" y="10" width="70" height="160" fill="var(--ochre-soft)" stroke="var(--ochre)"></rect>
+        <rect class="tile" data-k="ab2" x="10" y="170" width="160" height="70" fill="var(--ochre-soft)" stroke="var(--ochre)"></rect>
+        <rect class="tile" data-k="b2" x="170" y="170" width="70" height="70" fill="var(--moss-soft)" stroke="var(--moss)"></rect>
+        <text class="tile-lab" x="90" y="96" text-anchor="middle" fill="var(--indigo)">a<tspan dy="-5">2</tspan></text>
+        <text class="tile-lab" x="205" y="96" text-anchor="middle" fill="var(--ochre)">ab</text>
+        <text class="tile-lab" x="90" y="211" text-anchor="middle" fill="var(--ochre)">ab</text>
+        <text class="tile-lab" x="205" y="211" text-anchor="middle" fill="var(--moss)">b<tspan dy="-5">2</tspan></text>
+        <text class="tile-lab" x="90" y="256" text-anchor="middle" fill="var(--ink-faint)" font-size="13">a</text>
+        <text class="tile-lab" x="205" y="256" text-anchor="middle" fill="var(--ink-faint)" font-size="13">b</text>
+        <text class="tile-lab" x="4" y="96" text-anchor="middle" fill="var(--ink-faint)" font-size="13">a</text>
+        <text class="tile-lab" x="4" y="211" text-anchor="middle" fill="var(--ink-faint)" font-size="13">b</text>
+      </g>
+    </svg>
+    <div>
+      <p class="readout" id="areaOut">點一塊磚，看它對應到展開式的哪一項。</p>
+      <div class="btnrow">
+        <button class="btn" id="btnMistake">小明說 (a+b)² = a² + b²，他漏了什麼？</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="box">
+    <span class="lab">錯誤診斷</span>
+    <p>找一組數字，證明 <span class="m">(a + b)<sup>2</sup> ≠ a<sup>2</sup> + b<sup>2</sup></span>：取 <span class="m">a =</span> ＿＿、<span class="m">b =</span> ＿＿，則左式 ＝ ＿＿，右式 ＝ ＿＿。</p>
+    <p>再用上圖回答：右式少算的那兩塊，面積合起來是 ＿＿＿＿＿＿。</p>
+  </div>
+
+  <h3>公式二　差的平方（別重推，用代換）</h3>
+  <p>在 <span class="m">(a + b)<sup>2</sup> = a<sup>2</sup> + 2ab + b<sup>2</sup></span> 中，把 <span class="m">b</span> 整個換成 <span class="m">(−b)</span>，會得到什麼？</p>
+  <div class="qs"><div class="q"><b>6</b><div><span class="work"></span></div></div></div>
+  <div class="box moss">
+    <span class="lab">數學家的習慣</span>
+    <p>「用代換取代重算」是本張學習單第一個重要習慣。看到差的平方時，你腦中不該是第二條公式，而是<strong>同一條公式、<span class="m">b</span> 帶負號</strong>。等一下的 <span class="m">(a − b)<sup>3</sup></span> 也是這樣來的。</p>
+  </div>
+
+  <h3>公式三　平方差：唯一一個「相乘反而變簡單」的式子</h3>
+  <span class="formula">(<span class="n">a</span> + <span class="n">b</span>)(<span class="n">a</span> − <span class="n">b</span>) = <span class="n">a</span><sup>2</sup> − <span class="n">b</span><sup>2</sup></span>
+  <p>下圖：邊長 <span class="m">a</span> 的正方形挖掉角落邊長 <span class="m">b</span> 的正方形，剩下的部分剪一刀、轉一下，就能拼成一個長方形。按下按鈕觀察，並寫出這個長方形的長與寬。</p>
+  <div class="lab-panel">
+    <svg viewBox="0 0 300 230" width="300" height="230" role="img" aria-label="平方差的剪貼重組動畫">
+      <rect x="10" y="10" width="200" height="200" fill="none" stroke="var(--line)" stroke-dasharray="4 4"></rect>
+      <rect id="p1" x="10" y="10" width="200" height="130" fill="var(--indigo-soft)" stroke="var(--indigo)"></rect>
+      <g id="p2g" class="moving" style="transform:translate(10px,140px)">
+        <rect x="0" y="0" width="130" height="70" fill="var(--ochre-soft)" stroke="var(--ochre)"></rect>
+      </g>
+      <text id="labA" class="tile-lab" x="110" y="80" text-anchor="middle" fill="var(--indigo)" font-size="13">a(a − b)</text>
+    </svg>
+    <div>
+      <p class="readout" id="cutOut">原圖：大正方形 <b>a<sup>2</sup></b> 挖掉小正方形 <b>b<sup>2</sup></b>，面積為 <b>a<sup>2</sup> − b<sup>2</sup></b>。</p>
+      <div class="btnrow"><button class="btn" id="btnCut">剪下 → 旋轉 → 拼合</button></div>
+      <p class="hint">拼好後長 ＿＿＿＿、寬 ＿＿＿＿，面積 ＝ ＿＿＿＿＿＿＿</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3 練習 ============ -->
+<section>
+  <div class="sec-head"><span class="sec-num">練習</span><h2>先熟練，再談延伸</h2></div>
+  <p class="sec-note">左欄正著用（展開），右欄反著用（因式分解）。<strong>同一條公式，兩個方向。</strong></p>
+  <div class="two">
+    <div>
+      <h4>正向：展開</h4>
+      <div class="qs">
+        <div class="q"><b>7</b><div><p class="ask"><span class="m">(2x + 3)<sup>2</sup></span></p><span class="work"></span></div></div>
+        <div class="q"><b>8</b><div><p class="ask"><span class="m">(3x − 5y)<sup>2</sup></span></p><span class="work"></span></div></div>
+        <div class="q"><b>9</b><div><p class="ask"><span class="m">(4a + 7b)(4a − 7b)</span></p><span class="work"></span></div></div>
+        <div class="q"><b>10</b><div><p class="ask"><span class="m">(x + <sup>1</sup>⁄<sub>x</sub>)<sup>2</sup></span></p><span class="work"></span><p class="hint">順帶想想：若 <span class="m">x + <sup>1</sup>⁄<sub>x</sub> = 3</span>，則 <span class="m">x<sup>2</sup> + <sup>1</sup>⁄<sub>x<sup>2</sup></sub> = ?</span></p></div></div>
+        <div class="q"><b>11</b><div><p class="ask"><span class="m">(x + y + 1)(x + y − 1)</span></p><span class="work"></span><p class="hint">把 <span class="m">x + y</span> 當成一個整體 <span class="m">A</span></p></div></div>
+      </div>
+    </div>
+    <div>
+      <h4>反向：因式分解</h4>
+      <div class="qs">
+        <div class="q"><b>12</b><div><p class="ask"><span class="m">x<sup>2</sup> − 49</span></p><span class="work"></span></div></div>
+        <div class="q"><b>13</b><div><p class="ask"><span class="m">9x<sup>2</sup> − 16y<sup>2</sup></span></p><span class="work"></span></div></div>
+        <div class="q"><b>14</b><div><p class="ask"><span class="m">x<sup>2</sup> + 6x + 9</span></p><span class="work"></span></div></div>
+        <div class="q"><b>15</b><div><p class="ask"><span class="m">x<sup>4</sup> − 1</span></p><span class="work"></span><p class="hint">平方差用兩次</p></div></div>
+        <div class="q"><b>16</b><div><p class="ask"><span class="m">x<sup>2</sup> − 6x + 9 − y<sup>2</sup></span></p><span class="work"></span><p class="hint">先三項湊成完全平方，再平方差</p></div></div>
+      </div>
+    </div>
+  </div>
+  <details>
+    <summary>做完再看：練習區解答</summary>
+    <div class="body">
+      <p>7. <span class="m">4x<sup>2</sup> + 12x + 9</span>　8. <span class="m">9x<sup>2</sup> − 30xy + 25y<sup>2</sup></span>　9. <span class="m">16a<sup>2</sup> − 49b<sup>2</sup></span>　10. <span class="m">x<sup>2</sup> + 2 + <sup>1</sup>⁄<sub>x<sup>2</sup></sub></span>（故 <span class="m">x<sup>2</sup> + <sup>1</sup>⁄<sub>x<sup>2</sup></sub> = 9 − 2 = 7</span>）　11. <span class="m">(x + y)<sup>2</sup> − 1 = x<sup>2</sup> + 2xy + y<sup>2</sup> − 1</span></p>
+      <p>12. <span class="m">(x + 7)(x − 7)</span>　13. <span class="m">(3x + 4y)(3x − 4y)</span>　14. <span class="m">(x + 3)<sup>2</sup></span>　15. <span class="m">(x<sup>2</sup> + 1)(x + 1)(x − 1)</span>　16. <span class="m">(x − 3)<sup>2</sup> − y<sup>2</sup> = (x − 3 + y)(x − 3 − y)</span></p>
+    </div>
+  </details>
+</section>
+
+<!-- ============ 4 延伸 A ============ -->
+<section>
+  <div class="sec-head"><span class="sec-num">延伸 A</span><h2>如果括號裡有三項、四項、n 項？</h2></div>
+  <p class="sec-note">課本停在兩項。但面積模型不會停 —— 把正方形切成 <span class="m">3 × 3</span> 格就好。</p>
+
+  <div class="qs"><div class="q"><b>17</b><div><p class="ask">把 <span class="m">(a + b + c)<sup>2</sup></span> 展開。提示：把 <span class="m">(a + b)</span> 看成一個整體，用公式一兩次。</p><span class="work"></span><span class="work"></span></div></div></div>
+  <span class="formula">(<span class="n">a</span>+<span class="n">b</span>+<span class="n">c</span>)<sup>2</sup> = <span class="n">a</span><sup>2</sup>+<span class="n">b</span><sup>2</sup>+<span class="n">c</span><sup>2</sup> + 2(<span class="n">ab</span>+<span class="n">bc</span>+<span class="n">ca</span>)</span>
+  <p><strong>看出結構了嗎：</strong>每一項自己的平方，加上「兩兩配對乘積」的兩倍。<span class="m">3 × 3</span> 的方格圖中，對角線上是 3 塊平方，對角線外是 6 塊、兩兩成對。</p>
+
+  <div class="qs">
+    <div class="q"><b>18</b><div><p class="ask"><span class="m">(a + b + c + d)<sup>2</sup></span> 展開後共有幾項？其中「交叉項」有幾種？</p><span class="work"></span><p class="hint">別硬展。想：<span class="m">4 × 4</span> 的方格有幾格？對角線幾格？</p></div></div>
+    <div class="q"><b>19</b><div><p class="ask">推廣：<span class="m">(a<sub>1</sub> + a<sub>2</sub> + ⋯ + a<sub>n</sub>)<sup>2</sup></span> 中，交叉項有 <span class="m">C(n, 2)</span> 種，各出現 ＿＿ 次。用 <span class="m">n</span> 寫出總項數。</p><span class="work"></span></div></div>
+    <div class="q"><b>20</b><div><p class="ask">已知 <span class="m">a + b + c = 6</span>、<span class="m">ab + bc + ca = 11</span>，求 <span class="m">a<sup>2</sup> + b<sup>2</sup> + c<sup>2</sup></span>。</p><span class="work"></span><p class="hint">不必解出 a、b、c —— 只用它們的和與兩兩乘積，答案就出來了</p></div></div>
+  </div>
+</section>
+
+<!-- ============ 5 延伸 B ============ -->
+<section>
+  <div class="sec-head"><span class="sec-num">延伸 B</span><h2>升到三次方：巴斯卡三角現身</h2></div>
+  <p class="sec-note">平方會了，立方呢？不必背 —— 用 <span class="m">(a + b)<sup>2</sup> × (a + b)</span> 老實乘一次，然後看係數。</p>
+
+  <div class="qs">
+    <div class="q"><b>21</b><div><p class="ask">計算 <span class="m">(a + b)<sup>3</sup> = (a<sup>2</sup> + 2ab + b<sup>2</sup>)(a + b) =</span></p><span class="work"></span><span class="work"></span></div></div>
+    <div class="q"><b>22</b><div><p class="ask">不重算，直接寫出 <span class="m">(a − b)<sup>3</sup></span>（用代換）</p><span class="work"></span></div></div>
+  </div>
+
+  <h4>係數表 —— 填完空格，找出規律</h4>
+  <table>
+    <tr><th>次方</th><th>展開式的係數</th></tr>
+    <tr><td><span class="m">(a + b)<sup>0</sup></span></td><td>1</td></tr>
+    <tr><td><span class="m">(a + b)<sup>1</sup></span></td><td>1　1</td></tr>
+    <tr><td><span class="m">(a + b)<sup>2</sup></span></td><td>1　2　1</td></tr>
+    <tr><td><span class="m">(a + b)<sup>3</sup></span></td><td class="blank"></td></tr>
+    <tr><td><span class="m">(a + b)<sup>4</sup></span></td><td class="blank"></td></tr>
+    <tr><td><span class="m">(a + b)<sup>5</sup></span></td><td class="blank"></td></tr>
+  </table>
+  <p>填完後，點下面的三角形驗證你的規律。</p>
+
+  <div class="lab-panel" style="grid-template-columns:1fr">
+    <div>
+      <div class="pascal" id="pascal"></div>
+      <p class="pmsg" id="pmsg">點任一個數字，看它從哪裡來。</p>
+      <div class="btnrow" style="justify-content:center">
+        <button class="btn" id="btnExpand">顯示對應的展開式</button>
+      </div>
+      <p class="readout" id="expandOut" style="text-align:center;margin-top:10px"></p>
+    </div>
+  </div>
+
+  <div class="box">
+    <span class="lab">這條規律有名字</span>
+    <p>第 <span class="m">n</span> 列第 <span class="m">k</span> 個數就是組合數 <span class="m">C(n, k)</span>，這件事叫做<strong>二項式定理</strong>。<span class="m">(a + b)<sup>5</sup></span> 中 <span class="m">a<sup>2</sup>b<sup>3</sup></span> 的係數是 ＿＿；<span class="m">(a + b)<sup>10</sup></span> 中 <span class="m">a<sup>7</sup>b<sup>3</sup></span> 的係數是 <span class="m">C(10, 3) =</span> ＿＿。</p>
+    <p class="hint">想一想「為什麼是組合數」：展開時每個括號各出一個字母，要湊出 <span class="m">a<sup>7</sup>b<sup>3</sup></span>，等於從 10 個括號中挑 3 個出 <span class="m">b</span>。</p>
+  </div>
+
+  <h3>另一組立方公式：立方和與立方差</h3>
+  <span class="formula"><span class="n">a</span><sup>3</sup> + <span class="n">b</span><sup>3</sup> = (<span class="n">a</span> + <span class="n">b</span>)(<span class="n">a</span><sup>2</sup> − <span class="n">ab</span> + <span class="n">b</span><sup>2</sup>)　　<span class="n">a</span><sup>3</sup> − <span class="n">b</span><sup>3</sup> = (<span class="n">a</span> − <span class="n">b</span>)(<span class="n">a</span><sup>2</sup> + <span class="n">ab</span> + <span class="n">b</span><sup>2</sup>)</span>
+  <p class="hint">注意符號：括號內的 <span class="m">ab</span> 與括號外<strong>相反</strong>，而且是 <span class="m">ab</span> 不是 <span class="m">2ab</span> —— 這是最常錯的地方。</p>
+  <div class="qs">
+    <div class="q"><b>23</b><div><p class="ask">把右邊展開，驗證立方差公式（會發生大量相消，體會一次）。</p><span class="work"></span><span class="work"></span></div></div>
+    <div class="q"><b>24</b><div><p class="ask">因式分解 <span class="m">x<sup>3</sup> − 8</span>　與　<span class="m">27x<sup>3</sup> + 1</span></p><span class="work"></span></div></div>
+    <div class="q"><b>25</b><div><p class="ask"><span class="m">x<sup>6</sup> − 1</span> 有兩種拆法：先看成平方差、或先看成立方差。兩種都做，比較結果。</p><span class="work"></span><span class="work"></span><p class="hint">兩邊對照，你會意外分解出 <span class="m">x<sup>4</sup> + x<sup>2</sup> + 1</span></p></div></div>
+  </div>
+  <details>
+    <summary>做完再看：延伸 A、B 解答</summary>
+    <div class="body">
+      <p>18. 共 16 項，合併後 4 個平方項 + 6 種交叉項（各 2 倍）＝ 10 種。　19. 各出現 2 次；合併後共 <span class="m">n + C(n,2)</span> 種項。　20. <span class="m">36 − 2(11) = 14</span>。</p>
+      <p>21. <span class="m">a<sup>3</sup> + 3a<sup>2</sup>b + 3ab<sup>2</sup> + b<sup>3</sup></span>　22. <span class="m">a<sup>3</sup> − 3a<sup>2</sup>b + 3ab<sup>2</sup> − b<sup>3</sup></span>　係數列：1 3 3 1／1 4 6 4 1／1 5 10 10 5 1。<span class="m">a<sup>2</sup>b<sup>3</sup></span> 係數 10；<span class="m">C(10,3) = 120</span>。</p>
+      <p>24. <span class="m">(x − 2)(x<sup>2</sup> + 2x + 4)</span>；<span class="m">(3x + 1)(9x<sup>2</sup> − 3x + 1)</span>。　25. 先平方差：<span class="m">(x<sup>3</sup>+1)(x<sup>3</sup>−1) = (x+1)(x<sup>2</sup>−x+1)(x−1)(x<sup>2</sup>+x+1)</span>；先立方差：<span class="m">(x<sup>2</sup>−1)(x<sup>4</sup>+x<sup>2</sup>+1)</span>。兩式對照得 <span class="m">x<sup>4</sup> + x<sup>2</sup> + 1 = (x<sup>2</sup>+x+1)(x<sup>2</sup>−x+1)</span>。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============ 6 延伸 C ============ -->
+<section>
+  <div class="sec-head"><span class="sec-num">延伸 C</span><h2>拿來用：心算、估計、生活場景</h2></div>
+  <p class="sec-note">公式的價值不在紙上，在你能不能<strong>在看到數字的當下辨認出結構</strong>。以下各題請直接心算，並在旁邊寫出你用了哪條公式。</p>
+  <div class="two">
+    <div class="qs">
+      <div class="q"><b>26</b><div><p class="ask"><span class="m">98 × 102</span></p><span class="work"></span></div></div>
+      <div class="q"><b>27</b><div><p class="ask"><span class="m">47 × 53</span></p><span class="work"></span></div></div>
+      <div class="q"><b>28</b><div><p class="ask"><span class="m">35<sup>2</sup>　、　85<sup>2</sup></span></p><span class="work"></span><p class="hint">個位是 5 的平方有捷徑，找出它並說明為什麼</p></div></div>
+    </div>
+    <div class="qs">
+      <div class="q"><b>29</b><div><p class="ask"><span class="m">99<sup>2</sup>　、　2025<sup>2</sup></span></p><span class="work"></span></div></div>
+      <div class="q"><b>30</b><div><p class="ask"><span class="m">1234567<sup>2</sup> − 1234566 × 1234568</span></p><span class="work"></span><p class="hint">不用算大數，設 <span class="m">a = 1234567</span></p></div></div>
+      <div class="q"><b>31</b><div><p class="ask">化簡 <span class="m"><sup>1</sup>⁄<sub>√5 − 2</sub></span></p><span class="work"></span><p class="hint">這個動作叫做「分母有理化」，用的就是平方差</p></div></div>
+    </div>
+  </div>
+  <div class="box moss">
+    <span class="lab">情境題</span>
+    <p>學校有一塊邊長 <span class="m">a</span> 公尺的正方形花圃。若把邊長各加長 3 公尺，面積增加多少？請用 <span class="m">a</span> 表示，並在圖上指出增加的部分由哪幾塊組成。<span class="hint">（答案的形狀，和你在核心區看到的圖一模一樣。）</span></p>
+    <p style="margin-top:10px">延伸問：若改成「長加 3、寬減 3」，面積會變大還是變小？差多少？這說明了什麼？</p>
+  </div>
+  <details>
+    <summary>做完再看：延伸 C 解答</summary>
+    <div class="body">
+      <p>26. <span class="m">(100−2)(100+2) = 9996</span>　27. <span class="m">(50−3)(50+3) = 2491</span>　28. <span class="m">(30+5)<sup>2</sup> = 900+300+25 = 1225</span>；捷徑「十位 × (十位+1) 後接 25」，因為 <span class="m">(10k+5)<sup>2</sup> = 100k(k+1) + 25</span>。　29. <span class="m">9801</span>；<span class="m">2025<sup>2</sup> = (2000+25)<sup>2</sup> = 4000000 + 100000 + 625 = 4100625</span>。</p>
+      <p>30. 設 <span class="m">a = 1234567</span>，原式 <span class="m">= a<sup>2</sup> − (a−1)(a+1) = a<sup>2</sup> − (a<sup>2</sup>−1) = 1</span>。　31. <span class="m">√5 + 2</span>。　情境題：增加 <span class="m">(a+3)<sup>2</sup> − a<sup>2</sup> = 6a + 9</span>，即兩塊 <span class="m">3a</span> 長條加一塊 <span class="m">3<sup>2</sup></span>；長加寬減後面積為 <span class="m">a<sup>2</sup> − 9</span>，<strong>反而變小 9</strong>。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============ 7 挑戰 ============ -->
+<section>
+  <div class="sec-head"><span class="sec-num">挑戰</span><h2>資優挑戰：公式長大以後的樣子</h2></div>
+  <p class="sec-note">以下五題各自通往一個真實的數學領域。挑兩題深入做，把過程完整寫在另一張紙上。</p>
+
+  <h4>挑戰一　把「非負」藏進平方裡</h4>
+  <p>證明：<span class="m">a<sup>2</sup> + b<sup>2</sup> + c<sup>2</sup> − ab − bc − ca = ½[(a−b)<sup>2</sup> + (b−c)<sup>2</sup> + (c−a)<sup>2</sup>]</span>。</p>
+  <p>由此說明此式恆 <span class="m">≥ 0</span>，且等號成立的條件是什麼？<span class="hint">（這是所有「代數不等式」的起手式。）</span></p>
+
+  <h4>挑戰二　三次方的三元版本</h4>
+  <p>利用挑戰一的結果證明：</p>
+  <span class="formula"><span class="n">a</span><sup>3</sup>+<span class="n">b</span><sup>3</sup>+<span class="n">c</span><sup>3</sup>−3<span class="n">abc</span> = (<span class="n">a</span>+<span class="n">b</span>+<span class="n">c</span>)(<span class="n">a</span><sup>2</sup>+<span class="n">b</span><sup>2</sup>+<span class="n">c</span><sup>2</sup>−<span class="n">ab</span>−<span class="n">bc</span>−<span class="n">ca</span>)</span>
+  <p>並推論：若 <span class="m">a + b + c = 0</span>，則 <span class="m">a<sup>3</sup> + b<sup>3</sup> + c<sup>3</sup> = 3abc</span>。試舉一個具體的數字例子驗證。</p>
+
+  <h4>挑戰三　用代數證明一個數不是質數</h4>
+  <p>索菲・熱爾曼（Sophie Germain）恆等式：先湊成完全平方，再用平方差。</p>
+  <span class="formula"><span class="n">a</span><sup>4</sup> + 4<span class="n">b</span><sup>4</sup> = (<span class="n">a</span><sup>2</sup>+2<span class="n">b</span><sup>2</sup>)<sup>2</sup> − (2<span class="n">ab</span>)<sup>2</sup> = (<span class="n">a</span><sup>2</sup>+2<span class="n">ab</span>+2<span class="n">b</span><sup>2</sup>)(<span class="n">a</span><sup>2</sup>−2<span class="n">ab</span>+2<span class="n">b</span><sup>2</sup>)</span>
+  <p>(1) 先驗證這條恆等式。(2) 令 <span class="m">b = 1</span>，證明：當 <span class="m">n > 1</span> 時 <span class="m">n<sup>4</sup> + 4</span> 一定<strong>不是質數</strong>。(3) 用 <span class="m">n = 5</span> 實際算算看。</p>
+
+  <h4>挑戰四　用立方公式求平方和</h4>
+  <p>由 <span class="m">(k+1)<sup>3</sup> − k<sup>3</sup> = 3k<sup>2</sup> + 3k + 1</span> 出發，把 <span class="m">k = 1, 2, …, n</span> 全部相加（左邊會層層對消，這招叫<strong>望遠鏡法</strong>），推導出</p>
+  <span class="formula">1<sup>2</sup> + 2<sup>2</sup> + ⋯ + <span class="n">n</span><sup>2</sup> = <sup>1</sup>⁄<sub>6</sub> <span class="n">n</span>(<span class="n">n</span>+1)(2<span class="n">n</span>+1)</span>
+  <p class="hint">會用到 <span class="m">1 + 2 + ⋯ + n = ½n(n+1)</span>。做完可以自問：同樣手法能不能求出立方和？</p>
+
+  <h4>挑戰五　平方和的乘法</h4>
+  <p>驗證恆等式 <span class="m">(a<sup>2</sup>+b<sup>2</sup>)(c<sup>2</sup>+d<sup>2</sup>) = (ac − bd)<sup>2</sup> + (ad + bc)<sup>2</sup></span>。</p>
+  <p>它說的是：<strong>兩個「兩平方和」相乘，仍然是兩平方和。</strong>已知 <span class="m">5 = 1<sup>2</sup>+2<sup>2</sup></span>、<span class="m">13 = 2<sup>2</sup>+3<sup>2</sup></span>，請求出 <span class="m">65</span> 的兩種平方和寫法。<span class="hint">（提示：把 <span class="m">ac−bd</span> 換成 <span class="m">ac+bd</span> 再試一次。這是高斯整數與費馬平方和定理的起點。）</span></p>
+
+  <details>
+    <summary>教師用：挑戰題關鍵步驟</summary>
+    <div class="body">
+      <p><strong>一</strong>：右式展開得 <span class="m">½(2a<sup>2</sup>+2b<sup>2</sup>+2c<sup>2</sup>−2ab−2bc−2ca)</span>＝左式；等號成立於 <span class="m">a = b = c</span>。</p>
+      <p><strong>二</strong>：直接展開右式相消即得；<span class="m">a+b+c=0</span> 時右式為 0。例：<span class="m">1+2+(−3)</span>：<span class="m">1+8−27 = −18 = 3(1)(2)(−3)</span>。</p>
+      <p><strong>三</strong>：<span class="m">n<sup>4</sup>+4 = (n<sup>2</sup>+2n+2)(n<sup>2</sup>−2n+2)</span>，其中 <span class="m">n<sup>2</sup>−2n+2 = (n−1)<sup>2</sup>+1</span>，當 <span class="m">n > 1</span> 時大於 1，故為合數。<span class="m">n=5</span>：<span class="m">629 = 37 × 17</span>。</p>
+      <p><strong>四</strong>：累加得 <span class="m">(n+1)<sup>3</sup> − 1 = 3Σk<sup>2</sup> + 3·½n(n+1) + n</span>，整理即得。</p>
+      <p><strong>五</strong>：<span class="m">65 = (1·2−2·3)<sup>2</sup>+(1·3+2·2)<sup>2</sup> = 4<sup>2</sup>+7<sup>2</sup></span>；另一式 <span class="m">(ac+bd)<sup>2</sup>+(ad−bc)<sup>2</sup> = 8<sup>2</sup>+1<sup>2</sup></span>。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============ 8 統整 ============ -->
+<section>
+  <div class="sec-head"><span class="sec-num">統整</span><h2>把整張圖畫回來</h2></div>
+  <p class="sec-note">學習單的最後，請自己完成這張概念地圖，並用一句話回答最下面的問題。</p>
+  <table>
+    <tr><th style="width:26%">位置</th><th>內容（自己填）</th></tr>
+    <tr><td>往前：它從哪來</td><td class="blank"></td></tr>
+    <tr><td>核心：三條公式</td><td class="blank"></td></tr>
+    <tr><td>反過來用：因式分解</td><td class="blank"></td></tr>
+    <tr><td>往上：三項、n 項</td><td class="blank"></td></tr>
+    <tr><td>往高次：巴斯卡三角</td><td class="blank"></td></tr>
+    <tr><td>往應用：心算與數論</td><td class="blank"></td></tr>
+  </table>
+  <div class="box">
+    <span class="lab">一句話</span>
+    <p>如果只能留下一句話給明年的自己，你會怎麼說明「乘法公式到底是什麼」？</p>
+    <p><span class="work" style="display:block;height:26px"></span><span class="work" style="display:block;height:26px"></span></p>
+  </div>
+</section>
+
+<footer>設計｜黃士祐 老師（IsRight）　金門縣立金城國中　數理資優班　2026.09<br>本卷以「創用 CC 姓名標示—非商業性—相同方式分享 4.0 國際」（CC BY-NC-SA 4.0）授權</footer>
+</div>
+
+<script>
+(function(){
+  /* ---- 面積模型 ---- */
+  var out = document.getElementById('areaOut');
+  var texts = {
+    a2:'<b>a<sup>2</sup></b>　邊長 a 的正方形 —— 展開式的第一項。',
+    ab1:'<b>ab</b>　右上長條。注意：<b>ab</b> 出現<em>兩塊</em>，這就是 <b>2ab</b> 的來源。',
+    ab2:'<b>ab</b>　左下長條。與右上那塊全等，合起來正是 <b>2ab</b>。',
+    b2:'<b>b<sup>2</sup></b>　邊長 b 的小正方形 —— 展開式的最後一項。'
+  };
+  var tiles = document.querySelectorAll('#areaModel .tile');
+  for(var i=0;i<tiles.length;i++){
+    tiles[i].addEventListener('click', function(e){
+      out.innerHTML = texts[e.target.getAttribute('data-k')];
+    });
+  }
+  document.getElementById('btnMistake').addEventListener('click', function(){
+    var on = this.getAttribute('data-on') === '1';
+    for(var i=0;i<tiles.length;i++){
+      var k = tiles[i].getAttribute('data-k');
+      if(k === 'ab1' || k === 'ab2'){
+        tiles[i].setAttribute('fill', on ? 'var(--ochre-soft)' : 'var(--ochre)');
+      }
+    }
+    out.innerHTML = on
+      ? '點一塊磚，看它對應到展開式的哪一項。'
+      : '深色的兩塊就是小明漏掉的部分：他只算了 <b>a<sup>2</sup></b> 和 <b>b<sup>2</sup></b> 兩個角落，中間 <b>2ab</b> 整片不見了。';
+    this.setAttribute('data-on', on ? '0' : '1');
+    this.textContent = on ? '小明說 (a+b)² = a² + b²，他漏了什麼？' : '還原圖形';
+  });
+
+  /* ---- 平方差剪貼 ---- */
+  var g = document.getElementById('p2g'), cutOut = document.getElementById('cutOut'),
+      labA = document.getElementById('labA'), moved = false;
+  document.getElementById('btnCut').addEventListener('click', function(){
+    moved = !moved;
+    g.style.transform = moved ? 'translate(280px, 10px) rotate(90deg)' : 'translate(10px, 140px)';
+    labA.style.opacity = moved ? '0' : '1';
+    cutOut.innerHTML = moved
+      ? '拼好了：一個長 <b>a + b</b>、寬 <b>a − b</b> 的長方形。面積沒有改變，所以 <b>a<sup>2</sup> − b<sup>2</sup> = (a + b)(a − b)</b>。'
+      : '原圖：大正方形 <b>a<sup>2</sup></b> 挖掉小正方形 <b>b<sup>2</sup></b>，面積為 <b>a<sup>2</sup> − b<sup>2</sup></b>。';
+    this.textContent = moved ? '復原' : '剪下 → 旋轉 → 拼合';
+  });
+
+  /* ---- 巴斯卡三角 ---- */
+  var rows = [[1]];
+  for(var r=1;r<=6;r++){
+    var prev = rows[r-1], cur = [1];
+    for(var c=1;c<prev.length;c++) cur.push(prev[c-1]+prev[c]);
+    cur.push(1);
+    rows.push(cur);
+  }
+  var host = document.getElementById('pascal'),
+      pmsg = document.getElementById('pmsg'),
+      expandOut = document.getElementById('expandOut'),
+      selRow = -1;
+  rows.forEach(function(row, r){
+    var d = document.createElement('div');
+    d.className = 'prow';
+    var lab = document.createElement('div');
+    lab.className = 'rowlab';
+    lab.innerHTML = '(a+b)<span class="n"><sup>' + r + '</sup></span>';
+    d.appendChild(lab);
+    row.forEach(function(v, c){
+      var cell = document.createElement('button');
+      cell.className = 'pcell';
+      cell.type = 'button';
+      cell.textContent = v;
+      cell.setAttribute('data-r', r);
+      cell.setAttribute('data-c', c);
+      cell.addEventListener('click', function(){ select(r, c); });
+      d.appendChild(cell);
+    });
+    host.appendChild(d);
+  });
+  function clearMarks(){
+    var all = host.querySelectorAll('.pcell');
+    for(var i=0;i<all.length;i++){ all[i].classList.remove('sel'); all[i].classList.remove('par'); }
+  }
+  function cellAt(r,c){ return host.querySelector('.pcell[data-r="'+r+'"][data-c="'+c+'"]'); }
+  function select(r,c){
+    clearMarks();
+    selRow = r;
+    cellAt(r,c).classList.add('sel');
+    var left = (c > 0) ? cellAt(r-1, c-1) : null;
+    var right = (r > 0 && c < rows[r-1].length) ? cellAt(r-1, c) : null;
+    if(left) left.classList.add('par');
+    if(right) right.classList.add('par');
+    var v = rows[r][c];
+    if(left && right){
+      pmsg.innerHTML = '<b>' + left.textContent + ' + ' + right.textContent + ' = ' + v + '</b>　它是正上方兩個數的和。在展開式中，這是 <b>a<sup>' + (r-c) + '</sup>b<sup>' + c + '</sup></b> 的係數，也就是 <b>C(' + r + ', ' + c + ')</b>。';
+    } else {
+      pmsg.innerHTML = '兩端永遠是 <b>1</b>：只有一種方法讓每個括號都出 a（或都出 b）。這裡是 <b>a<sup>' + (r-c) + '</sup>b<sup>' + c + '</sup></b> 的係數。';
+    }
+    expandOut.innerHTML = '';
+  }
+  document.getElementById('btnExpand').addEventListener('click', function(){
+    var r = selRow < 0 ? 3 : selRow;
+    var parts = [];
+    rows[r].forEach(function(v, c){
+      var coef = (v === 1 ? '' : v);
+      var ap = r - c, bp = c;
+      var s = coef;
+      if(ap > 0) s += 'a' + (ap > 1 ? '<sup>' + ap + '</sup>' : '');
+      if(bp > 0) s += 'b' + (bp > 1 ? '<sup>' + bp + '</sup>' : '');
+      if(ap === 0 && bp === 0) s = '1';
+      parts.push(s);
+    });
+    expandOut.innerHTML = '<b>(a + b)<sup>' + r + '</sup> = ' + parts.join(' + ') + '</b>';
+  });
+  select(3, 1);
+})();
+</script>
+
+</body></html>

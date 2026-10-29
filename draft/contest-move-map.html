@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>國中數學競賽招式地圖</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700&family=STIX+Two+Text:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F2E8; --grid:rgba(46,90,136,.075); --card:#FFFDF8; --line:#DAD3C2;
+  --ink:#1F2A36; --muted:#5C6570; --indigo:#2E5A88; --ochre:#B45A28; --moss:#4A7C59;
+  --ans-bg:#EEF4EC; --focus:#2E5A88;
+  --lv0:transparent; --lv1:#D98A5C; --lv2:#C7D5E6; --lv3:#6F92BD; --lv4:#B9D3BF; --lv5:#6E9C7B; --lv6:#3C6B4A;
+  --lv-ink0:var(--muted); --lv-ink1:#fff; --lv-ink2:#1F2A36; --lv-ink3:#fff; --lv-ink4:#1F2A36; --lv-ink5:#fff; --lv-ink6:#fff;
+  --serif:"Noto Serif TC","Songti TC","PMingLiU",serif;
+  --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  --math:"STIX Two Text","Times New Roman",Times,serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#191E25; --grid:rgba(143,179,218,.07); --card:#222932; --line:#38414C;
+    --ink:#E7E2D7; --muted:#A3ABB5; --indigo:#93B6DC; --ochre:#E39565; --moss:#8FC19D;
+    --ans-bg:#243128; --focus:#93B6DC;
+    --lv1:#B8653A; --lv2:#3A4E66; --lv3:#5F86B5; --lv4:#3D5A46; --lv5:#5E9270; --lv6:#8FC19D;
+    --lv-ink1:#fff; --lv-ink2:#E7E2D7; --lv-ink3:#fff; --lv-ink4:#E7E2D7; --lv-ink5:#fff; --lv-ink6:#14201A;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#191E25; --grid:rgba(143,179,218,.07); --card:#222932; --line:#38414C;
+  --ink:#E7E2D7; --muted:#A3ABB5; --indigo:#93B6DC; --ochre:#E39565; --moss:#8FC19D;
+  --ans-bg:#243128; --focus:#93B6DC;
+  --lv1:#B8653A; --lv2:#3A4E66; --lv3:#5F86B5; --lv4:#3D5A46; --lv5:#5E9270; --lv6:#8FC19D;
+  --lv-ink1:#fff; --lv-ink2:#E7E2D7; --lv-ink3:#fff; --lv-ink4:#E7E2D7; --lv-ink5:#fff; --lv-ink6:#14201A;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; color:var(--ink); background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px; font-family:var(--sans); font-size:16px; line-height:1.7;
+}
+.wrap{max-width:900px; margin:0 auto; padding:0 20px}
+header.top{padding-top:44px; padding-bottom:20px}
+h1{font-family:var(--serif); font-weight:700; font-size:clamp(1.9rem,4.4vw,2.7rem); line-height:1.25; margin:0 0 12px; letter-spacing:.02em}
+.lede{margin:0; max-width:40em; color:var(--muted)}
+.lede b{color:var(--ink); font-weight:500}
+
+/* ---------- map ---------- */
+.map{margin:26px 0 8px; padding:18px 18px 12px; background:var(--card); border:1px solid var(--line); border-radius:8px}
+.map-row{display:grid; grid-template-columns:minmax(0,17.5em) 1fr auto; gap:6px 16px; align-items:center; padding:7px 0; border-top:1px dashed var(--line)}
+.map-row:first-child{border-top:0}
+.map-q{font-family:var(--serif); font-weight:500; font-size:.98rem; line-height:1.45; background:none; border:0; padding:0; color:var(--ink); text-align:left; cursor:pointer}
+.map-q:hover{color:var(--indigo)}
+.cells{display:flex; flex-wrap:wrap; gap:4px}
+.cell{width:22px; height:22px; border-radius:3px; border:1.5px solid var(--line); background:var(--lv0); padding:0; cursor:pointer; transition:background-color .25s,border-color .25s}
+.cell[data-lv="0"]{border-style:dashed}
+.cell[data-lv="1"]{background:var(--lv1); border-color:var(--lv1)}
+.cell[data-lv="2"]{background:var(--lv2); border-color:var(--lv3)}
+.cell[data-lv="3"]{background:var(--lv3); border-color:var(--lv3)}
+.cell[data-lv="4"]{background:var(--lv4); border-color:var(--lv5)}
+.cell[data-lv="5"]{background:var(--lv5); border-color:var(--lv5)}
+.cell[data-lv="6"]{background:var(--lv6); border-color:var(--lv6)}
+.map-n{font-size:.82rem; color:var(--muted); white-space:nowrap; font-variant-numeric:tabular-nums}
+.legend{display:flex; flex-wrap:wrap; gap:8px 18px; margin:14px 0 2px; padding-top:12px; border-top:1px solid var(--line); font-size:.86rem}
+.legend span{display:inline-flex; align-items:center; gap:6px; color:var(--muted)}
+.legend i{width:14px; height:14px; border-radius:3px; display:inline-block; border:1.5px solid var(--line)}
+.legend b{color:var(--ink); font-weight:500}
+.levels-help{margin:10px 0 0; font-size:.86rem; color:var(--muted)}
+.levels-help summary{cursor:pointer; color:var(--indigo)}
+.levels-help dl{display:grid; grid-template-columns:auto 1fr; gap:2px 14px; margin:8px 0 4px}
+.levels-help dt{color:var(--ink); font-weight:500}
+.levels-help dd{margin:0}
+
+/* ---------- toolbar ---------- */
+.bar{position:sticky; top:0; z-index:5; background:var(--paper); border-bottom:1px solid var(--line); margin-top:18px}
+.bar .wrap{display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center; padding-top:10px; padding-bottom:10px}
+.seg{display:inline-flex; border:1px solid var(--line); border-radius:6px; overflow:hidden; background:var(--card)}
+.seg button{font:inherit; font-size:.92rem; border:0; background:none; color:var(--ink); padding:6px 12px; cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--indigo); color:var(--card)}
+.bar label{font-size:.9rem; color:var(--muted); display:inline-flex; gap:8px; align-items:center}
+select{font:inherit; font-size:.92rem; color:var(--ink); background:var(--card); border:1px solid var(--line); border-radius:6px; padding:5px 8px}
+.txtbtn{font:inherit; font-size:.9rem; background:none; border:0; color:var(--indigo); cursor:pointer; padding:4px 2px; text-decoration:underline; text-underline-offset:3px}
+
+/* ---------- groups & cards ---------- */
+main{padding:10px 0 20px}
+.group-h{font-family:var(--serif); font-weight:700; font-size:clamp(1.3rem,3vw,1.6rem); line-height:1.35; margin:40px 0 14px; scroll-margin-top:70px}
+.group-h small{display:block; font-family:var(--sans); font-weight:400; font-size:.85rem; color:var(--muted); margin-top:2px}
+.card{background:var(--card); border:1px solid var(--line); border-left:5px solid var(--line); border-radius:6px; padding:16px 20px 14px; margin:0 0 14px; scroll-margin-top:74px}
+.card[data-lv="1"]{border-left-color:var(--lv1)}
+.card[data-lv="2"]{border-left-color:var(--lv2)}
+.card[data-lv="3"]{border-left-color:var(--lv3)}
+.card[data-lv="4"]{border-left-color:var(--lv4)}
+.card[data-lv="5"]{border-left-color:var(--lv5)}
+.card[data-lv="6"]{border-left-color:var(--lv6)}
+.card.flash{outline:2px solid var(--focus); outline-offset:3px}
+.card-h{display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 12px; margin-bottom:6px}
+.card-h h3{font-family:var(--serif); font-weight:700; font-size:1.14rem; margin:0; line-height:1.4}
+.src{font-size:.78rem; color:var(--ochre); border:1px solid currentColor; border-radius:3px; padding:0 6px; line-height:1.6}
+.lab{display:inline-block; font-size:.8rem; font-weight:500; color:var(--muted); margin-right:8px; min-width:3.2em}
+.sig{margin:0 0 8px; font-size:.94rem; color:var(--muted)}
+.sig .t{color:var(--ink)}
+.prob{font-family:var(--serif); font-size:1.06rem; line-height:2.05; margin:8px 0 10px; padding:6px 0 6px 14px; border-left:2px solid var(--indigo)}
+.reveal{font:inherit; font-size:.9rem; color:var(--indigo); background:none; border:1px solid var(--indigo); border-radius:5px; padding:3px 12px; cursor:pointer}
+.reveal[aria-expanded="true"]{background:var(--indigo); color:var(--card)}
+.ans{margin:12px 0 4px; padding:10px 14px; background:var(--ans-bg); border-radius:5px; line-height:2}
+.ans p{margin:2px 0}
+.ans .who{font-family:var(--serif); font-weight:700; font-size:1.05rem; margin-bottom:4px}
+.ans .who small{font-family:var(--sans); font-weight:400; color:var(--muted); font-size:.85rem; margin-left:8px}
+.ans .lab{color:var(--moss)}
+.rate{border:0; margin:12px 0 0; padding:0; display:flex; flex-wrap:wrap; gap:6px; align-items:center}
+.rate legend{float:left; font-size:.84rem; color:var(--muted); margin-right:6px; padding:0}
+.rate label{position:relative; font-size:.86rem; cursor:pointer}
+.rate input{position:absolute; opacity:0; width:1px; height:1px}
+.rate span{display:inline-block; border:1px solid var(--line); border-radius:999px; padding:2px 10px; background:var(--card); color:var(--ink); transition:background-color .2s}
+.rate input:focus-visible + span{outline:2px solid var(--focus); outline-offset:2px}
+.rate input:checked + span{font-weight:500}
+.rate input[value="1"]:checked + span{background:var(--lv1); border-color:var(--lv1); color:var(--lv-ink1)}
+.rate input[value="2"]:checked + span{background:var(--lv2); border-color:var(--lv3); color:var(--lv-ink2)}
+.rate input[value="3"]:checked + span{background:var(--lv3); border-color:var(--lv3); color:var(--lv-ink3)}
+.rate input[value="4"]:checked + span{background:var(--lv4); border-color:var(--lv5); color:var(--lv-ink4)}
+.rate input[value="5"]:checked + span{background:var(--lv5); border-color:var(--lv5); color:var(--lv-ink5)}
+.rate input[value="6"]:checked + span{background:var(--lv6); border-color:var(--lv6); color:var(--lv-ink6)}
+.clear{font-size:.8rem; margin-left:2px}
+.note{margin-top:8px; font-size:.88rem}
+.note summary{cursor:pointer; color:var(--muted)}
+.note textarea{width:100%; min-height:64px; margin-top:6px; font:inherit; font-size:.92rem; color:var(--ink); background:var(--paper); border:1px solid var(--line); border-radius:5px; padding:8px}
+.empty{padding:30px 0; color:var(--muted)}
+
+/* ---------- math ---------- */
+.m{font-family:var(--math); white-space:normal}
+.m.nw{white-space:nowrap}
+.m i{font-style:italic; font-family:var(--math)}
+.fr{display:inline-flex; flex-direction:column; vertical-align:middle; text-align:center; font-size:.86em; line-height:1.2; margin:0 .08em}
+.fr>span:first-child{border-bottom:1px solid currentColor; padding:0 .18em}
+.fr>span:last-child{padding:0 .18em}
+.sq{white-space:nowrap}
+.sq>span{border-top:1px solid currentColor; padding:0 .08em 0 .05em; margin-left:.02em}
+.ol{border-top:1px solid currentColor; padding-top:.02em}
+.fn{font-style:normal}
+sup,sub{font-size:.7em; line-height:0}
+
+/* ---------- tail ---------- */
+.tail{max-width:860px; margin:40px auto 60px; padding:18px 20px; background:var(--card); border:1px solid var(--line); border-radius:8px}
+.tail h2{font-family:var(--serif); font-size:1.25rem; margin:0 0 6px}
+.tail p{margin:4px 0 10px; color:var(--muted); font-size:.92rem}
+.tail textarea{width:100%; font:inherit; font-size:.9rem; line-height:1.7; color:var(--ink); background:var(--paper); border:1px solid var(--line); border-radius:5px; padding:10px}
+.tail .row{display:flex; flex-wrap:wrap; gap:8px 16px; align-items:center; margin:8px 0 18px}
+.btn{font:inherit; font-size:.9rem; color:var(--card); background:var(--indigo); border:0; border-radius:5px; padding:6px 14px; cursor:pointer}
+.btn.ghost{color:var(--indigo); background:none; border:1px solid var(--indigo)}
+.btn.warn{color:var(--ochre); background:none; border:1px solid var(--ochre)}
+.status{font-size:.86rem; color:var(--moss)}
+:focus-visible{outline:2px solid var(--focus); outline-offset:2px}
+@media (max-width:640px){
+  .wrap{padding:0 14px}
+  header.top{padding-top:30px}
+  .map{padding:14px 12px 10px}
+  .map-row{grid-template-columns:1fr auto; }
+  .map-q{grid-column:1 / -1}
+  .card{padding:14px 14px 12px; scroll-margin-top:118px}
+  .group-h{scroll-margin-top:112px}
+  .prob{padding-left:10px; font-size:1.02rem}
+}
+@media (prefers-reduced-motion:reduce){ *{transition:none !important; scroll-behavior:auto !important} }
+</style>
+</head>
+<body>
+<header class="top wrap">
+  <h1>國中數學競賽招式地圖</h1>
+  <p class="lede">按「背後的問句」分成九組，共 <b id="total-n">65</b> 招，每招一道例題。先自己做，再打開解答，選你目前到了哪一層。標有年份的題目取材自 JHMC／TRML 真題，文字已改寫。紀錄只存在這個瀏覽器裡，換裝置時用頁尾的紀錄代碼搬過去。</p>
+
+  <section class="map" aria-label="進度地圖">
+    <div id="map"></div>
+    <div class="legend" id="legend"></div>
+    <details class="levels-help">
+      <summary>六個層次怎麼判斷</summary>
+      <dl id="levels-dl"></dl>
+    </details>
+  </section>
+</header>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="seg" role="group" aria-label="檢視方式">
+      <button type="button" id="mode-map" aria-pressed="true">按問句看</button>
+      <button type="button" id="mode-cold" aria-pressed="false">冷解：打散順序、藏起招式</button>
+    </div>
+    <label>只看
+      <select id="filter">
+        <option value="all">全部</option>
+        <option value="unset">還沒標的</option>
+        <option value="low">沒見過或看得懂</option>
+        <option value="mid">想得到、還說不出為什麼</option>
+        <option value="high">說得出為什麼以上</option>
+      </select>
+    </label>
+    <button type="button" class="txtbtn" id="reshuffle" hidden>重新打散</button>
+  </div>
+</div>
+
+<main class="wrap" id="list" aria-live="polite"></main>
+
+<section class="tail wrap" aria-label="整理與紀錄">
+  <h2>待補清單</h2>
+  <p>標成「沒見過」「看得懂」的招式會列在這裡，依問句分組。</p>
+  <textarea id="todo" rows="8" readonly></textarea>
+  <div class="row">
+    <button type="button" class="btn" id="copy-todo">複製待補清單</button>
+    <span class="status" id="todo-status" role="status"></span>
+  </div>
+
+  <h2>紀錄代碼</h2>
+  <p>複製這串代碼，到另一台裝置打開同一頁，貼進下方再按「讀回紀錄」。</p>
+  <textarea id="code" rows="3"></textarea>
+  <div class="row">
+    <button type="button" class="btn ghost" id="copy-code">複製紀錄代碼</button>
+    <button type="button" class="btn ghost" id="load-code">讀回紀錄</button>
+    <button type="button" class="btn warn" id="reset">清除全部紀錄</button>
+    <span class="status" id="code-status" role="status"></span>
+  </div>
+</section>
+
+<script type="text/plain" id="data">
+@g rewrite|換個寫法，會不會變成我會的？
+
+#t sqdiff|平方差反過來用
+s:兩個平方相減；一長串平方交錯加減；很大的數要硬算。
+q:計算 $100^{2} - 99^{2} + 98^{2} - 97^{2} + \cdots + 2^{2} - 1^{2}$。
+a:$5050$
+k:每一對 $a^{2} - (a-1)^{2} = a + (a-1)$，整串變成 $100 + 99 + \cdots + 1$。
+x:平方「相加」拆不開，這條路就斷了。
+
+#t square|配方
+s:兩個變數的二次式等於 0，或要求最小值；常數項剛好湊得成幾個平方。
+q:實數 $x$、$y$ 滿足 $x^{2} + y^{2} - 4x + 6y + 13 = 0$，求 $x + y$。
+a:$-1$
+k:$13 = 4 + 9$，寫成 $(x-2)^{2} + (y+3)^{2} = 0$；兩個非負數相加是 0，只能都是 0。
+x:常數湊不滿時只得到一個範圍或一條曲線，定不出單一的值。
+
+#t subst|整體代換
+s:同一團式子出現兩次以上；次數看起來很高，結構卻在重複。
+q:求 $(x^{2} + x)^{2} - 8(x^{2} + x) + 12 = 0$ 的所有實數解。
+a:$x = 1,\ -2,\ 2,\ -3$
+k:令 $t = x^{2} + x$，得 $t = 2$ 或 $t = 6$，再各解一次。
+x:換回 $x$ 時要檢查每個 $t$ 值是否真的有實數解（$x^{2} + x \ge -\frac{1}{4}$，這題兩個值都可以）。
+
+#t recip-pair|$x + \frac{1}{x}$ 型
+s:$x$ 和 $\frac{1}{x}$ 同時出現；方程式的係數左右對稱。
+q:若 $x + \frac{1}{x} = 3$，求 $x^{2} + \frac{1}{x^{2}}$ 與 $x^{4} + \frac{1}{x^{4}}$。
+a:$7$、$47$
+k:平方一次，交叉項 $2 \cdot x \cdot \frac{1}{x} = 2$ 是常數，所以每往上一層就是「平方再減 2」。
+x:要求 $x - \frac{1}{x}$ 時，平方後得到 5，會有 $\pm\sqrt{5}$ 兩個值，要再判斷。
+
+#t symm|用和與積表示對稱式
+s:$a$、$b$ 互換之後式子不變；題目給的是和與積。
+q:$a + b = 5$，$ab = 3$，求 $a^{3} + b^{3}$ 與 $(a - b)^{2}$。
+a:$80$、$13$
+k:$a^{3} + b^{3} = (a+b)^{3} - 3ab(a+b)$；$(a-b)^{2} = (a+b)^{2} - 4ab$。
+x:不對稱的式子（例如 $a^{2} + 2b$）只靠和與積定不出來。
+
+#t vieta|根與係數
+s:問兩根的和、積或某個對稱式，而根本身很醜。
+q:$\alpha$、$\beta$ 是 $x^{2} - 5x + 2 = 0$ 的兩根，求 $\frac{1}{\alpha} + \frac{1}{\beta}$ 與 $\alpha^{2} + \beta^{2}$。
+a:$\frac{5}{2}$、$21$
+k:$\alpha + \beta = 5$、$\alpha\beta = 2$，把要求的式子改寫成和與積。
+x:不對稱的組合（例如 $\alpha - 2\beta$）不能直接由根與係數得到。
+
+#t remainder|餘式定理
+s:只問餘式、不問商；題目給的是多項式在幾個點的值。
+q:多項式 $f(x)$ 除以 $x - 1$ 餘 3，除以 $x - 2$ 餘 5，求 $f(x)$ 除以 $(x-1)(x-2)$ 的餘式。
+a:$2x + 1$
+k:餘式最多一次，設成 $ax + b$；代 $x = 1$、$x = 2$ 讓商那一項消失，得 $a + b = 3$、$2a + b = 5$。
+x:除式有重複的因式（例如 $(x-1)^{2}$）時，代同一個值只得到一個條件，另一個條件要換方法找。
+
+#t special-value|代特殊值
+s:展開式很長，卻只問係數和、奇次項和這類組合。
+q:$(2x - 1)^{5} = a_{5}x^{5} + a_{4}x^{4} + \cdots + a_{1}x + a_{0}$，求 $a_{0} + a_{1} + \cdots + a_{5}$ 與 $a_{0} + a_{2} + a_{4}$。
+a:$1$、$-121$
+k:代 $x = 1$ 得全部係數和 1；代 $x = -1$ 得 $a_{0} - a_{1} + a_{2} - \cdots - a_{5} = -243$；兩式相加再除以 2。
+x:只要單獨一個係數（例如 $a_{3}$）時，代值得解聯立，不如直接展開。
+
+#t reciprocal|取倒數
+s:分式方程組，分子是乘積、分母是和。
+q:正數 $x$、$y$、$z$ 滿足 $\frac{xy}{x+y} = 2$、$\frac{yz}{y+z} = 3$、$\frac{zx}{z+x} = 4$，求 $x$、$y$、$z$。
+a:$x = \frac{24}{5}$，$y = \frac{24}{7}$，$z = 24$
+k:倒過來是 $\frac{1}{x} + \frac{1}{y} = \frac{1}{2}$ 這樣的一次式；三條相加得 $\frac{1}{x} + \frac{1}{y} + \frac{1}{z} = \frac{13}{24}$，再各減一條。
+x:分母多了常數（例如 $\frac{xy}{x+y+1}$）時，倒過來不再是 $\frac{1}{x}$、$\frac{1}{y}$ 的一次式。
+
+#t abs-median|絕對值和的最小值
+s:幾個 $|x - a|$ 相加求最小值。
+q:求 $|x - 1| + |x - 3| + |x - 8|$ 的最小值，以及此時 $x$ 的值。
+a:最小值 7，此時 $x = 3$
+k:$|x - a|$ 是數線上 $x$ 到 $a$ 的距離；到幾個點的距離和，在中間那個點（中位數）最小。
+x:點數是偶數時，最小值出現在中間兩點之間的整段，不是單一個 $x$。
+
+@g diff|這一項是誰減誰？
+
+#t tel-frac|分式裂項
+src:TRML 2018 競速 14
+s:分母是相鄰兩整數的乘積；項數很多，答案卻要乾淨；題目裡出現年份。
+q:解方程式 $\frac{2x}{1 \cdot 2} + \frac{2x}{2 \cdot 3} + \cdots + \frac{2x}{2017 \cdot 2018} = 2017$。
+a:$x = 1009$
+k:$\frac{1}{k(k+1)} = \frac{1}{k} - \frac{1}{k+1}$，左邊只剩 $2x\left(1 - \frac{1}{2018}\right)$。
+x:分母不是「相差固定的兩數」相乘（例如 $\frac{1}{k^{2}}$）時裂不乾淨。
+
+#t tel-gap|公差不是 1 的裂項
+s:分母兩個因數相差固定，但不是 1。
+q:計算 $\frac{1}{1 \cdot 4} + \frac{1}{4 \cdot 7} + \frac{1}{7 \cdot 10} + \cdots + \frac{1}{97 \cdot 100}$。
+a:$\frac{33}{100}$
+k:$\frac{1}{k(k+3)} = \frac{1}{3}\left(\frac{1}{k} - \frac{1}{k+3}\right)$，拆完要補回 $\frac{1}{3}$。
+x:兩因數的差每項都不同時，沒辦法統一補同一個係數。
+
+#t tel-root|根式裂項
+s:分母是兩個相鄰根號的和。
+q:計算 $\frac{1}{\sqrt{1} + \sqrt{2}} + \frac{1}{\sqrt{2} + \sqrt{3}} + \cdots + \frac{1}{\sqrt{99} + \sqrt{100}}$。
+a:$9$
+k:有理化：$\frac{1}{\sqrt{k} + \sqrt{k+1}} = \sqrt{k+1} - \sqrt{k}$，整串剩 $\sqrt{100} - \sqrt{1}$。
+x:根號裡相差 2（$\sqrt{k} + \sqrt{k+2}$）時會多一個 $\frac{1}{2}$，而且是隔項相消，頭尾各剩兩項。
+
+#t tel-up|升冪裂項
+s:每一項是連續整數的乘積，例如 $k(k+1)$。
+q:計算 $1 \cdot 2 + 2 \cdot 3 + 3 \cdot 4 + \cdots + 99 \cdot 100$。
+a:$333300$
+k:$k(k+1)(k+2) - (k-1)k(k+1) = 3k(k+1)$，所以總和是 $\frac{99 \cdot 100 \cdot 101}{3}$。
+x:不是連續整數的乘積（例如 $k^{2}$）時，先改寫成 $k(k+1) - k$ 再分開算。
+
+#t shift-sub|錯位相減
+s:「等差 × 等比」的一串；整串乘上公比之後，剛好錯開一格。
+q:計算 $1 + 2 \cdot 2 + 3 \cdot 2^{2} + \cdots + 10 \cdot 2^{9}$。
+a:$9217$
+k:設總和為 $S$，算 $2S - S$：對齊之後剩 $10 \cdot 2^{10} - (1 + 2 + 2^{2} + \cdots + 2^{9}) = 10240 - 1023$。
+x:公比是 1 時，錯開一格什麼都消不掉。
+
+#t tel-fact|階乘裂項
+s:$k \cdot k!$ 這種階乘前面帶著係數。
+q:計算 $1 \cdot 1! + 2 \cdot 2! + 3 \cdot 3! + \cdots + 10 \cdot 10!$。
+a:$11! - 1 = 39916799$
+k:$k \cdot k! = (k+1)! - k!$。
+x:係數不剛好是 $k$ 時（例如 $(k+2) \cdot k!$），要先拆成 $k \cdot k! + 2 \cdot k!$。
+
+#t tel-prod|連乘相消
+s:一長串乘積，每個因子都能拆成兩個分數相乘。
+q:計算 $\left(1 - \frac{1}{2^{2}}\right)\left(1 - \frac{1}{3^{2}}\right)\left(1 - \frac{1}{4^{2}}\right) \cdots \left(1 - \frac{1}{100^{2}}\right)$。
+a:$\frac{101}{200}$
+k:$1 - \frac{1}{k^{2}} = \frac{k-1}{k} \cdot \frac{k+1}{k}$；前一半連乘剩 $\frac{1}{100}$，後一半連乘剩 $\frac{101}{2}$。
+x:$1 + \frac{1}{k^{2}}$ 用平方差拆不開，就沒有相消。
+
+@g pair|能不能兩兩配對，或把同一個量算兩次？
+
+#t fn-pair|函數值配對
+s:要加很多個函數值，而 $x$ 和 $\frac{1}{x}$（或 $x$ 和 $1 - x$）成對出現。
+q:$f(x) = \frac{x^{2}}{1 + x^{2}}$，求 $f(1) + f(2) + f\left(\frac{1}{2}\right) + f(3) + f\left(\frac{1}{3}\right) + \cdots + f(10) + f\left(\frac{1}{10}\right)$。
+a:$\frac{19}{2}$
+k:$f(x) + f\left(\frac{1}{x}\right) = 1$，共 9 對，再加上落單的 $f(1) = \frac{1}{2}$。
+x:配對之外落單的項要另外算，最容易漏掉。
+
+#t perm-pair|對稱配對求總和
+s:要加總一大群「對稱」的東西；找得到一種配法，讓每一對的和都相同。
+q:用 1、2、3、4 各一次組成的所有四位數，總和是多少？
+a:$66660$
+k:把一個數的每一位 $d$ 換成 $5 - d$，兩數相加恰好是 5555；24 個數配成 12 對。
+x:數字裡有 0 時，換過去的數首位可能變成 0，配對會出界，改成數每一位上各數字出現幾次。
+
+#t area-twice|面積算兩次
+s:要求高、點到邊的距離、內切圓半徑。
+q:直角三角形的兩股是 6 和 8，求斜邊上的高與內切圓半徑。
+a:高 $\frac{24}{5}$，內切圓半徑 2
+k:面積 24 同時等於 $\frac{1}{2} \times 10 \times h$，也等於以內心為頂點切出的三個小三角形面積和 $\frac{1}{2}r(6 + 8 + 10)$。
+x:要求的線段不是任何三角形的高時，得先找出它是哪個圖形的高。
+
+#t count-twice|從兩個方向數同一批東西
+s:「每個人都……」「總共……」；同一批東西可以從兩種角度數。
+q:7 個人能不能每人恰好和其中 3 人握手？若 12 個人每人都握了 5 次手，總共握了幾次？
+a:不能；30 次
+k:從人的角度數「握手人次」是 $7 \times 3 = 21$，但每次握手被兩個人各數一次，人次一定是偶數。$12 \times 5 \div 2 = 30$。
+x:人次是偶數只說明「沒有被排除」，真的排不排得出來，要實際畫出一種握法。
+
+#t total|平均數換回總和
+s:平均數被改動：加入、去掉或更正一筆資料。
+q:10 個數的平均是 50。去掉其中一個數之後，剩下 9 個數的平均是 48，去掉的數是多少？
+a:$68$
+k:平均數不能直接相減，換成總和：$500 - 9 \times 48 = 68$。
+x:題目只給中位數的變化時，無法換回總和。
+
+@g invariant|什麼東西不會變？
+
+#t parity|奇偶性
+s:重複做某個操作，問最後可不可能變成某個樣子。
+q:黑板上寫著 1、2、3、…、10。每次擦掉兩個數，改寫上它們的差（大減小）。最後剩下一個數，它可能是 0 嗎？
+a:不可能
+k:$a + b$ 與 $a - b$ 奇偶相同，所以黑板上所有數的總和奇偶不變；一開始總和 55 是奇數，最後那個數也是奇數。
+x:不變量只能證明「做不到」；要說明「做得到」，得真的給出一種做法。
+
+#t last-digit|個位數的週期
+s:很大的次方，只問個位數或末兩位。
+q:求 $7^{2026}$ 的個位數字。
+a:$9$
+k:7 的次方個位數是 7、9、3、1 四個一輪，2026 除以 4 餘 2。
+x:有些週期不是從第一項開始（例如 $2^{n}$ 的末兩位從 $2^{2}$ 才開始循環），用餘數之前要先確認起點。
+
+#t mod|同餘
+s:大數除以小數的餘數；只關心「除以 $m$ 餘多少」。
+q:求 $2^{100}$ 除以 7 的餘數。
+a:$2$
+k:$2^{3} = 8 \equiv 1 \pmod{7}$，而 $2^{100} = (2^{3})^{33} \times 2$。
+x:同餘式兩邊不能隨便約分；約掉的數和模數不互質時會出錯。
+
+#t nine|數字和與 9
+s:由很多數字串成的大數，問除以 3 或 9 的餘數。
+q:把 1 到 100 依序寫成一個大數 $123456789101112 \cdots 99100$，它除以 9 的餘數是多少？
+a:$1$
+k:一個數除以 9 的餘數，等於它的數字和除以 9 的餘數，所以只要算 $1 + 2 + \cdots + 100 = 5050$，而 5050 除以 9 餘 1。
+x:除以 7、11、13 就不能只看數字和（除以 11 要看交錯和）。
+
+#t coloring|染色
+s:用某種形狀的小塊鋪滿或走遍一個區域，問做不做得到。
+q:把 $8 \times 8$ 的棋盤剪掉左上角與右下角兩格。能不能用 31 張 $1 \times 2$ 的骨牌剛好蓋滿剩下的 62 格？
+a:不能
+k:黑白相間著色，剪掉的兩格同色，剩下 32 格一色、30 格另一色；但每張骨牌恰好蓋一黑一白。
+x:兩色數量相等時，染色就下不了結論，要另外找鋪法或別的不變量。
+
+#t fold|摺疊時不變的長度
+s:摺紙、翻折、找對稱點。
+q:長方形 $ABCD$ 中，$AB = 8$、$BC = 6$。把紙摺起來讓 $C$ 落在 $A$ 上，摺痕交 $AB$ 於 $E$。求 $AE$ 與摺痕的長。
+a:$AE = \frac{25}{4}$，摺痕長 $\frac{15}{2}$
+k:摺痕上的點到 $A$、$C$ 等距，所以 $EA = EC$；設 $AE = x$，在直角 $\triangle EBC$ 中 $(8 - x)^{2} + 6^{2} = x^{2}$。摺痕垂直平分 $AC$，由 $\triangle AOE \sim \triangle ABC$（$O$ 是長方形中心）得 $OE = \frac{15}{4}$，摺痕是它的兩倍。
+x:摺過去的點若落在紙外，摺痕不一定和這兩邊相交，要先畫出實際位置。
+
+@g structure|數的骨架長什麼樣？
+
+#t divisors|數因數個數
+s:問因數個數，或反過來問「有幾個因數」的最小數。
+q:360 有幾個正因數？有 12 個正因數的最小正整數是多少？
+a:24 個；60
+k:$360 = 2^{3} \cdot 3^{2} \cdot 5$，每個質數的次方各選一個：$(3+1)(2+1)(1+1) = 24$。$12 = 3 \times 2 \times 2$，讓最小的質數拿最大的次方：$2^{2} \cdot 3 \cdot 5 = 60$。
+x:反問「最小」時要把 12 的每一種乘法拆法都比過（$2^{11}$、$2^{5} \cdot 3$、$2^{3} \cdot 3^{2}$、$2^{2} \cdot 3 \cdot 5$）。
+
+#t sigma|因數和與倒數和
+src:TRML 2016 競速 23
+s:同時出現因數和與因數的倒數和。
+q:某個正整數所有正因數的和是 56，所有正因數的倒數和是 2，求這個數。
+a:$28$
+k:$\frac{1}{d}$ 通分成 $\frac{n/d}{n}$，而 $n/d$ 也跑遍所有因數，所以倒數和等於因數和除以 $n$：$n = 56 \div 2$。
+x:只給倒數和、不給因數和時，這一步定不出 $n$。
+
+#t zeros|末尾有幾個 0
+s:階乘或連乘的末尾有幾個 0。
+q:$100!$ 的末尾有幾個連續的 0？
+a:24 個
+k:每個 0 要一個 2 配一個 5，5 比較少，只要數 5：5 的倍數 20 個，25 的倍數再多貢獻 4 個。
+x:問「最後一個不是 0 的數字」時，只數 5 就不夠了。
+
+#t gcdlcm|最大公因數與最小公倍數
+s:同時給最大公因數與最小公倍數，反求原來的數。
+q:兩個正整數的最大公因數是 6，最小公倍數是 72，求這兩個數所有可能的組合。
+a:6 與 72；18 與 24
+k:寫成 $6m$、$6n$，其中 $m$、$n$ 互質且 $mn = 72 \div 6 = 12$，只剩 $1 \times 12$、$3 \times 4$。
+x:$2 \times 6$ 乘積也是 12，但不互質，最大公因數會變大，要排除。
+
+#t place|按位值拆開
+src:TRML 2019 團體 9
+s:數字的樣子有規律（$\overline{abab}$、$\overline{aabb}$、數字倒過來），問它的性質。
+q:證明形如 $\overline{abab}$ 的四位數（例如 3737）不可能是完全平方數。
+a:$\overline{abab} = 101 \times \overline{ab}$。101 是質數，完全平方數裡 101 要出現偶數次，但 $10 \le \overline{ab} \le 99$ 不含因數 101。
+k:把數字按位值寫開，骨架就露出來。
+x:$\overline{aabb} = 11 \times \overline{a0b}$ 就可能是平方數（$7744 = 88^{2}$），每一種樣子要各自分析。
+
+#t sqdiff-int|平方差找整數
+src:TRML 2019 競速 17
+s:兩個式子都是完全平方數，而且差是固定的數。
+q:正整數 $n$ 使 $n + 168$ 與 $n + 100$ 都是完全平方數，求 $n$。
+a:$156$
+k:設 $n + 168 = a^{2}$、$n + 100 = b^{2}$，則 $(a+b)(a-b) = 68$；兩個因數同奇偶，只能是 $34 \times 2$，得 $a = 18$、$b = 16$。
+x:差是奇數時兩個因數都是奇數，配對的候選就不同，要重新列。
+
+#t sfft|湊常數再分解
+s:求整數解，式子裡有 $xy$，也有 $x$、$y$ 的一次項。
+q:求滿足 $xy - 2x - 3y = 0$ 的所有正整數解 $(x, y)$。
+a:$(4, 8)$、$(5, 5)$、$(6, 4)$、$(9, 3)$
+k:兩邊加 6：$(x - 3)(y - 2) = 6$，再列出 6 的因數配對。
+x:負的因數配對也要檢查（這題的負配對都讓 $x$ 或 $y$ 不是正數）。
+
+#t sq-mod|平方數的餘數
+s:問某個數能不能寫成平方和、平方差，或某個式子能不能是平方數。
+q:2026 能不能寫成兩個整數的平方差？
+a:不能
+k:平方數除以 4 只會餘 0 或 1，兩個相減只會餘 0、1、3；2026 除以 4 餘 2。
+x:用 4 排除不了時，可以換成除以 3 或 8 試試；全部通過也不代表一定寫得出來。
+
+#t base|換進位制
+src:TRML 2015 競速 16
+s:遞迴式裡出現 $2n$、$2n+1$（或 $3n$、$3n+1$、$3n+2$）。
+q:數列滿足 $a_{1} = 1$、$a_{2n} = a_{n}$、$a_{2n+1} = a_{n} + 1$，求 $a_{104}$。
+a:$3$
+k:乘 2 是在二進位末尾補一個 0，乘 2 加 1 是補一個 1，所以 $a_{n}$ 就是 $n$ 的二進位中 1 的個數；$104 = 1101000_{(2)}$。
+x:遞迴式的樣子不是「補一位」時，就不能直接讀進位制。
+
+#t euclid|輾轉相除
+s:含 $n$ 的兩個式子，問最大公因數或能不能約分。
+q:證明對所有正整數 $n$，分數 $\frac{21n + 4}{14n + 3}$ 都已經是最簡分數。
+a:$\gcd(21n + 4,\ 14n + 3) = \gcd(7n + 1,\ 14n + 3) = \gcd(7n + 1,\ 1) = 1$
+k:用大的減小的，反覆幾次讓 $n$ 消失。
+x:最後剩下的常數不是 1 時（例如得到 2），公因數要看 $n$ 的奇偶才決定。
+
+@g smaller|小一號的問題是不是已經會了？
+
+#t pattern|算小例子、猜、再驗證
+s:和、積或個數跟 $n$ 有關，但一時看不出公式。
+q:求 $1^{3} + 2^{3} + 3^{3} + \cdots + 10^{3}$。
+a:$3025$
+k:前幾個和是 1、9、36、100，都是平方數，而且是 1、3、6、10 的平方，猜 $\left(\frac{n(n+1)}{2}\right)^{2}$，再代 $n = 5$ 驗證。
+x:看幾項都只是猜；圓上 $n$ 個點兩兩連線分割圓，塊數 1、2、4、8、16 之後是 31。
+
+#t recur|按最後一步分類
+s:長度或大小是 $n$ 的東西有幾個；小的情況能組成大的情況。
+q:長度 8、只由 0 和 1 組成的字串中，沒有兩個 1 相鄰的有幾個？
+a:$55$
+k:按最後一個字元分類：最後是 0，前面是任何長度 7 的合法字串；最後是 1，倒數第二個一定是 0，前面是長度 6 的合法字串。所以 $f(n) = f(n-1) + f(n-2)$，$f(1) = 2$、$f(2) = 3$。
+x:限制牽涉更遠的位置（例如不能有三個 1 相鄰）時，要看最後兩三步，遞迴式也跟著多幾項。
+
+#t backward|倒著走
+s:求最少步數，終點很具體，從起點出發的選擇卻很多。
+q:從 1 出發，每一步可以「乘以 2」或「加 1」。最少幾步可以得到 100？
+a:8 步
+k:從 100 倒回去：偶數就除以 2，奇數就減 1，得 100、50、25、24、12、6、3、2、1。
+x:倒著走時每一步若不只一種選法，要說明為什麼這樣選最好（這題可以用二進位說明）。
+
+#t period|算幾項找週期
+s:遞迴數列問很後面的一項，而遞迴式是分式，或含 $\frac{1}{a_{n}}$。
+q:$a_{1} = 2$，$a_{n+1} = 1 - \frac{1}{a_{n}}$，求 $a_{2026}$。
+a:$2$
+k:算出 $2,\ \frac{1}{2},\ -1,\ 2$，三項一輪；2026 除以 3 餘 1，對應第一項。
+x:有些數列前幾項不在循環裡，要從循環開始的那一項算餘數。
+
+@g counting|怎麼數才不漏不重？
+
+#t case-step|先分類，再分步
+s:排數字、排座位時，某些位置有特別的限制。
+q:用 0 到 9 組成數字不重複的三位數偶數，共有幾個？
+a:$328$
+k:個位是 0 和個位是 2、4、6、8 時，首位能選的數量不同，要分成兩類：$9 \times 8 + 4 \times 8 \times 8$。
+x:不先分類就直接乘，會把「0 已經用掉」和「首位不能是 0」兩個限制混在一起而算錯。
+
+#t complement|算反面
+s:題目裡有「至少一個」「不全是」。
+q:同時擲三顆公正的骰子，至少出現一個 6 的機率是多少？
+a:$\frac{91}{216}$
+k:「至少一個 6」的反面是「一個 6 都沒有」：$1 - \left(\frac{5}{6}\right)^{3}$。
+x:反面也很複雜時（例如「恰好兩個 6」），就直接算正面。
+
+#t bundle|捆綁與插空
+s:排列時「一定要相鄰」或「一定不能相鄰」。
+q:甲、乙、丙、丁、戊五人排成一列。甲乙必須相鄰有幾種排法？甲乙不能相鄰有幾種？
+a:48 種；72 種
+k:相鄰就把甲乙綁成一人：$4! \times 2$。不相鄰就先排另外三人，再把甲乙放進 4 個空隙中的兩個：$3! \times 4 \times 3$。
+x:不能相鄰的人比空隙還多時，插空法會直接告訴你是 0 種。
+
+#t stars|隔板
+s:相同的東西分給幾個人，只在乎每人拿幾個。
+q:10 顆相同的糖果分給 3 個小朋友，每人至少 1 顆，有幾種分法？如果可以有人拿 0 顆呢？
+a:36 種；66 種
+k:10 顆排一列有 9 個空隙，選 2 個放隔板：$C(9, 2)$。可以拿 0 顆時，先向每人借 1 顆，變成 13 顆每人至少 1 顆：$C(12, 2)$。
+x:糖果各不相同時就不是隔板，而是每顆各選一人：$3^{10}$。
+
+#t incl-excl|排容
+s:「是 A 或 B 或 C」的個數，而條件之間有重疊。
+q:1 到 100 中，是 2、3 或 5 的倍數的數有幾個？
+a:74 個
+k:$50 + 33 + 20 - 16 - 10 - 6 + 3$：先加單一條件，減掉被算兩次的，再補回被多減的。
+x:條件多到四、五個時項數暴增，常常改算補集或直接列舉比較快。
+
+#t bijection|一一對應
+s:直接數很亂，但每個要數的東西恰好對應到另一種好數的東西。
+q:100 支隊伍進行單淘汰賽（需要時可以輪空），要比幾場才能決出冠軍？
+a:99 場
+k:每場比賽恰好淘汰一隊，冠軍以外每隊都被淘汰一次，所以場數等於被淘汰的隊數。
+x:對應要真的一對一：若允許平手重賽，一場就不一定淘汰一隊。
+
+#t lattice|路徑就是選位置
+s:方格上只能往右、往上走的路徑數。
+q:在方格上從 $(0, 0)$ 走到 $(4, 3)$，每步只能向右或向上一格，有幾種走法？若不能經過 $(2, 1)$ 呢？
+a:35 種；17 種
+k:7 步裡選 3 步向上：$C(7, 3) = 35$。不能經過某點就算反面：經過 $(2, 1)$ 的有 $C(3, 1) \times C(4, 2) = 18$ 條。
+x:有好幾個禁止點時，扣掉的部分會重疊，要改用排容或逐格相加。
+
+@g extreme|極端的那一個在哪？
+
+#t pigeon|鴿籠原理
+s:「至少要選幾個才保證……」「一定有兩個……」。
+q:從 1、2、…、20 中至少要選幾個數，才保證其中一定有兩個數的和是 21？
+a:11 個
+k:配成 $(1, 20)$、$(2, 19)$、…、$(10, 11)$ 十個籠子，選 11 個一定有兩個落在同一籠；選 1 到 10 就說明 10 個不夠。
+x:鴿籠只保證存在，不告訴你是哪兩個；「最少幾個」一定要附上「少一個就不行」的例子。
+
+#t amgm|算幾不等式
+s:正數的積固定求和的最小值，或和固定求積的最大值。
+q:正數 $a$、$b$ 滿足 $ab = 16$，求 $a + 4b$ 的最小值，以及此時的 $a$、$b$。
+a:最小值 16，此時 $a = 8$、$b = 2$
+k:$a + 4b \ge 2\sqrt{a \cdot 4b} = 2\sqrt{64} = 16$，等號成立在 $a = 4b$。
+x:等號取不到時（例如限制 $b \ge 3$），16 就不是最小值。
+
+#t wlog|先假設大小順序
+s:式子對幾個變數對稱，要找所有整數解。
+q:求所有正整數 $a$、$b$、$c$，使 $abc = a + b + c$。
+a:1、2、3 的所有排列，共 6 組
+k:設 $a \le b \le c$，則 $abc = a + b + c \le 3c$，所以 $ab \le 3$，只剩 $(a, b) = (1, 1)$、$(1, 2)$、$(1, 3)$ 要檢查。
+x:式子不對稱時（例如 $abc = a + 2b + 3c$），不能直接假設誰大誰小。
+
+#t extremal|看最大的那一個
+s:要證明「全部相等」「一定存在」，看一般的元素看不出什麼。
+q:圓周上寫著 10 個實數，每個數都等於它左右兩個數的平均。證明這 10 個數全部相等。
+a:取最大的數 $M$。它是兩個鄰居的平均，而兩個鄰居都不超過 $M$，所以兩個鄰居都等於 $M$；一路傳下去，全部等於 $M$。
+k:不看一般的數，只看最大的那一個。
+x:數字排在一條線上（兩端只有一個鄰居）時，條件只管中間的數，結論就不成立，例如 1、2、3、…、10。
+
+#t bound|放縮估計
+s:求整數部分，或估計一個算不出來的和有多大。
+q:求 $\frac{1}{\sqrt{1}} + \frac{1}{\sqrt{2}} + \cdots + \frac{1}{\sqrt{100}}$ 的整數部分。
+a:$18$
+k:$2(\sqrt{k+1} - \sqrt{k}) < \frac{1}{\sqrt{k}} < 2(\sqrt{k} - \sqrt{k-1})$，兩邊都能裂項：總和大於 $2(\sqrt{101} - 1) > 18$，又小於 $1 + 2(\sqrt{100} - 1) = 19$。
+x:夾出來的範圍跨過一個整數時，先把前幾項精確算出來，從後面才開始放縮。
+
+@g geometry|哪些比不會變？角認的是哪段弧？
+
+#t same-height|等高三角形面積比
+s:幾個三角形共用一個頂點，底落在同一條直線上。
+q:$\triangle ABC$ 面積 60，$D$ 在 $BC$ 上且 $BD : DC = 2 : 3$，$E$ 是 $AD$ 的中點。求 $\triangle BDE$ 的面積。
+a:$12$
+k:$\triangle ABD$ 和 $\triangle ABC$ 同高，面積是 $60 \times \frac{2}{5} = 24$；$\triangle BDE$ 和 $\triangle BAE$ 的底 $DE = EA$ 且同高，各占一半。
+x:兩個三角形的底不在同一條直線上時，高不一定相同。
+
+#t similar|找平行，就有相似
+s:圖中有平行線，或兩組角分別相等。
+q:梯形 $ABCD$ 中 $AD \parallel BC$，$AD = 4$、$BC = 12$，對角線交於 $O$。若 $\triangle AOD$ 的面積是 3，求梯形面積。
+a:$48$
+k:$\triangle AOD \sim \triangle COB$，相似比 $1 : 3$，所以 $\triangle COB$ 面積 27；$AO : OC = 1 : 3$，$\triangle AOB$ 與 $\triangle COD$ 各是 9。
+x:只有一組角相等不夠說相似，要兩組角相等。
+
+#t area-ratio|面積比是相似比的平方
+s:相似圖形問面積，或反過來由面積問邊長。
+q:$\triangle ABC$ 中，$D$、$E$ 分別在 $AB$、$AC$ 上，$DE \parallel BC$，且 $\triangle ADE$ 的面積是 $\triangle ABC$ 的一半。求 $AD : AB$。
+a:$\sqrt{2} : 2$（約 0.707）
+k:設相似比為 $k$，面積比 $k^{2} = \frac{1}{2}$。
+x:不相似的兩個三角形，面積比不是邊長比的平方。
+
+#t altitude|直角三角形斜邊上的高
+s:直角三角形從直角頂點畫到斜邊的高。
+q:直角 $\triangle ABC$ 中 $\angle C = 90^{\circ}$，$CD \perp AB$ 於 $D$，$AD = 4$、$DB = 9$。求 $CD$ 與 $AC$。
+a:$CD = 6$，$AC = 2\sqrt{13}$
+k:三個直角三角形兩兩相似，得 $CD^{2} = AD \cdot DB$、$AC^{2} = AD \cdot AB$。
+x:$D$ 不是垂足時，三個三角形就不相似。
+
+#t bisector|角平分線分對邊
+s:圖中有角平分線，要求對邊被分成的兩段。
+q:$\triangle ABC$ 中 $AB = 6$、$AC = 4$、$BC = 5$，$\angle A$ 的平分線交 $BC$ 於 $D$。求 $BD$。
+a:$3$
+k:$BD : DC = AB : AC = 3 : 2$，所以 $BD = 5 \times \frac{3}{5}$。
+x:中線、高不會照兩鄰邊的比例分對邊，只有角平分線會。
+
+#t inscribed|圓周角與內接四邊形
+s:圓上有幾個點，要求角度。
+q:圓 $O$ 中，弦 $AB$ 所對的圓心角 $\angle AOB = 100^{\circ}$。$C$ 在優弧 $AB$ 上，$D$ 在劣弧 $AB$ 上。求 $\angle ACB$ 與 $\angle ADB$。
+a:$\angle ACB = 50^{\circ}$，$\angle ADB = 130^{\circ}$
+k:圓周角只認它所對的弧：$\angle ACB$ 對劣弧，是圓心角的一半；$ACBD$ 是圓內接四邊形，對角互補。
+x:$C$、$D$ 在同一段弧上時兩角相等而不是互補，要先看點落在哪一段弧。
+
+#t power|圓冪
+src:TRML 2019 競速 6
+s:從圓外一點畫切線或割線，已知幾段長度。
+q:圓外一點 $P$ 到圓上最近的距離是 4，最遠的距離是 $x$；從 $P$ 作圓的切線，切線長是 6。求 $x$。
+a:$9$
+k:最近與最遠的兩點在同一條過圓心的割線上，所以 $4 \cdot x = 6^{2}$。
+x:點在圓內時沒有切線，要改用兩條弦被分成的線段乘積相等。
+
+#t tangent|切線長相等
+s:圓和多邊形的每一邊都相切。
+q:四邊形 $ABCD$ 的四邊都和同一個圓相切，$AB = 7$、$BC = 9$、$CD = 8$。求 $DA$。
+a:$6$
+k:從每個頂點畫出的兩條切線等長，四邊拆成八段，得 $AB + CD = BC + DA$。
+x:三角形沒有這樣的和相等，要把三段切線長設成未知數再解。
+
+#t rotate|旋轉把分散的線段拼起來
+s:幾段長度散在不同位置，而圖形是正方形或正三角形（有相等的邊和特殊角）。
+q:正方形 $ABCD$ 內有一點 $P$，$PA = 1$、$PB = 2$、$PC = 3$。求 $\angle APB$。
+a:$135^{\circ}$
+k:把 $\triangle BPC$ 繞 $B$ 旋轉 $90^{\circ}$，讓 $C$ 轉到 $A$、$P$ 轉到 $P'$：$BP' = 2$、$\angle PBP' = 90^{\circ}$，所以 $PP' = 2\sqrt{2}$、$\angle BPP' = 45^{\circ}$；又 $AP' = 3$，而 $1^{2} + (2\sqrt{2})^{2} = 3^{2}$，所以 $\angle APP' = 90^{\circ}$。
+x:旋轉的中心和角度要讓兩條等長的邊重合；選錯了，拼出來的三角形沒有已知邊。
+
+#t unfold|展開成平面
+s:立體圖形表面上的最短路徑。
+q:長方體的長、寬、高分別是 3、4、5。一隻螞蟻沿表面從一個頂點爬到離它最遠的頂點，最短路徑長是多少？
+a:$\sqrt{74}$
+k:把經過的兩個面攤平，路徑變成長方形的對角線。有三種攤法：$\sqrt{7^{2} + 5^{2}}$、$\sqrt{8^{2} + 4^{2}}$、$\sqrt{9^{2} + 3^{2}}$，取最小的。
+x:只算一種攤法不保險，每一種都要比。
+
+#t coords|放座標
+s:想不到輔助線或相似時；圖形有直角、正方形，點的位置好寫。
+q:正方形 $ABCD$ 邊長 4，$E$ 是 $BC$ 的中點，$AE$ 與對角線 $BD$ 交於 $F$。求 $\triangle ABF$ 的面積。
+a:$\frac{8}{3}$
+k:設 $A(0, 0)$、$B(4, 0)$、$C(4, 4)$、$D(0, 4)$，解直線 $AE$ 和 $BD$ 的交點 $F\left(\frac{8}{3}, \frac{4}{3}\right)$。也可以用 $BE \parallel AD$ 得 $BF : FD = 1 : 2$。
+x:沒有直角的圖形放座標，算式常常比找相似還繁。
+</script>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------------- levels ---------------- */
+var LEVELS = [
+  {v:1, name:"沒見過", hint:"第一次看到這種做法"},
+  {v:2, name:"看得懂", hint:"看解答跟得上，但自己不會先想到"},
+  {v:3, name:"想得到", hint:"沒提示時，自己會先試這一招"},
+  {v:4, name:"說得出為什麼", hint:"能跟別人講清楚它為什麼成立"},
+  {v:5, name:"知道何時失效", hint:"舉得出看起來像、卻用不了的例子"},
+  {v:6, name:"造得出題", hint:"能自己出一題，而且別人解得出來"}
+];
+var FILTERS = {
+  all:function(){return true;},
+  unset:function(l){return !l;},
+  low:function(l){return l===1||l===2;},
+  mid:function(l){return l===3;},
+  high:function(l){return l>=4;}
+};
+
+/* ---------------- tiny math markup ---------------- */
+var CMD = {cdot:"·", times:"×", div:"÷", cdots:"⋯", ldots:"…", le:"≤", ge:"≥", ne:"≠", equiv:"≡", pm:"±",
+  angle:"∠", triangle:"△", parallel:"∥", perp:"⊥", sim:"∼", circ:"°", pi:"π", alpha:"α", beta:"β", left:"", right:""};
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function tex(src){
+  var i=0, out="";
+  function group(){
+    if(src[i]==="{"){
+      var depth=1, j=i+1;
+      while(j<src.length && depth){ if(src[j]==="{")depth++; else if(src[j]==="}")depth--; j++; }
+      var inner=src.slice(i+1,j-1); i=j; return inner;
+    }
+    var c=src[i]; i++; return c||"";
+  }
+  while(i<src.length){
+    var c=src[i];
+    if(c==="\\"){
+      i++;
+      if(src[i]===" "||src[i]===","){ out+=(src[i]===","?"\u2009":" "); i++; continue; }
+      var m=/^[a-zA-Z]+/.exec(src.slice(i)); var name=m?m[0]:""; i+=name.length;
+      if(name==="frac"){ var a=group(), b=group(); out+='<span class="fr"><span>'+tex(a)+'</span><span>'+tex(b)+'</span></span>'; }
+      else if(name==="sqrt"){ out+='<span class="sq">√<span>'+tex(group())+'</span></span>'; }
+      else if(name==="overline"){ out+='<span class="ol">'+tex(group())+'</span>'; }
+      else if(name==="pmod"){ out+=' (<span class="fn">mod</span> '+tex(group())+')'; }
+      else if(name==="gcd"){ out+='<span class="fn">gcd</span>'; }
+      else if(name==="text"){ out+=esc(group()); }
+      else if(Object.prototype.hasOwnProperty.call(CMD,name)){ out+=CMD[name]; }
+      else { out+=esc(name); }
+      continue;
+    }
+    if(c==="^"){ i++; out+="<sup>"+tex(group())+"</sup>"; continue; }
+    if(c==="_"){ i++; out+="<sub>"+tex(group())+"</sub>"; continue; }
+    if(/[a-zA-Z]/.test(c)){ out+="<i>"+c+"</i>"; i++; continue; }
+    if(c==="-"){ out+="−"; i++; continue; }
+    if(c==="'"){ out+="′"; i++; continue; }
+    out+=esc(c); i++;
+  }
+  return out;
+}
+function rich(s){
+  var parts=String(s).split("$"), out="";
+  for(var k=0;k<parts.length;k++){
+    out += (k%2) ? '<span class="m'+(parts[k].length<=24?' nw':'')+'">'+tex(parts[k])+'</span>' : esc(parts[k]);
+  }
+  return out;
+}
+function plain(s){ var d=document.createElement("div"); d.innerHTML=rich(s); return d.textContent.replace(/\s+/g," ").trim(); }
+
+/* ---------------- data ---------------- */
+function parse(txt){
+  var groups=[], techs=[], g=null, t=null;
+  txt.split(/\r?\n/).forEach(function(line){
+    if(!line.trim()) return;
+    if(line.indexOf("@g ")===0){ var p=line.slice(3).split("|"); g={id:p[0].trim(), q:p.slice(1).join("|").trim(), items:[]}; groups.push(g); return; }
+    if(line.indexOf("#t ")===0){ var p2=line.slice(3).split("|"); t={id:p2[0].trim(), name:p2.slice(1).join("|").trim(), g:g}; g.items.push(t); techs.push(t); return; }
+    var m=/^(src|s|q|a|k|x):(.*)$/.exec(line);
+    if(m && t){ t[m[1]] = (t[m[1]] ? t[m[1]]+" " : "") + m[2].trim(); }
+  });
+  return {groups:groups, techs:techs};
+}
+var DATA = parse(document.getElementById("data").textContent);
+var BYID = {}; DATA.techs.forEach(function(t){ BYID[t.id]=t; });
+
+/* ---------------- state ---------------- */
+var KEY="contest-moves-map-v1";
+var state={ratings:{}, notes:{}};
+var memoryOnly=false;
+function load(){
+  try{
+    var raw=localStorage.getItem(KEY);
+    if(raw){ var obj=JSON.parse(raw); if(obj && typeof obj==="object"){ state.ratings=obj.ratings||{}; state.notes=obj.notes||{}; } }
+  }catch(e){ memoryOnly=true; }
+}
+function save(){
+  try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){ memoryOnly=true; }
+  refreshCode();
+}
+function lv(id){ var v=state.ratings[id]; return (typeof v==="number" && v>=1 && v<=6) ? v : 0; }
+
+var ui={mode:"map", filter:"all", order:null, open:{}};
+
+/* ---------------- map ---------------- */
+function levelName(v){ return v ? LEVELS[v-1].name : "還沒標"; }
+function renderMap(){
+  var host=document.getElementById("map"); host.innerHTML="";
+  DATA.groups.forEach(function(g){
+    var row=document.createElement("div"); row.className="map-row";
+    var q=document.createElement("button"); q.type="button"; q.className="map-q"; q.textContent=g.q;
+    q.addEventListener("click",function(){ jumpGroup(g); });
+    var cells=document.createElement("div"); cells.className="cells";
+    g.items.forEach(function(t){
+      var c=document.createElement("button"); c.type="button"; c.className="cell"; c.dataset.id=t.id; c.dataset.lv=lv(t.id);
+      c.addEventListener("click",function(){ jumpTech(t.id); });
+      cells.appendChild(c);
+    });
+    var n=document.createElement("span"); n.className="map-n"; n.dataset.g=g.id;
+    row.appendChild(q); row.appendChild(cells); row.appendChild(n);
+    host.appendChild(row);
+  });
+  var dl=document.getElementById("levels-dl"); dl.innerHTML="";
+  LEVELS.forEach(function(L){
+    var dt=document.createElement("dt"); dt.textContent=L.name;
+    var dd=document.createElement("dd"); dd.textContent=L.hint;
+    dl.appendChild(dt); dl.appendChild(dd);
+  });
+  updateMap();
+}
+function updateMap(){
+  document.querySelectorAll(".cell").forEach(function(c){
+    var v=lv(c.dataset.id); c.dataset.lv=v;
+    var t=BYID[c.dataset.id];
+    var label = ui.mode==="cold" ? ("第 "+(t.g.items.indexOf(t)+1)+" 招，"+levelName(v)) : (plain(t.name)+"，"+levelName(v));
+    c.setAttribute("aria-label", label); c.title = label;
+  });
+  DATA.groups.forEach(function(g){
+    var el=document.querySelector('.map-n[data-g="'+g.id+'"]');
+    var marked=g.items.filter(function(t){return lv(t.id)>0;}).length;
+    var up=g.items.filter(function(t){return lv(t.id)>=3;}).length;
+    el.textContent="已標 "+marked+"／"+g.items.length+"，想得到以上 "+up;
+  });
+  var counts=[0,0,0,0,0,0,0];
+  DATA.techs.forEach(function(t){ counts[lv(t.id)]++; });
+  var lg=document.getElementById("legend"); lg.innerHTML="";
+  var swatch=["transparent","var(--lv1)","var(--lv2)","var(--lv3)","var(--lv4)","var(--lv5)","var(--lv6)"];
+  for(var v=0; v<=6; v++){
+    var s=document.createElement("span");
+    s.innerHTML='<i style="background:'+swatch[v]+';'+(v===0?'border-style:dashed':'border-color:'+swatch[v])+'"></i>'+levelName(v)+' <b>'+counts[v]+'</b>';
+    lg.appendChild(s);
+  }
+}
+
+/* ---------------- list ---------------- */
+function shuffled(){
+  var a=DATA.techs.map(function(t){return t.id;});
+  for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var tmp=a[i]; a[i]=a[j]; a[j]=tmp; }
+  return a;
+}
+function field(label, html){ return '<p><span class="lab">'+label+'</span>'+html+'</p>'; }
+function cardHTML(t, idx){
+  var v=lv(t.id), cold = ui.mode==="cold", open=!!ui.open[t.id];
+  var h='';
+  h+='<div class="card-h"><h3>'+(cold ? '第 '+idx+' 題' : rich(t.name))+'</h3>'+((!cold && t.src)?'<span class="src">'+esc(t.src)+'</span>':'')+'</div>';
+  if(!cold) h+='<p class="sig"><span class="lab">訊號</span><span class="t">'+rich(t.s)+'</span></p>';
+  h+='<div class="prob">'+rich(t.q)+'</div>';
+  h+='<button type="button" class="reveal" aria-expanded="'+open+'" aria-controls="ans-'+t.id+'">'+(cold?'看招式與解答':'看解答')+'</button>';
+  h+='<div class="ans" id="ans-'+t.id+'"'+(open?'':' hidden')+'>';
+  if(cold){
+    h+='<p class="who">'+rich(t.name)+'<small>'+esc(t.g.q)+(t.src?'　'+esc(t.src):'')+'</small></p>';
+    h+=field('訊號', rich(t.s));
+  }
+  h+=field('答案', rich(t.a));
+  h+=field('轉彎點', rich(t.k));
+  if(t.x) h+=field('何時失效', rich(t.x));
+  h+='</div>';
+  if(!cold || open) h+=rateHTML(t, v);
+  h+='<details class="note"'+(state.notes[t.id]?' open':'')+'><summary>我的轉彎點筆記</summary><textarea data-note="'+t.id+'" aria-label="'+(cold?'這一題的筆記':esc(plain(t.name))+'的筆記')+'" placeholder="看到＿＿，所以問＿＿。">'+esc(state.notes[t.id]||"")+'</textarea></details>';
+  return h;
+}
+function rateHTML(t, v){
+  var h='<fieldset class="rate"><legend>目前到了</legend>';
+  LEVELS.forEach(function(L){
+    h+='<label title="'+esc(L.hint)+'"><input type="radio" name="lv-'+t.id+'" value="'+L.v+'"'+(v===L.v?' checked':'')+'><span>'+L.name+'</span></label>';
+  });
+  h+='<button type="button" class="txtbtn clear" data-clear="'+t.id+'"'+(v?'':' hidden')+'>清除</button></fieldset>';
+  return h;
+}
+function renderList(){
+  var host=document.getElementById("list"); host.innerHTML="";
+  var f=FILTERS[ui.filter];
+  var shown=0;
+  if(ui.mode==="map"){
+    DATA.groups.forEach(function(g){
+      var items=g.items.filter(function(t){ return f(lv(t.id)); });
+      if(!items.length) return;
+      var h=document.createElement("h2"); h.className="group-h"; h.id="g-"+g.id;
+      h.innerHTML=esc(g.q)+'<small>'+g.items.length+' 招</small>';
+      host.appendChild(h);
+      items.forEach(function(t){ host.appendChild(makeCard(t, 0)); shown++; });
+    });
+  }else{
+    if(!ui.order) ui.order=shuffled();
+    var n=0;
+    ui.order.forEach(function(id){
+      var t=BYID[id]; n++;
+      if(!f(lv(id))) return;
+      host.appendChild(makeCard(t, n)); shown++;
+    });
+    if(shown){ var top=document.createElement("div"); top.style.height="18px"; host.insertBefore(top, host.firstChild); }
+  }
+  if(!shown){
+    var e=document.createElement("p"); e.className="empty";
+    e.textContent="這個篩選條件下沒有招式。把上方的「只看」改回「全部」就會全部列出。";
+    host.appendChild(e);
+  }
+}
+function makeCard(t, idx){
+  var art=document.createElement("article"); art.className="card"; art.id="t-"+t.id; art.dataset.lv=lv(t.id); art.dataset.idx=idx;
+  art.innerHTML=cardHTML(t, idx);
+  return art;
+}
+function rerenderCard(id){
+  var art=document.getElementById("t-"+id); if(!art) return;
+  var t=BYID[id]; var noteOpen=art.querySelector(".note") && art.querySelector(".note").open;
+  art.innerHTML=cardHTML(t, +art.dataset.idx);
+  art.dataset.lv=lv(id);
+  if(noteOpen){ var d=art.querySelector(".note"); if(d) d.open=true; }
+}
+
+/* ---------------- jumping ---------------- */
+function flash(el){ el.classList.add("flash"); setTimeout(function(){ el.classList.remove("flash"); }, 1400); }
+function ensureVisible(id){
+  if(!FILTERS[ui.filter](lv(id))){ ui.filter="all"; document.getElementById("filter").value="all"; renderList(); }
+}
+function jumpTech(id){
+  ensureVisible(id);
+  var el=document.getElementById("t-"+id); if(!el) return;
+  el.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"start"});
+  flash(el);
+  var btn=el.querySelector(".reveal"); if(btn) btn.focus({preventScroll:true});
+}
+function jumpGroup(g){
+  if(ui.mode!=="map"){ setMode("map"); }
+  if(ui.filter!=="all"){ ui.filter="all"; document.getElementById("filter").value="all"; renderList(); }
+  var el=document.getElementById("g-"+g.id);
+  if(el) el.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"start"});
+}
+
+/* ---------------- tail ---------------- */
+function refreshTodo(){
+  var lines=[];
+  DATA.groups.forEach(function(g){
+    var none=g.items.filter(function(t){return lv(t.id)===1;}).map(function(t){return plain(t.name);});
+    var read=g.items.filter(function(t){return lv(t.id)===2;}).map(function(t){return plain(t.name);});
+    if(!none.length && !read.length) return;
+    lines.push(g.q);
+    if(none.length) lines.push("　沒見過："+none.join("、"));
+    if(read.length) lines.push("　看得懂：" +read.join("、"));
+  });
+  var unset=DATA.techs.filter(function(t){return !lv(t.id);}).length;
+  if(!lines.length) lines.push(unset===DATA.techs.length ? "還沒有標任何招式。" : "目前沒有標成「沒見過」或「看得懂」的招式。");
+  if(unset && unset<DATA.techs.length) lines.push("", "另有 "+unset+" 招還沒標。");
+  document.getElementById("todo").value=lines.join("\n");
+}
+function refreshCode(){
+  var compact={r:state.ratings, n:state.notes};
+  document.getElementById("code").value=JSON.stringify(compact);
+  refreshTodo();
+}
+function copyFrom(textareaId, statusId){
+  var ta=document.getElementById(textareaId), st=document.getElementById(statusId);
+  function manual(){ ta.focus(); ta.select(); st.textContent="已選取，請按 Ctrl＋C（或長按）複製。"; }
+  try{
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(ta.value).then(function(){ st.textContent="已複製。"; }, manual);
+    }else{ manual(); }
+  }catch(e){ manual(); }
+}
+
+/* ---------------- modes ---------------- */
+function setMode(m){
+  ui.mode=m; ui.open={};
+  document.getElementById("mode-map").setAttribute("aria-pressed", m==="map");
+  document.getElementById("mode-cold").setAttribute("aria-pressed", m==="cold");
+  document.getElementById("reshuffle").hidden = m!=="cold";
+  if(m==="cold") ui.order=shuffled();
+  renderList(); updateMap();
+}
+
+/* ---------------- events ---------------- */
+var noteTimer=null;
+function bind(){
+  document.getElementById("mode-map").addEventListener("click",function(){ if(ui.mode!=="map") setMode("map"); });
+  document.getElementById("mode-cold").addEventListener("click",function(){ if(ui.mode!=="cold") setMode("cold"); });
+  document.getElementById("reshuffle").addEventListener("click",function(){ ui.order=shuffled(); ui.open={}; renderList(); });
+  document.getElementById("filter").addEventListener("change",function(e){ ui.filter=e.target.value; renderList(); });
+
+  var list=document.getElementById("list");
+  list.addEventListener("click",function(e){
+    var btn=e.target.closest(".reveal");
+    if(btn){
+      var art=btn.closest(".card"), id=art.id.slice(2);
+      ui.open[id]=!ui.open[id];
+      if(ui.mode==="cold"){ rerenderCard(id); var b2=document.querySelector("#t-"+id+" .reveal"); if(b2) b2.focus(); }
+      else{
+        btn.setAttribute("aria-expanded", ui.open[id]);
+        document.getElementById("ans-"+id).hidden=!ui.open[id];
+      }
+      return;
+    }
+    var clr=e.target.closest("[data-clear]");
+    if(clr){
+      var cid=clr.dataset.clear; delete state.ratings[cid]; save();
+      var a2=document.getElementById("t-"+cid); a2.dataset.lv=0;
+      a2.querySelectorAll('input[name="lv-'+cid+'"]').forEach(function(r){ r.checked=false; });
+      clr.hidden=true; updateMap();
+    }
+  });
+  list.addEventListener("change",function(e){
+    var r=e.target;
+    if(r.type==="radio" && r.name.indexOf("lv-")===0){
+      var id=r.name.slice(3); state.ratings[id]=+r.value; save();
+      var art=document.getElementById("t-"+id); art.dataset.lv=r.value;
+      var c=art.querySelector("[data-clear]"); if(c) c.hidden=false;
+      updateMap();
+    }
+  });
+  list.addEventListener("input",function(e){
+    var ta=e.target;
+    if(ta.dataset && ta.dataset.note){
+      var v=ta.value;
+      if(v.trim()) state.notes[ta.dataset.note]=v; else delete state.notes[ta.dataset.note];
+      clearTimeout(noteTimer); noteTimer=setTimeout(save, 400);
+    }
+  });
+
+  document.getElementById("copy-todo").addEventListener("click",function(){ copyFrom("todo","todo-status"); });
+  document.getElementById("copy-code").addEventListener("click",function(){ copyFrom("code","code-status"); });
+  document.getElementById("load-code").addEventListener("click",function(){
+    var st=document.getElementById("code-status");
+    try{
+      var obj=JSON.parse(document.getElementById("code").value);
+      if(!obj || typeof obj!=="object" || typeof obj.r!=="object") throw new Error("shape");
+      var r={}, n={};
+      Object.keys(obj.r||{}).forEach(function(k){ var v=+obj.r[k]; if(BYID[k] && v>=1 && v<=6) r[k]=v; });
+      Object.keys(obj.n||{}).forEach(function(k){ if(BYID[k] && typeof obj.n[k]==="string") n[k]=obj.n[k]; });
+      state.ratings=r; state.notes=n; save(); renderList(); updateMap();
+      st.textContent="已讀回 "+Object.keys(r).length+" 招的層次。";
+    }catch(err){
+      st.textContent="讀不出這串代碼。請貼上從「複製紀錄代碼」得到的完整內容。";
+    }
+  });
+  var resetArmed=false, resetTimer=null;
+  document.getElementById("reset").addEventListener("click",function(e){
+    var st=document.getElementById("code-status");
+    if(!resetArmed){
+      resetArmed=true; e.target.textContent="再按一次確認清除"; st.textContent="";
+      resetTimer=setTimeout(function(){ resetArmed=false; e.target.textContent="清除全部紀錄"; }, 4000);
+      return;
+    }
+    clearTimeout(resetTimer); resetArmed=false; e.target.textContent="清除全部紀錄";
+    state={ratings:{}, notes:{}}; save(); renderList(); updateMap();
+    st.textContent="已清除全部紀錄。";
+  });
+}
+
+/* ---------------- boot ---------------- */
+load();
+document.getElementById("total-n").textContent=DATA.techs.length;
+renderMap(); renderList(); bind(); refreshCode();
+if(memoryOnly){ document.getElementById("code-status").textContent="這個瀏覽器不允許儲存，關掉頁面前請先複製紀錄代碼。"; }
+})();
+</script>
+</body>
+</html>

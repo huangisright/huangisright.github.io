@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow"><title>課堂工具｜IsRight 入口</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&display=swap" rel="stylesheet"><link href="../fonts/isright-hand.css" rel="stylesheet"><style>
+:root{--paper:#fdfcf8;--ink:#1b1b1b;--pencil:#77756f;--faint:#d9d6cc;--marker:#d4472b;--hl:#fff2a8;
+--title:"IsRight Hand","LXGW WenKai TC","Kaiti TC","KaiTi",serif;
+--wob:255px 15px 225px 15px/15px 225px 15px 255px;--wob2:15px 255px 15px 225px/225px 15px 255px 15px}
+@media (prefers-color-scheme:dark){:root{--paper:#1c1d1f;--ink:#ecebe6;--pencil:#9c9a93;--faint:#3a3b3e;--marker:#ff7a5c;--hl:#4a4320}}
+*{box-sizing:border-box}html{background:var(--paper)}
+body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.6 "LXGW WenKai TC","Kaiti TC","KaiTi",serif}
+.wrap{max-width:900px;margin:0 auto;padding:30px 16px 70px}
+a{color:inherit}
+.crumb{font-size:15px;color:var(--pencil)}.crumb a{text-decoration:underline dotted}
+header{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-top:8px}
+h1{font-family:var(--title);margin:0;font-size:42px;font-weight:700;line-height:1.1}
+.sub{color:var(--pencil);font-size:16px;margin:6px 0 0}
+.doodle-me{width:64px;height:64px;flex:none;stroke:var(--ink);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+#q{width:100%;font:inherit;font-size:17px;color:var(--ink);background:transparent;border:2px solid var(--ink);border-radius:var(--wob);padding:9px 14px;outline:none;margin:24px 0 4px}
+#q:focus{background:var(--hl)}
+.shelf{margin-top:30px}
+.shelf h2{font-family:var(--title);font-size:26px;margin:0 0 12px;font-weight:700;display:inline-block;padding:0 6px;background:linear-gradient(transparent 55%,var(--hl) 55%)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:18px}
+a.card{text-decoration:none;border:2.5px solid var(--ink);border-radius:var(--wob);padding:14px 14px 12px;display:flex;flex-direction:column;gap:4px;transition:transform .12s}
+a.card:nth-child(even){border-radius:var(--wob2)}
+a.card:hover{transform:rotate(-1deg);background:var(--hl)}
+a.card:nth-child(even):hover{transform:rotate(1deg)}
+a.card svg{width:60px;height:48px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.card .n{font-family:var(--title);font-size:23px;font-weight:700}
+.card .c{font-size:14px;color:var(--pencil)}
+.card.dashed{border-style:dashed}
+.note{color:var(--pencil);font-size:16px;margin:6px 0 0}
+.scribble{height:10px;width:180px;margin:6px 0 10px}.scribble path{stroke:var(--marker);stroke-width:3;fill:none;stroke-linecap:round}
+ul.items{list-style:none;margin:0;padding:0}
+ul.items li{display:flex;align-items:baseline;gap:10px;padding:9px 2px;border-bottom:1.5px dashed var(--faint);flex-wrap:wrap}
+ul.items li::before{content:"→";color:var(--pencil);flex:none}
+ul.items li.sub{border:none;padding:18px 0 2px;font-size:15px;color:var(--pencil);letter-spacing:.08em}
+ul.items li.sub::before{content:""}
+h3.grp{font-family:var(--title);font-size:24px;margin:26px 0 4px}
+ul.items a{text-decoration:none;font-size:19px;background-image:linear-gradient(var(--ink),var(--ink));background-size:0 2px;background-repeat:no-repeat;background-position:0 100%;transition:background-size .2s}
+ul.items a:hover{background-size:100% 2px}
+.d{color:var(--pencil);font-size:15px}
+.tag{font-size:13px;color:var(--marker);border:1.5px solid var(--marker);border-radius:var(--wob2);padding:0 7px;line-height:1.6}
+.tag.c{color:var(--pencil);border-color:var(--pencil);border-style:dashed}
+.copy{margin-left:auto;font:inherit;font-size:14px;color:var(--pencil);background:none;border:none;cursor:pointer;text-decoration:underline dotted}
+.copy:hover{color:var(--ink)}
+.box{border:2px dashed var(--pencil);border-radius:var(--wob2);padding:12px 16px;color:var(--pencil);font-size:15px;margin-top:18px}
+#results{margin-top:10px}
+footer{margin-top:50px;color:var(--pencil);font-size:14px;border-top:1.5px dashed var(--faint);padding-top:14px}
+</style></head>
+<body><div class="wrap"><div class="crumb"><a href="../index.html">← IsRight 入口</a>　／　工具與行政</div><header><h1>課堂工具</h1></header><p class="note">為了少做一件重複的事，花三天寫一個工具。值得。</p><svg class="scribble" viewBox="0 0 180 10" aria-hidden="true"><path d="M2 6 C40 2 70 9 110 5 S160 3 178 6"/></svg><ul class="items"><li><a href="https://huangisright.github.io/isright-tools/" target="_blank" rel="noopener">IsRight 工具箱（總目錄）</a><button class="copy" data-u="https://huangisright.github.io/isright-tools/">複製連結</button></li><li><a href="https://huangisright.github.io/isright-tools/question-variant/" target="_blank" rel="noopener">題目變形工坊</a><span class="d">參數化出卷</span><button class="copy" data-u="https://huangisright.github.io/isright-tools/question-variant/">複製連結</button></li><li><a href="https://huangisright.github.io/isright-tools/exam-to-word/" target="_blank" rel="noopener">考卷轉 Word</a><span class="d">Markdown＋LaTeX 轉 docx</span><button class="copy" data-u="https://huangisright.github.io/isright-tools/exam-to-word/">複製連結</button></li><li><a href="https://huangisright.github.io/isright-tools/roll-call/" target="_blank" rel="noopener">點名表產生器</a><button class="copy" data-u="https://huangisright.github.io/isright-tools/roll-call/">複製連結</button></li><li><a href="https://huangisright.github.io/isright-tools/igp/" target="_blank" rel="noopener">IGP 產生器</a><span class="d">資料只在瀏覽器處理</span><button class="copy" data-u="https://huangisright.github.io/isright-tools/igp/">複製連結</button></li><li><a href="https://huangisright.github.io/class-check-tool/" target="_blank" rel="noopener">上課檢核表</a><button class="copy" data-u="https://huangisright.github.io/class-check-tool/">複製連結</button></li><li><a href="https://huangisright.github.io/isright-tools/grab-launcher/" target="_blank" rel="noopener">搶登記發射台</a><button class="copy" data-u="https://huangisright.github.io/isright-tools/grab-launcher/">複製連結</button></li><li><a href="https://huangisright.github.io/isright-tools/key-path/" target="_blank" rel="noopener">鍵盤路徑勘查</a><button class="copy" data-u="https://huangisright.github.io/isright-tools/key-path/">複製連結</button></li></ul><p class="box">另有 5 個試作版在<a href="draft.html#tools">「未完成」</a>，確認後會搬過來。</p></div><script>document.addEventListener("click",e=>{const b=e.target.closest(".copy");if(!b)return;
+const u=new URL(b.dataset.u,location.href).href;navigator.clipboard.writeText(u).then(()=>{b.textContent="複製了";setTimeout(()=>b.textContent="複製連結",1200)}).catch(()=>prompt("複製這個連結：",u));});</script></body></html>

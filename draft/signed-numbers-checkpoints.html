@@ -1,0 +1,431 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>正負數加減考點對照</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap">
+<style>
+  :root{
+    --paper:#faf8f4;
+    --raise:#ffffff;
+    --ink:#1b2430;
+    --soft:#65707d;
+    --faint:#8b95a1;
+    --rule:#e0dad0;
+    --hair:#ece7de;
+    --red:#ab3a2c;          /* 教用卷上老師紅筆的顏色 */
+    --redbg:#f7ece9;
+    --ok:#2c6a4a;
+    --okbg:#e9f1eb;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --paper:#14181d; --raise:#1b2026; --ink:#e7eaee; --soft:#9aa5b1; --faint:#78828e;
+      --rule:#2b323a; --hair:#232930; --red:#e0897c; --redbg:#2e211f;
+      --ok:#74c79b; --okbg:#1d2a23;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#14181d; --raise:#1b2026; --ink:#e7eaee; --soft:#9aa5b1; --faint:#78828e;
+    --rule:#2b323a; --hair:#232930; --red:#e0897c; --redbg:#2e211f;
+    --ok:#74c79b; --okbg:#1d2a23;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+    font-size:15px;line-height:1.72;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding-block:44px 72px;padding-left:20px;padding-right:20px}
+
+  /* ── 抬頭 ── */
+  header{border-bottom:2px solid var(--ink);padding-bottom:16px}
+  .eyebrow{
+    font-size:11.5px;letter-spacing:.18em;color:var(--soft);
+    text-transform:uppercase;font-weight:700;margin-bottom:7px
+  }
+  h1{
+    font-family:"Noto Serif TC",serif;font-weight:700;
+    font-size:clamp(27px,5.4vw,38px);line-height:1.25;margin:0 0 9px;
+    letter-spacing:.01em;text-wrap:balance
+  }
+  .src{color:var(--soft);font-size:14px;max-width:62ch}
+  .src b{color:var(--ink);font-weight:500}
+
+  /* ── 數字列 ── */
+  .facts{
+    display:flex;flex-wrap:wrap;gap:0;margin:26px 0 8px;
+    border:1px solid var(--rule);border-radius:3px;background:var(--raise);overflow:hidden
+  }
+  .fact{flex:1 1 130px;padding:13px 16px;border-right:1px solid var(--hair)}
+  .fact:last-child{border-right:0}
+  .fact .v{
+    font-family:"Noto Serif TC",serif;font-size:23px;font-weight:700;
+    line-height:1.2;font-variant-numeric:tabular-nums
+  }
+  .fact .k{font-size:11.5px;color:var(--soft);letter-spacing:.04em;margin-top:2px}
+  .fact.flag .v{color:var(--red)}
+
+  /* ── 分區 ── */
+  section{margin-top:42px}
+  .sechead{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--ink);padding-bottom:6px}
+  .sechead h2{
+    font-family:"Noto Serif TC",serif;font-size:19px;margin:0;font-weight:700;letter-spacing:.02em
+  }
+  .sechead .meta{font-size:12.5px;color:var(--soft);margin-left:auto;font-variant-numeric:tabular-nums}
+
+  /* ── 逐題 ── */
+  .row{
+    display:grid;grid-template-columns:58px minmax(0,1fr);gap:0 16px;
+    padding:15px 0;border-bottom:1px solid var(--hair);align-items:start
+  }
+  .row:last-child{border-bottom:0}
+  .tag{padding-top:2px}
+  .tag .no{
+    font-family:"Noto Serif TC",serif;font-size:19px;font-weight:700;
+    line-height:1;font-variant-numeric:tabular-nums
+  }
+  .tag .pt{font-size:11px;color:var(--faint);margin-top:3px;letter-spacing:.03em}
+  .pt2{font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-top:6px;letter-spacing:.02em}
+
+  .skill{font-weight:500;font-size:15.5px;line-height:1.5;margin-bottom:4px;text-wrap:balance}
+  .detail{font-size:13.5px;color:var(--soft);line-height:1.66}
+  .detail .lbl{
+    color:var(--faint);font-size:11px;letter-spacing:.1em;font-weight:700;
+    margin-right:6px;text-transform:uppercase
+  }
+  .detail p{margin:3px 0 0}
+  .var{font-family:var(--mono);font-size:12px;color:var(--ink);opacity:.78;word-break:break-word}
+
+  .note{
+    margin-top:9px;padding:9px 12px;background:var(--redbg);
+    border-left:3px solid var(--red);border-radius:0 3px 3px 0;
+    font-size:13px;color:var(--ink);line-height:1.6
+  }
+  .note b{color:var(--red);font-weight:700}
+
+  .badge{
+    display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.06em;
+    padding:1px 7px;border-radius:2px;background:var(--okbg);color:var(--ok);
+    vertical-align:2px;margin-left:7px
+  }
+  .badge.chg{background:var(--redbg);color:var(--red)}
+
+  /* ── 結尾 ── */
+  .foot{
+    margin-top:46px;padding-top:20px;border-top:2px solid var(--ink);
+    font-size:13.5px;color:var(--soft)
+  }
+  .foot h3{
+    font-family:"Noto Serif TC",serif;font-size:16px;color:var(--ink);
+    margin:0 0 8px;font-weight:700
+  }
+  .foot p{margin:0 0 10px;max-width:66ch}
+  .foot p:last-child{margin-bottom:0}
+  .foot code{font-family:var(--mono);font-size:12.5px;background:var(--hair);padding:1px 5px;border-radius:2px}
+
+  @media (max-width:520px){
+    .row{grid-template-columns:44px minmax(0,1fr);gap:0 11px}
+    .fact{flex:1 1 50%;border-bottom:1px solid var(--hair)}
+  }
+</style>
+
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">考點對照表</div>
+  <h1>正負數的加減</h1>
+  <p class="src">
+    對照來源：<b>南一 114 學年 國中數學 1 上・平時測驗卷 1-2（進階）</b>。
+    左欄是出版社原卷的題號與配分，右欄是對應的參數化模板所測的能力。
+    變形版逐題沿用同一考點與同一難度分級，只有數字、情境與選項位置每份不同。
+  </p>
+</header>
+
+<div class="facts">
+  <div class="fact"><div class="v">21</div><div class="k">題，對應 21 個模板</div></div>
+  <div class="fact"><div class="v">100</div><div class="k">分，配分結構不變</div></div>
+  <div class="fact"><div class="v">2,520</div><div class="k">項獨立驗算，全數通過</div></div>
+  <div class="fact flag"><div class="v">2</div><div class="k">題調整了問法</div></div>
+</div>
+
+<section>
+  <div class="sechead">
+    <h2>一、選擇題</h2>
+    <span class="meta">10 題 × 3 分 ＝ 30 分</span>
+  </div>
+
+  <div class="row">
+    <div class="tag"><div class="no">1</div><div class="pt">3 分</div><div class="pt2">mc01</div></div>
+    <div>
+      <div class="skill">去括號、減去負數；從結構看出兩括號相消</div>
+      <div class="detail">
+        <p><span class="lbl">變形</span><span class="var">三位數 × 4，答案落在 −9 ~ 9</span></p>
+        <p><span class="lbl">誘答</span>整串符號分配錯、只錯一個括號、兩括號相加</p>
+        <p>原卷刻意讓兩括號都等於 911 使答案為 0。模板保留「大數字、小答案」的設計精神，但不強制為 0，所以各版答案不同。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="tag"><div class="no">2</div><div class="pt">3 分</div><div class="pt2">mc02</div></div>
+    <div>
+      <div class="skill">等量關係：加數愈大，原數愈小</div>
+      <div class="detail">
+        <p><span class="lbl">變形</span><span class="var">四個加數 ∈ [−12, 12] 且兩兩相異</span></p>
+        <p>正解會落在甲、乙、丙、丁四人中的不同人，四個版本剛好各取一人。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="tag"><div class="no">3</div><div class="pt">3 分</div><div class="pt2">mc03</div></div>
+    <div>
+      <div class="skill">絕對值符號的作用範圍</div>
+      <div class="detail">
+        <p><span class="lbl">變形</span><span class="var">a, b ∈ [2, 14]，a ≠ b</span></p>
+        <p>四個選項中有兩個同值（<span class="var">−a−b</span> 與 <span class="var">−a−|b|</span>），這是原卷刻意的設計，模板保留。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="tag"><div class="no">4</div><div class="pt">3 分</div><div class="pt2">mc04</div></div>
+    <div>
+      <div class="skill">情境轉譯為數線上的帶號位移</div>
+      <div class="detail">
+        <p><span class="lbl">變形</span><span class="var">起點、贏／輸移動量、總次數、勝負平手次數</span></p>
+        <p><span class="lbl">誘答</span>平手誤算成輸贏、忘記乙也在移動、完全沒算（初始距離）</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="tag"><div class="no">5</div><div class="pt">3 分</div><div class="pt2">mc05</div></div>
+    <div>
+      <div class="skill">數線兩點距離的表示法，隨兩點位置而不同</div>
+      <div class="detail">
+        <p><span class="lbl">變形</span><span class="var">兩點分居原點兩側／同在原點右側</span></p>
+        <p>位置換了，「不能表示」的選項也跟著換——異號時是 |a|−|b|，同號時是 |a|+|b|。<b>附圖由座標即時繪製</b>，不會出現圖文不符。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="tag"><div class="no">6</div><div class="pt">3 分</div><div class="pt2">mc06</div></div>
+    <div>
+      <div class="skill">先判斷正負，再決定怎麼去絕對值</div>
+      <div class="detail">
+        <p><span class="lbl">變形</span><span class="var">p, q ∈ [105, 980]，大小關係兩種都會出現</span></p>
+        <p>p &gt; q 與 p &lt; q 時正解寫法不同，學生不能背固定答案。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="tag"><div class="no">7</div><div class="pt">3 分</div><div class="pt2">mc07</div></div>
+    <div>
+      <div class="skill">去括號與相反數的符號規則（從四式中挑錯）</div>
+      <div class="detail">
+        <p><span class="lbl">變形</span><span class="var">四種等式型，隨機決定哪一型被弄壞</span></p>
+        <p>原卷固定錯在「兩負數相加把負號丟掉」。模板讓四型輪流當錯的那一個，每型對應一個具體迷思。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="tag"><div class="no">8</div><div class="pt">3 分</div><div class="pt2">mc08</div></div>
+    <div>
+      <div class="skill">分數在數線上的位置、整數的稠密性<span class="badge chg">問法已調整</span></div>
+      <div class="detail">
+        <p><span class="lbl">變形</span><span class="var">−m − num/den，m ∈ [2, 12]，真分數且最簡</span></p>
+        <div class="note">
+          原卷問 <b>b − a</b>，但這個值<b>恆為 1</b>，與題目的數字完全無關——換幾次數字，答案都一樣。
+          模板改問 <b>a + b</b>：仍然要先判斷分數落在哪兩個整數之間，考的能力不變，但答案會隨數字改變。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="tag"><div class="no">9</div><div class="pt">3 分</div><div class="pt2">mc09</div></div>
+    <div>
+      <div class="skill">絕對值的雙解：距離對應兩個點</div>
+      <div class="detail">
+        <p><span class="lbl">變形</span><span class="var">d 為 12 ~ 96 的偶數</span></p>
+        <p><span class="lbl">誘答</span>只寫正的、只寫負的、距離折半</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="tag"><div class="no">10</div><div class="pt">3 分</div><div class="pt2">mc10</div></div>
+    <div>
+      <div class="skill">基準量 × 份數，再加上增減總和</div>
+      <div class="detail">
+        <p><span class="lbl">變形</span><span class="var">基準 20~80，七天增減各自獨立；回收品項輪替</span></p>
+        <p><span class="lbl">誘答</span>忘記乘天數、增減符號弄反</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sechead">
+    <h2>二、填充題</h2>
+    <span class="meta">6 題 × 5 分 ＝ 30 分</span>
+  </div>
+
+  <div class="row">
+    <div class="tag"><div class="no">1</div><div class="pt">5 分</div><div class="pt2">f01</div></div>
+    <div>
+      <div class="skill">跨零度的溫差：減去一個負數</div>
+      <div class="detail">
+        <p><span class="lbl">變形</span><span class="var">溫差 40 ~ 110 度；寒冷城市與臺灣城市各自輪替</span></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="tag"><div class="no">2</div><div class="pt">5 分</div><div class="pt2">f02</div></div>
+    <div>
+      <div class="skill">中點坐標等於兩端點坐標的平均</div>
+      <div class="detail">
+        <p><span class="lbl">變形</span><span class="var">兩端點一正一負，和為偶數，中點不為 0</span></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="tag"><div class="no">3</div><div class="pt">5 分</div><div class="pt2">f03</div></div>
+    <div>
+      <div class="skill">由「移動後的結果」逆推原位置</div>
+      <div class="detail">
+        <p><span class="lbl">變形</span><span class="var">四人位移各自獨立且相異；集合點 −18 ~ 12</span></p>
+        <p>角色組輪替（柯南／航海王／鬼滅），左右方向也隨位移正負自動改寫，不會出現「向右移動 −3 個單位」。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="tag"><div class="no">4</div><div class="pt">5 分</div><div class="pt2">f04</div></div>
+    <div>
+      <div class="skill">辨識去括號時的符號錯誤<span class="badge chg">問法已調整</span></div>
+      <div class="detail">
+        <p><span class="lbl">變形</span><span class="var">X ∈ [15, 45]，內層兩數獨立；兩位同學姓名輪替</span></p>
+        <div class="note">
+          原卷問<b>誰算對了</b>，答案只有甲、乙兩種，四個版本必然重複。
+          模板改問<b>正確的計算結果是多少</b>——兩人的做法照樣並列，學生還是得先判斷哪個做法對，
+          考的能力不變，但答案會隨數字改變。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="tag"><div class="no">5</div><div class="pt">5 分</div><div class="pt2">f05</div></div>
+    <div>
+      <div class="skill">由位置條件與不等式推出三數大小關係</div>
+      <div class="detail">
+        <p><span class="lbl">變形</span><span class="var">甲乙丙三個角色的 6 種指派</span></p>
+        <p>這題的推理結構不動，只輪換誰扮演哪個角色，答案會是六種排列中的不同一種。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="tag"><div class="no">6</div><div class="pt">5 分</div><div class="pt2">f06</div></div>
+    <div>
+      <div class="skill">三條線上的和相等，逐線反推未知數</div>
+      <div class="detail">
+        <p><span class="lbl">變形</span><span class="var">線上和、中心值、三個已知外圈值</span></p>
+        <p><b>圖由參數即時繪製</b>：六個外圈點與三條連線都依當次數值重畫，圖上的數字永遠與題幹一致。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sechead">
+    <h2>三、計算題</h2>
+    <span class="meta">5 題 × 8 分 ＝ 40 分</span>
+  </div>
+
+  <div class="row">
+    <div class="tag"><div class="no">1</div><div class="pt">8 分</div><div class="pt2">c01</div></div>
+    <div>
+      <div class="skill">多層括號的運算順序（兩小題，各 4 分）</div>
+      <div class="detail">
+        <p><span class="lbl">變形</span><span class="var">兩式各自獨立，答案絕對值 ≤ 70 且兩題不同</span></p>
+        <p>第二小題保留原卷的三層括號結構 <span class="var">{ ( ) − 〔 〕 }</span>。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="tag"><div class="no">2</div><div class="pt">8 分</div><div class="pt2">c02</div></div>
+    <div>
+      <div class="skill">數線上線段的和差關係；絕對值即距離</div>
+      <div class="detail">
+        <p><span class="lbl">變形</span><span class="var">三個已知距離，需滿足 a &lt; b &lt; c &lt; d</span></p>
+        <p>驗算會重建四點座標，確認順序與附圖一致——三個距離之間若不相容，圖上的點序就會跟題目給的數字互相矛盾。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="tag"><div class="no">3</div><div class="pt">8 分</div><div class="pt2">c03</div></div>
+    <div>
+      <div class="skill">中點坐標，以及平移後互為相反數（兩小題，各 4 分）</div>
+      <div class="detail">
+        <p><span class="lbl">變形</span><span class="var">A 為負、B 為正，兩數和為偶數且不為 0</span></p>
+        <p>移動方向（向左／向右）由參數自動判定，不會寫死。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="tag"><div class="no">4</div><div class="pt">8 分</div><div class="pt2">c04</div></div>
+    <div>
+      <div class="skill">以平均為基準的偏差表：偏差和為零、比較大小（四小題，各 2 分）</div>
+      <div class="detail">
+        <p><span class="lbl">變形</span><span class="var">平均 140~165；七個偏差非零、絕對值兩兩相異</span></p>
+        <p>絕對值相異才能保證「最接近平均」與「最高」各自唯一。另外約束了戊的偏差大於丁，
+        否則第 (4) 小題會問出「比他高 −14 公分」這種病句。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="tag"><div class="no">5</div><div class="pt">8 分</div><div class="pt2">c05</div></div>
+    <div>
+      <div class="skill">等速相向則相遇點即中點；辨識多餘條件</div>
+      <div class="detail">
+        <p><span class="lbl">變形</span><span class="var">相遇點 −30 ~ 20，兩人距離為偶數</span></p>
+        <p>「兩人相距 ⋯ 個單位」是原卷刻意放的<b>誘餌</b>——答案只跟相遇點有關。模板保留這個設計。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="foot">
+  <h3>難度為什麼不會漂移</h3>
+  <p>
+    每一份平行卷的第 <i>n</i> 題都由<b>同一個模板</b>生成，所以考點、解題步驟數與難度分級完全相同，
+    不同的只有數字、情境與選項位置。這不是靠比對兩份卷子判斷出來的，而是由生成方式保證的。
+  </p>
+  <p>
+    另外，答案由參數<b>反推計算</b>而來，不是改寫文字得到的——先決定答案，再把題目的數字算回去，
+    所以整數解與答案的合理範圍由構造保證。工具每次產生試卷時會跑六項檢查，
+    其中「計算量比對」會量各版本題幹數字的規模差距，超過 50% 就提醒收窄參數域。
+  </p>
+  <p>
+    上述兩處問法調整之外，其餘 19 題的題型、配分與作答形式與原卷一致。
+    要重印同一份卷，把<code>亂數種子</code>填回原來的值即可，產生的題目完全相同。
+  </p>
+</div>
+
+</div>
+
+</body></html>

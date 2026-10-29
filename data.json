@@ -1,0 +1,926 @@
+{
+ "shelves": [
+  {
+   "name": "教材",
+   "cats": [
+    {
+     "id": "math",
+     "name": "數學互動操作",
+     "dz": "hand",
+     "note": "手動一次，勝過看十次。",
+     "items": [
+      {
+       "t": "互動探索站（總目錄）",
+       "d": "可搜尋、可依年級篩選",
+       "u": "https://huangisright.github.io/GiftedMath/",
+       "stu": 1
+      },
+      {
+       "t": "章後延伸報告",
+       "u": "https://huangisright.github.io/GiftedMath/extend.html",
+       "stu": 1
+      },
+      {
+       "h": "七上"
+      },
+      {
+       "t": "一條數線，兩把尺",
+       "u": "https://huangisright.github.io/GiftedMath/units/g7a-ch1-number-line.html",
+       "stu": 1
+      },
+      {
+       "t": "拆開來看",
+       "u": "https://huangisright.github.io/GiftedMath/units/g7a-ch2-skeleton.html",
+       "stu": 1
+      },
+      {
+       "t": "把數線捲起來",
+       "u": "https://huangisright.github.io/GiftedMath/units/g7a-ch2-modular.html",
+       "stu": 1
+      },
+      {
+       "t": "分母是單位",
+       "u": "https://huangisright.github.io/GiftedMath/units/g7a-ch2-fraction-unit.html",
+       "stu": 1
+      },
+      {
+       "t": "先給它一個名字",
+       "u": "https://huangisright.github.io/GiftedMath/units/g7a-ch3-naming.html",
+       "stu": 1
+      },
+      {
+       "h": "七下"
+      },
+      {
+       "t": "一條不夠",
+       "u": "https://huangisright.github.io/GiftedMath/units/g7b-ch1-simultaneous.html",
+       "stu": 1
+      },
+      {
+       "t": "一個數不夠",
+       "u": "https://huangisright.github.io/GiftedMath/units/g7b-ch2-coordinates.html",
+       "stu": 1
+      },
+      {
+       "t": "換一個基準看",
+       "u": "https://huangisright.github.io/GiftedMath/units/g7b-ch3-ratio.html",
+       "stu": 1
+      },
+      {
+       "t": "答案是一整段",
+       "u": "https://huangisright.github.io/GiftedMath/units/g7b-ch4-inequality.html",
+       "stu": 1
+      },
+      {
+       "t": "誰能代表大家",
+       "u": "https://huangisright.github.io/GiftedMath/units/g7b-ch5-statistics.html",
+       "stu": 1
+      },
+      {
+       "t": "正對著看",
+       "u": "https://huangisright.github.io/GiftedMath/units/g7b-ch6-geometry.html",
+       "stu": 1
+      },
+      {
+       "h": "八上"
+      },
+      {
+       "t": "把十換成 x",
+       "u": "https://huangisright.github.io/GiftedMath/units/g8a-ch1-polynomial.html",
+       "stu": 1
+      },
+      {
+       "t": "不要乘，用數的",
+       "u": "https://huangisright.github.io/GiftedMath/units/g8a-s1-1-binomial.html",
+       "stu": 1
+      },
+      {
+       "t": "把面積翻回邊長",
+       "u": "https://huangisright.github.io/GiftedMath/units/g8a-ch2-sqrt-pythagoras.html",
+       "stu": 1
+      },
+      {
+       "t": "拆成乘法才看得見",
+       "u": "https://huangisright.github.io/GiftedMath/units/g8a-ch3-factoring.html",
+       "stu": 1
+      },
+      {
+       "t": "係數才是主角",
+       "u": "https://huangisright.github.io/GiftedMath/units/g8a-ch3-genfunc-1.html",
+       "stu": 1
+      },
+      {
+       "t": "一直加下去",
+       "u": "https://huangisright.github.io/GiftedMath/units/g8a-ch3-genfunc-2.html",
+       "stu": 1
+      },
+      {
+       "t": "變回你會解的樣子",
+       "u": "https://huangisright.github.io/GiftedMath/units/g8a-ch4-quadratic.html",
+       "stu": 1
+      },
+      {
+       "t": "中間的那個人在哪裡",
+       "u": "https://huangisright.github.io/GiftedMath/units/g8a-ch5-statistics.html",
+       "stu": 1
+      },
+      {
+       "h": "八下"
+      },
+      {
+       "t": "規則才是數列",
+       "u": "https://huangisright.github.io/GiftedMath/units/g8b-ch1-sequences.html",
+       "stu": 1
+      },
+      {
+       "t": "裡面有一個小的自己",
+       "u": "https://huangisright.github.io/GiftedMath/units/g8b-ch1-recursion.html",
+       "stu": 1
+      },
+      {
+       "t": "它不會改口",
+       "u": "https://huangisright.github.io/GiftedMath/units/g8b-ch2-functions.html",
+       "stu": 1
+      },
+      {
+       "t": "不能再動了",
+       "u": "https://huangisright.github.io/GiftedMath/units/g8b-ch3-triangle.html",
+       "stu": 1
+      },
+      {
+       "t": "那條線本來不在圖上",
+       "u": "https://huangisright.github.io/GiftedMath/units/g8b-ch4-parallel.html",
+       "stu": 1
+      },
+      {
+       "h": "九上"
+      },
+      {
+       "t": "兩個角就夠了",
+       "u": "https://huangisright.github.io/GiftedMath/units/g9a-ch1-similar.html",
+       "stu": 1
+      },
+      {
+       "t": "怎麼看都一樣",
+       "u": "https://huangisright.github.io/GiftedMath/units/g9a-ch2-circle.html",
+       "stu": 1
+      },
+      {
+       "t": "不是剛好",
+       "u": "https://huangisright.github.io/GiftedMath/units/g9a-ch3-proof.html",
+       "stu": 1
+      },
+      {
+       "h": "九下"
+      },
+      {
+       "t": "同一條，搬了家",
+       "u": "https://huangisright.github.io/GiftedMath/units/g9b-ch1-quadratic.html",
+       "stu": 1
+      },
+      {
+       "t": "算出來之前，先問",
+       "u": "https://huangisright.github.io/GiftedMath/units/g9b-ch2-statprob.html",
+       "stu": 1
+      },
+      {
+       "t": "多出來的那個方向",
+       "u": "https://huangisright.github.io/GiftedMath/units/g9b-ch3-solids.html",
+       "stu": 1
+      }
+     ]
+    },
+    {
+     "id": "kinmen",
+     "name": "金門等時線",
+     "dz": "iso",
+     "note": "金門很小，但走路還是要很久。",
+     "items": [
+      {
+       "t": "金門有多大？（總覽）",
+       "u": "https://huangisright.github.io/GiftedMath/units/tp-kinmen-isochrone.html",
+       "stu": 1
+      },
+      {
+       "t": "走 10 分鐘，到得了哪裡？",
+       "u": "https://huangisright.github.io/GiftedMath/units/tp-kinmen-1-school.html",
+       "stu": 1
+      },
+      {
+       "t": "坐一段公車，範圍會變成什麼形狀？",
+       "u": "https://huangisright.github.io/GiftedMath/units/tp-kinmen-2-bus.html",
+       "stu": 1
+      },
+      {
+       "t": "退潮了，走哪條路最快？",
+       "u": "https://huangisright.github.io/GiftedMath/units/tp-kinmen-3-jiangong.html",
+       "stu": 1
+      },
+      {
+       "t": "兩輛救護車，誰先到？",
+       "u": "https://huangisright.github.io/GiftedMath/units/tp-kinmen-4-who-first.html",
+       "stu": 1
+      },
+      {
+       "t": "金門大橋通車以後，烈嶼變近了多少？",
+       "u": "https://huangisright.github.io/GiftedMath/units/tp-kinmen-5-bridge.html",
+       "stu": 1
+      },
+      {
+       "t": "金門離哪裡比較近？",
+       "u": "https://huangisright.github.io/GiftedMath/units/tp-kinmen-6-time-map.html",
+       "stu": 1
+      },
+      {
+       "t": "金門等時線地圖",
+       "u": "https://huangisright.github.io/eqaul-line/kinmen_isochrones.html",
+       "stu": 1
+      }
+     ]
+    },
+    {
+     "id": "escape",
+     "name": "密室逃脫",
+     "dz": "door",
+     "note": "學生解謎的時間，永遠是你預估的一半或兩倍。",
+     "items": [
+      {
+       "t": "數位密室逃脫（學生端）",
+       "u": "https://huangisright.github.io/isright-tools/escape-room/",
+       "stu": 1
+      },
+      {
+       "t": "數位密室逃脫（教師監看台）",
+       "u": "https://huangisright.github.io/isright-tools/escape-room/teacher.html"
+      },
+      {
+       "t": "閩南建築與僑鄉記憶：落番密室逃脫",
+       "d": "金門介紹密室",
+       "u": "https://huangisright.github.io/ksecret/",
+       "stu": 1
+      }
+     ]
+    },
+    {
+     "id": "misc",
+     "name": "其他課堂頁面",
+     "dz": "wind",
+     "note": "分類不了的，通常是最有趣的。",
+     "items": [
+      {
+       "t": "虛擬風洞模擬系統",
+       "u": "https://huangisright.github.io/virtual_wind_tunnel/",
+       "stu": 1
+      }
+     ]
+    },
+    {
+     "id": "geo",
+     "name": "幾何明珠",
+     "dz": "geo",
+     "note": "每一頁都在問同一件事：什麼沒有變？",
+     "items": []
+    }
+   ]
+  },
+  {
+   "name": "工具與行政",
+   "cats": [
+    {
+     "id": "tools",
+     "name": "課堂工具",
+     "dz": "tools",
+     "note": "為了少做一件重複的事，花三天寫一個工具。值得。",
+     "items": [
+      {
+       "t": "IsRight 工具箱（總目錄）",
+       "u": "https://huangisright.github.io/isright-tools/"
+      },
+      {
+       "t": "題目變形工坊",
+       "d": "參數化出卷",
+       "u": "https://huangisright.github.io/isright-tools/question-variant/"
+      },
+      {
+       "t": "考卷轉 Word",
+       "d": "Markdown＋LaTeX 轉 docx",
+       "u": "https://huangisright.github.io/isright-tools/exam-to-word/"
+      },
+      {
+       "t": "點名表產生器",
+       "u": "https://huangisright.github.io/isright-tools/roll-call/"
+      },
+      {
+       "t": "IGP 產生器",
+       "d": "資料只在瀏覽器處理",
+       "u": "https://huangisright.github.io/isright-tools/igp/"
+      },
+      {
+       "t": "上課檢核表",
+       "u": "https://huangisright.github.io/class-check-tool/"
+      },
+      {
+       "t": "搶登記發射台",
+       "u": "https://huangisright.github.io/isright-tools/grab-launcher/"
+      },
+      {
+       "t": "鍵盤路徑勘查",
+       "u": "https://huangisright.github.io/isright-tools/key-path/"
+      }
+     ]
+    },
+    {
+     "id": "admin",
+     "name": "資優行政與科展",
+     "dz": "list",
+     "note": "這一格存在，是為了讓其他格能存在。",
+     "items": []
+    }
+   ]
+  }
+ ],
+ "repos": [
+  {
+   "name": "GiftedMath",
+   "t": "數理資優班　互動探索站",
+   "site": "https://huangisright.github.io/GiftedMath/"
+  },
+  {
+   "name": "isright-tools",
+   "t": "IsRight 工具箱",
+   "site": "https://huangisright.github.io/isright-tools/"
+  },
+  {
+   "name": "eqaul-line",
+   "t": "金門等時線地圖",
+   "site": "https://huangisright.github.io/eqaul-line/kinmen_isochrones.html"
+  },
+  {
+   "name": "ksecret",
+   "t": "落番密室逃脫",
+   "site": "https://huangisright.github.io/ksecret/"
+  },
+  {
+   "name": "virtual_wind_tunnel",
+   "t": "虛擬風洞模擬系統",
+   "site": "https://huangisright.github.io/virtual_wind_tunnel/"
+  },
+  {
+   "name": "class-check-tool",
+   "t": "上課檢核表",
+   "site": "https://huangisright.github.io/class-check-tool/"
+  },
+  {
+   "name": "escape-workshop",
+   "t": "密室工坊（後台）",
+   "site": "",
+   "private": 1
+  },
+  {
+   "name": "huangisright.github.io",
+   "t": "這個入口",
+   "site": "https://huangisright.github.io/"
+  }
+ ],
+ "draft_cats": {
+  "幾何明珠": "geo",
+  "金門等時線": "kinmen",
+  "密室逃脫": "escape",
+  "數學教材": "misc",
+  "課堂工具": "tools",
+  "資優行政與科展": "admin"
+ },
+ "drafts": [
+  {
+   "slug": "gp-map-3d",
+   "t": "幾何明珠群島 3D",
+   "cat": "幾何明珠",
+   "d": "課程地圖",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/KEcLYjBxb4PYnjuh7gWWiP",
+   "u": "draft/gp-map-3d.html"
+  },
+  {
+   "slug": "gp-map-2d",
+   "t": "幾何明珠群島 2D",
+   "cat": "幾何明珠",
+   "d": "課程地圖",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/BTHNULA1nw9oKYaL9Fz8HY",
+   "u": "draft/gp-map-2d.html"
+  },
+  {
+   "slug": "gp-u1-1",
+   "t": "一個不會變的數",
+   "cat": "幾何明珠",
+   "d": "單元一",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/FCFdtRSTuB4zRaqBznHM5W",
+   "u": "draft/gp-u1-1.html"
+  },
+  {
+   "slug": "gp-u1-2",
+   "t": "空白搬了家",
+   "cat": "幾何明珠",
+   "d": "單元一",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/GTxSgcZnYVGGrjQoJiTFMR",
+   "u": "draft/gp-u1-2.html"
+  },
+  {
+   "slug": "gp-u1-3",
+   "t": "三條線交在一點",
+   "cat": "幾何明珠",
+   "d": "單元一",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/2LiQyNTR3Zd13DrUodZNCW",
+   "u": "draft/gp-u1-3.html"
+  },
+  {
+   "slug": "gp-u2-1",
+   "t": "光走的那一條",
+   "cat": "幾何明珠",
+   "d": "單元二",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/L22sRi3xGridM2M3SFgPgJ",
+   "u": "draft/gp-u2-1.html"
+  },
+  {
+   "slug": "gp-u2-2",
+   "t": "最短的那一圈",
+   "cat": "幾何明珠",
+   "d": "單元二",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/URLwdS8CLzMnuukusTpRNn",
+   "u": "draft/gp-u2-2.html"
+  },
+  {
+   "slug": "gp-u2-3",
+   "t": "三條路接成一條",
+   "cat": "幾何明珠",
+   "d": "單元二",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/Fo4D7T4iijwVoiF2MZMzhK",
+   "u": "draft/gp-u2-3.html"
+  },
+  {
+   "slug": "gp-u3-1",
+   "t": "離 A 是離 B 的兩倍",
+   "cat": "幾何明珠",
+   "d": "單元三",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/B3x1jJ29A2YNg3aYhc7Gaa",
+   "u": "draft/gp-u3-1.html"
+  },
+  {
+   "slug": "gp-u3-2",
+   "t": "從頂點到底邊的那一條",
+   "cat": "幾何明珠",
+   "d": "單元三",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/3Kpf6HjJKSE57jXnjvR4nf",
+   "u": "draft/gp-u3-2.html"
+  },
+  {
+   "slug": "gp-u3-3",
+   "t": "切下來的那一塊",
+   "cat": "幾何明珠",
+   "d": "單元三",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/QYgTiQyb4LdxiArCsTpqVP",
+   "u": "draft/gp-u3-3.html"
+  },
+  {
+   "slug": "gp-u4-1",
+   "t": "又交在一點",
+   "cat": "幾何明珠",
+   "d": "單元四",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/4MwA2za9JZcRSpUa6gXtQg",
+   "u": "draft/gp-u4-1.html"
+  },
+  {
+   "slug": "gp-u4-2",
+   "t": "一條線穿過去",
+   "cat": "幾何明珠",
+   "d": "單元四",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/9EkBNmTpoipGzX2fMQTVMc",
+   "u": "draft/gp-u4-2.html"
+  },
+  {
+   "slug": "gp-u4-3",
+   "t": "三組對邊，交在一條線上",
+   "cat": "幾何明珠",
+   "d": "單元四",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/4S8oJnsZvjxNjTWmVq7ja4",
+   "u": "draft/gp-u4-3.html"
+  },
+  {
+   "slug": "gp-u5-1",
+   "t": "三個點排成一列",
+   "cat": "幾何明珠",
+   "d": "單元五",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/VkfW8FtYVxYpiRQ3J4CJSa",
+   "u": "draft/gp-u5-1.html"
+  },
+  {
+   "slug": "gp-u5-2",
+   "t": "九個點，一個圓",
+   "cat": "幾何明珠",
+   "d": "單元五",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/RWPYcBx9CRde4fGsUSy1Jo",
+   "u": "draft/gp-u5-2.html"
+  },
+  {
+   "slug": "gp-u5-3",
+   "t": "三個尖，一條線",
+   "cat": "幾何明珠",
+   "d": "單元五",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/MpqrhiUwWZV7AsBAybtEh2",
+   "u": "draft/gp-u5-3.html"
+  },
+  {
+   "slug": "gp-u6-1",
+   "t": "乘起來還是那個數",
+   "cat": "幾何明珠",
+   "d": "單元六",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/MbsYeDhx8oKcZ5FB8C1yG1",
+   "u": "draft/gp-u6-1.html"
+  },
+  {
+   "slug": "gp-u6-2",
+   "t": "站在兩個圓中間",
+   "cat": "幾何明珠",
+   "d": "單元六",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/SbcpP34nnRe5tf8ugUqFSG",
+   "u": "draft/gp-u6-2.html"
+  },
+  {
+   "slug": "gp-u6-3",
+   "t": "中點兩邊一樣長",
+   "cat": "幾何明珠",
+   "d": "單元六",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/VN8BCm7F5nyLjprQ7Ltqud",
+   "u": "draft/gp-u6-3.html"
+  },
+  {
+   "slug": "gp-u6-4",
+   "t": "對角線乘起來",
+   "cat": "幾何明珠",
+   "d": "單元六",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/JHgPDVzuezhox2H7QNAcxS",
+   "u": "draft/gp-u6-4.html"
+  },
+  {
+   "slug": "gp-u7-1",
+   "t": "轉兩次",
+   "cat": "幾何明珠",
+   "d": "單元七",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/5eYo8kLYc7wJFGjPRLmcSP",
+   "u": "draft/gp-u7-1.html"
+  },
+  {
+   "slug": "gp-u7-2",
+   "t": "三個中心",
+   "cat": "幾何明珠",
+   "d": "單元七",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/XFCoAeD7L4sLYJZAgJajKM",
+   "u": "draft/gp-u7-2.html"
+  },
+  {
+   "slug": "gp-u7-3",
+   "t": "中點又是正三角形",
+   "cat": "幾何明珠",
+   "d": "單元七",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/4QbAdFQFVjkVGNDJnReqbA",
+   "u": "draft/gp-u7-3.html"
+  },
+  {
+   "slug": "gp-u7-4",
+   "t": "轉回原樣",
+   "cat": "幾何明珠",
+   "d": "單元七",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/2pjQpMtHXErhJbFvMFxAnF",
+   "u": "draft/gp-u7-4.html"
+  },
+  {
+   "slug": "gp-u8-1",
+   "t": "畫出來的地板",
+   "cat": "幾何明珠",
+   "d": "單元八",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/2TFwv9fqTgoCPYq5iJtP2L",
+   "u": "draft/gp-u8-1.html"
+  },
+  {
+   "slug": "gp-u8-2",
+   "t": "一個數都不用算",
+   "cat": "幾何明珠",
+   "d": "單元八",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/Wn5GFWthvTd6AMQsRXbAYF",
+   "u": "draft/gp-u8-2.html"
+  },
+  {
+   "slug": "gp-u8-3",
+   "t": "圓上六個點",
+   "cat": "幾何明珠",
+   "d": "單元八",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/QNz5YDRP6kzAGo3zYWAHP8",
+   "u": "draft/gp-u8-3.html"
+  },
+  {
+   "slug": "gp-u8-4",
+   "t": "翻譯過來的句子",
+   "cat": "幾何明珠",
+   "d": "單元八",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/4WjpX1ozQCYVSMVqcVdbjA",
+   "u": "draft/gp-u8-4.html"
+  },
+  {
+   "slug": "gp-u8-5",
+   "t": "最後一題",
+   "cat": "幾何明珠",
+   "d": "單元八",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/CrWAJaKXeQkWzgxfPsrmP8",
+   "u": "draft/gp-u8-5.html"
+  },
+  {
+   "slug": "kinmen-isochrone-unit",
+   "t": "金門有多大？等時線單元",
+   "cat": "金門等時線",
+   "d": "",
+   "type": "Slides",
+   "claude": "https://claude.ai/artifact/W1NkgYq4cESmHhaDHAYAC1",
+   "u": "https://claude.ai/artifact/W1NkgYq4cESmHhaDHAYAC1"
+  },
+  {
+   "slug": "lieyu-how-far",
+   "t": "烈嶼有多遠？",
+   "cat": "金門等時線",
+   "d": "",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/A6hB36cmmRN4qCZ8cuzVw1",
+   "u": "draft/lieyu-how-far.html"
+  },
+  {
+   "slug": "who-arrives-first",
+   "t": "誰先到？",
+   "cat": "金門等時線",
+   "d": "",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/7EjPfUV9jKHHYwETn3p4Cw",
+   "u": "draft/who-arrives-first.html"
+  },
+  {
+   "slug": "kinmen-share",
+   "t": "金門有多大？課程分享",
+   "cat": "金門等時線",
+   "d": "給老師",
+   "type": "Slides",
+   "claude": "https://claude.ai/artifact/3eYLiFBc7udNdaamAmn2Rg",
+   "u": "https://claude.ai/artifact/3eYLiFBc7udNdaamAmn2Rg"
+  },
+  {
+   "slug": "kinmen-unit-plan",
+   "t": "等時線單元規劃：從金城國中出發",
+   "cat": "金門等時線",
+   "d": "給老師",
+   "type": "Docs",
+   "claude": "https://claude.ai/artifact/PLn6R5qFLG82PSNXTTiaWN",
+   "u": "https://claude.ai/artifact/PLn6R5qFLG82PSNXTTiaWN"
+  },
+  {
+   "slug": "kinmen-modeling-idea",
+   "t": "等時圈地圖：金門數學建模課程構想",
+   "cat": "金門等時線",
+   "d": "給老師",
+   "type": "Slides",
+   "claude": "https://claude.ai/artifact/XytyPYvUDcdvc7LoupKFsv",
+   "u": "https://claude.ai/artifact/XytyPYvUDcdvc7LoupKFsv"
+  },
+  {
+   "slug": "escape-room-gifted",
+   "t": "密室逃脫在資優教育",
+   "cat": "密室逃脫",
+   "d": "",
+   "type": "Docs",
+   "claude": "https://claude.ai/artifact/CXvCfUG94XfKs6RXs7Qwqv",
+   "u": "https://claude.ai/artifact/CXvCfUG94XfKs6RXs7Qwqv"
+  },
+  {
+   "slug": "climate-escape-draft",
+   "t": "氣候變遷密室逃脫・示範密室規劃草案",
+   "cat": "密室逃脫",
+   "d": "",
+   "type": "Docs",
+   "claude": "https://claude.ai/artifact/CC9a33aDYoZ64FSpvhhMwf",
+   "u": "https://claude.ai/artifact/CC9a33aDYoZ64FSpvhhMwf"
+  },
+  {
+   "slug": "climate-escape-props",
+   "t": "氣候變遷密室逃脫｜列印道具",
+   "cat": "密室逃脫",
+   "d": "",
+   "type": "Design",
+   "claude": "https://claude.ai/artifact/7QCnVWaKaozwXhesHjtMfx",
+   "u": "https://claude.ai/artifact/7QCnVWaKaozwXhesHjtMfx"
+  },
+  {
+   "slug": "escape-workshop-guide",
+   "t": "密室工坊使用教學",
+   "cat": "密室逃脫",
+   "d": "",
+   "type": "Docs",
+   "claude": "https://claude.ai/artifact/FF2kYRaUUx4q7hiiKsktac",
+   "u": "https://claude.ai/artifact/FF2kYRaUUx4q7hiiKsktac"
+  },
+  {
+   "slug": "escape-workshop-v4",
+   "t": "密室工坊 v4 平台設計",
+   "cat": "密室逃脫",
+   "d": "",
+   "type": "Docs",
+   "claude": "https://claude.ai/artifact/LpwTr5vh4FAeHuAoseDDvd",
+   "u": "https://claude.ai/artifact/LpwTr5vh4FAeHuAoseDDvd"
+  },
+  {
+   "slug": "proposal-selfcheck",
+   "t": "推廣提案自我檢驗單",
+   "cat": "密室逃脫",
+   "d": "",
+   "type": "Docs",
+   "claude": "https://claude.ai/artifact/2UnAHPWyQnPD1PTcZHD3Mn",
+   "u": "https://claude.ai/artifact/2UnAHPWyQnPD1PTcZHD3Mn"
+  },
+  {
+   "slug": "tablet-who-is-all",
+   "t": "誰是全部？平板關卡",
+   "cat": "數學教材",
+   "d": "",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/M4wMAf45EJLMN6SKyCb6EV",
+   "u": "draft/tablet-who-is-all.html"
+  },
+  {
+   "slug": "tablet-exposed-piece",
+   "t": "露出來的那一塊 平板關卡",
+   "cat": "數學教材",
+   "d": "",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/N4BHjYrXwQ1Rsd7wkLtgAr",
+   "u": "draft/tablet-exposed-piece.html"
+  },
+  {
+   "slug": "multiplication-formula-path",
+   "t": "乘法公式的來時路與去向",
+   "cat": "數學教材",
+   "d": "",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/BdassJFiD5QAuiW9BFtEzc",
+   "u": "draft/multiplication-formula-path.html"
+  },
+  {
+   "slug": "signed-numbers-checkpoints",
+   "t": "正負數加減考點對照",
+   "cat": "數學教材",
+   "d": "",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/7bVbjd5JVGzQpfi2UAGicS",
+   "u": "draft/signed-numbers-checkpoints.html"
+  },
+  {
+   "slug": "contest-move-map",
+   "t": "國中數學競賽招式地圖",
+   "cat": "數學教材",
+   "d": "",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/5p6JB9ttxuwFNi3cNRxnex",
+   "u": "draft/contest-move-map.html"
+  },
+  {
+   "slug": "numsense-20-lessons",
+   "t": "數感寫作二十節重排",
+   "cat": "數學教材",
+   "d": "",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/4SHQrWdVXFvjhkW5vCvTxM",
+   "u": "draft/numsense-20-lessons.html"
+  },
+  {
+   "slug": "exam-review-schedule",
+   "t": "段考複習進度表",
+   "cat": "數學教材",
+   "d": "",
+   "type": "Design",
+   "claude": "https://claude.ai/artifact/PdKjfEoXCiHjnmyrNqMhPQ",
+   "u": "https://claude.ai/artifact/PdKjfEoXCiHjnmyrNqMhPQ"
+  },
+  {
+   "slug": "worksheet-review-report",
+   "t": "國中講義檢視報告",
+   "cat": "數學教材",
+   "d": "",
+   "type": "Docs",
+   "claude": "https://claude.ai/artifact/YQqAtQ3UmJBnE4Qksw72hG",
+   "u": "https://claude.ai/artifact/YQqAtQ3UmJBnE4Qksw72hG"
+  },
+  {
+   "slug": "math-bank-workshop",
+   "t": "數學題庫工坊",
+   "cat": "課堂工具",
+   "d": "",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/Kc1nCDNJCvdrAER3Ps2htm",
+   "u": "draft/math-bank-workshop.html"
+  },
+  {
+   "slug": "question-variant",
+   "t": "題目變形工坊",
+   "cat": "課堂工具",
+   "d": "GitHub 工具箱已有正式版",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/FXobATSmTRGhygTvLBhRew",
+   "u": "draft/question-variant.html"
+  },
+  {
+   "slug": "roll-call",
+   "t": "點名表產生器",
+   "cat": "課堂工具",
+   "d": "GitHub 工具箱已有正式版",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/Je8Evwc5BH48h6bE73jmqB",
+   "u": "draft/roll-call.html"
+  },
+  {
+   "slug": "grab-launcher",
+   "t": "搶登記發射台",
+   "cat": "課堂工具",
+   "d": "GitHub 工具箱已有正式版",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/746j4aPgikksZe9fxFXLoY",
+   "u": "draft/grab-launcher.html"
+  },
+  {
+   "slug": "key-path",
+   "t": "鍵盤路徑勘查",
+   "cat": "課堂工具",
+   "d": "GitHub 工具箱已有正式版",
+   "type": "html",
+   "claude": "https://claude.ai/artifact/BNWhVrXoJRCGqCiKXj3VJe",
+   "u": "draft/key-path.html"
+  },
+  {
+   "slug": "igp-handbook",
+   "t": "資優生 IGP 年度作業手冊",
+   "cat": "資優行政與科展",
+   "d": "",
+   "type": "Docs",
+   "claude": "https://claude.ai/artifact/Ba6CXYkmQE7UUJc6GCvQvM",
+   "u": "https://claude.ai/artifact/Ba6CXYkmQE7UUJc6GCvQvM"
+  },
+  {
+   "slug": "science-fair-checklist",
+   "t": "科展與獨研發表檢核表",
+   "cat": "資優行政與科展",
+   "d": "",
+   "type": "Docs",
+   "claude": "https://claude.ai/artifact/6JgUXPbhTzy3W2LZcbJSQD",
+   "u": "https://claude.ai/artifact/6JgUXPbhTzy3W2LZcbJSQD"
+  },
+  {
+   "slug": "science-fair-handbook",
+   "t": "數學科展指導手冊",
+   "cat": "資優行政與科展",
+   "d": "",
+   "type": "Docs",
+   "claude": "https://claude.ai/artifact/WxoQqGhwVYdQ7pr4kxVR7a",
+   "u": "https://claude.ai/artifact/WxoQqGhwVYdQ7pr4kxVR7a"
+  },
+  {
+   "slug": "class-management-share",
+   "t": "讓孩子越來越獨立：資優班班級經營分享",
+   "cat": "資優行政與科展",
+   "d": "",
+   "type": "Slides",
+   "claude": "https://claude.ai/artifact/DkAbvYS9mQsU638LtfzBzt",
+   "u": "https://claude.ai/artifact/DkAbvYS9mQsU638LtfzBzt"
+  }
+ ]
+}

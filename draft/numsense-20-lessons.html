@@ -1,0 +1,537 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>數感寫作二十節重排</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --ground:#F5F2E8;
+  --surface:#FDFBF5;
+  --sunk:#EDE8D9;
+  --ink:#23272C;
+  --muted:#6C727A;
+  --rule:#DCD5C2;
+  --rule-soft:#E7E1D1;
+  --indigo:#2E5A88;
+  --ochre:#C1652F;
+  --moss:#4A7C59;
+  --serif:"Noto Serif TC",Songti TC,"Source Han Serif TC",serif;
+  --sans:"Noto Sans TC","PingFang TC","Heiti TC",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#15181C;
+    --surface:#1D2127;
+    --sunk:#23282F;
+    --ink:#E9E5DA;
+    --muted:#9AA1AA;
+    --rule:#333940;
+    --rule-soft:#282D34;
+    --indigo:#84AEDC;
+    --ochre:#E39062;
+    --moss:#82B38F;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#15181C;
+  --surface:#1D2127;
+  --sunk:#23282F;
+  --ink:#E9E5DA;
+  --muted:#9AA1AA;
+  --rule:#333940;
+  --rule-soft:#282D34;
+  --indigo:#84AEDC;
+  --ochre:#E39062;
+  --moss:#82B38F;
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--ground);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.85;
+  margin:0;
+  padding-block:0 4rem;
+  padding-left:20px;
+  padding-right:20px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:47rem;margin:0 auto}
+.wide{max-width:56rem;margin:0 auto}
+
+/* ---- masthead ---- */
+header.top{
+  border-bottom:2px solid var(--ink);
+  padding-block:3.2rem 1.4rem;
+  margin-bottom:2.4rem;
+}
+.eyebrow{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin:0 0 .9rem;
+}
+h1{
+  font-family:var(--serif);
+  font-weight:700;
+  font-size:clamp(2rem,6vw,2.9rem);
+  line-height:1.25;
+  letter-spacing:.02em;
+  margin:0 0 .8rem;
+  text-wrap:balance;
+}
+.standfirst{
+  font-size:1.05rem;
+  color:var(--muted);
+  margin:0;
+  max-width:36rem;
+}
+.meta{
+  display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;
+  font-family:var(--mono);font-size:.75rem;color:var(--muted);
+  margin-top:1.4rem;
+}
+
+/* ---- sections ---- */
+section{margin-block:3.6rem}
+h2{
+  font-family:var(--serif);
+  font-weight:600;
+  font-size:1.5rem;
+  line-height:1.4;
+  margin:0 0 .4rem;
+  text-wrap:balance;
+}
+h2 .num{
+  font-family:var(--mono);
+  font-size:.78rem;
+  font-weight:600;
+  color:var(--ochre);
+  letter-spacing:.1em;
+  display:block;
+  margin-bottom:.45rem;
+}
+h3{
+  font-family:var(--serif);
+  font-weight:600;
+  font-size:1.13rem;
+  margin:2.2rem 0 .5rem;
+  text-wrap:balance;
+}
+p{margin:0 0 1.1rem}
+.lede{font-size:1.02rem;color:var(--muted);margin-bottom:1.8rem;max-width:36rem}
+a{color:var(--indigo);text-underline-offset:.22em}
+strong{font-weight:700}
+em{font-style:normal;background:linear-gradient(transparent 62%,color-mix(in srgb,var(--ochre) 28%,transparent) 62%);padding:0 .05em}
+code,.mono{font-family:var(--mono);font-size:.9em}
+
+/* ---- findings ---- */
+.findings{display:flex;flex-direction:column;gap:1.4rem;margin-top:1.8rem}
+.finding{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:0 1.1rem;
+  align-items:baseline;
+  border-top:1px solid var(--rule);
+  padding-top:1.1rem;
+}
+.finding .tag{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;
+  color:var(--ochre);white-space:nowrap;
+}
+.finding h3{margin:0 0 .35rem;font-size:1.16rem}
+.finding p{margin:0;color:var(--muted)}
+.finding .body{grid-column:2}
+@media (max-width:520px){
+  .finding{grid-template-columns:1fr}
+  .finding .body{grid-column:1}
+  .finding .tag{margin-bottom:.3rem}
+}
+
+/* ---- weights ---- */
+.weights{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  padding:1.6rem 1.5rem 1.3rem;
+  margin:1.8rem 0;
+}
+.weights h3{margin:0 0 1.2rem;font-size:1rem;font-family:var(--sans);font-weight:700}
+.wrow{
+  display:grid;
+  grid-template-columns:9.5rem 1fr 2.6rem;
+  align-items:center;
+  gap:.7rem;
+  margin-bottom:.55rem;
+  font-size:.88rem;
+}
+.wrow .bar{height:.62rem;background:var(--sunk);position:relative}
+.wrow .bar i{display:block;height:100%;background:var(--indigo)}
+.wrow.hot .bar i{background:var(--ochre)}
+.wrow.hot .lab{font-weight:700;color:var(--ochre)}
+.wrow .val{font-family:var(--mono);font-size:.82rem;text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+.wnote{font-size:.85rem;color:var(--muted);margin:1rem 0 0;padding-top:.9rem;border-top:1px solid var(--rule-soft)}
+@media (max-width:520px){
+  .wrow{grid-template-columns:1fr 2.6rem;grid-template-areas:"lab val" "bar bar";gap:.25rem .7rem}
+  .wrow .lab{grid-area:lab}.wrow .val{grid-area:val}.wrow .bar{grid-area:bar;margin-bottom:.45rem}
+}
+
+/* ---- spec list ---- */
+dl.spec{margin:1.6rem 0;display:grid;grid-template-columns:auto 1fr;gap:.55rem 1.2rem;font-size:.95rem}
+dl.spec dt{font-family:var(--mono);font-size:.78rem;color:var(--muted);letter-spacing:.04em;white-space:nowrap;padding-top:.4em}
+dl.spec dd{margin:0}
+@media (max-width:520px){
+  dl.spec{grid-template-columns:1fr;gap:.15rem}
+  dl.spec dd{margin-bottom:.8rem}
+}
+
+/* ---- tables ---- */
+.tscroll{overflow-x:auto;margin:1.6rem 0;border:1px solid var(--rule)}
+table{border-collapse:collapse;width:100%;font-size:.88rem;background:var(--surface);min-width:34rem}
+caption{
+  text-align:left;font-family:var(--mono);font-size:.73rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);padding:.9rem 1rem .6rem;background:var(--surface);
+  border-bottom:1px solid var(--rule-soft);
+}
+th,td{text-align:left;padding:.62rem .85rem;border-bottom:1px solid var(--rule-soft);vertical-align:top;line-height:1.62}
+thead th{
+  font-family:var(--mono);font-size:.73rem;font-weight:600;letter-spacing:.06em;
+  color:var(--muted);background:var(--sunk);border-bottom:1px solid var(--rule);white-space:nowrap;
+}
+tbody tr:last-child td{border-bottom:none}
+td.wk{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--muted);white-space:nowrap;font-size:.82rem}
+td.nm{font-weight:500}
+.verdict{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;white-space:nowrap}
+.v-keep{color:var(--moss)}
+.v-edit{color:var(--indigo)}
+.v-merge{color:var(--indigo)}
+.v-cut{color:var(--muted)}
+.v-new{color:var(--ochre);font-weight:600}
+tr.phase td{
+  background:var(--sunk);font-family:var(--mono);font-size:.73rem;letter-spacing:.12em;
+  color:var(--muted);padding-block:.45rem;
+}
+
+/* ---- angle pairs ---- */
+.angles{display:flex;flex-direction:column;gap:0;margin:1.8rem 0;border-top:1px solid var(--rule)}
+.angle{border-bottom:1px solid var(--rule-soft);padding:1.15rem 0}
+.angle .concept{font-family:var(--mono);font-size:.75rem;letter-spacing:.1em;color:var(--muted);margin-bottom:.55rem}
+.angle .pair{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}
+.angle .cliche{color:var(--muted);font-size:.92rem}
+.angle .good{font-size:.95rem}
+.angle .pair > div > span{
+  display:block;font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;
+  margin-bottom:.3rem;text-transform:uppercase;
+}
+.angle .cliche > span{color:var(--muted)}
+.angle .good > span{color:var(--moss)}
+@media (max-width:600px){.angle .pair{grid-template-columns:1fr;gap:.9rem}}
+
+/* ---- callout ---- */
+.call{
+  background:var(--surface);
+  border-left:3px solid var(--ochre);
+  padding:1.2rem 1.3rem;
+  margin:1.8rem 0;
+}
+.call p:last-child{margin-bottom:0}
+.call .k{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;color:var(--ochre);display:block;margin-bottom:.5rem}
+
+/* ---- plain lists ---- */
+ul.plain{margin:1.1rem 0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:.7rem}
+ul.plain li{padding-left:1.2rem;position:relative}
+ul.plain li::before{content:"";position:absolute;left:0;top:.75em;width:.42rem;height:1px;background:var(--ochre)}
+ol.steps{margin:1.1rem 0;padding-left:1.3rem;display:flex;flex-direction:column;gap:.7rem}
+ol.steps li::marker{font-family:var(--mono);font-size:.85rem;color:var(--ochre)}
+
+/* ---- footer ---- */
+footer{border-top:1px solid var(--rule);margin-top:4rem;padding-top:1.4rem;font-size:.85rem;color:var(--muted)}
+footer h3{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;margin:0 0 .7rem;font-weight:600}
+footer ul{margin:0;padding-left:1.1rem;display:flex;flex-direction:column;gap:.35rem}
+
+@media print{
+  body{background:#fff;color:#000;font-size:11pt}
+  section{break-inside:auto}
+  h2{break-after:avoid}
+  .tscroll{overflow:visible}
+}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <p class="eyebrow">金城國中　數理資優　七年級</p>
+  <h1>數感寫作二十節重排</h1>
+  <p class="standfirst">現有的十三份學習單和課程計畫，都是為「報導＋小說＋詩」三種文類設計的。目標換成數感盃之後，課程的形狀要跟著換。</p>
+  <div class="meta">
+    <span>檢視：學習單 1–13、評量規準表、113 學年度課程計畫</span>
+    <span>2026.09.14</span>
+  </div>
+</header>
+
+<section>
+  <h2><span class="num">結論</span>三件事要動</h2>
+  <div class="findings">
+
+    <div class="finding">
+      <span class="tag">一</span>
+      <div class="body">
+        <h3>三成的分數在「歷程」——這件事簡報已經講了，但沒有練</h3>
+        <p>簡章裡「指令精確完整」10% ＋「修改互動歷程」20% 合計 30%，比「詩作文學性」15% 高一倍。課堂簡報 p.48–53 講得很準（「誰在主導」「把 AI 拿走還是不是你的」，還把三種合法用法直接對應到評分項目），<em>缺的是把它變成動作</em>：沒有一份學習單讓學生實際跑一輪，再回頭看自己的對話長什麼樣。</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <span class="tag">二</span>
+      <div class="body">
+        <h3>順序要整個翻轉：詩排到最前面</h3>
+        <p>課程計畫把詩放在第 17–21 週，學習單本身則是詩（1–7）→ 小說（8–11）→ 策展（12–13）。兩份文件彼此就矛盾，而且都趕不上一月截止。詩要在第 11 節前練完，第 12 節起才進得了投稿。</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <span class="tag">三</span>
+      <div class="body">
+        <h3>二十節放不下三種文類，小說要整組移出去</h3>
+        <p>學習單 8–11 那組（《平面國》、小組發想、評量單）本身做得不錯，但比賽只收詩。留《平面國》一節當閱讀材料，其餘移到八年級或社團，不要硬塞。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">規格</span>會決定課程形狀的硬條件</h2>
+  <p class="lede">以下是 2026 那屆（2025 秋季開跑）的規格。2027 屆的簡章目前還沒公布，去年是十一月開說明會，所以前八節先不要綁死規格；但歷程訓練不管規格怎麼改都不會白做。</p>
+
+  <div class="weights">
+    <h3>評分權重</h3>
+    <div class="wrow"><span class="lab">獨到觀點角度</span><span class="bar"><i style="width:100%"></i></span><span class="val">20%</span></div>
+    <div class="wrow hot"><span class="lab">修改互動歷程</span><span class="bar"><i style="width:100%"></i></span><span class="val">20%</span></div>
+    <div class="wrow"><span class="lab">詩作文學性</span><span class="bar"><i style="width:75%"></i></span><span class="val">15%</span></div>
+    <div class="wrow"><span class="lab">數學應用比重</span><span class="bar"><i style="width:75%"></i></span><span class="val">15%</span></div>
+    <div class="wrow"><span class="lab">創意</span><span class="bar"><i style="width:75%"></i></span><span class="val">15%</span></div>
+    <div class="wrow hot"><span class="lab">指令精確完整</span><span class="bar"><i style="width:50%"></i></span><span class="val">10%</span></div>
+    <div class="wrow"><span class="lab">作品完成度／圖像藝術性</span><span class="bar"><i style="width:25%"></i></span><span class="val">5%</span></div>
+    <p class="wnote">橘色那兩條是 AI 對話歷程，合計 30%。圖只有 5%——課堂上別讓學生把時間花在生圖。</p>
+  </div>
+
+  <dl class="spec">
+    <dt>組別</dt><dd>國七組，正好是你的學生。每組金 1、銀 2、銅 3、佳作 4，共十個得獎名額。</dd>
+    <dt>創作平台</dt><dd>必須在官方創作專區的「數感詩人 NumNum」上做，歷程由後台自動記錄。<strong>這是最容易踩的坑</strong>——在自己的 ChatGPT 上寫完再貼過去，等於歷程是空的。</dd>
+    <dt>詩作</dt><dd>不限體裁，<strong>行數上限 25 行</strong>，字數不限。A4、12 級、橫式、全形標點。</dd>
+    <dt>圖像</dt><dd>先完成原創詩作，再以詩為基礎共創圖像，一併繳交。<strong>圖像生成至多 20 次</strong>。</dd>
+    <dt>人工修改</dt><dd>AI 生不出正確內容時可適度人工修改，但「人工調整程度會影響評價」。</dd>
+    <dt>件數</dt><dd>每人限投一件。每件需一位年滿 18 歲指導者，負責確認原創與未違規。</dd>
+    <dt>時程（上屆）</dt><dd>11/22 線上說明會 → 1/23 截止 → 2/6 公告入圍 → 2/24 繳交 90 秒創作說明影片 → 3/9 公告得獎 → 3/14 頒獎。</dd>
+  </dl>
+</section>
+
+<section>
+  <h2><span class="num">最該補的第一件事</span>獨到觀點 20%，而你手上已經有礦</h2>
+
+  <p>「獨到觀點角度」是單項最高分，而現有學習單的引導全部停在<em>把數學擬人化、加上情緒</em>——學習單 1、2、4、5 的範例（無限像永遠長不大的孩子、平行線是永恆的寂寞、圓周率讓人神祕迷惘）正好就是全國最容易撞題的那一區。不是寫得不好，是太多人這樣寫。</p>
+
+  <div class="call">
+    <span class="k">建議</span>
+    <p>把你數學講義那條主線搬過來：<strong>規則不是規定的，是被某條律不准壞掉逼出來的。</strong>「出事的地方就是所有規定的來源」——這正好是數感詩最好的礦脈，而且七年級上學期學生手上就有料（負數、因數倍數、一元一次方程式）。</p>
+    <p>這樣做同時吃下兩個項目：角度是從數學內部長出來的（獨到觀點 20%），而且數學是骨架不是裝飾（數學應用 15%）。別校學生寫 π 的神祕，你的學生寫「1 為什麼被開除」。</p>
+  </div>
+
+  <div class="angles">
+    <div class="angle">
+      <p class="concept">圓周率</p>
+      <div class="pair">
+        <div class="cliche"><span>撞題區</span>無限不循環、追不到的愛、永遠到不了的終點</div>
+        <div class="good"><span>從數學內部進去</span>它不是算不完。是我們堅持用一把直的尺，去量一件彎的事，所以永遠差那麼一點。</div>
+      </div>
+    </div>
+    <div class="angle">
+      <p class="concept">質數</p>
+      <div class="pair">
+        <div class="cliche"><span>撞題區</span>孤獨、獨來獨往、只相信自己</div>
+        <div class="good"><span>從數學內部進去</span>1 不是質數。它被開除不是因為不夠格，是因為留著它，「分解方式只有一種」這句話就不成立。</div>
+      </div>
+    </div>
+    <div class="angle">
+      <p class="concept">負數</p>
+      <div class="pair">
+        <div class="cliche"><span>撞題區</span>負面、低潮、人生的谷底</div>
+        <div class="good"><span>從數學內部進去</span>負負得正不是誰規定的。是分配律不准壞掉，把它逼成這樣——它其實沒有選擇。</div>
+      </div>
+    </div>
+    <div class="angle">
+      <p class="concept">無限</p>
+      <div class="pair">
+        <div class="cliche"><span>撞題區</span>沒有盡頭、永恆、宇宙</div>
+        <div class="good"><span>從數學內部進去</span>0.999… 不是很接近 1。是為了讓它等於 1，「等於」這兩個字必須重寫一次定義。</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>課堂上可以直接用的三個問句</h3>
+  <ol class="steps">
+    <li>這個數學裡，有什麼是<strong>只有算過的人才知道</strong>的？（不是外行也講得出來的印象）</li>
+    <li>這個數學有沒有一個<strong>出事的地方</strong>？不能除以 0、根號只取正根、輾轉相除切不完的那一段——出事的地方最好寫。</li>
+    <li>把你的角度講出來，<strong>會不會有人想反駁</strong>？有人會反駁表示那是觀點；沒人會反駁，那是陳腔。</li>
+  </ol>
+</section>
+
+<section>
+  <h2><span class="num">最該補的第二件事</span>對話歷程 30%，而這是你學生的主場</h2>
+
+  <p>要先讓學生理解一件反直覺的事：<strong>對話歷程不是製作過程的證據，它本身就是作品的一部分。</strong>一次下指令就收工的人，那 30% 是空的。</p>
+
+  <h3>把「跟 AI 講話」拆成三個動作</h3>
+  <ul class="plain">
+    <li><strong>給材料</strong>——不是「幫我寫一首關於質數的詩」，而是把角度、限制、不要的東西一起交出去：「我的角度是 1 被開除。我不要孤獨、不要神祕。」</li>
+    <li><strong>要變化</strong>——「同一個意思給我三個版本，差別在斷行的位置。」有比較才有選擇，有選擇才有歷程。</li>
+    <li><strong>拒絕並說出理由</strong>——句型固定下來：「這句我不要，因為 ______；我要的是 ______。」每一次有理由的拒絕，都在累積那 20%。</li>
+  </ul>
+
+  <div class="call">
+    <span class="k">你的學生比別人多一手</span>
+    <p>NumNum 很常把數學講錯或講淺。<strong>抓到錯誤、指出來、說明為什麼錯、要求改正</strong>——這一段歷程同時吃下「修改互動歷程 20%」和「數學應用 15%」，而且是只有數理資優生寫得出來的段落。FAQ 裡明說審查會看「詩沒曲解數學公式或定理」，所以這不只是加分，也是避險。</p>
+    <p>可以直接設計成一節課：故意讓 AI 寫一首數學有問題的詩，全班一起抓，練習把「哪裡錯、為什麼錯、應該怎麼說」寫成一段指令。</p>
+  </div>
+
+  <h3>順便提醒學生的兩件事</h3>
+  <ul class="plain">
+    <li>人工修改越少越好，不是叫你少改，是<strong>你的意志要出現在指令裡，而不是出現在事後偷偷改</strong>。想改什麼，回去跟它說。</li>
+    <li>圖像只有 5%，額度只有 20 次。詩定稿之前不要生圖。</li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="num">校準</span>去年那件入圍作品，拆給學生看</h2>
+  <p class="lede">《1.618 － 黃金比例時光印記》進了決審、沒有得獎。它剛好把「入圍」和「得獎」之間的距離標得很清楚，所以四堂新課都拿它當靶。</p>
+
+  <h3>他做得好的地方，不是客套</h3>
+  <ul class="plain">
+    <li><strong>所有具體意象都是他給的</strong>——蝸牛的家、卡其色到咖啡、像海浪的旋渦、鎖住時光的時光膠囊。NumNum 只負責問。</li>
+    <li><strong>他在管結構</strong>：「結束這一段，下一段的主題可以是哪一種生物」「下一段我想用建築物」——動物→植物→建築→抽象收束。</li>
+    <li><strong>他拒絕過 AI 的過度修飾。</strong>NumNum 把句子改成「其色淺褐漸染，終成咖啡之澤」，他回「改成：卡其色到咖啡的過程」。</li>
+    <li><strong>他糾正過 NumNum。</strong>算行數時 AI 把 1.618 算成字，他說「數字不是字」。</li>
+    <li><strong>圖像指令很專業</strong>：「透明度 90–50 就好，向日葵跟蝸牛不要這麼搶戲，主角是黃金比例」，最後「不要再生成了，我要第五張」。</li>
+  </ul>
+
+  <h3>卡住的四件事，正好對上四堂新課</h3>
+  <div class="tscroll">
+  <table>
+    <caption>失分點與對應的課</caption>
+    <thead><tr><th>卡在哪裡</th><th>發生了什麼</th><th>哪一節處理</th></tr></thead>
+    <tbody>
+      <tr><td class="nm">最好的想法太晚，還被磨掉</td><td>他自己說出「就是利用他無限放大或縮小都長得一樣」——那是自我相似，黃金比例身上唯一不能靠印象講出來的性質。但它在第八十幾輪才出現，NumNum 立刻壓成「不變的形狀，隱藏著和諧的常數」。</td><td class="verdict v-new">第 4 節</td></tr>
+      <tr><td class="nm">三個例子有兩個是數學迷思</td><td>向日葵種子的費氏螺旋是真的；蝸牛殼是對數螺線、成長率不是 φ；帕德嫩神廟的說法出自十九世紀，沒有古希臘證據。而這兩個都是 NumNum 第一輪餵給他的清單。</td><td class="verdict v-new">第 10 節</td></tr>
+      <tr><td class="nm">「整理一下」把作者身分交出去</td><td>說了十幾次。全詩最弱的四行——四段各自的抽象結尾——全部是 AI 補的黏合句。修改也多半停在刪逗號、刪「它」這種字詞層級。</td><td class="verdict v-new">第 9 節</td></tr>
+      <tr><td class="nm">四段長得一模一樣</td><td>都是四行、都以抽象總結收尾、「時間／時光」每段都出現。25 行的額度只用了 17 行，其實還有空間讓某一段長得不一樣。</td><td class="verdict v-new">第 7、8 節</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="call">
+    <span class="k">一句話</span>
+    <p><strong>這件作品是學生出材料、AI 出句子；得獎那一格要的是學生出角度、AI 出版本。</strong></p>
+  </div>
+</section>
+
+<section class="wide">
+  <h2><span class="num">重排</span>二十節課程表</h2>
+  <p class="lede" style="max-width:36rem">第 1–11 節養成，第 12 節起進投稿——和你原本抓的節奏一致。第 17 節之後保留策展，是為了讓沒入圍的人也有終點，不是只有入圍的人才有事做。</p>
+
+  <div class="tscroll">
+  <table>
+    <caption>建議週次</caption>
+    <thead><tr><th>節</th><th>單元</th><th>用哪份</th><th>要改什麼</th></tr></thead>
+    <tbody>
+      <tr><td class="wk">1</td><td class="nm">數學和文學在同一件事上</td><td class="verdict v-keep">已做好</td><td>蛋糕、色票、掃把婦人的作答面，加二十節地圖。規格與權重抽成夾頁，簡章更新時只換那一張。</td></tr>
+      <tr><td class="wk">2</td><td class="nm">數學燈謎</td><td class="verdict v-keep">已做好</td><td>學習單 3 加上<strong>完整解析</strong>——用「餘數」從拆解、第一版、測試到第二版走一輪，附逐句分析。不依賴其他節。</td></tr>
+      <tr><td class="wk">3</td><td class="nm">兩種句子</td><td class="verdict v-keep">已做好</td><td>學習單 1 改。例句全換，新增<strong>還原測試</strong>（把詩還原回數學事實）。</td></tr>
+      <tr><td class="wk">4</td><td class="nm">平面國</td><td class="verdict v-keep">已做好</td><td>學習單 8 壓成一節。主線改成「<strong>角度不是想像力，是處境</strong>」，收在「它看不見什麼」那張表。</td></tr>
+      <tr><td class="wk">5</td><td class="nm">挑一個撐得住的概念</td><td class="verdict v-keep">已做好</td><td>換名詞測試、三個問句、出事的地方六格、四個關卡。這一節決定學生接下來兩個月寫什麼。</td></tr>
+      <tr><td class="wk">6</td><td class="nm">從概念長出詞庫</td><td class="verdict v-keep">已做好</td><td>學習單 2＋4 合併。三欄拆解改成名字／動作／<strong>處境</strong>，加溫沿用原版逐詞兩段表。</td></tr>
+      <tr><td class="wk">7</td><td class="nm">把詩排出來</td><td class="verdict v-keep">已做好</td><td>學習單 5 改。<strong>範例詩全部拿掉</strong>，起承轉合擴成四種結構，加斷行練習與 25 行分配。</td></tr>
+      <tr><td class="wk">8</td><td class="nm">撞題區</td><td class="verdict v-keep">已做好</td><td>三型辨識、拿去年作品逐段標型、一句話改造。</td></tr>
+      <tr><td class="wk">9</td><td class="nm">和 AI 來回</td><td class="verdict v-keep">已做好</td><td>三個動作、拒絕句型、十二句真實對話逐句標「主／交」。</td></tr>
+      <tr><td class="wk">10</td><td class="nm">查核你詩裡的數學</td><td class="verdict v-keep">已做好</td><td>八個真假題、三種錯法、查核三步、帕德嫩改寫示範。</td></tr>
+      <tr><td class="wk">11</td><td class="nm">自評與互評</td><td class="verdict v-keep">已做好</td><td><strong>《評量規準總表》</strong>：七項三級分、三個最容易誤會的地方、用這張表打一次去年那件作品。</td></tr>
+      <tr class="phase"><td colspan="4">以下進入投稿</td></tr>
+      <tr><td class="wk">12</td><td class="nm">平台實作：開第一版</td><td class="verdict v-new">新增</td><td>註冊、確認規格、在 NumNum 上開第一版。<strong>前一週先測過學校網路和設備。</strong></td></tr>
+      <tr><td class="wk">13</td><td class="nm">定稿：數到 25 行</td><td class="verdict v-new">新增</td><td>課堂上每人可能寫了好幾首，這節挑一首。行數當場數。</td></tr>
+      <tr><td class="wk">14</td><td class="nm">從詩到圖</td><td class="verdict v-edit">學習單 7</td><td>四部分縮成兩部分。刪掉「畫出即所得」的手繪草稿段——只有 5%，不值得一節。強調 20 次上限。</td></tr>
+      <tr><td class="wk">15</td><td class="nm">回頭看自己的對話</td><td class="verdict v-new">新增</td><td>把歷程當作品重看一次：哪裡是「再修一下」？補一次有理由的來回。</td></tr>
+      <tr><td class="wk">16</td><td class="nm">繳件</td><td class="verdict v-new">新增</td><td>留成緩衝節。若校曆讓這節落在 1 月中，剛好卡在截止前。</td></tr>
+      <tr><td class="wk">17</td><td class="nm">90 秒創作說明影片</td><td class="verdict v-new">新增</td><td>入圍後只有 2 週能交，先寫腳本。全班都做——講得出自己的角度，本身就是這門課的成果。</td></tr>
+      <tr><td class="wk">18</td><td class="nm">策展一：選件與作品說明</td><td class="verdict v-keep">學習單 12</td><td>原樣留著。三種呈現方式的選項設計得很好。</td></tr>
+      <tr><td class="wk">19</td><td class="nm">策展二：展出與回饋信</td><td class="verdict v-keep">學習單 13</td><td>原樣留著。「給創作者的一封信」是很好的收尾。</td></tr>
+      <tr><td class="wk">20</td><td class="nm">檢討</td><td class="verdict v-edit">—</td><td>對照第 4 節挑的概念，看角度長成了什麼。</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>移出去的部分</h3>
+  <p>學習單 9（數感小說：從發想到驚奇）、10（小組創作發想）、11（寫作評量單）不必改，整組收起來，留給八年級或社團。課程計畫裡的「數感專題報導」那七週（原第 4–9 週）同樣移出。<strong>檔案不用刪</strong>——三種文類的教材放著，哪年比賽改回文章類就直接拿出來用。</p>
+</section>
+
+<section class="wide">
+  <h2><span class="num">評量</span>規準表對齊簡章</h2>
+  <p class="lede" style="max-width:36rem">現在有三套規準並存：簡報 p.35 的三向度四級分、Pages 那份的四面向三級分，和簡章的七項。收斂成下面這一版，學生自評時就是在練評審的眼睛。</p>
+
+  <div class="tscroll">
+  <table>
+    <caption>數感詩評量規準</caption>
+    <thead><tr><th>面向</th><th>3 分（優）</th><th>2 分（佳）</th><th>1 分（待加強）</th></tr></thead>
+    <tbody>
+      <tr><td class="nm">獨到觀點　20%</td><td>角度是從這個數學內部長出來的，別人沒這樣看過</td><td>有自己的想法，但仍是常見說法的變形</td><td>重複「神祕／孤獨／無限」這類通用印象</td></tr>
+      <tr><td class="nm">修改互動歷程　20%</td><td>每次都說出不要什麼、為什麼，下一版真的轉了方向</td><td>有來回，但多半只說「再修一下」</td><td>一次生成就收，或只換詞不換方向</td></tr>
+      <tr><td class="nm">詩作文學性　15%</td><td>意象前後一致，斷行與節奏有意圖</td><td>句子通順，但比喻各自為政</td><td>散文分行</td></tr>
+      <tr><td class="nm">數學應用　15%</td><td>數學是骨架，抽掉詩就垮；敘述正確</td><td>數學是裝飾，抽掉詩還在</td><td>只出現名詞，或把定理講錯</td></tr>
+      <tr><td class="nm">創意　15%</td><td>形式或角度有超出預期的一步</td><td>有巧思</td><td>照著範例填</td></tr>
+      <tr><td class="nm">指令精確完整　10%</td><td>指令帶著材料與限制</td><td>指令清楚但籠統</td><td>「幫我寫一首關於 X 的詩」</td></tr>
+      <tr><td class="nm">圖像　5%</td><td>圖延伸了詩沒說完的部分</td><td>圖是詩的插圖</td><td>圖與詩無關</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">文件</span>課程計畫要改的地方</h2>
+  <p>113 學年度那份的下半表（數感寫作）除了週次表要整個換掉，還有幾處值得順手補：</p>
+  <ul class="plain">
+    <li><strong>核心素養補特創-J-B2</strong>——「具備善用科技、資訊與媒體以增進創造力學習的素養，思辨創造思考歷程中，個體與科技、資訊、媒體的互動關係」。AI 共創正是這一條，而且審查委員看到就懂。現在只有 B3、數-J-A1、國-J-B1。</li>
+    <li><strong>學習表現補特創 3e-Ⅳ-2</strong>（修改創意計畫，使其符合實際需求）與 <strong>4a-Ⅳ-2</strong>（接受他人建設性的改進意見）——對應的就是「修改互動歷程」。</li>
+    <li><strong>學習內容</strong>的特創 B-IV-10「資訊真偽的判斷原則」留著，剛好對上「抓 AI 的數學錯誤」那一節。</li>
+    <li><strong>教學評量</strong>現在四項都是作品導向，加一條「歷程評量：與 AI 互動過程的指令品質與修改軌跡」。</li>
+    <li><strong>教學資源</strong>只寫了「Ipad、數感實驗室研習講義」，補上官方創作平台。</li>
+    <li>原第 15 週「Chat gpt 認識」定位是「協助優化自己的作品」——這個定位要換掉。在 AI 共創的評分邏輯裡，歷程本身就是作品，不是作品的修飾工具。</li>
+    <li>議題融入已勾資訊教育＋閱讀素養，對的；教學對象寫 7 年級，也對。</li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="num">最後</span>幾個容易掉進去的坑</h2>
+  <ul class="plain">
+    <li><strong>不在官方平台上做，歷程就是空的。</strong>課堂練習用什麼工具都行，正式作品一定要在 NumNum 上從第一句開始。這一條如果只講一次，一定有人漏掉。</li>
+    <li><strong>每人限投一件。</strong>課堂上鼓勵每個人寫好幾首，第 13 節再挑——但要先講清楚只能投一件，免得有人做了兩份完整的圖文。</li>
+    <li><strong>圖像 20 次額度</strong>會被前期亂試用掉。第 14 節之前不要開圖。</li>
+    <li><strong>2027 簡章還沒出來。</strong>去年十一月才開說明會，所以前八節不要把規格寫死在學習單上；規格那頁做成單張夾頁，簡章一出來換掉就好。</li>
+    <li><strong>設備與網路先測。</strong>第 12 節全班同時上平台，金門這邊值得提前一週在同一間教室試一次。</li>
+    <li><strong>指導者責任。</strong>你要簽的是「作品為學生原創且未違規」，所以「AI 共創 ≠ 代寫」這句話要在第 1 節就講，不要等到第 12 節。</li>
+  </ul>
+</section>
+
+<footer>
+  <h3>規格來源</h3>
+  <ul>
+    <li><a href="https://ai-award.numeracylab.com/">數感盃：AI 共創新詩圖文競賽（官方網站）</a></li>
+    <li><a href="https://ai-award.numeracylab.com/faq/">數感盃 AI 共創新詩圖文競賽 — 常見問題</a></li>
+    <li><a href="https://www.ntsec.gov.tw/article/detail.aspx?a=5897">國立臺灣科學教育館：2026 數感盃 AI 共創新詩圖文競賽</a></li>
+  </ul>
+  <p style="margin-top:1.2rem">以上為 2026 屆規格，2027 屆簡章公布後需重新核對。</p>
+</footer>
+</div>
+
+</body></html>

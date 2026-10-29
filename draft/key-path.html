@@ -1,0 +1,345 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}</style></head><body>
+<title>鍵盤路徑勘查</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@400;600;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<style>
+:root{
+  --bg:#EDF1F0;--panel:#FFFFFF;--panel-2:#F5F8F7;--line:#D2DCDA;--line-soft:#E3EAE9;
+  --ink:#0E1A1C;--ink-2:#3D4F52;--ink-3:#6D8083;
+  --accent:#0C8B85;--accent-soft:#D6EFED;--amber:#B07708;--red:#CE3628;
+  --code-bg:#0E1416;--code-ink:#E8F2F1;
+  --shadow:0 1px 2px rgba(14,26,28,.06),0 8px 24px -12px rgba(14,26,28,.18);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0B1113;--panel:#141C1E;--panel-2:#101719;--line:#263335;--line-soft:#1D282A;
+  --ink:#E4EDEC;--ink-2:#A9BCBB;--ink-3:#7A8E8E;
+  --accent:#3FD0C9;--accent-soft:#12302F;--amber:#F2B23E;--red:#FF6152;
+  --code-bg:#080D0E;--code-ink:#E8F2F1;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 32px -16px rgba(0,0,0,.8);
+}}
+:root[data-theme="dark"]{
+  --bg:#0B1113;--panel:#141C1E;--panel-2:#101719;--line:#263335;--line-soft:#1D282A;
+  --ink:#E4EDEC;--ink-2:#A9BCBB;--ink-3:#7A8E8E;
+  --accent:#3FD0C9;--accent-soft:#12302F;--amber:#F2B23E;--red:#FF6152;
+  --code-bg:#080D0E;--code-ink:#E8F2F1;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 32px -16px rgba(0,0,0,.8);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;
+  font-family:"IBM Plex Sans","Noto Sans TC",system-ui,-apple-system,sans-serif}
+.wrap{max-width:760px;margin:0 auto;padding:30px 20px 72px}
+h1{font-family:"Chivo Mono","IBM Plex Sans",monospace;font-weight:800;font-size:clamp(21px,3.4vw,28px);
+  letter-spacing:-.02em;margin:0 0 6px;text-wrap:balance}
+.lede{color:var(--ink-3);font-size:14px;margin:0 0 26px;max-width:60ch}
+.mod{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px;
+  box-shadow:var(--shadow);margin-bottom:16px}
+.eyebrow{font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);
+  margin:0 0 12px;display:flex;align-items:center;gap:8px}
+.eyebrow .dot{width:5px;height:5px;border-radius:50%;background:var(--accent);flex:none}
+p{margin:0 0 10px}p:last-child{margin-bottom:0}
+strong{font-weight:600}
+code,.mono{font-family:"Chivo Mono",monospace;font-size:.92em}
+code{background:var(--panel-2);border:1px solid var(--line-soft);border-radius:4px;padding:1px 5px}
+kbd{font-family:"Chivo Mono",monospace;font-size:.86em;background:var(--panel-2);border:1px solid var(--line);
+  border-bottom-width:2px;border-radius:5px;padding:2px 6px;white-space:nowrap}
+.drag{display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  background:var(--accent-soft);border:1px dashed var(--accent);border-radius:9px;padding:16px}
+a.bm{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:700;font-size:15px;
+  padding:10px 20px;border-radius:7px;cursor:grab;box-shadow:0 2px 8px rgba(12,139,133,.3)}
+a.bm:active{cursor:grabbing}
+:root[data-theme="dark"] a.bm{color:#04201F}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) a.bm{color:#04201F}}
+.drag .t{flex:1 1 220px;font-size:13px;color:var(--ink-2)}
+ol.steps{counter-reset:s;list-style:none;margin:0;padding:0}
+ol.steps>li{position:relative;padding:0 0 16px 36px;border-left:1px solid var(--line-soft);margin-left:9px}
+ol.steps>li:last-child{border-left-color:transparent;padding-bottom:0}
+ol.steps>li::before{counter-increment:s;content:counter(s);position:absolute;left:-10px;top:0;
+  width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;
+  font:700 11px/20px "Chivo Mono",monospace;text-align:center}
+:root[data-theme="dark"] ol.steps>li::before{color:#04201F}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) ol.steps>li::before{color:#04201F}}
+ol.steps b{display:block;font-weight:600;margin-bottom:2px}
+ol.steps .d{font-size:13.5px;color:var(--ink-2)}
+.callout{border-left:3px solid var(--amber);background:var(--panel-2);border-radius:0 7px 7px 0;
+  padding:11px 14px;font-size:13.5px;color:var(--ink-2);margin:12px 0 0}
+.callout b{color:var(--ink)}
+ul.plain{margin:0;padding:0;list-style:none}
+ul.plain li{padding:9px 0;border-bottom:1px solid var(--line-soft);font-size:13.5px;color:var(--ink-2)}
+ul.plain li:last-child{border-bottom:0}
+ul.plain b{color:var(--ink);font-weight:600}
+details{margin-top:14px}
+summary{cursor:pointer;font-size:13px;color:var(--accent);font-weight:500}
+summary:focus-visible,a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+pre{background:var(--code-bg);color:var(--code-ink);border-radius:8px;padding:14px;overflow-x:auto;
+  font-family:"Chivo Mono",monospace;font-size:11px;line-height:1.5;max-height:340px;margin:10px 0 0}
+button.copy{background:var(--panel-2);border:1px solid var(--line);color:var(--ink);border-radius:6px;
+  padding:6px 12px;font:inherit;font-size:12.5px;cursor:pointer;margin-top:10px}
+button.copy:hover{border-color:var(--accent);color:var(--accent)}
+footer{margin-top:28px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-3)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<div class="wrap">
+<h1>鍵盤路徑勘查</h1>
+<p class="lede">在真正的登記頁上按一下，它會把整頁的 Tab 順序標出來，告訴你「Tab 幾次會到登記鍵」。它不點任何東西，只告訴你路怎麼走。</p>
+
+<div class="mod">
+  <p class="eyebrow"><span class="dot"></span>安裝</p>
+  <div class="drag">
+    <a class="bm" href="javascript:(function()%7B%0Aif(window.__kbScout)%7B%20window.__kbScout.toggle()%3B%20return%3B%20%7D%0Avar%20SEL%3D'a%5Bhref%5D%2Carea%5Bhref%5D%2Cbutton%2Cinput%2Cselect%2Ctextarea%2Csummary%2C%5Bcontenteditable%5D%3Anot(%5Bcontenteditable%3D%22false%22%5D)%2C%5Btabindex%5D'%3B%0Avar%20HOT%3D%2F%E7%99%BB%E8%A8%98%7C%E5%A0%B1%E5%90%8D%7C%E7%AB%8B%E5%8D%B3%7C%E9%A6%AC%E4%B8%8A%7C%E6%88%91%E8%A6%81%7C%E9%80%81%E5%87%BA%7C%E9%81%9E%E4%BA%A4%7C%E7%A2%BA%E8%AA%8D%7C%E7%A2%BA%E5%AE%9A%7C%E5%90%8C%E6%84%8F%7C%E7%B5%90%E5%B8%B3%7C%E8%B3%BC%E8%B2%B7%7C%E4%B8%8B%E5%96%AE%7C%E5%8A%A0%E5%85%A5%E8%B3%BC%E7%89%A9%E8%BB%8A%7C%E9%A0%98%E5%8F%96%7C%E7%B4%A2%E5%8F%96%7C%E5%8F%83%E5%8A%A0%7C%E7%94%B3%E8%AB%8B%7Csubmit%7Capply%7Cjoin%7Cregister%2Fi%3B%0Afunction%20vis(el)%7B%0Aif(el.disabled)%20return%20false%3B%0Aif(el.getAttribute('aria-hidden')%3D%3D%3D'true')%20return%20false%3B%0Aif(el.type%3D%3D%3D'hidden')%20return%20false%3B%0Avar%20r%3Del.getBoundingClientRect()%3B%0Aif(r.width%3D%3D%3D0%26%26r.height%3D%3D%3D0)%20return%20false%3B%0Avar%20cs%3DgetComputedStyle(el)%3B%0Aif(cs.visibility%3D%3D%3D'hidden'%7C%7Ccs.display%3D%3D%3D'none'%7C%7Ccs.opacity%3D%3D%3D'0')%20return%20false%3B%0Areturn%20true%3B%0A%7D%0Afunction%20tabbable(el)%7B%0Avar%20ti%3Del.getAttribute('tabindex')%3B%0Aif(ti!%3D%3Dnull%26%26parseInt(ti%2C10)%3C0)%20return%20false%3B%0Areturn%20vis(el)%3B%0A%7D%0Afunction%20label(el)%7B%0Avar%20t%3D(el.getAttribute('aria-label')%7C%7C'').trim()%3B%0Avar%20tag%3Del.tagName.toLowerCase()%3B%0Avar%20formish%20%3D%20tag%3D%3D%3D'select'%7C%7Ctag%3D%3D%3D'textarea'%7C%7C(tag%3D%3D%3D'input'%26%26!%2Fsubmit%7Cbutton%7Cimage%2F.test(el.type%7C%7C''))%3B%0Aif(!t%26%26formish)%7B%0Avar%20lb%3Dnull%3B%0Atry%7B%20lb%20%3D%20el.id%3Fdocument.querySelector('label%5Bfor%3D%22'%2BCSS.escape(el.id)%2B'%22%5D')%3Anull%3B%20%7Dcatch(e)%7B%7D%0Aif(!lb%26%26el.closest)%20lb%3Del.closest('label')%3B%0Aif(lb)%20t%3D(lb.innerText%7C%7C'').replace(%2F%5Cs%2B%2Fg%2C'%20').trim()%3B%0Aif(!t%26%26tag%3D%3D%3D'select'%26%26el.selectedOptions%26%26el.selectedOptions%5B0%5D)%20t%3D'%E9%81%B8%E5%96%AE%EF%BC%9A'%2Bel.selectedOptions%5B0%5D.text.trim()%3B%0A%7D%0Aif(!t%26%26!formish)%20t%3D(el.innerText%7C%7C'').replace(%2F%5Cs%2B%2Fg%2C'%20').trim()%3B%0Aif(!t)%20t%3D(el.value%7C%7C'').trim()%3B%0Aif(!t)%20t%3D(el.getAttribute('title')%7C%7Cel.getAttribute('alt')%7C%7Cel.getAttribute('placeholder')%7C%7C'').trim()%3B%0Aif(!t)%20t%3D'%3C'%2Bel.tagName.toLowerCase()%2B'%3E'%3B%0Areturn%20t.length%3E28%3Ft.slice(0%2C28)%2B'%E2%80%A6'%3At%3B%0A%7D%0Afunction%20scan()%7B%0Avar%20all%3D%5B%5D.slice.call(document.querySelectorAll(SEL)).filter(tabbable)%3B%0Avar%20pos%3D%5B%5D%2Cnat%3D%5B%5D%3B%0Aall.forEach(function(el)%7B%0Avar%20ti%3DparseInt(el.getAttribute('tabindex')%7C%7C'0'%2C10)%3B%0A(ti%3E0%3Fpos%3Anat).push(%7Bel%3Ael%2Cti%3Ati%7D)%3B%0A%7D)%3B%0Apos.sort(function(a%2Cb)%7Breturn%20a.ti-b.ti%3B%7D)%3B%0Areturn%20pos.concat(nat).map(function(o%2Ci)%7B%0Areturn%20%7Bel%3Ao.el%2Cn%3Ai%2B1%2Cname%3Alabel(o.el)%2Chot%3AHOT.test(label(o.el))%7C%7CHOT.test(o.el.className%7C%7C'')%7D%3B%0A%7D)%3B%0A%7D%0Avar%20host%3Ddocument.createElement('div')%3B%0Ahost.style.cssText%3D'position%3Afixed%3Binset%3A0%3Bz-index%3A2147483647%3Bpointer-events%3Anone'%3B%0Adocument.documentElement.appendChild(host)%3B%0Avar%20sr%3Dhost.attachShadow(%7Bmode%3A'open'%7D)%3B%0Asr.innerHTML%3D'%3Cstyle%3E'%2B%0A'*%7Bbox-sizing%3Aborder-box%3Bfont-family%3A-apple-system%2C%22Noto%20Sans%20TC%22%2Csystem-ui%2Csans-serif%7D'%2B%0A'.badge%7Bposition%3Afixed%3Bpointer-events%3Aauto%3Bcursor%3Apointer%3Bbackground%3A%230C8B85%3Bcolor%3A%23fff%3Bfont%3A600%2011px%2F1%20monospace%3B'%2B%0A'padding%3A3px%205px%3Bborder-radius%3A4px%3Bbox-shadow%3A0%201px%204px%20rgba(0%2C0%2C0%2C.4)%3Btransform%3Atranslate(-50%25%2C-50%25)%3Bwhite-space%3Anowrap%7D'%2B%0A'.badge.hot%7Bbackground%3A%23CE3628%7D'%2B%0A'.badge.tgt%7Bbackground%3A%23111%3Boutline%3A2px%20solid%20%23F2B23E%7D'%2B%0A'.ring%7Bposition%3Afixed%3Bpointer-events%3Anone%3Bborder%3A2px%20solid%20%230C8B85%3Bborder-radius%3A4px%7D'%2B%0A'.ring.hot%7Bborder-color%3A%23CE3628%7D'%2B%0A'.ring.tgt%7Bborder-color%3A%23F2B23E%3Bborder-width%3A3px%3Bbox-shadow%3A0%200%200%203px%20rgba(242%2C178%2C62%2C.25)%7D'%2B%0A'.ring.cur%7Bborder-color%3A%237C3AED%3Bborder-style%3Adashed%7D'%2B%0A'%23p%7Bposition%3Afixed%3Btop%3A12px%3Bright%3A12px%3Bwidth%3A288px%3Bpointer-events%3Aauto%3Bbackground%3A%230E1416%3Bcolor%3A%23E4EDEC%3B'%2B%0A'border%3A1px%20solid%20%23263335%3Bborder-radius%3A10px%3Bbox-shadow%3A0%2010px%2034px%20rgba(0%2C0%2C0%2C.5)%3Bfont-size%3A13px%3Boverflow%3Ahidden%7D'%2B%0A'%23p%20h4%7Bmargin%3A0%3Bpadding%3A9px%2012px%3Bfont-size%3A12px%3Bletter-spacing%3A.1em%3Bbackground%3A%23141C1E%3Bborder-bottom%3A1px%20solid%20%23263335%3B'%2B%0A'display%3Aflex%3Balign-items%3Acenter%3Bgap%3A8px%7D'%2B%0A'%23p%20h4%20b%7Bflex%3A1%3Bfont-weight%3A700%7D'%2B%0A'%23p%20.bd%7Bpadding%3A10px%2012px%3Bmax-height%3A60vh%3Boverflow%3Aauto%7D'%2B%0A'.big%7Bfont%3A800%2026px%2F1.1%20monospace%3Bcolor%3A%233FD0C9%3Bmargin%3A2px%200%202px%7D'%2B%0A'.mut%7Bcolor%3A%238DA0A0%3Bfont-size%3A11.5px%3Bline-height%3A1.55%7D'%2B%0A'.rec%7Bbackground%3A%2312211F%3Bborder%3A1px%20solid%20%231E3B38%3Bborder-radius%3A7px%3Bpadding%3A9px%2010px%3Bmargin%3A8px%200%7D'%2B%0A'button%7Bbackground%3A%231A2427%3Bcolor%3A%23E4EDEC%3Bborder%3A1px%20solid%20%232E3C3F%3Bborder-radius%3A6px%3Bpadding%3A5px%209px%3B'%2B%0A'font-size%3A12px%3Bcursor%3Apointer%3Bmargin%3A2px%203px%202px%200%7D'%2B%0A'button%3Ahover%7Bborder-color%3A%233FD0C9%3Bcolor%3A%233FD0C9%7D'%2B%0A'button.on%7Bbackground%3A%233FD0C9%3Bcolor%3A%2304201F%3Bborder-color%3A%233FD0C9%3Bfont-weight%3A700%7D'%2B%0A'button.x%7Bbackground%3Atransparent%3Bborder%3A0%3Bcolor%3A%238DA0A0%3Bfont-size%3A16px%3Bpadding%3A0%204px%3Bmargin%3A0%7D'%2B%0A'%23toast%7Bposition%3Afixed%3Bleft%3A50%25%3Btop%3A18%25%3Btransform%3AtranslateX(-50%25)%3Bbackground%3A%23CE3628%3Bcolor%3A%23fff%3B'%2B%0A'padding%3A10px%2016px%3Bborder-radius%3A8px%3Bfont-weight%3A700%3Bfont-size%3A14px%3Bbox-shadow%3A0%206px%2024px%20rgba(0%2C0%2C0%2C.5)%3Bdisplay%3Anone%7D'%2B%0A'ol%7Bmargin%3A6px%200%200%3Bpadding-left%3A17px%7Dli%7Bmargin%3A3px%200%3Bcolor%3A%23A9BCBB%3Bfont-size%3A11.5px%3Bline-height%3A1.5%7D'%2B%0A'%3C%2Fstyle%3E'%2B%0A'%3Cdiv%20id%3D%22rings%22%3E%3C%2Fdiv%3E%3Cdiv%20id%3D%22badges%22%3E%3C%2Fdiv%3E%3Cdiv%20id%3D%22toast%22%3E%3C%2Fdiv%3E'%2B%0A'%3Cdiv%20id%3D%22p%22%3E%3Ch4%3E%3Cb%3E%E9%8D%B5%E7%9B%A4%E8%B7%AF%E5%BE%91%E5%8B%98%E6%9F%A5%3C%2Fb%3E'%2B%0A'%3Cbutton%20class%3D%22x%22%20id%3D%22min%22%3E%E2%80%93%3C%2Fbutton%3E%3Cbutton%20class%3D%22x%22%20id%3D%22close%22%3E%C3%97%3C%2Fbutton%3E%3C%2Fh4%3E'%2B%0A'%3Cdiv%20class%3D%22bd%22%20id%3D%22bd%22%3E%3C%2Fdiv%3E%3C%2Fdiv%3E'%3B%0Avar%20%24%3Dfunction(s)%7Breturn%20sr.querySelector(s)%3B%7D%3B%0Avar%20items%3D%5B%5D%2C%20target%3Dnull%2C%20guard%3Dtrue%2C%20live%3Dtrue%2C%20minimized%3Dfalse%3B%0Afunction%20toast(msg)%7B%0Avar%20t%3D%24('%23toast')%3B%20t.textContent%3Dmsg%3B%20t.style.display%3D'block'%3B%0AclearTimeout(t._h)%3B%20t._h%3DsetTimeout(function()%7Bt.style.display%3D'none'%3B%7D%2C1600)%3B%0A%7D%0Afunction%20curIndex()%7B%0Avar%20a%3Ddocument.activeElement%3B%0Aif(!a%7C%7Ca%3D%3D%3Ddocument.body)%20return%200%3B%0Afor(var%20i%3D0%3Bi%3Citems.length%3Bi%2B%2B)%20if(items%5Bi%5D.el%3D%3D%3Da)%20return%20items%5Bi%5D.n%3B%0Areturn%20-1%3B%0A%7D%0Afunction%20draw()%7B%0Avar%20rings%3D%24('%23rings')%2C%20badges%3D%24('%23badges')%3B%0Arings.innerHTML%3D''%3B%20badges.innerHTML%3D''%3B%0Aif(minimized)%20return%3B%0Avar%20ci%3DcurIndex()%3B%0Aitems.forEach(function(it)%7B%0Avar%20r%3Dit.el.getBoundingClientRect()%3B%0Aif(r.bottom%3C0%7C%7Cr.top%3EinnerHeight%7C%7Cr.width%3D%3D%3D0)%20return%3B%0Avar%20cls%3Dit%3D%3D%3Dtarget%3F'tgt'%3A(it.hot%3F'hot'%3A'')%3B%0Avar%20ring%3Ddocument.createElement('div')%3B%0Aring.className%3D'ring%20'%2Bcls%2B(it.n%3D%3D%3Dci%3F'%20cur'%3A'')%3B%0Aring.style.cssText%3D'left%3A'%2Br.left%2B'px%3Btop%3A'%2Br.top%2B'px%3Bwidth%3A'%2Br.width%2B'px%3Bheight%3A'%2Br.height%2B'px'%3B%0Arings.appendChild(ring)%3B%0Avar%20b%3Ddocument.createElement('div')%3B%0Ab.className%3D'badge%20'%2Bcls%3B%0Ab.textContent%3Dit.n%3B%0Ab.style.cssText%3D'left%3A'%2Br.left%2B'px%3Btop%3A'%2Br.top%2B'px'%3B%0Ab.title%3Dit.name%3B%0Ab.addEventListener('click'%2Cfunction(e)%7Be.preventDefault()%3Be.stopPropagation()%3BsetTarget(it)%3B%7D)%3B%0Abadges.appendChild(b)%3B%0A%7D)%3B%0A%7D%0Afunction%20recipe()%7B%0Aif(!target)%20return%20'%3Cdiv%20class%3D%22mut%22%3E%E9%BB%9E%E7%95%AB%E9%9D%A2%E4%B8%8A%E4%BB%BB%E4%B8%80%E5%80%8B%E8%99%9F%E7%A2%BC%EF%BC%8C%E6%8A%8A%E5%AE%83%E8%A8%AD%E6%88%90%E7%9B%AE%E6%A8%99%E3%80%82%E7%B4%85%E8%89%B2%E7%9A%84%E6%98%AF%E6%88%91%E7%8C%9C%E7%9A%84%E7%99%BB%E8%A8%98%EF%BC%8F%E9%80%81%E5%87%BA%E9%8D%B5%E3%80%82%3C%2Fdiv%3E'%3B%0Avar%20ci%3DcurIndex()%3B%0Avar%20left%20%3D%20ci%3E%3D0%20%3F%20target.n-ci%20%3A%20null%3B%0Avar%20s%3D'%3Cdiv%20class%3D%22rec%22%3E%3Cdiv%20class%3D%22mut%22%3E%E7%9B%AE%E6%A8%99%3C%2Fdiv%3E%3Cdiv%20style%3D%22font-weight%3A700%3Bmargin%3A2px%200%206px%22%3E'%2B%0Atarget.n%2B'.%20'%2Btarget.name.replace(%2F%3C%2Fg%2C'%26lt%3B')%2B'%3C%2Fdiv%3E'%2B%0A'%3Cdiv%20class%3D%22mut%22%3E%E5%AF%A6%E6%88%B0%E5%8B%95%E4%BD%9C%3C%2Fdiv%3E%3Cdiv%20class%3D%22big%22%3ETab%20%C3%97%20'%2Btarget.n%2B'%3C%2Fdiv%3E'%2B%0A'%3Cdiv%20class%3D%22mut%22%3E%E5%85%88%E5%9C%A8%E9%A0%81%E9%9D%A2%E7%A9%BA%E7%99%BD%E8%99%95%E9%BB%9E%E4%B8%80%E4%B8%8B%E6%8A%8A%E7%84%A6%E9%BB%9E%E6%B8%85%E6%8E%89%EF%BC%8C%E5%86%8D%E6%8C%89%20'%2Btarget.n%2B'%20%E6%AC%A1%20Tab%EF%BC%8C%E7%84%B6%E5%BE%8C%20Enter%E3%80%82%3C%2Fdiv%3E%3C%2Fdiv%3E'%3B%0Aif(ci%3E%3D0)%20s%2B%3D'%3Cdiv%20class%3D%22mut%22%3E%E7%9B%AE%E5%89%8D%E7%84%A6%E9%BB%9E%E5%9C%A8%E7%AC%AC%20'%2B(ci%7C%7C'%E2%80%94')%2B'%20%E5%80%8B'%2B(left!%3D%3Dnull%26%26left%3E0%3F'%EF%BC%8C%E9%82%84%E8%A6%81%20Tab%20'%2Bleft%2B'%20%E6%AC%A1'%3A(left%3D%3D%3D0%3F'%EF%BC%8C%E5%B0%B1%E6%98%AF%E9%80%99%E5%80%8B'%3A''))%2B'%E3%80%82%3C%2Fdiv%3E'%3B%0Aelse%20s%2B%3D'%3Cdiv%20class%3D%22mut%22%3E%E7%9B%AE%E5%89%8D%E7%84%A6%E9%BB%9E%E4%B8%8D%E5%9C%A8%E6%8E%83%E6%8F%8F%E6%B8%85%E5%96%AE%E8%A3%A1%EF%BC%88%E5%8F%AF%E8%83%BD%E5%9C%A8%20iframe%20%E6%88%96%E7%B6%B2%E5%9D%80%E5%88%97%EF%BC%89%E3%80%82%3C%2Fdiv%3E'%3B%0Areturn%20s%3B%0A%7D%0Afunction%20render()%7B%0Aif(minimized)%7B%20%24('%23bd').innerHTML%3D'%3Cdiv%20class%3D%22mut%22%3E%E5%B7%B2%E6%94%B6%E8%B5%B7%EF%BC%8C%E9%BB%9E%20%E2%80%93%20%E5%B1%95%E9%96%8B%E3%80%82%3C%2Fdiv%3E'%3B%20return%3B%20%7D%0Avar%20ifr%3Ddocument.querySelectorAll('iframe').length%3B%0Avar%20hots%3Ditems.filter(function(i)%7Breturn%20i.hot%3B%7D).slice(0%2C6)%3B%0Avar%20chips%20%3D%20hots.length%3F%20'%3Cdiv%20class%3D%22mut%22%20style%3D%22margin-top%3A8px%22%3E%E5%8F%AF%E8%83%BD%E7%9A%84%E7%9B%AE%E6%A8%99%3C%2Fdiv%3E%3Cdiv%3E'%2Bhots.map(function(h)%7B%0Areturn%20'%3Cbutton%20data-n%3D%22'%2Bh.n%2B'%22%3E'%2Bh.n%2B'.%20'%2Bh.name.replace(%2F%3C%2Fg%2C'%26lt%3B')%2B'%3C%2Fbutton%3E'%3B%0A%7D).join('')%2B'%3C%2Fdiv%3E'%20%3A%20''%3B%0A%24('%23bd').innerHTML%3D%0A'%3Cdiv%20class%3D%22mut%22%3E%E6%8E%83%E5%88%B0%20%3Cb%20style%3D%22color%3A%23E4EDEC%22%3E'%2Bitems.length%2B'%3C%2Fb%3E%20%E5%80%8B%E5%8F%AF%E7%94%A8%20Tab%20%E5%88%B0%E9%81%94%E7%9A%84%E5%85%83%E7%B4%A0'%2B%0A(ifr%3F'%EF%BC%8C%E5%8F%A6%E6%9C%89%20'%2Bifr%2B'%20%E5%80%8B%20iframe%EF%BC%88%E8%A3%A1%E9%9D%A2%E7%9A%84%E6%8C%89%E9%88%95%E6%95%B8%E4%B8%8D%E5%88%B0%EF%BC%8C%E8%A6%8B%E4%B8%8B%E6%96%B9%E8%AA%AA%E6%98%8E%EF%BC%89'%3A'')%2B'%E3%80%82%3C%2Fdiv%3E'%2B%0Arecipe()%2Bchips%2B%0A'%3Cdiv%20style%3D%22margin-top%3A8px%22%3E'%2B%0A'%3Cbutton%20id%3D%22rescan%22%3E%E9%87%8D%E6%96%B0%E6%8E%83%E6%8F%8F%3C%2Fbutton%3E'%2B%0A'%3Cbutton%20id%3D%22gd%22%20class%3D%22'%2B(guard%3F'on'%3A'')%2B'%22%3E'%2B(guard%3F'%E2%9C%93%20%E6%BC%94%E7%B7%B4%E8%AD%B7%E6%AC%84%E9%96%8B'%3A'%E6%BC%94%E7%B7%B4%E8%AD%B7%E6%AC%84%E9%97%9C')%2B'%3C%2Fbutton%3E'%2B%0A'%3Cbutton%20id%3D%22clr%22%3E%E6%B8%85%E9%99%A4%E7%9B%AE%E6%A8%99%3C%2Fbutton%3E%3C%2Fdiv%3E'%2B%0A'%3Col%3E%3Cli%3E%E9%A0%81%E9%9D%A2%E5%85%A7%E5%AE%B9%E8%AE%8A%E5%8B%95%E5%BE%8C%EF%BC%88%E4%BE%8B%E5%A6%82%E6%B4%BB%E5%8B%95%E9%96%8B%E6%94%BE%E3%80%81%E6%8C%89%E9%88%95%E6%89%8D%E5%87%BA%E7%8F%BE%EF%BC%89%E8%A6%81%E6%8C%89%E3%80%8C%E9%87%8D%E6%96%B0%E6%8E%83%E6%8F%8F%E3%80%8D%EF%BC%8C%E8%99%9F%E7%A2%BC%E6%9C%83%E8%AE%8A%E3%80%82%3C%2Fli%3E'%2B%0A'%3Cli%3E%E6%BC%94%E7%B7%B4%E8%AD%B7%E6%AC%84%E9%96%8B%E8%91%97%E6%99%82%EF%BC%8CEnter%EF%BC%8F%E7%A9%BA%E7%99%BD%E9%8D%B5%E8%90%BD%E5%9C%A8%E9%80%81%E5%87%BA%E9%A1%9E%E6%8C%89%E9%88%95%E4%B8%8A%E6%9C%83%E8%A2%AB%E6%93%8B%E4%B8%8B%E4%BE%86%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%AE%89%E5%BF%83%E5%9C%A8%E7%9C%9F%E7%9A%84%E9%A0%81%E9%9D%A2%E4%B8%8A%E7%B7%B4%E3%80%82%3C%2Fli%3E'%2B%0A'%3Cli%3E%E9%80%99%E5%80%8B%E5%B7%A5%E5%85%B7%E4%B8%8D%E6%9C%83%E6%9B%BF%E4%BD%A0%E9%BB%9E%E4%BB%BB%E4%BD%95%E6%9D%B1%E8%A5%BF%EF%BC%8C%E4%B9%9F%E4%B8%8D%E9%80%81%E5%87%BA%E4%BB%BB%E4%BD%95%E8%B3%87%E6%96%99%E3%80%82%3C%2Fli%3E%3C%2Fol%3E'%3B%0A%24('%23rescan').onclick%3Dfunction()%7B%20items%3Dscan()%3B%20if(target%26%26items.indexOf(target)%3C0)%20target%3Dnull%3B%20render()%3B%20draw()%3B%20%7D%3B%0A%24('%23gd').onclick%3Dfunction()%7B%20guard%3D!guard%3B%20render()%3B%20%7D%3B%0A%24('%23clr').onclick%3Dfunction()%7B%20target%3Dnull%3B%20render()%3B%20draw()%3B%20%7D%3B%0A%5B%5D.forEach.call(sr.querySelectorAll('%5Bdata-n%5D')%2Cfunction(b)%7B%0Ab.onclick%3Dfunction()%7B%20var%20n%3D%2Bb.getAttribute('data-n')%3B%0Afor(var%20i%3D0%3Bi%3Citems.length%3Bi%2B%2B)%20if(items%5Bi%5D.n%3D%3D%3Dn)%7B%20setTarget(items%5Bi%5D)%3B%20return%3B%20%7D%20%7D%3B%0A%7D)%3B%0A%7D%0Afunction%20setTarget(it)%7B%20target%3Dit%3B%20render()%3B%20draw()%3B%20%7D%0A%24('%23close').onclick%3Dfunction()%7B%20api.destroy()%3B%20%7D%3B%0A%24('%23min').onclick%3Dfunction()%7B%20minimized%3D!minimized%3B%20%24('%23p').style.width%3Dminimized%3F'160px'%3A'288px'%3B%20render()%3B%20draw()%3B%20%7D%3B%0Afunction%20keyGuard(e)%7B%0Aif(!guard)%20return%3B%0Aif(e.key!%3D%3D'Enter'%26%26e.key!%3D%3D'%20')%20return%3B%0Avar%20a%3Ddocument.activeElement%3B%20if(!a)%20return%3B%0Avar%20tag%3Da.tagName.toLowerCase()%3B%0Avar%20isSubmit%20%3D%20tag%3D%3D%3D'button'%20%7C%7C%20(tag%3D%3D%3D'input'%26%26%2Fsubmit%7Cbutton%7Cimage%2F.test(a.type%7C%7C''))%20%7C%7C%0Aa.getAttribute('role')%3D%3D%3D'button'%20%7C%7C%20(tag%3D%3D%3D'a'%26%26HOT.test(label(a)))%3B%0Aif(!isSubmit)%20return%3B%0Ae.preventDefault()%3B%20e.stopImmediatePropagation()%3B%0Atoast('%E6%BC%94%E7%B7%B4%E8%AD%B7%E6%AC%84%E6%93%8B%E4%B8%8B%E4%BA%86%E9%80%99%E6%AC%A1%E9%80%81%E5%87%BA')%3B%0A%7D%0Afunction%20clickGuard(e)%7B%0Aif(!guard)%20return%3B%0Avar%20a%3De.target.closest%3Fe.target.closest('button%2Cinput%5Btype%3Dsubmit%5D%2C%5Brole%3Dbutton%5D')%3Anull%3B%0Aif(!a)%20return%3B%0Aif(!HOT.test(label(a)))%20return%3B%0Ae.preventDefault()%3B%20e.stopImmediatePropagation()%3B%0Atoast('%E6%BC%94%E7%B7%B4%E8%AD%B7%E6%AC%84%E6%93%8B%E4%B8%8B%E4%BA%86%E9%80%99%E6%AC%A1%E9%BB%9E%E6%93%8A')%3B%0A%7D%0AaddEventListener('keydown'%2CkeyGuard%2Ctrue)%3B%0AaddEventListener('click'%2CclickGuard%2Ctrue)%3B%0Avar%20raf%3Dnull%3B%0Afunction%20tick()%7B%20if(live)%7B%20draw()%3B%20%7D%20raf%3DrequestAnimationFrame(tick)%3B%20%7D%0Afunction%20onFocus()%7B%20render()%3B%20draw()%3B%20%7D%0AaddEventListener('focusin'%2ConFocus%2Ctrue)%3B%0AaddEventListener('focusout'%2ConFocus%2Ctrue)%3B%0Avar%20api%3D%7B%0Atoggle%3Afunction()%7B%20minimized%3D!minimized%3B%20render()%3B%20draw()%3B%20%7D%2C%0Adestroy%3Afunction()%7B%0AcancelAnimationFrame(raf)%3B%0AremoveEventListener('keydown'%2CkeyGuard%2Ctrue)%3B%0AremoveEventListener('click'%2CclickGuard%2Ctrue)%3B%0AremoveEventListener('focusin'%2ConFocus%2Ctrue)%3B%0AremoveEventListener('focusout'%2ConFocus%2Ctrue)%3B%0Ahost.remove()%3B%20delete%20window.__kbScout%3B%0A%7D%0A%7D%3B%0Awindow.__kbScout%3Dapi%3B%0Aitems%3Dscan()%3B%20render()%3B%20tick()%3B%0A%7D)()%3B">⌨︎ 鍵盤路徑勘查</a>
+    <div class="t">把左邊這顆按鈕<strong>拖到書籤列</strong>就裝好了。書籤列沒開的話按 <kbd>⇧ ⌘ B</kbd>。</div>
+  </div>
+  <details>
+    <summary>拖不動？改用手動新增，或看它到底做了什麼</summary>
+    <p style="font-size:13.5px;color:var(--ink-2);margin-top:10px">Chrome 選單 → 書籤 → 書籤管理員 → 右上角三點 → 新增書籤，名稱隨便填，網址貼下面複製到的那一長串。</p>
+    <button class="copy" id="cp">複製書籤網址</button>
+    <p style="font-size:13.5px;color:var(--ink-2);margin-top:14px">以下是完整原始碼，可以自己讀過再決定要不要用：</p>
+    <pre id="src">(function(){
+if(window.__kbScout){ window.__kbScout.toggle(); return; }
+var SEL='a[href],area[href],button,input,select,textarea,summary,[contenteditable]:not([contenteditable="false"]),[tabindex]';
+var HOT=/登記|報名|立即|馬上|我要|送出|遞交|確認|確定|同意|結帳|購買|下單|加入購物車|領取|索取|參加|申請|submit|apply|join|register/i;
+function vis(el){
+if(el.disabled) return false;
+if(el.getAttribute('aria-hidden')==='true') return false;
+if(el.type==='hidden') return false;
+var r=el.getBoundingClientRect();
+if(r.width===0&amp;&amp;r.height===0) return false;
+var cs=getComputedStyle(el);
+if(cs.visibility==='hidden'||cs.display==='none'||cs.opacity==='0') return false;
+return true;
+}
+function tabbable(el){
+var ti=el.getAttribute('tabindex');
+if(ti!==null&amp;&amp;parseInt(ti,10)&lt;0) return false;
+return vis(el);
+}
+function label(el){
+var t=(el.getAttribute('aria-label')||'').trim();
+var tag=el.tagName.toLowerCase();
+var formish = tag==='select'||tag==='textarea'||(tag==='input'&amp;&amp;!/submit|button|image/.test(el.type||''));
+if(!t&amp;&amp;formish){
+var lb=null;
+try{ lb = el.id?document.querySelector('label[for="'+CSS.escape(el.id)+'"]'):null; }catch(e){}
+if(!lb&amp;&amp;el.closest) lb=el.closest('label');
+if(lb) t=(lb.innerText||'').replace(/\s+/g,' ').trim();
+if(!t&amp;&amp;tag==='select'&amp;&amp;el.selectedOptions&amp;&amp;el.selectedOptions[0]) t='選單：'+el.selectedOptions[0].text.trim();
+}
+if(!t&amp;&amp;!formish) t=(el.innerText||'').replace(/\s+/g,' ').trim();
+if(!t) t=(el.value||'').trim();
+if(!t) t=(el.getAttribute('title')||el.getAttribute('alt')||el.getAttribute('placeholder')||'').trim();
+if(!t) t='&lt;'+el.tagName.toLowerCase()+'&gt;';
+return t.length&gt;28?t.slice(0,28)+'…':t;
+}
+function scan(){
+var all=[].slice.call(document.querySelectorAll(SEL)).filter(tabbable);
+var pos=[],nat=[];
+all.forEach(function(el){
+var ti=parseInt(el.getAttribute('tabindex')||'0',10);
+(ti&gt;0?pos:nat).push({el:el,ti:ti});
+});
+pos.sort(function(a,b){return a.ti-b.ti;});
+return pos.concat(nat).map(function(o,i){
+return {el:o.el,n:i+1,name:label(o.el),hot:HOT.test(label(o.el))||HOT.test(o.el.className||'')};
+});
+}
+var host=document.createElement('div');
+host.style.cssText='position:fixed;inset:0;z-index:2147483647;pointer-events:none';
+document.documentElement.appendChild(host);
+var sr=host.attachShadow({mode:'open'});
+sr.innerHTML='&lt;style&gt;'+
+'*{box-sizing:border-box;font-family:-apple-system,"Noto Sans TC",system-ui,sans-serif}'+
+'.badge{position:fixed;pointer-events:auto;cursor:pointer;background:#0C8B85;color:#fff;font:600 11px/1 monospace;'+
+'padding:3px 5px;border-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,.4);transform:translate(-50%,-50%);white-space:nowrap}'+
+'.badge.hot{background:#CE3628}'+
+'.badge.tgt{background:#111;outline:2px solid #F2B23E}'+
+'.ring{position:fixed;pointer-events:none;border:2px solid #0C8B85;border-radius:4px}'+
+'.ring.hot{border-color:#CE3628}'+
+'.ring.tgt{border-color:#F2B23E;border-width:3px;box-shadow:0 0 0 3px rgba(242,178,62,.25)}'+
+'.ring.cur{border-color:#7C3AED;border-style:dashed}'+
+'#p{position:fixed;top:12px;right:12px;width:288px;pointer-events:auto;background:#0E1416;color:#E4EDEC;'+
+'border:1px solid #263335;border-radius:10px;box-shadow:0 10px 34px rgba(0,0,0,.5);font-size:13px;overflow:hidden}'+
+'#p h4{margin:0;padding:9px 12px;font-size:12px;letter-spacing:.1em;background:#141C1E;border-bottom:1px solid #263335;'+
+'display:flex;align-items:center;gap:8px}'+
+'#p h4 b{flex:1;font-weight:700}'+
+'#p .bd{padding:10px 12px;max-height:60vh;overflow:auto}'+
+'.big{font:800 26px/1.1 monospace;color:#3FD0C9;margin:2px 0 2px}'+
+'.mut{color:#8DA0A0;font-size:11.5px;line-height:1.55}'+
+'.rec{background:#12211F;border:1px solid #1E3B38;border-radius:7px;padding:9px 10px;margin:8px 0}'+
+'button{background:#1A2427;color:#E4EDEC;border:1px solid #2E3C3F;border-radius:6px;padding:5px 9px;'+
+'font-size:12px;cursor:pointer;margin:2px 3px 2px 0}'+
+'button:hover{border-color:#3FD0C9;color:#3FD0C9}'+
+'button.on{background:#3FD0C9;color:#04201F;border-color:#3FD0C9;font-weight:700}'+
+'button.x{background:transparent;border:0;color:#8DA0A0;font-size:16px;padding:0 4px;margin:0}'+
+'#toast{position:fixed;left:50%;top:18%;transform:translateX(-50%);background:#CE3628;color:#fff;'+
+'padding:10px 16px;border-radius:8px;font-weight:700;font-size:14px;box-shadow:0 6px 24px rgba(0,0,0,.5);display:none}'+
+'ol{margin:6px 0 0;padding-left:17px}li{margin:3px 0;color:#A9BCBB;font-size:11.5px;line-height:1.5}'+
+'&lt;/style&gt;'+
+'&lt;div id="rings"&gt;&lt;/div&gt;&lt;div id="badges"&gt;&lt;/div&gt;&lt;div id="toast"&gt;&lt;/div&gt;'+
+'&lt;div id="p"&gt;&lt;h4&gt;&lt;b&gt;鍵盤路徑勘查&lt;/b&gt;'+
+'&lt;button class="x" id="min"&gt;–&lt;/button&gt;&lt;button class="x" id="close"&gt;×&lt;/button&gt;&lt;/h4&gt;'+
+'&lt;div class="bd" id="bd"&gt;&lt;/div&gt;&lt;/div&gt;';
+var $=function(s){return sr.querySelector(s);};
+var items=[], target=null, guard=true, live=true, minimized=false;
+function toast(msg){
+var t=$('#toast'); t.textContent=msg; t.style.display='block';
+clearTimeout(t._h); t._h=setTimeout(function(){t.style.display='none';},1600);
+}
+function curIndex(){
+var a=document.activeElement;
+if(!a||a===document.body) return 0;
+for(var i=0;i&lt;items.length;i++) if(items[i].el===a) return items[i].n;
+return -1;
+}
+function draw(){
+var rings=$('#rings'), badges=$('#badges');
+rings.innerHTML=''; badges.innerHTML='';
+if(minimized) return;
+var ci=curIndex();
+items.forEach(function(it){
+var r=it.el.getBoundingClientRect();
+if(r.bottom&lt;0||r.top&gt;innerHeight||r.width===0) return;
+var cls=it===target?'tgt':(it.hot?'hot':'');
+var ring=document.createElement('div');
+ring.className='ring '+cls+(it.n===ci?' cur':'');
+ring.style.cssText='left:'+r.left+'px;top:'+r.top+'px;width:'+r.width+'px;height:'+r.height+'px';
+rings.appendChild(ring);
+var b=document.createElement('div');
+b.className='badge '+cls;
+b.textContent=it.n;
+b.style.cssText='left:'+r.left+'px;top:'+r.top+'px';
+b.title=it.name;
+b.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();setTarget(it);});
+badges.appendChild(b);
+});
+}
+function recipe(){
+if(!target) return '&lt;div class="mut"&gt;點畫面上任一個號碼，把它設成目標。紅色的是我猜的登記／送出鍵。&lt;/div&gt;';
+var ci=curIndex();
+var left = ci&gt;=0 ? target.n-ci : null;
+var s='&lt;div class="rec"&gt;&lt;div class="mut"&gt;目標&lt;/div&gt;&lt;div style="font-weight:700;margin:2px 0 6px"&gt;'+
+target.n+'. '+target.name.replace(/&lt;/g,'&amp;lt;')+'&lt;/div&gt;'+
+'&lt;div class="mut"&gt;實戰動作&lt;/div&gt;&lt;div class="big"&gt;Tab × '+target.n+'&lt;/div&gt;'+
+'&lt;div class="mut"&gt;先在頁面空白處點一下把焦點清掉，再按 '+target.n+' 次 Tab，然後 Enter。&lt;/div&gt;&lt;/div&gt;';
+if(ci&gt;=0) s+='&lt;div class="mut"&gt;目前焦點在第 '+(ci||'—')+' 個'+(left!==null&amp;&amp;left&gt;0?'，還要 Tab '+left+' 次':(left===0?'，就是這個':''))+'。&lt;/div&gt;';
+else s+='&lt;div class="mut"&gt;目前焦點不在掃描清單裡（可能在 iframe 或網址列）。&lt;/div&gt;';
+return s;
+}
+function render(){
+if(minimized){ $('#bd').innerHTML='&lt;div class="mut"&gt;已收起，點 – 展開。&lt;/div&gt;'; return; }
+var ifr=document.querySelectorAll('iframe').length;
+var hots=items.filter(function(i){return i.hot;}).slice(0,6);
+var chips = hots.length? '&lt;div class="mut" style="margin-top:8px"&gt;可能的目標&lt;/div&gt;&lt;div&gt;'+hots.map(function(h){
+return '&lt;button data-n="'+h.n+'"&gt;'+h.n+'. '+h.name.replace(/&lt;/g,'&amp;lt;')+'&lt;/button&gt;';
+}).join('')+'&lt;/div&gt;' : '';
+$('#bd').innerHTML=
+'&lt;div class="mut"&gt;掃到 &lt;b style="color:#E4EDEC"&gt;'+items.length+'&lt;/b&gt; 個可用 Tab 到達的元素'+
+(ifr?'，另有 '+ifr+' 個 iframe（裡面的按鈕數不到，見下方說明）':'')+'。&lt;/div&gt;'+
+recipe()+chips+
+'&lt;div style="margin-top:8px"&gt;'+
+'&lt;button id="rescan"&gt;重新掃描&lt;/button&gt;'+
+'&lt;button id="gd" class="'+(guard?'on':'')+'"&gt;'+(guard?'✓ 演練護欄開':'演練護欄關')+'&lt;/button&gt;'+
+'&lt;button id="clr"&gt;清除目標&lt;/button&gt;&lt;/div&gt;'+
+'&lt;ol&gt;&lt;li&gt;頁面內容變動後（例如活動開放、按鈕才出現）要按「重新掃描」，號碼會變。&lt;/li&gt;'+
+'&lt;li&gt;演練護欄開著時，Enter／空白鍵落在送出類按鈕上會被擋下來，可以安心在真的頁面上練。&lt;/li&gt;'+
+'&lt;li&gt;這個工具不會替你點任何東西，也不送出任何資料。&lt;/li&gt;&lt;/ol&gt;';
+$('#rescan').onclick=function(){ items=scan(); if(target&amp;&amp;items.indexOf(target)&lt;0) target=null; render(); draw(); };
+$('#gd').onclick=function(){ guard=!guard; render(); };
+$('#clr').onclick=function(){ target=null; render(); draw(); };
+[].forEach.call(sr.querySelectorAll('[data-n]'),function(b){
+b.onclick=function(){ var n=+b.getAttribute('data-n');
+for(var i=0;i&lt;items.length;i++) if(items[i].n===n){ setTarget(items[i]); return; } };
+});
+}
+function setTarget(it){ target=it; render(); draw(); }
+$('#close').onclick=function(){ api.destroy(); };
+$('#min').onclick=function(){ minimized=!minimized; $('#p').style.width=minimized?'160px':'288px'; render(); draw(); };
+function keyGuard(e){
+if(!guard) return;
+if(e.key!=='Enter'&amp;&amp;e.key!==' ') return;
+var a=document.activeElement; if(!a) return;
+var tag=a.tagName.toLowerCase();
+var isSubmit = tag==='button' || (tag==='input'&amp;&amp;/submit|button|image/.test(a.type||'')) ||
+a.getAttribute('role')==='button' || (tag==='a'&amp;&amp;HOT.test(label(a)));
+if(!isSubmit) return;
+e.preventDefault(); e.stopImmediatePropagation();
+toast('演練護欄擋下了這次送出');
+}
+function clickGuard(e){
+if(!guard) return;
+var a=e.target.closest?e.target.closest('button,input[type=submit],[role=button]'):null;
+if(!a) return;
+if(!HOT.test(label(a))) return;
+e.preventDefault(); e.stopImmediatePropagation();
+toast('演練護欄擋下了這次點擊');
+}
+addEventListener('keydown',keyGuard,true);
+addEventListener('click',clickGuard,true);
+var raf=null;
+function tick(){ if(live){ draw(); } raf=requestAnimationFrame(tick); }
+function onFocus(){ render(); draw(); }
+addEventListener('focusin',onFocus,true);
+addEventListener('focusout',onFocus,true);
+var api={
+toggle:function(){ minimized=!minimized; render(); draw(); },
+destroy:function(){
+cancelAnimationFrame(raf);
+removeEventListener('keydown',keyGuard,true);
+removeEventListener('click',clickGuard,true);
+removeEventListener('focusin',onFocus,true);
+removeEventListener('focusout',onFocus,true);
+host.remove(); delete window.__kbScout;
+}
+};
+window.__kbScout=api;
+items=scan(); render(); tick();
+})();</pre>
+  </details>
+</div>
+
+<div class="mod">
+  <p class="eyebrow"><span class="dot"></span>活動前先勘查一次</p>
+  <ol class="steps">
+    <li><b>登入後打開登記頁</b><div class="d">要用你實戰時會用的那個瀏覽器和那個帳號，因為登入狀態會改變頁面上的元素數量，Tab 號碼跟著變。</div></li>
+    <li><b>點書籤列上的「鍵盤路徑勘查」</b><div class="d">頁面上每個 Tab 到得了的元素會冒出一個號碼，右上角出現控制面板。紅色號碼是它猜的登記／送出鍵。</div></li>
+    <li><b>選定目標</b><div class="d">點目標的號碼，或用面板上「可能的目標」的快捷鈕。面板會給你一行 <code>Tab × N</code>。</div></li>
+    <li><b>當場驗證一次</b><div class="d">在頁面空白處點一下把焦點清掉，按 N 次 Tab，看焦點是不是真的停在登記鍵上（面板會即時顯示你現在在第幾個）。護欄預設開著，這時候按 <kbd>Enter</kbd> 不會真的送出。</div></li>
+    <li><b>把數字記下來</b><div class="d">寫進倒數器的活動備註，或直接記在紙上。這個數字才是你實戰要用的東西。</div></li>
+  </ol>
+  <div class="callout"><b>如果登記鍵在活動開放前根本不存在</b>，勘查會掃不到它。這時候先勘查到「最接近的那個穩定元素」（例如同意條款的勾選框），實戰開放後按一次「重新掃描」再補上剩下幾次 Tab——或直接在開放後的頭幾秒重掃，通常還來得及。</div>
+</div>
+
+<div class="mod">
+  <p class="eyebrow"><span class="dot"></span>活動當天</p>
+  <ol class="steps">
+    <li><b>開好登記頁，開好倒數器</b><div class="d">倒數器用浮動視窗壓在登記頁上方，這樣不用切分頁。</div></li>
+    <li><b>在頁面空白處點一下</b><div class="d">這一步是把焦點歸零，Tab 才會從第 1 個開始數。網址列點過就不算，一定要點頁面本身的空白區。</div></li>
+    <li><b>發令時 Tab × N，然後 Enter</b><div class="d">手不用離開鍵盤，也不用瞄準。Tab 連按可以按很快，這一段通常在 100 毫秒內結束。</div></li>
+    <li><b>後面每一步同樣用鍵盤</b><div class="d">確認視窗跳出來通常 Tab 一兩次就到確定鍵。這一步也值得先勘查。</div></li>
+  </ol>
+</div>
+
+<div class="mod">
+  <p class="eyebrow"><span class="dot"></span>幾件要先知道的事</p>
+  <ul class="plain">
+    <li><b>號碼會變。</b>頁面內容一改（跳出橫幅、載入推薦商品、活動開放），Tab 順序就變了。所以勘查要盡量貼近實戰狀態，開放後也值得重掃一次。</li>
+    <li><b>iframe 裡的東西數不到。</b>面板會告訴你頁面上有幾個 iframe。如果登記表單在 iframe 裡，Tab 進去之後的計數要另外算——那種情況勘查完進去再數一次。</li>
+    <li><b>護欄不是萬能。</b>它擋 <kbd>Enter</kbd>、<kbd>Space</kbd> 和點擊落在送出類按鈕上的情況，但擋不掉網站自己用 JavaScript 觸發的送出。演練時還是別在真的能成立的活動上亂按。</li>
+    <li><b>它不會替你點。</b>沒有自動點擊、沒有排程送出、不讀也不送任何表單資料。所有東西都在你的瀏覽器裡跑完，不連任何伺服器。</li>
+  </ul>
+</div>
+
+<footer>
+配套工具：搶登記發射台（毫秒級發令倒數）。兩個一起用——倒數器解決「什麼時候按」，這個解決「按下去之後手要往哪走」。
+</footer>
+</div>
+<script>
+document.getElementById('cp').addEventListener('click',function(){
+  var a=document.querySelector('a.bm');
+  var t=this;
+  navigator.clipboard.writeText(a.getAttribute('href')).then(function(){
+    t.textContent='已複製'; setTimeout(function(){t.textContent='複製書籤網址';},1600);
+  },function(){ t.textContent='複製失敗，請手動選取下方原始碼'; });
+});
+</script>
+</body></html>
