@@ -245,6 +245,12 @@
      "note": "學生解謎的時間，永遠是你預估的一半或兩倍。",
      "items": [
       {
+       "t": "密室工坊",
+       "d": "上傳謎題、審核、遊玩（輸入代碼進入；同時登入多個 Google 帳號時請用無痕視窗）",
+       "u": "https://script.google.com/macros/s/AKfycbyGkgT4aB4K_0dJTwRz38MtXhopdLIZPTv_6rM7lwXtYuSmoT0iUsDLJWXc0YCnwjA-/exec",
+       "stu": 1
+      },
+      {
        "t": "數位密室逃脫（學生端）",
        "u": "https://huangisright.github.io/isright-tools/escape-room/",
        "stu": 1
@@ -391,9 +397,8 @@
   },
   {
    "name": "escape-workshop",
-   "t": "密室工坊（後台）",
-   "site": "",
-   "private": 1
+   "t": "密室工坊",
+   "site": "https://script.google.com/macros/s/AKfycbyGkgT4aB4K_0dJTwRz38MtXhopdLIZPTv_6rM7lwXtYuSmoT0iUsDLJWXc0YCnwjA-/exec"
   },
   {
    "name": "huangisright.github.io",
