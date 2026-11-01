@@ -246,8 +246,8 @@
      "items": [
       {
        "t": "密室工坊",
-       "d": "上傳謎題、審核、遊玩（輸入代碼進入；同時登入多個 Google 帳號時請用無痕視窗）",
-       "u": "https://script.google.com/macros/s/AKfycbyGkgT4aB4K_0dJTwRz38MtXhopdLIZPTv_6rM7lwXtYuSmoT0iUsDLJWXc0YCnwjA-/exec",
+       "d": "上傳謎題、審核、遊玩（輸入老師發的代碼進入）",
+       "u": "https://huangisright.github.io/escape-workshop/",
        "stu": 1
       },
       {
@@ -398,7 +398,7 @@
   {
    "name": "escape-workshop",
    "t": "密室工坊",
-   "site": "https://script.google.com/macros/s/AKfycbyGkgT4aB4K_0dJTwRz38MtXhopdLIZPTv_6rM7lwXtYuSmoT0iUsDLJWXc0YCnwjA-/exec"
+   "site": "https://huangisright.github.io/escape-workshop/"
   },
   {
    "name": "huangisright.github.io",
