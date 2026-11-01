@@ -337,6 +337,25 @@
      "items": []
     }
    ]
+  },
+  {
+   "name": "生活",
+   "cats": [
+    {
+     "id": "life",
+     "name": "運動紀錄",
+     "dz": "bike",
+     "note": "騎了一千多公里，才發現金門其實有坡。",
+     "items": [
+      {
+       "t": "我的 Strava 運動紀錄",
+       "d": "跑步、騎車的趨勢與分析，Strava 即時資料，只有自己開得了",
+       "u": "https://claude.ai/artifact/2Zen4FmWySKfmwqiYWLtuJ",
+       "type": "Dashboard"
+      }
+     ]
+    }
+   ]
   }
  ],
  "repos": [

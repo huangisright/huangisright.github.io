@@ -23,6 +23,7 @@ DOODLES = {
   "wind": '<path d="M5 15 C18 10 33 20 46 13 C52 10 54 17 49 18"/><path d="M9 26 C24 21 38 30 54 23"/><path d="M5 37 C19 32 33 41 45 35 C51 32 53 39 48 40"/>',
   "list": '<path d="M9 9 L17 9 L17 17 L9 17 Z"/><path d="M11 13 L13 15.5 L19 7"/><path d="M24 13 L52 12"/><path d="M9 25 L17 25 L17 33 L9 33 Z"/><path d="M11 29 L13 31.5 L19 23"/><path d="M24 29 L46 29.5"/><path d="M9 41 L17 41 L17 47 L9 47"/><path d="M24 44 L50 43"/>',
   "draft": '<path d="M12 40 L40 12 L47 19 L19 47 L10 49 Z"/><path d="M36 16 L43 23"/><path d="M6 8 C14 6 20 10 26 7"/>',
+  "bike": '<circle cx="14" cy="34" r="9"/><circle cx="46" cy="34" r="9"/><path d="M14 34 L24 18 L40 18 L46 34"/><path d="M24 18 L31 34 L40 18"/><path d="M14 34 L31 34"/><path d="M22 13 L28 13"/><path d="M40 18 L38 11 L44 10"/>',
   "repo": '<circle cx="16" cy="10" r="4.5"/><circle cx="16" cy="40" r="4.5"/><circle cx="42" cy="18" r="4.5"/><path d="M16 14.5 L16 35.5"/><path d="M42 22.5 C42 32 26 28 17 36"/>',
 }
 
