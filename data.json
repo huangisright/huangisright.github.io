@@ -285,7 +285,178 @@
      "name": "幾何明珠",
      "dz": "geo",
      "note": "每一頁都在問同一件事：什麼沒有變？",
-     "items": []
+     "items": [
+      {
+       "t": "互動探索站（幾何明珠在最下面）",
+       "d": "28 節動態頁，依單元收合",
+       "u": "https://huangisright.github.io/GiftedMath/",
+       "stu": 1
+      },
+      {
+       "h": "單元一"
+      },
+      {
+       "t": "一個不會變的數",
+       "u": "https://huangisright.github.io/GiftedMath/units/gp-u1-1.html",
+       "stu": 1
+      },
+      {
+       "t": "空白搬了家",
+       "u": "https://huangisright.github.io/GiftedMath/units/gp-u1-2.html",
+       "stu": 1
+      },
+      {
+       "t": "三條線，交在一點",
+       "u": "https://huangisright.github.io/GiftedMath/units/gp-u1-3.html",
+       "stu": 1
+      },
+      {
+       "h": "單元二"
+      },
+      {
+       "t": "光走的那一條",
+       "u": "https://huangisright.github.io/GiftedMath/units/gp-u2-1.html",
+       "stu": 1
+      },
+      {
+       "t": "最短的那一圈",
+       "u": "https://huangisright.github.io/GiftedMath/units/gp-u2-2.html",
+       "stu": 1
+      },
+      {
+       "t": "三條路接成一條",
+       "u": "https://huangisright.github.io/GiftedMath/units/gp-u2-3.html",
+       "stu": 1
+      },
+      {
+       "h": "單元三"
+      },
+      {
+       "t": "離 A 是離 B 的兩倍",
+       "u": "https://huangisright.github.io/GiftedMath/units/gp-u3-1.html",
+       "stu": 1
+      },
+      {
+       "t": "從頂點到底邊的那一條",
+       "u": "https://huangisright.github.io/GiftedMath/units/gp-u3-2.html",
+       "stu": 1
+      },
+      {
+       "t": "切下來的那一塊",
+       "u": "https://huangisright.github.io/GiftedMath/units/gp-u3-3.html",
+       "stu": 1
+      },
+      {
+       "h": "單元四"
+      },
+      {
+       "t": "又交在一點",
+       "u": "https://huangisright.github.io/GiftedMath/units/gp-u4-1.html",
+       "stu": 1
+      },
+      {
+       "t": "一條線穿過去",
+       "u": "https://huangisright.github.io/GiftedMath/units/gp-u4-2.html",
+       "stu": 1
+      },
+      {
+       "t": "三組對邊，交在一條線上",
+       "u": "https://huangisright.github.io/GiftedMath/units/gp-u4-3.html",
+       "stu": 1
+      },
+      {
+       "h": "單元五"
+      },
+      {
+       "t": "三個點排成一列",
+       "u": "https://huangisright.github.io/GiftedMath/units/gp-u5-1.html",
+       "stu": 1
+      },
+      {
+       "t": "九個點，一個圓",
+       "u": "https://huangisright.github.io/GiftedMath/units/gp-u5-2.html",
+       "stu": 1
+      },
+      {
+       "t": "三個尖，一條線",
+       "u": "https://huangisright.github.io/GiftedMath/units/gp-u5-3.html",
+       "stu": 1
+      },
+      {
+       "h": "單元六"
+      },
+      {
+       "t": "乘起來還是那個數",
+       "u": "https://huangisright.github.io/GiftedMath/units/gp-u6-1.html",
+       "stu": 1
+      },
+      {
+       "t": "站在兩個圓中間",
+       "u": "https://huangisright.github.io/GiftedMath/units/gp-u6-2.html",
+       "stu": 1
+      },
+      {
+       "t": "中點兩邊一樣長",
+       "u": "https://huangisright.github.io/GiftedMath/units/gp-u6-3.html",
+       "stu": 1
+      },
+      {
+       "t": "對角線乘起來",
+       "u": "https://huangisright.github.io/GiftedMath/units/gp-u6-4.html",
+       "stu": 1
+      },
+      {
+       "h": "單元七"
+      },
+      {
+       "t": "轉兩次",
+       "u": "https://huangisright.github.io/GiftedMath/units/gp-u7-1.html",
+       "stu": 1
+      },
+      {
+       "t": "三個中心",
+       "u": "https://huangisright.github.io/GiftedMath/units/gp-u7-2.html",
+       "stu": 1
+      },
+      {
+       "t": "中點又是正三角形",
+       "u": "https://huangisright.github.io/GiftedMath/units/gp-u7-3.html",
+       "stu": 1
+      },
+      {
+       "t": "轉回原樣",
+       "u": "https://huangisright.github.io/GiftedMath/units/gp-u7-4.html",
+       "stu": 1
+      },
+      {
+       "h": "單元八"
+      },
+      {
+       "t": "畫出來的地板",
+       "u": "https://huangisright.github.io/GiftedMath/units/gp-u8-1.html",
+       "stu": 1
+      },
+      {
+       "t": "一個數都不用算",
+       "u": "https://huangisright.github.io/GiftedMath/units/gp-u8-2.html",
+       "stu": 1
+      },
+      {
+       "t": "圓上六個點",
+       "u": "https://huangisright.github.io/GiftedMath/units/gp-u8-3.html",
+       "stu": 1
+      },
+      {
+       "t": "翻譯過來的句子",
+       "u": "https://huangisright.github.io/GiftedMath/units/gp-u8-4.html",
+       "stu": 1
+      },
+      {
+       "t": "最後一題",
+       "u": "https://huangisright.github.io/GiftedMath/units/gp-u8-5.html",
+       "stu": 1
+      }
+     ]
     }
    ]
   },
@@ -432,258 +603,6 @@
    "type": "html",
    "claude": "https://claude.ai/artifact/BTHNULA1nw9oKYaL9Fz8HY",
    "u": "draft/gp-map-2d.html"
-  },
-  {
-   "slug": "gp-u1-1",
-   "t": "一個不會變的數",
-   "cat": "幾何明珠",
-   "d": "單元一",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/FCFdtRSTuB4zRaqBznHM5W",
-   "u": "draft/gp-u1-1.html"
-  },
-  {
-   "slug": "gp-u1-2",
-   "t": "空白搬了家",
-   "cat": "幾何明珠",
-   "d": "單元一",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/GTxSgcZnYVGGrjQoJiTFMR",
-   "u": "draft/gp-u1-2.html"
-  },
-  {
-   "slug": "gp-u1-3",
-   "t": "三條線交在一點",
-   "cat": "幾何明珠",
-   "d": "單元一",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/2LiQyNTR3Zd13DrUodZNCW",
-   "u": "draft/gp-u1-3.html"
-  },
-  {
-   "slug": "gp-u2-1",
-   "t": "光走的那一條",
-   "cat": "幾何明珠",
-   "d": "單元二",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/L22sRi3xGridM2M3SFgPgJ",
-   "u": "draft/gp-u2-1.html"
-  },
-  {
-   "slug": "gp-u2-2",
-   "t": "最短的那一圈",
-   "cat": "幾何明珠",
-   "d": "單元二",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/URLwdS8CLzMnuukusTpRNn",
-   "u": "draft/gp-u2-2.html"
-  },
-  {
-   "slug": "gp-u2-3",
-   "t": "三條路接成一條",
-   "cat": "幾何明珠",
-   "d": "單元二",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/Fo4D7T4iijwVoiF2MZMzhK",
-   "u": "draft/gp-u2-3.html"
-  },
-  {
-   "slug": "gp-u3-1",
-   "t": "離 A 是離 B 的兩倍",
-   "cat": "幾何明珠",
-   "d": "單元三",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/B3x1jJ29A2YNg3aYhc7Gaa",
-   "u": "draft/gp-u3-1.html"
-  },
-  {
-   "slug": "gp-u3-2",
-   "t": "從頂點到底邊的那一條",
-   "cat": "幾何明珠",
-   "d": "單元三",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/3Kpf6HjJKSE57jXnjvR4nf",
-   "u": "draft/gp-u3-2.html"
-  },
-  {
-   "slug": "gp-u3-3",
-   "t": "切下來的那一塊",
-   "cat": "幾何明珠",
-   "d": "單元三",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/QYgTiQyb4LdxiArCsTpqVP",
-   "u": "draft/gp-u3-3.html"
-  },
-  {
-   "slug": "gp-u4-1",
-   "t": "又交在一點",
-   "cat": "幾何明珠",
-   "d": "單元四",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/4MwA2za9JZcRSpUa6gXtQg",
-   "u": "draft/gp-u4-1.html"
-  },
-  {
-   "slug": "gp-u4-2",
-   "t": "一條線穿過去",
-   "cat": "幾何明珠",
-   "d": "單元四",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/9EkBNmTpoipGzX2fMQTVMc",
-   "u": "draft/gp-u4-2.html"
-  },
-  {
-   "slug": "gp-u4-3",
-   "t": "三組對邊，交在一條線上",
-   "cat": "幾何明珠",
-   "d": "單元四",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/4S8oJnsZvjxNjTWmVq7ja4",
-   "u": "draft/gp-u4-3.html"
-  },
-  {
-   "slug": "gp-u5-1",
-   "t": "三個點排成一列",
-   "cat": "幾何明珠",
-   "d": "單元五",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/VkfW8FtYVxYpiRQ3J4CJSa",
-   "u": "draft/gp-u5-1.html"
-  },
-  {
-   "slug": "gp-u5-2",
-   "t": "九個點，一個圓",
-   "cat": "幾何明珠",
-   "d": "單元五",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/RWPYcBx9CRde4fGsUSy1Jo",
-   "u": "draft/gp-u5-2.html"
-  },
-  {
-   "slug": "gp-u5-3",
-   "t": "三個尖，一條線",
-   "cat": "幾何明珠",
-   "d": "單元五",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/MpqrhiUwWZV7AsBAybtEh2",
-   "u": "draft/gp-u5-3.html"
-  },
-  {
-   "slug": "gp-u6-1",
-   "t": "乘起來還是那個數",
-   "cat": "幾何明珠",
-   "d": "單元六",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/MbsYeDhx8oKcZ5FB8C1yG1",
-   "u": "draft/gp-u6-1.html"
-  },
-  {
-   "slug": "gp-u6-2",
-   "t": "站在兩個圓中間",
-   "cat": "幾何明珠",
-   "d": "單元六",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/SbcpP34nnRe5tf8ugUqFSG",
-   "u": "draft/gp-u6-2.html"
-  },
-  {
-   "slug": "gp-u6-3",
-   "t": "中點兩邊一樣長",
-   "cat": "幾何明珠",
-   "d": "單元六",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/VN8BCm7F5nyLjprQ7Ltqud",
-   "u": "draft/gp-u6-3.html"
-  },
-  {
-   "slug": "gp-u6-4",
-   "t": "對角線乘起來",
-   "cat": "幾何明珠",
-   "d": "單元六",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/JHgPDVzuezhox2H7QNAcxS",
-   "u": "draft/gp-u6-4.html"
-  },
-  {
-   "slug": "gp-u7-1",
-   "t": "轉兩次",
-   "cat": "幾何明珠",
-   "d": "單元七",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/5eYo8kLYc7wJFGjPRLmcSP",
-   "u": "draft/gp-u7-1.html"
-  },
-  {
-   "slug": "gp-u7-2",
-   "t": "三個中心",
-   "cat": "幾何明珠",
-   "d": "單元七",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/XFCoAeD7L4sLYJZAgJajKM",
-   "u": "draft/gp-u7-2.html"
-  },
-  {
-   "slug": "gp-u7-3",
-   "t": "中點又是正三角形",
-   "cat": "幾何明珠",
-   "d": "單元七",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/4QbAdFQFVjkVGNDJnReqbA",
-   "u": "draft/gp-u7-3.html"
-  },
-  {
-   "slug": "gp-u7-4",
-   "t": "轉回原樣",
-   "cat": "幾何明珠",
-   "d": "單元七",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/2pjQpMtHXErhJbFvMFxAnF",
-   "u": "draft/gp-u7-4.html"
-  },
-  {
-   "slug": "gp-u8-1",
-   "t": "畫出來的地板",
-   "cat": "幾何明珠",
-   "d": "單元八",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/2TFwv9fqTgoCPYq5iJtP2L",
-   "u": "draft/gp-u8-1.html"
-  },
-  {
-   "slug": "gp-u8-2",
-   "t": "一個數都不用算",
-   "cat": "幾何明珠",
-   "d": "單元八",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/Wn5GFWthvTd6AMQsRXbAYF",
-   "u": "draft/gp-u8-2.html"
-  },
-  {
-   "slug": "gp-u8-3",
-   "t": "圓上六個點",
-   "cat": "幾何明珠",
-   "d": "單元八",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/QNz5YDRP6kzAGo3zYWAHP8",
-   "u": "draft/gp-u8-3.html"
-  },
-  {
-   "slug": "gp-u8-4",
-   "t": "翻譯過來的句子",
-   "cat": "幾何明珠",
-   "d": "單元八",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/4WjpX1ozQCYVSMVqcVdbjA",
-   "u": "draft/gp-u8-4.html"
-  },
-  {
-   "slug": "gp-u8-5",
-   "t": "最後一題",
-   "cat": "幾何明珠",
-   "d": "單元八",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/CrWAJaKXeQkWzgxfPsrmP8",
-   "u": "draft/gp-u8-5.html"
   },
   {
    "slug": "kinmen-isochrone-unit",
