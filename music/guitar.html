@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>吉他不迷路｜17 單元練習本</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&display=swap" rel="stylesheet">
+<link href="../fonts/isright-hand.css" rel="stylesheet">
+<style>
+:root{--paper:#fdfcf8;--ink:#1b1b1b;--pencil:#77756f;--faint:#d9d6cc;--marker:#d4472b;--hl:#fff2a8;--soft:#f4f2ea;
+--root:#d4472b;--third:#2f7d6d;--fifth:#3b5ba5;
+--title:"IsRight Hand","LXGW WenKai TC","Kaiti TC","KaiTi",serif;
+--wob:255px 15px 225px 15px/15px 225px 15px 255px;--wob2:15px 255px 15px 225px/225px 15px 255px 15px}
+@media (prefers-color-scheme:dark){:root{--paper:#1c1d1f;--ink:#ecebe6;--pencil:#9c9a93;--faint:#3a3b3e;--marker:#ff7a5c;--hl:#4a4320;--soft:#26272a;--root:#ff7a5c;--third:#5cc2a8;--fifth:#8aa6ff}}
+*{box-sizing:border-box}html{background:var(--paper);scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.7 "LXGW WenKai TC","Kaiti TC","KaiTi",serif}
+a{color:inherit}
+.top{max-width:1180px;margin:0 auto;padding:22px 16px 6px}
+.crumb{font-size:15px;color:var(--pencil)}.crumb a{text-decoration:underline dotted}
+h1{font-family:var(--title);font-size:40px;line-height:1.15;margin:8px 0 2px}
+.sub{color:var(--pencil);margin:0}
+.layout{max-width:1180px;margin:0 auto;padding:12px 16px 60px;display:grid;grid-template-columns:230px minmax(0,1fr);gap:22px;align-items:start}
+nav{position:sticky;top:10px;max-height:calc(100vh - 20px);overflow:auto;border:2px solid var(--ink);border-radius:var(--wob2);padding:10px 8px}
+nav a{display:flex;gap:8px;align-items:baseline;text-decoration:none;padding:5px 8px;border-radius:8px;font-size:15px;color:var(--pencil)}
+nav a .n{width:22px;flex:none;font-size:13px}
+nav a.on{background:var(--hl);color:var(--ink);font-weight:700}
+nav a .ck{margin-left:auto;font-size:12px;color:var(--third)}
+nav .grp{font-size:12px;color:var(--pencil);letter-spacing:.12em;padding:10px 8px 2px}
+section.view{display:none}section.view.on{display:block}
+h2{font-family:var(--title);font-size:32px;margin:2px 0 6px;line-height:1.2}
+h3{font-family:var(--title);font-size:23px;margin:26px 0 6px}
+h2 .u{display:block;font:700 13px/1.4 "LXGW WenKai TC",serif;color:var(--marker);letter-spacing:.12em}
+.pill{display:inline-block;font-size:14px;color:var(--marker);border:1.5px solid var(--marker);border-radius:var(--wob2);padding:0 9px;margin-right:6px}
+.pill.g{color:var(--pencil);border-color:var(--pencil);border-style:dashed}
+p{margin:8px 0}
+.box{border:2px solid var(--ink);border-radius:var(--wob);padding:14px 16px;margin:14px 0}
+.box.dash{border-style:dashed;border-color:var(--pencil)}
+.hlbg{background:linear-gradient(transparent 55%,var(--hl) 55%);padding:0 3px}
+.prac{border:2.5px solid var(--ink);border-radius:var(--wob);padding:14px 16px 12px;margin:16px 0;position:relative}
+.prac:nth-of-type(even){border-radius:var(--wob2)}
+.prac.done{border-style:dashed;border-color:var(--third)}
+.prac h4{font-family:var(--title);font-size:22px;margin:0 0 2px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.prac h4 .no{font:700 13px "LXGW WenKai TC",serif;color:var(--marker)}
+.prac .goal{color:var(--pencil);font-size:15px;margin:0 0 6px}
+.prac .tip{font-size:15px;margin:8px 0 0;padding-left:12px;border-left:3px solid var(--faint)}
+.tabwrap{display:flex;flex-wrap:wrap;row-gap:4px;margin:8px 0 4px;overflow-x:auto}
+.tabwrap svg{display:block;flex:none}
+.tabwrap text{font-family:"LXGW WenKai TC",serif}
+.st .hl{fill:transparent}.st.on .hl{fill:var(--hl)}
+.st.on .fn{fill:var(--marker);font-weight:700}
+.ctrl{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;font-size:15px;margin-top:6px}
+button,.btn{font:inherit;font-size:15px;color:var(--ink);background:transparent;border:2px solid var(--ink);border-radius:var(--wob2);padding:4px 13px;cursor:pointer;line-height:1.5}
+button:hover{background:var(--hl)}
+button.main{background:var(--ink);color:var(--paper)}
+button.main:hover{background:var(--marker);border-color:var(--marker)}
+button.ok{border-color:var(--third);color:var(--third)}
+input[type=range]{accent-color:var(--marker);width:120px;vertical-align:middle}
+input[type=checkbox],input[type=radio]{accent-color:var(--marker)}
+select,textarea,input[type=text]{font:inherit;font-size:15px;color:var(--ink);background:transparent;border:2px solid var(--ink);border-radius:var(--wob2);padding:4px 8px}
+textarea{width:100%;min-height:120px;font-family:ui-monospace,Menlo,monospace;font-size:14px;border-radius:12px}
+.small{font-size:14px;color:var(--pencil)}
+.quiz{border:2px dashed var(--pencil);border-radius:var(--wob2);padding:12px 16px;margin:16px 0}
+.quiz label{display:block;padding:2px 0;cursor:pointer}
+.fb{font-weight:700;margin-top:6px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;padding:6px 8px;border-bottom:1.5px dashed var(--faint);vertical-align:top}
+th{color:var(--pencil);font-weight:400}
+.fret{overflow-x:auto}
+.fret table{min-width:760px;border-collapse:separate;border-spacing:2px}
+.fret td,.fret th{border:none;padding:0;text-align:center}
+.fret th{font-size:12px}
+.fc{height:30px;min-width:38px;border:1.5px solid var(--faint);border-radius:7px;font-size:12px;cursor:pointer;background:transparent;color:var(--pencil);padding:0;width:100%}
+.fc.mk{color:var(--ink);border-color:var(--ink);font-weight:700}
+.fc.root{background:var(--root);border-color:var(--root);color:#fff}
+.fc.third{background:var(--third);border-color:var(--third);color:#fff}
+.fc.fifth{background:var(--fifth);border-color:var(--fifth);color:#fff}
+.fc.open{border-style:dashed}
+.legend span{display:inline-block;width:12px;height:12px;border-radius:3px;margin:0 4px 0 10px;vertical-align:-1px}
+.circle{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.circle button{padding:6px 0;text-align:center}
+.circle button b{display:block;font-size:19px}
+.big{font-family:var(--title);font-size:44px;line-height:1;margin:6px 0}
+.today li{margin:6px 0}
+.bar{height:12px;border:2px solid var(--ink);border-radius:var(--wob2);overflow:hidden;margin:6px 0}
+.bar span{display:block;height:100%;background:var(--marker);width:0}
+footer{color:var(--pencil);font-size:14px;border-top:1.5px dashed var(--faint);padding:16px;text-align:center;max-width:1180px;margin:0 auto}
+.navbtns{display:flex;justify-content:space-between;margin-top:26px;gap:10px}
+@media(max-width:820px){.layout{grid-template-columns:1fr}nav{position:static;max-height:none;display:flex;flex-wrap:wrap;gap:2px}nav .grp{width:100%}nav a{font-size:14px;padding:3px 7px}nav a .ck{margin-left:4px}.grid2{grid-template-columns:1fr}h1{font-size:32px}.circle{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<div class="top">
+<div class="crumb"><a href="../index.html">← IsRight 入口</a>　／　生活　／　吉他與音樂</div>
+<h1>吉他不迷路：17 單元練習本</h1>
+<p class="sub">從「知道怎麼按」走到「知道為什麼這樣彈」。每單元都有明確的練習主題和可以播放的六線譜；沒帶琴時，用推導、聽力與小測驗繼續練。</p>
+</div>
+<div class="layout">
+<nav id="nav"></nav>
+<main id="main">
+
+<section class="view" id="v-plan">
+<h2>今天練什麼</h2>
+<p>建議每週 3–4 次，每次 20–30 分鐘：<span class="hlbg">暖身 5 分鐘 → 本單元主題 15 分鐘 → 複習 5 分鐘</span>。每個練習先用慢速練到「乾淨、不停頓」，再往目標速度推；練好了就按「練好了」，系統會記下你當時的速度。</p>
+<div class="box" id="today"></div>
+<h3>整體進度</h3>
+<div class="bar"><span id="pbar"></span></div>
+<p class="small" id="plabel"></p>
+<h3>全部練習主題</h3>
+<div id="plist"></div>
+<h3>六線譜怎麼看</h3>
+<div class="box dash">
+<p>六條橫線由上到下是<b>第 1 弦（最細的高音 E）到第 6 弦（最粗的低音 E）</b>，跟你低頭看琴的方向相反。線上的數字是要按的格數，0 是空弦。同一直排的數字一起彈。</p>
+<p>上方的字是和弦名稱；↓、↑ 是下刷、上刷；下方的小字是音名。h＝捶音，p＝勾音，/＝滑音。</p>
+<div class="tabwrap" id="legendTab"></div>
+</div>
+</section>
+
+<section class="view" id="v-tools">
+<h2>工具箱</h2>
+<p class="small">有琴時拿來對照，沒琴時拿來推導、練耳朵。</p>
+
+<h3>① 指板地圖：和弦音、音階一眼看</h3>
+<div class="ctrl">
+<label>看什麼 <select id="fbMode"><option value="none">只有音名</option><option value="chord">和弦</option><option value="scale">音階</option></select></label>
+<label>根音 <select id="fbRoot"></select></label>
+<label>種類 <select id="fbType"></select></label>
+<label><input type="checkbox" id="fbDeg"> 顯示級數（1、♭3、5…）</label>
+</div>
+<p class="legend small"><span style="background:var(--root)"></span>根音<span style="background:var(--third)"></span>三度<span style="background:var(--fifth)"></span>五度<span style="border:1.5px solid var(--ink)"></span>其他組成音</p>
+<div class="fret" id="fretboard"></div>
+<p id="fbInfo"><b>點任一格，這裡會顯示音名，以及它和根音的距離。</b></p>
+
+<h3>② 伴奏機：跟著和弦即興、哼旋律</h3>
+<div class="ctrl">
+<label>調 <select id="bkKey"></select></label>
+<label>進行 <select id="bkProg"></select></label>
+<label>速度 <input type="range" id="bkBpm" min="50" max="140" value="80"> <span id="bkBpmV">80</span></label>
+<button class="main" id="bkPlay">▶ 開始</button><button id="bkStop">■ 停止</button>
+</div>
+<p class="small">刷法固定為「↓ ↓↑ ↑↓↑」，第 1、3 拍有低音。即興時，先只用五聲音階，句尾停在和弦音上。</p>
+<div class="big" id="bkNow">–</div><p id="bkSeq" class="small"></p>
+
+<h3>③ 耳朵練習</h3>
+<div class="ctrl">
+<label>題型 <select id="earMode"><option value="tri">大三和弦還是小三和弦？</option><option value="int">兩個音差多遠？</option></select></label>
+<button class="main" id="earNew">出題</button><button id="earAgain">再聽一次</button>
+<span class="small" id="earScore">0 / 0</span>
+</div>
+<div class="ctrl" id="earAns"></div>
+<p class="fb" id="earFb"></p>
+
+<div class="grid2">
+<div>
+<h3>④ 移調器</h3>
+<div class="ctrl"><label>進行 <select id="trProg"></select></label><label>到哪個調 <select id="trKey"></select></label></div>
+<p id="trOut" class="big" style="font-size:30px"></p>
+<p class="small">級數不變，名稱跟著調走。用變調夾：夾第 n 格＝整體升 n 個半音。</p>
+</div>
+<div>
+<h3>⑤ 音程計算器</h3>
+<div class="ctrl"><select id="inA"></select> 到 <select id="inB"></select></div>
+<p id="inOut" style="font-size:20px"></p>
+</div>
+</div>
+
+<h3>⑥ 五度圈</h3>
+<p class="small">順時針每格往上完全五度、多一個升記號；逆時針每格往上完全四度、多一個降記號。點一個調看看。</p>
+<div class="circle" id="circle"></div>
+<p id="circleOut" class="box dash">點一個調開始。</p>
+
+<h3>⑦ 我的六線譜筆記</h3>
+<p class="small">把想練的句子寫下來，可以播放。寫法：<code>弦:格</code>（例 <code>5:3</code>）、同時彈用 <code>+</code>、<code>|</code> 分小節、<code>-</code> 延長、<code>[C]</code> 標和弦、<code>*C</code> 下刷 C 和弦、<code>v</code>／<code>^</code> 下刷／上刷目前和弦、<code>@C</code> 在下方標音名、格數後加 <code>h</code>、<code>p</code>、<code>/</code> 標技巧。內容只存在這台裝置的瀏覽器。</p>
+<textarea id="nbSrc"></textarea>
+<div class="ctrl"><label>每拍幾格 <select id="nbBeat"><option>1</option><option selected>2</option><option>4</option></select></label><button id="nbRender">畫出來</button><button id="nbSave">存起來</button></div>
+<div id="nbOut"></div>
+</section>
+
+<div id="units"></div>
+</main>
+</div>
+<footer>吉他不迷路｜17 單元練習本　·　標準調弦 E–A–D–G–B–E　·　黃士祐 老師（IsRight）<br>部分樂理講法參考：小樓老師（樓奐廷）《木吉他學習手冊》第十四版。所有譜例皆為原創練習。</footer>
+
+<script>
+/* ========== 基本資料 ========== */
+const SHARP=['C','C♯','D','D♯','E','F','F♯','G','G♯','A','A♯','B'];
+const FLAT =['C','D♭','D','E♭','E','F','G♭','G','A♭','A','B♭','B'];
+const FLATKEYS=[5,10,3,8,1,6]; // F B♭ E♭ A♭ D♭ G♭
+const nameOf=(pc,key)=>(FLATKEYS.includes(key)?FLAT:SHARP)[(pc%12+12)%12];
+const OPEN={6:40,5:45,4:50,3:55,2:59,1:64};           // MIDI
+const OPENPC={6:4,5:9,4:2,3:7,2:11,1:4};
+const DEG={0:'1',1:'♭2',2:'2',3:'♭3',4:'3',5:'4',6:'♭5',7:'5',8:'♭6',9:'6',10:'♭7',11:'7'};
+const INTNAME={0:'同音／八度',1:'小二度',2:'大二度',3:'小三度',4:'大三度',5:'完全四度',6:'增四度／減五度',7:'完全五度',8:'小六度',9:'大六度',10:'小七度',11:'大七度',12:'八度'};
+
+/* 和弦按法：由第 6 弦到第 1 弦，x＝不彈 */
+const CH={
+ 'C':'x32010','Cmaj7':'x32000','C7':'x32310','D':'xx0232','Dm':'xx0231','Dm7':'xx0211','D7':'xx0212',
+ 'E':'022100','Em':'022000','E7':'020100','F':'xx3211','F(全)':'133211','G':'320003','G7':'320001','Gmaj7':'3x0002',
+ 'A':'x02220','Am':'x02210','Am7':'x02010','Bm':'x24432','Bdim':'x2343x',
+ 'G(E型)':'3,5,5,4,3,3','A(E型)':'5,7,7,6,5,5','B♭(A型)':'x,1,3,3,3,1','C(A型)':'x,3,5,5,5,3','D(A型)':'x,5,7,7,7,5',
+ 'C(C形)':'x32010','C(A形)':'x,3,5,5,5,3','C(G形)':'x,x,5,5,5,8','C(E形)':'8,10,10,9,8,8','C(D形)':'x,x,10,12,13,12'
+};
+function shape(name){const s=CH[name];if(!s)return null;const a=s.includes(',')?s.split(','):s.split('');
+ return a.map((v,i)=>v==='x'?null:{s:6-i,f:+v}).filter(Boolean);}
+
+/* ========== 17 單元內容 ========== */
+const U=[
+{t:'指板地圖',tag:'知道自己站在哪裡',stage:'基礎地圖',
+ c:'指板是一張音高座標圖。六條弦各有空弦音，每往琴身方向一格升高半音；第 12 格回到同名音，高一個八度。12 個音名像 12 個月一樣循環：C C♯ D D♯ E F F♯ G G♯ A A♯ B，再回到 C。<b>E–F、B–C 之間只差半音</b>，其他相鄰自然音都差一個全音。',
+ g:'先背第六弦、第五弦的自然音位置，這兩條弦是所有可移動和弦的根音所在。其他弦用「八度形狀」找：從第六、五弦的音往細弦數兩條、往高格數兩格，就是同名音；但跨過第三、二弦時要再多一格（因為只有 G–B 弦之間是大三度，其他相鄰弦都是完全四度）。',
+ nog:'閉眼由粗到細背出 E A D G B E；再在腦中走一遍第六弦：0 格 E、1 格 F、3 格 G、5 格 A、7 格 B、8 格 C、10 格 D、12 格 E。',
+ p:[
+  {n:'空弦點名',goal:'邊彈邊唸出每條空弦的音名',bpm:[60,90],beat:1,tab:'6:0@E 5:0@A 4:0@D 3:0@G | 2:0@B 1:0@E 2:0@B 3:0@G | 4:0@D 5:0@A 6:0@E -',tip:'聲音要出來再唸，唸的速度跟著拍子，不要搶拍。'},
+  {n:'第六弦自然音爬格',goal:'在第六弦找到 E F G A B C D E 並說出名稱',bpm:[50,80],beat:1,tab:'6:0@E 6:1@F 6:3@G 6:5@A | 6:7@B 6:8@C 6:10@D 6:12@E | 6:10@D 6:8@C 6:7@B 6:5@A | 6:3@G 6:1@F 6:0@E -',tip:'留意 E→F、B→C 只差一格。下行時不看譜，靠位置記憶。'},
+  {n:'第五弦自然音爬格',goal:'在第五弦找到 A B C D E F G A',bpm:[50,80],beat:1,tab:'5:0@A 5:2@B 5:3@C 5:5@D | 5:7@E 5:8@F 5:10@G 5:12@A | 5:10@G 5:8@F 5:7@E 5:5@D | 5:3@C 5:2@B 5:0@A -',tip:'練完後隨機抽考：說一個音名，在第五弦上找到它。'},
+  {n:'八度形狀',goal:'用八度形狀把低音弦的音搬到細弦',bpm:[50,72],beat:1,tab:'6:3@G 4:5@G 6:5@A 4:7@A | 5:3@C 3:5@C 5:5@D 3:7@D | 4:2@E 2:5@E 3:2@A 1:5@A | 6:3+4:5@G - 5:3+3:5@C -',tip:'第三小節開始跨過 G–B 弦：形狀要再往高音多移一格（4:2→2:5，不是 2:4）。'}
+ ],
+ q:{q:'第六弦第 8 格是什麼音？',o:['B','C','D'],a:1,e:'第六弦：5 格 A、7 格 B、8 格 C（B 到 C 只差半音）。'}},
+
+{t:'音程：距離就是情緒',tag:'聽懂音與音的距離',stage:'基礎地圖',
+ c:'音程是兩個音的距離。先用「在音階上數第幾個音」決定度數（C 到 E 是三度），再用半音數分大小：小三度 3 個半音、大三度 4 個、完全四度 5 個、完全五度 7 個、八度 12 個。大三度通常聽起來明亮，小三度比較內斂。',
+ g:'同一條弦上，格數差＝半音數，最直觀。跨到隔壁細弦時，同一格往上是完全四度（G→B 弦例外是大三度），所以：大三度＝隔壁弦退一格、小三度＝退兩格、完全五度＝隔壁弦進兩格、八度＝隔一條弦進兩格。',
+ nog:'用音程計算器（工具箱⑤）算：C→E、E→G、G→B、B→D 各是大三度還是小三度？',
+ p:[
+  {n:'同一條弦上的距離',goal:'用格數感受小三、大三、完全五度、八度',bpm:[50,72],beat:1,tab:'5:3@C 5:6@E♭ - - | 5:3@C 5:7@E - - | 5:3@C 5:10@G - - | 5:3@C 5:15@C - -',tip:'每組彈完先停下來聽，說出它是「暗」還是「亮」。'},
+  {n:'跨弦的音程形狀',goal:'把音程變成手指形狀，先分開彈再一起彈',bpm:[50,72],beat:1,tab:'5:3@C 4:1@E♭ 5:3+4:1 - | 5:3@C 4:2@E 5:3+4:2 - | 5:3@C 4:3@F 5:3+4:3 - | 5:3@C 4:5@G 5:3+4:5 -',tip:'最後一組 5:3+4:5 就是搖滾常用的「強力和弦」，只有根音和五度。'},
+  {n:'從 A 出發的音程聽寫',goal:'空弦 A 當參考音，聽出每個音的距離',bpm:[50,70],beat:1,tab:'5:0@A 4:0@D - - | 5:0@A 4:2@E - - | 5:0@A 4:4@F♯ - - | 5:0@A 3:2@A - -',tip:'答案：完全四度、完全五度、大六度、八度。沒琴時用工具箱③練耳朵。'}
+ ],
+ q:{q:'C 到 E 相差幾個半音？',o:['3','4','5'],a:1,e:'C→C♯→D→D♯→E，共 4 個半音，是大三度。'}},
+
+{t:'大調音階與它的公式',tag:'用公式建立大調',stage:'基礎地圖',
+ c:'大調音階公式：全、全、半、全、全、全、半。C 大調是 C D E F G A B C，唱名 Do Re Mi Fa Sol La Ti Do。換一個起點套同一公式就得到新的調：G 大調 G A B C D E F♯ G。<b>每個字母只用一次</b>，所以第七音寫 F♯ 不寫 G♭。',
+ g:'在單一條弦上彈音階，格數差就是公式：2-2-1-2-2-2-1。再學一個不含空弦的把位指型，它可以整個平移到任何調。',
+ nog:'用「全全半全全全半」推出 D 大調、F 大調，再到工具箱①選「音階」核對。',
+ p:[
+  {n:'C 大調開放把位',goal:'彈出 C 大調並唱出 Do Re Mi',bpm:[60,100],beat:1,tab:'5:3@Do 4:0@Re 4:2@Mi 4:3@Fa | 3:0@Sol 3:2@La 2:0@Ti 2:1@Do | 2:0@Ti 3:2@La 3:0@Sol 4:3@Fa | 4:2@Mi 4:0@Re 5:3@Do -',tip:'心裡唱唱名，這是之後抓歌定調的基本功。'},
+  {n:'一條弦上看見公式',goal:'在第六弦從 G 開始，用格距 2-2-1-2-2-2-1 走出 G 大調',bpm:[50,80],beat:1,tab:'6:3@G 6:5@A 6:7@B 6:8@C | 6:10@D 6:12@E 6:14@F♯ 6:15@G | 6:14@F♯ 6:12@E 6:10@D 6:8@C | 6:7@B 6:5@A 6:3@G -',tip:'第 7 格到第 8 格（B→C）、第 14 格到 15 格（F♯→G）是那兩個「半」。'},
+  {n:'可移動的大調指型',goal:'不用空弦彈 G 大調，再整個往上移 2 格變 A 大調',bpm:[60,100],beat:1,tab:'6:3@G 6:5@A 5:2@B 5:3@C | 5:5@D 4:2@E 4:4@F♯ 4:5@G | 6:5@A 6:7@B 5:4@C♯ 5:5@D | 5:7@E 4:4@F♯ 4:6@G♯ 4:7@A',tip:'食指負責第一格位置，一指一格。形狀不變，起點決定調名。'}
+ ],
+ q:{q:'G 大調需要哪個升記號？',o:['C♯','F♯','G♯'],a:1,e:'G A B C D E F♯ G，第七音要升高才符合全全半全全全半。'}},
+
+{t:'小調音階與 12 個調',tag:'理解小調與調性',stage:'基礎地圖',
+ c:'自然小調公式：全、半、全、全、半、全、全。A 自然小調 A B C D E F G A，跟 C 大調用同一組音，只是重心（主音）不同，這叫<b>關係大小調</b>：大調主音往下小三度就是它的關係小調（C→Am、G→Em、F→Dm）。',
+ g:'判斷一首歌是大調還是小調：看它從哪個和弦開始、停在哪個和弦。以 Am 開始、Am 結束的歌多半是 A 小調。小調的和弦常用關係大調的級數來寫，例如 A 小調的 Am 寫成 6m。',
+ nog:'寫出 E 小調與 G 大調的音，確認它們是同一組音；再找出 D 大調的關係小調。',
+ p:[
+  {n:'A 自然小調開放把位',goal:'彈出 A 小調，感受停在 A 的「家」',bpm:[60,100],beat:1,tab:'5:0@A 5:2@B 5:3@C 4:0@D | 4:2@E 4:3@F 3:0@G 3:2@A | 3:0@G 4:3@F 4:2@E 4:0@D | 5:3@C 5:2@B 5:0@A -',tip:'和單元 3 的 C 大調比一比：同一組音，停在 A 聽起來比較暗。'},
+  {n:'同一組音，兩個家',goal:'用分解和弦比較 Am 與 C 的重心',bpm:[60,90],beat:2,tab:'[Am] 5:0@A 4:2 3:2 2:1 1:0 2:1 3:2 4:2 | 5:0@A 4:2 3:2 2:1 1:0 2:1 3:2 4:2 | [C] 5:3@C 4:2 3:0 2:1 1:0 2:1 3:0 4:2 | 5:3@C 4:2 3:0 2:1 1:0 - - -',tip:'彈完 Am 後，試著用 A 小調音階哼一句停在 A；換到 C 後，同樣的音停在 C。'}
+ ],
+ q:{q:'A 自然小調的第三個音是？',o:['C','C♯','D'],a:0,e:'A–B–C–D–E–F–G，第三音是 C，跟 A 是小三度。'}},
+
+{t:'用公式組和弦',tag:'從按法回到組成音',stage:'和弦建構',
+ c:'大三和弦＝1、3、5；小三和弦＝1、♭3、5。差別只有三音：大三度變小三度。吉他按法常會重複某些音，但和弦身分由組成音決定。',
+ g:'從你會的按法往回拆：C 和弦 x32010 由粗到細是 C E G C E，只有 C、E、G 三個音。把大和弦裡的三音降半音，就得到小和弦：E→Em 只動第三弦、A→Am 只動第二弦、D→Dm 只動第一弦。',
+ nog:'推出 E 和弦的組成音（答案 E、G♯、B），再推 Dm（D、F、A）。到工具箱①選「和弦」核對。',
+ p:[
+  {n:'拆開 C 和弦',goal:'逐弦彈出 C 和弦並說出每個音名',bpm:[50,80],beat:1,tab:'[C] 5:3@C 4:2@E 3:0@G 2:1@C | 1:0@E 2:1@C 3:0@G 4:2@E | *C - - -',tip:'找出哪幾條弦是根音 C、哪幾條是三音 E。'},
+  {n:'只改三音：大和弦變小和弦',goal:'聽見三音改變帶來的明暗',bpm:[60,90],beat:1,tab:'*E - *Em - | *A - *Am - | *D - *Dm - | *E - - -',tip:'E→Em：第三弦 G♯ 放掉變 G；A→Am：第二弦 C♯ 變 C；D→Dm：第一弦 F♯ 變 F。'},
+  {n:'分解 Am 與 Dm',goal:'用分解和弦聽清楚小三和弦的三個音',bpm:[60,90],beat:2,tab:'[Am] 5:0@A 4:2@E 3:2@A 2:1@C 1:0@E 2:1 3:2 4:2 | [Dm] 4:0@D 3:2@A 2:3@D 1:1@F 2:3 3:2 4:0 - ',tip:'Dm 的 F（1:1）就是那個「降下來的三音」。'}
+ ],
+ q:{q:'把 A 和弦變成 Am，要改哪個音？',o:['根音 A 改成 A♭','三音 C♯ 改成 C','五音 E 改成 E♭'],a:1,e:'大三和弦變小三和弦，只把三音降半音：C♯→C。'}},
+
+{t:'橫按與可移動指型',tag:'把和弦形狀移到其他調',stage:'和弦建構',
+ c:'橫按把食指當成移動的琴枕。<b>E 型</b>大和弦根音在第六弦，<b>A 型</b>根音在第五弦。形狀不變、整體平移，和弦名稱由根音所在的格決定：E 型在第 3 格是 G、第 5 格是 A；A 型在第 1 格是 B♭、第 3 格是 C。',
+ g:'只要背熟第六、第五弦的音名（單元 1），任何大和弦、小和弦都能找到。先練半橫按 F（xx3211），再練全橫按。',
+ nog:'不看指板回答：E 型在第 7 格是什麼和弦？A 型在第 5 格呢？（B、D）',
+ p:[
+  {n:'E 型橫按走三個位置',goal:'同一個形狀在第 1、3、5 格得到 F、G、A',bpm:[60,90],beat:1,tab:'[F] v v v v | [G(E型)] v v v v | [A(E型)] v v v v | [G(E型)] v v v v',tip:'按不響時先檢查：食指側面壓弦、手腕放低、大拇指在琴頸後方中間。'},
+  {n:'A 型橫按走三個位置',goal:'同一個形狀在第 1、3、5 格得到 B♭、C、D',bpm:[60,90],beat:1,tab:'[B♭(A型)] v v v v | [C(A型)] v v v v | [D(A型)] v v v v | [C(A型)] v v v v',tip:'第六弦不要刷到。說出每個位置的根音再刷。'},
+  {n:'半橫按 F 與換和弦',goal:'C → F → G → C 換得順，不停拍',bpm:[60,90],beat:1,tab:'*C - v v | *F - v v | *G - v v | *C - - -',tip:'換和弦慢的話，只練「換的那一下」：C→F 來回 10 次。'}
+ ],
+ q:{q:'E 型大和弦形狀的根音在哪條弦？',o:['第六弦','第五弦','第四弦'],a:0,e:'E 型的根音在第六弦，A 型在第五弦。'}},
+
+{t:'CAGED：五個把位走遍指板',tag:'把開放和弦形狀連成地圖',stage:'和弦建構',
+ c:'CAGED 取自 C、A、G、E、D 五個開放和弦形狀。同一個和弦可以沿著指板用這五個形狀依序出現，而且順序永遠是 C→A→G→E→D 再回到 C。重點不是背五張圖，而是在每個形狀裡找到根音、三度、五度。',
+ g:'以 C 和弦為例：C 形在開放把位、A 形在第 3 格、G 形在第 5 格、E 形在第 8 格、D 形在第 10 格。每個形狀的最高音和下一個形狀相接，五個形狀拼起來就是整條指板。',
+ nog:'到工具箱①選「和弦 C 大三和弦」，在指板上找出這五塊各自的 C、E、G。',
+ p:[
+  {n:'C 和弦的五個形狀',goal:'沿著指板彈出 C 的 C、A、G、E、D 形',bpm:[50,70],beat:1,tab:'[C(C形)] v - - - | [C(A形)] v - - - | [C(G形)] v - - - | [C(E形)] v - - - | [C(D形)] v - - -',tip:'G 形只彈細的四條弦（xx5558）。每個形狀先找到根音 C 在哪裡。'},
+  {n:'在 E 形裡找出 1、3、5',goal:'分解第 8 格的 C 和弦，說出每個音的角色',bpm:[50,80],beat:1,tab:'[C(E形)] 6:8@C根 5:10@G五 4:10@C根 3:9@E三 | 2:8@G五 1:8@C根 2:8@G五 3:9@E三',tip:'三音只出現一次（第三弦第 9 格），它決定這是大和弦。'},
+  {n:'在 D 形與 A 形裡找三音',goal:'只彈三音與根音，熟悉三音的位置',bpm:[50,80],beat:1,tab:'4:10@C 3:12@G 2:13@C 1:12@E | 5:3@C 4:5@G 3:5@C 2:5@E | 5:3+2:5 - 4:10+1:12 -',tip:'最後一小節把兩個位置的「根音＋三音」連起來，耳朵會聽到同一個和弦換了顏色。'}
+ ],
+ q:{q:'沿著指板往高音走，C 形的下一個形狀是？',o:['A 形','G 形','D 形'],a:0,e:'順序是 C→A→G→E→D，再回到 C。'}},
+
+{t:'七和弦與色彩',tag:'讓和弦不只大、小',stage:'和弦建構',
+ c:'在三和弦上再疊一個七度：maj7＝1、3、5、7；屬七 7＝1、3、5、♭7；m7＝1、♭3、5、♭7。名稱裡有 m 的三音是小三度；單寫 7 的七音是小七度；maj7 的七音是大七度。',
+ g:'從會的和弦改一個音就能得到七和弦：G 和弦第一弦的 G（第 3 格）降到 F♯（第 2 格）是 Gmaj7，再降到 F（第 1 格）是 G7。按不出全部音時，優先省略五音。',
+ nog:'推出 Cmaj7、C7、Cm7 的組成音（C E G B／C E G B♭／C E♭ G B♭）。',
+ p:[
+  {n:'G → Gmaj7 → G7',goal:'聽一個音往下走帶來的色彩變化',bpm:[60,90],beat:1,tab:'*G - - - | *Gmaj7 - - - | *G7 - - - | *C - - -',tip:'G7 最後回到 C 會有「回家」的感覺，那是屬七和弦的功能。'},
+  {n:'C 家族的七和弦',goal:'比較 C、Cmaj7、C7、Am7',bpm:[60,90],beat:1,tab:'*C - - - | *Cmaj7 - - - | *C7 - - - | *Am7 - - -',tip:'Cmaj7 只是把 C 第二弦的 C 放開成 B；C7 是在第三弦按出 B♭。'},
+  {n:'七和弦小進行',goal:'Cmaj7 → Am7 → Dm7 → G7，彈出柔和的流行感',bpm:[60,90],beat:2,tab:'[Cmaj7] v - v ^ - ^ v ^ | [Am7] v - v ^ - ^ v ^ | [Dm7] v - v ^ - ^ v ^ | [G7] v - v ^ - ^ v ^',tip:'這個進行的級數是 Imaj7–vi7–ii7–V7，單元 11 會再遇到。'}
+ ],
+ q:{q:'Cmaj7 的七音是？',o:['B','B♭','A'],a:0,e:'Cmaj7＝C E G B，七音是大七度 B。'}},
+
+{t:'級數與羅馬數字',tag:'看懂和弦在調裡的位置',stage:'調性與和聲',
+ c:'大調七個音各自往上疊三度，得到七個順階和弦：I、ii、iii、IV、V、vi、vii°（大寫＝大和弦、小寫＝小和弦、°＝減和弦）。也常寫成 1、2m、3m、4、5、6m、7dim。C 大調是 C、Dm、Em、F、G、Am、Bdim。',
+ g:'看到一首歌的和弦，就練習改寫成級數：C–G–Am–F＝I–V–vi–IV。級數不管在哪個調都一樣，所以它才是歌的骨架。',
+ nog:'寫出 G 大調、D 大調的七個順階和弦。',
+ p:[
+  {n:'C 大調順階和弦一輪',goal:'依序彈出 I 到 vii°，邊彈邊唸級數',bpm:[60,90],beat:1,tab:'[I C] v v v v | [ii Dm] v v v v | [iii Em] v v v v | [IV F] v v v v | [V G] v v v v | [vi Am] v v v v | [vii° Bdim] v v v v | [I C] v - - -',tip:'Bdim（x2343x）聽起來不穩，很想回到 C，這就是它很少單獨出現的原因。'},
+  {n:'G 大調順階和弦',goal:'換一個調，級數的大小模式不變',bpm:[60,90],beat:1,tab:'[I G] v v v v | [ii Am] v v v v | [iii Bm] v v v v | [IV C] v v v v | [V D] v v v v | [vi Em] v v v v | [I G] v - - -',tip:'大、小、小、大、大、小 的模式和 C 大調一模一樣。'}
+ ],
+ q:{q:'C 大調的 V 級和弦是？',o:['F','G','Am'],a:1,e:'C D E F G：第五個音是 G，V 級是 G 大和弦。'}},
+
+{t:'五度圈',tag:'看見 12 個調之間的關係',stage:'調性與和聲',
+ c:'五度圈把 12 個調按完全五度排成一圈。順時針（往上五度）：C G D A E B F♯，每格多一個升記號；逆時針（往上四度）：C F B♭ E♭ A♭ D♭ G♭，每格多一個降記號。相鄰的調只差一個音，所以轉調常往鄰居走。',
+ g:'五度圈也藏在和弦進行裡：<b>逆時針走</b>（每步根音往下五度）是最有推進力的進行，例如 E→A→D→G→C，每一個都像前一個的 V 級在找家。',
+ nog:'用工具箱⑥點 G、F，說出它們各有幾個升降記號；再說出 C 的關係小調在五度圈的哪裡。',
+ p:[
+  {n:'跟著五度圈找根音',goal:'在第六、五弦按五度圈順序找到 12 個根音',bpm:[50,72],beat:1,tab:'5:3@C 6:3@G 5:5@D 5:0@A | 6:0@E 5:2@B 6:2@F♯ 5:4@C♯ | 6:4@A♭ 5:6@E♭ 5:1@B♭ 6:1@F | 5:3@C - - -',tip:'這個練習同時複習單元 1 的低音弦音名。'},
+  {n:'逆時針的和弦進行',goal:'E → A → D → G → C，聽見一步步回家',bpm:[60,90],beat:1,tab:'*E - v v | *A - v v | *D - v v | *G - v v | *C - - -',tip:'改成 E7 → A7 → D7 → G7 → C 會更有藍調、爵士味。'}
+ ],
+ q:{q:'C 順時針下一格（往上完全五度）是哪個調？',o:['F','G','D'],a:1,e:'C 往上完全五度是 G，G 大調有一個升記號。'}},
+
+{t:'撐起一切的和弦進行',tag:'讓和弦變成音樂句子',stage:'調性與和聲',
+ c:'和聲功能大致分三類：<b>主功能</b>（I、vi，穩定、回家）、<b>下屬功能</b>（IV、ii，離開家）、<b>屬功能</b>（V、vii°，緊張、想回家）。常見進行就是在「離開—緊張—回家」之間繞：I–V–vi–IV、vi–IV–I–V、ii–V–I。',
+ g:'這是傾向，不是規則。先把三個經典進行彈熟，再用工具箱②伴奏機換調聽。',
+ nog:'把 I–V–vi–IV 寫成 G 大調與 D 大調的和弦名。',
+ p:[
+  {n:'I–V–vi–IV（C 大調）',goal:'用基本刷法彈完一輪不停拍',bpm:[60,96],beat:2,tab:'[C] v - v ^ - ^ v ^ | [G] v - v ^ - ^ v ^ | [Am] v - v ^ - ^ v ^ | [F] v - v ^ - ^ v ^',tip:'刷法：↓ ↓↑ ↑↓↑。第三拍那個「空」是手照樣往下揮，只是不碰弦。'},
+  {n:'vi–IV–I–V',goal:'同四個和弦換順序，聽感變得比較憂傷',bpm:[60,96],beat:2,tab:'[Am] v - v ^ - ^ v ^ | [F] v - v ^ - ^ v ^ | [C] v - v ^ - ^ v ^ | [G] v - v ^ - ^ v ^',tip:'從 vi 開始，聽起來像小調，其實還是 C 大調的和弦。'},
+  {n:'ii–V–I',goal:'Dm7 → G7 → Cmaj7，最常見的「回家」公式',bpm:[60,90],beat:2,tab:'[Dm7] v - v ^ - ^ v ^ | [G7] v - v ^ - ^ v ^ | [Cmaj7] v - v ^ - ^ v ^ | [Cmaj7] v - - - - - - -',tip:'G7 裡的 F 和 B 很想分別走到 E 和 C，那就是「回家」的力量。'}
+ ],
+ q:{q:'C 大調的 ii–V–I 是？',o:['Dm–G–C','C–F–G','Am–F–C'],a:0,e:'ii＝Dm、V＝G、I＝C。'}},
+
+{t:'移調與變調夾',tag:'同一首歌換一個調',stage:'調性與和聲',
+ c:'移調就是整首歌一起移動。用級數移調最可靠：I–V–vi–IV 在 C 大調是 C–G–Am–F，在 G 大調是 G–D–Em–C，在 D 大調是 D–A–Bm–G。移調的理由通常是：配合歌手音域、曲中轉調、或換到比較好彈的和弦。',
+ g:'變調夾夾第 n 格＝整體升高 n 個半音：用 C 大調的按法夾第 2 格，聽起來是 D 大調。遇到升記號很多的調（例如 G♯），可以彈 G 大調夾第 1 格。但也別完全依賴夾子，常用調的和弦還是要會。',
+ nog:'用工具箱④把 vi–IV–I–V 移到 D、A、E 大調，再想想：E 大調可以用什麼調夾幾格來彈？',
+ p:[
+  {n:'同一個進行，三個調',goal:'C、G、D 大調各彈一輪 I–V–vi–IV',bpm:[60,90],beat:1,tab:'*C - v v | *G - v v | *Am - v v | *F - v v | *G - v v | *D - v v | *Em - v v | *C - v v | *D - v v | *A - v v | *Bm - v v | *G - - -',tip:'Bm（x24432）是 A 型小和弦橫按在第 2 格。'},
+  {n:'變調夾聽差別',goal:'同樣的按法夾第 2 格，跟上一題的 D 大調比較',bpm:[60,90],beat:1,capo:2,tab:'*C - v v | *G - v v | *Am - v v | *F - - -',tip:'播放器會依照「夾第 2 格」的實際音高發聲。你聽到的和上一題的 D–A–Bm–G 同一個調。'}
+ ],
+ q:{q:'C 大調的 I–V–vi–IV 移到 G 大調，第二個和弦是？',o:['D','C','A'],a:0,e:'G 大調的 V 級是 D。'}},
+
+{t:'用耳朵抓歌',tag:'由聽覺回推音樂材料',stage:'聽覺與技巧',
+ c:'抓歌分層做：<b>① 拍子與段落 → ② 調性 → ③ 低音根音 → ④ 和弦大小 → ⑤ 細節</b>。定調最穩的方法是唱唱名，找出 Do 在哪個音；簡便法是看最後一個和弦或最後一個音，大約八、九成準。知道調之後，順階和弦就把候選範圍縮小到六個。',
+ g:'先跟著歌哼低音，在第六、五弦找到同一個音；有了根音，再用大三度或小三度判斷大、小和弦。',
+ nog:'找一首熟悉的歌，先拍手跟拍，再只哼每小節最低的那個音。到工具箱③練「大三或小三」，每天 10 題。',
+ p:[
+  {n:'跟著低音走',goal:'彈出 I–V–vi–IV 的根音線，邊彈邊唱',bpm:[60,90],beat:1,tab:'5:3@C - - - | 6:3@G - - - | 5:0@A - - - | 6:1@F - - -',tip:'抓歌時你要找的就是這條線。先抓低音，和弦就猜對一半。'},
+  {n:'根音之後判斷大小',goal:'同一個根音，先彈大三和弦再彈小三和弦',bpm:[50,72],beat:1,tab:'5:0@A 4:2@E 3:2@A 2:2@C♯ | 5:0@A 4:2@E 3:2@A 2:1@C | 6:0@E 5:2@B 4:2@E 3:1@G♯ | 6:0@E 5:2@B 4:2@E 3:0@G',tip:'只有最後一個音（三音）不同。耳朵要學會聽出它。'}
+ ],
+ q:{q:'抓歌時，通常先辨認哪一項最有幫助？',o:['每個裝飾音','拍點與低音根音','所有旋律音'],a:1,e:'先有拍點和低音，和弦與調性的範圍就縮小了。'}},
+
+{t:'刷弦、撥片與分解和弦',tag:'讓右手知道自己在做什麼',stage:'聽覺與技巧',
+ c:'同一組和弦，右手可以有三種主要做法：<b>刷弦</b>（一次掃過多條弦）、<b>分解和弦</b>（依序撥出和弦音）、<b>指彈</b>（拇指負責低音、其他手指負責伴奏或旋律）。右手決定律動，不只是把弦弄響。',
+ g:'分解和弦常用 T1213121：T＝拇指撥根音，1、2、3＝食指、中指、無名指撥第三、二、一弦。指彈的基礎是拇指在兩條低音弦之間交替。',
+ nog:'用手掌在桌上打「↓ ↓↑ ↑↓↑」的節奏，數出「1 2 & 3 & 4 &」。',
+ p:[
+  {n:'基本刷法 8 beat',goal:'穩定刷出 ↓ ↓↑ ↑↓↑，手臂不停',bpm:[60,100],beat:2,tab:'[C] v - v ^ - ^ v ^ | v - v ^ - ^ v ^ | [G] v - v ^ - ^ v ^ | [C] v - v ^ - ^ v -',tip:'手臂像鐘擺一樣一直上下擺，「-」的地方只是不碰弦。'},
+  {n:'分解和弦 T1213121',goal:'C → Am → F → G，每小節一個和弦',bpm:[60,100],beat:2,tab:'[C] 5:3 3:0 2:1 3:0 1:0 3:0 2:1 3:0 | [Am] 5:0 3:2 2:1 3:2 1:0 3:2 2:1 3:2 | [F] 4:3 3:2 2:1 3:2 1:1 3:2 2:1 3:2 | [G] 6:3 3:0 2:0 3:0 1:3 3:0 2:0 3:0',tip:'拇指先找根音：C 在第五弦、Am 在第五弦、F 在第四弦、G 在第六弦。'},
+  {n:'交替低音指彈',goal:'拇指在兩條低音弦交替，手指補在反拍',bpm:[50,90],beat:2,tab:'[C] 5:3 2:1 4:2 3:0 5:3 2:1 4:2 3:0 | [Am] 5:0 2:1 4:2 3:2 5:0 2:1 4:2 3:2 | [G] 6:3 2:0 4:0 3:0 6:3 2:0 4:0 3:0 | [C] 5:3 2:1 4:2 3:0 5:3+1:0 - - -',tip:'先只練拇指（每拍一下），穩了再加入手指。這是指彈曲最常見的骨架。'},
+  {n:'捶音、勾音、滑音',goal:'讓左手也能發聲',bpm:[50,80],beat:2,tab:'3:0 3:2h 3:0 3:2h 2:1 2:3h 2:1 - | 2:3 2:1p 3:2 3:0p 4:2 - - - | 3:2 3:4/ 3:2 - 2:1 2:3/ 2:1 -',tip:'捶音要「捶」下去有力道；勾音手指離弦時往下輕拉；滑音全程不要放鬆壓力。'}
+ ],
+ q:{q:'T1213121 裡的 T 是什麼？',o:['大拇指撥根音','刷弦','捶音'],a:0,e:'T＝Thumb，大拇指負責低音根音。'}},
+
+{t:'五聲音階與五個把位',tag:'用少量的音開始即興',stage:'即興與創作',
+ c:'大調五聲音階取大調的 1、2、3、5、6；小調五聲音階是 1、♭3、4、5、♭7。A 小調五聲＝A C D E G，跟 C 大調五聲（C D E G A）是同一組音。少了最容易「撞」的半音，所以怎麼彈都不太會錯。',
+ g:'先練第一把位（第 5 格的「方塊」），根音 A 在第六弦第 5 格、第四弦第 7 格、第一弦第 5 格。熟了以後再往上下連接其他四個把位（工具箱①選「小調五聲」看全貌）。',
+ nog:'用唱名唱 La Do Re Mi Sol La，這就是 A 小調五聲。',
+ p:[
+  {n:'A 小調五聲第一把位',goal:'上下行各一次，每個音乾淨',bpm:[60,110],beat:2,tab:'6:5@A 6:8@C 5:5@D 5:7@E 4:5@G 4:7@A 3:5@C 3:7@D | 2:5@E 2:8@G 1:5@A 1:8@C 1:5@A 2:8@G 2:5@E 3:7@D | 3:5@C 4:7@A 4:5@G 5:7@E 5:5@D 6:8@C 6:5@A -',tip:'食指管第 5 格、無名指或小指管第 7、8 格，一路不移動手。'},
+  {n:'第一個樂句',goal:'彈一句停在根音 A 的短句',bpm:[60,100],beat:2,tab:'2:5@E 2:8@G 1:5@A 2:8@G 2:5@E 3:7@D 3:5@C - | 3:5@C 3:7h@D 2:5@E 3:7@D 4:7@A - - -',tip:'背起來之後，把伴奏機設成「A 小調 Am–G–F–G」，讓這句在伴奏上出現。'},
+  {n:'即興任務：問與答',goal:'用五聲音階編兩小節「問句」＋兩小節「答句」',bpm:[60,90],beat:2,tab:'[Am] 1:5 - 1:8 1:5 2:8 - - - | [G] 2:5 - 2:8 2:5 3:7 - - - | [F] 3:5 3:7 2:5 3:7 3:5 - - - | [G] 4:7 4:5 4:7 - - - - -',tip:'範例的問句停在 D（不穩），答句停在 A（穩）。改掉其中幾個音，做出你自己的版本。'}
+ ],
+ q:{q:'C 大調五聲音階不包含哪個音？',o:['D','F','G'],a:1,e:'C D E G A，沒有 F 與 B。'}},
+
+{t:'寫你自己的歌',tag:'把和弦、旋律與結構整合',stage:'即興與創作',
+ c:'寫歌可以從很小開始：一個調、四小節和弦進行、一段能哼的旋律。旋律在<b>強拍放和弦音</b>聽起來穩，弱拍可以用經過音連接。重複讓人記得，變化讓人想聽下去。',
+ g:'先選 I–V–vi–IV（C–G–Am–F），用 C 大調五聲音階寫四小節；第四小節停在不穩的音，第八小節停在 Do，就是一組「問與答」。',
+ nog:'不用琴：在紙上寫下 C–G–Am–F，每小節寫四個唱名，強拍挑和弦音（C 和弦挑 Do、Mi、Sol）。',
+ p:[
+  {n:'旋律範例：強拍放和弦音',goal:'看懂每小節強拍為什麼選那個音',bpm:[60,90],beat:1,tab:'[C] 2:1@C 1:0@E 1:3@G 1:0@E | [G] 1:3@G 2:3@D 1:0@E 2:3@D | [Am] 1:0@E 1:5@A 1:3@G 1:0@E | [F] 2:1@C 3:2@A 2:1@C -',tip:'每小節第一拍：C、G、E、C，分別是 C、G、Am、F 的和弦音。'},
+  {n:'先彈和弦，再唱旋律',goal:'一邊彈分解和弦一邊哼上一題的旋律',bpm:[60,90],beat:2,tab:'[C] 5:3 3:0 2:1 3:0 1:0 3:0 2:1 3:0 | [G] 6:3 3:0 2:0 3:0 1:3 3:0 2:0 3:0 | [Am] 5:0 3:2 2:1 3:2 1:0 3:2 2:1 3:2 | [F] 4:3 3:2 2:1 3:2 1:1 3:2 2:1 3:2',tip:'用手機錄下來。不用完整，一段能哼的就好。'}
+ ],
+ q:{q:'寫旋律時，強拍最穩的選擇是？',o:['當下和弦的和弦音','隨機任何音','只用最高音'],a:0,e:'和弦音當落點最穩，其他音可以當經過音或裝飾。'}},
+
+{t:'歌本與範本：實際運用',tag:'把知識放回一首完整的曲子',stage:'整合實作',
+ c:'最後一步是整合：判斷調性 → 標出級數 → 找出段落 → 選擇右手織度 → 決定把位。編曲時常見的手法：前奏與主歌用分解和弦、副歌改刷弦讓能量上升、結尾放慢回到 I。',
+ g:'下面是一首原創小曲〈海邊的下午〉，用到前面學過的分解和弦、刷弦、五聲音階樂句。彈完後完成分析任務。之後可以用同樣的方法重新分析你練過的《黃昏》《Hero》：先挑 2–4 小節，標出低音、和弦、級數。',
+ nog:'不看答案，寫出〈海邊的下午〉每小節的級數。（答案：I V vi IV｜IV V vi I｜結尾 vi IV V I）',
+ p:[
+  {n:'〈海邊的下午〉A 段：分解和弦',goal:'T1213121 彈完四小節',bpm:[60,90],beat:2,tab:'[C] 5:3 3:0 2:1 3:0 1:0 3:0 2:1 3:0 | [G] 6:3 3:0 2:0 3:0 1:3 3:0 2:0 3:0 | [Am] 5:0 3:2 2:1 3:2 1:0 3:2 2:1 3:2 | [F] 4:3 3:2 2:1 3:2 1:1 3:2 2:1 3:2'},
+  {n:'〈海邊的下午〉B 段：刷弦',goal:'能量升高，換成 8 beat 刷法',bpm:[60,90],beat:2,tab:'[F] v - v ^ - ^ v ^ | [G] v - v ^ - ^ v ^ | [Am] v - v ^ - ^ v ^ | [C] v - v ^ - ^ v -'},
+  {n:'〈海邊的下午〉尾奏：旋律收尾',goal:'用五聲音階旋律回到 C',bpm:[60,90],beat:2,tab:'[Am] 1:0@E - 1:3@G - 1:5@A - 1:3@G - | [F] 1:1@F - 1:0@E - 2:1@C - - - | [G] 2:3@D - 2:1@C - 2:3@D - 1:0@E - | [C] 5:3+2:1+1:0 - - - - - - -',tip:'分析任務：在每小節上方寫級數，再說出哪裡是「離開」、哪裡是「回家」。'}
+ ],
+ q:{q:'分析一首歌，比較適合的入門順序是？',o:['拍點與低音 → 和弦 → 調性與級數','先分析所有裝飾音','先背完整首 TAB'],a:0,e:'先抓骨架，再看細節。'}}
+];
+
+/* ========== 六線譜解析與繪製 ========== */
+function parseTab(src){
+ const measures=[];let cur=null,label=null;
+ src.split('|').map(m=>m.trim()).filter(Boolean).forEach(m=>{
+  const steps=[];
+  (m.match(/\[[^\]]*\]|\S+/g)||[]).forEach(tok=>{
+   let mm;
+   if((mm=tok.match(/^\[(.+)\]$/))){label=mm[1];const nm=label.split(' ').pop();if(CH[nm])cur=nm;return;}
+   if(tok==='-'){steps.push({notes:[],label});label=null;return;}
+   if(tok==='v'||tok==='^'){let sh=shape(cur)||[];if(tok==='^')sh=sh.filter(n=>n.s<=4);
+     steps.push({notes:sh,strum:tok,label});label=null;return;}
+   if(tok[0]==='*'){const nm=tok.slice(1);cur=nm;steps.push({notes:shape(nm)||[],strum:'v',label:label||nm});label=null;return;}
+   const [main,ann]=tok.split('@');const notes=[];
+   main.split('+').forEach(p=>{const q=p.match(/^(\d):(\d+)([hp\/]?)$/);if(q)notes.push({s:+q[1],f:+q[2],t:q[3]||''});});
+   steps.push({notes,ann:ann||'',label});label=null;
+  });
+  measures.push(steps);
+ });
+ return measures;
+}
+const SW=27,LS=11,TOP=30,PAD=9;
+function drawTab(el,src,id){
+ const ms=parseTab(src);el.innerHTML='';let k=0;
+ ms.forEach((steps,mi)=>{
+  const lead=mi===0?24:0,w=lead+PAD*2+steps.length*SW,h=TOP+5*LS+22;
+  let s=`<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" style="color:var(--ink)">`;
+  for(let i=0;i<6;i++)s+=`<line x1="0" x2="${w}" y1="${TOP+i*LS}" y2="${TOP+i*LS}" stroke="var(--pencil)" stroke-width="1"/>`;
+  if(mi===0){s+=`<line x1="1" x2="1" y1="${TOP}" y2="${TOP+5*LS}" stroke="var(--ink)" stroke-width="2"/>`;
+   ['T','A','B'].forEach((c,i)=>s+=`<text x="9" y="${TOP+13+i*15}" font-size="12" font-weight="700" fill="var(--ink)">${c}</text>`);}
+  s+=`<line x1="${w-1}" x2="${w-1}" y1="${TOP}" y2="${TOP+5*LS}" stroke="var(--ink)" stroke-width="${mi===ms.length-1?3:1.4}"/>`;
+  steps.forEach((st,j)=>{
+   const x=lead+PAD+j*SW+SW/2;
+   s+=`<g class="st" id="${id}-${k}"><rect class="hl" x="${x-SW/2+1}" y="${TOP-6}" width="${SW-2}" height="${5*LS+12}" rx="5"/>`;
+   if(st.label)s+=`<text x="${x-SW/2+2}" y="12" font-size="13" font-weight="700" fill="var(--ink)">${esc(st.label)}</text>`;
+   if(st.strum)s+=`<text x="${x}" y="${TOP-9}" font-size="13" text-anchor="middle" fill="var(--marker)">${st.strum==='v'?'↓':'↑'}</text>`;
+   st.notes.forEach(n=>{const y=TOP+(n.s-1)*LS,lab=String(n.f),bw=lab.length>1?15:10;
+    s+=`<rect x="${x-bw/2}" y="${y-6}" width="${bw}" height="12" fill="var(--paper)"/><text class="fn" x="${x}" y="${y+4.5}" font-size="12.5" text-anchor="middle" fill="var(--ink)">${lab}</text>`;
+    if(n.t)s+=`<text x="${x-SW/2}" y="${y-3}" font-size="10" text-anchor="middle" fill="var(--marker)">${n.t}</text>`;});
+   if(st.ann)s+=`<text x="${x}" y="${TOP+5*LS+16}" font-size="11.5" text-anchor="middle" fill="var(--pencil)">${esc(st.ann)}</text>`;
+   s+='</g>';k++;});
+  s+='</svg>';el.insertAdjacentHTML('beforeend',s);
+ });
+ return ms;
+}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+/* ========== 聲音：撥弦合成 ========== */
+let AC=null;const BUF={};
+function ac(){if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();return AC;}
+function pluckBuf(m){
+ if(BUF[m])return BUF[m];const c=ac(),sr=c.sampleRate,f=440*Math.pow(2,(m-69)/12),N=Math.max(2,Math.round(sr/f)),L=Math.floor(sr*2.2);
+ const b=c.createBuffer(1,L,sr),d=b.getChannelData(0);let last=0;
+ for(let i=0;i<N;i++){const r=Math.random()*2-1;last=0.6*r+0.4*last;d[i]=last;}
+ const decay=0.9965-(m-40)*0.00004;
+ for(let i=N;i<L;i++)d[i]=decay*0.5*(d[i-N]+d[i-N+1]||d[i-N]);
+ let mx=0;for(let i=0;i<L;i++)mx=Math.max(mx,Math.abs(d[i]));for(let i=0;i<L;i++)d[i]=d[i]/mx*0.32;
+ return BUF[m]=b;
+}
+const live={src:[],timers:[],id:null};
+function pluck(m,t,vol=1,len=2){const c=ac(),s=c.createBufferSource(),g=c.createGain();s.buffer=pluckBuf(m);g.gain.setValueAtTime(vol,t);g.gain.setTargetAtTime(0,t+len,0.08);s.connect(g).connect(c.destination);s.start(t);s.stop(t+len+0.5);live.src.push(s);}
+function click(t,acc){const c=ac(),o=c.createOscillator(),g=c.createGain();o.frequency.value=acc?1500:1000;g.gain.setValueAtTime(acc?0.25:0.14,t);g.gain.exponentialRampToValueAtTime(0.001,t+0.05);o.connect(g).connect(c.destination);o.start(t);o.stop(t+0.06);live.src.push(o);}
+function stopAll(){live.src.forEach(s=>{try{s.stop()}catch(e){}});live.src=[];live.timers.forEach(clearTimeout);live.timers=[];
+ document.querySelectorAll('.st.on').forEach(e=>e.classList.remove('on'));document.querySelectorAll('[data-playing]').forEach(b=>{b.textContent='▶ 播放';b.removeAttribute('data-playing')});live.id=null;}
+function playSteps(id,ms,bpm,perBeat,opt={}){
+ stopAll();const c=ac();live.id=id;const dur=60/bpm/perBeat;let t0=c.currentTime+0.12;const capo=opt.capo||0;
+ const beatsPerBar=Math.max(1,Math.round(ms[0].length/perBeat));
+ if(opt.countin){for(let b=0;b<beatsPerBar;b++)click(t0+b*60/bpm,b===0);t0+=beatsPerBar*60/bpm;}
+ const run=(start)=>{let k=0,t=start;
+  ms.forEach(steps=>{steps.forEach((st,j)=>{
+   const tt=t;if(opt.click&&j%perBeat===0)click(tt,j===0);
+   let ns=st.notes.slice();if(st.strum==='^')ns.sort((a,b)=>a.s-b.s);else ns.sort((a,b)=>b.s-a.s);
+   ns.forEach((n,i)=>pluck(OPEN[n.s]+n.f+capo,tt+(st.strum?i*0.014:0),st.strum?0.75:1,Math.max(dur*1.6,0.5)));
+   const kk=k,el=document.getElementById(id+'-'+kk);
+   live.timers.push(setTimeout(()=>{document.querySelectorAll('#'+CSS.escape(id.split('-')[0])+'-wrap .st.on').forEach(e=>e.classList.remove('on'));if(el)el.classList.add('on');},(tt-c.currentTime)*1000));
+   k++;t+=dur;});});
+  if(opt.loop)live.timers.push(setTimeout(()=>{if(live.id===id)run(t);},(t-c.currentTime-0.25)*1000));
+  else live.timers.push(setTimeout(()=>{if(live.id===id)stopAll();},(t-c.currentTime+0.3)*1000));
+ };
+ run(t0);
+}
+
+/* ========== 進度存取 ========== */
+const LS_=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}};
+const SV=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+let doneU=new Set(LS_('guitarDone17',[])),doneP=LS_('guitarPracDone',{});
+
+/* ========== 版面：導覽與單元 ========== */
+const nav=document.getElementById('nav'),units=document.getElementById('units');
+function buildNav(){
+ let h='<div class="grp">開始</div><a href="#plan" data-v="plan"><span class="n">★</span>今天練什麼</a><a href="#tools" data-v="tools"><span class="n">⚙</span>工具箱</a>';
+ let stage='';
+ U.forEach((u,i)=>{if(u.stage!==stage){stage=u.stage;h+=`<div class="grp">${stage}</div>`;}
+  const all=u.p.every((p,j)=>doneP['u'+i+'p'+j]);
+  h+=`<a href="#u${i+1}" data-v="u${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span>${u.t}${doneU.has(i)?'<span class="ck">✓</span>':all?'<span class="ck">●</span>':''}</a>`;});
+ nav.innerHTML=h;markNav();
+}
+function buildUnits(){
+ U.forEach((u,i)=>{
+  const sec=document.createElement('section');sec.className='view';sec.id='v-u'+(i+1);
+  let h=`<h2><span class="u">UNIT ${String(i+1).padStart(2,'0')} / 17　·　${u.stage}</span>${u.t}</h2><span class="pill">${u.tag}</span><span class="pill g">${u.p.length} 個練習主題</span>
+  <h3>觀念</h3><p>${u.c}</p><h3>連到吉他上</h3><p>${u.g}</p><h3>練習主題</h3>`;
+  u.p.forEach((p,j)=>{const id=`u${i}p${j}`;const rec=doneP[id];
+   h+=`<div class="prac${rec?' done':''}" id="${id}-wrap"><h4><span class="no">練習 ${i+1}-${j+1}</span>${p.n}</h4><p class="goal">目標：${p.goal}　·　建議速度 ${p.bpm[0]} → ${p.bpm[1]} BPM${p.capo?`　·　變調夾第 ${p.capo} 格`:''}</p>
+   <div class="tabwrap" id="${id}-tab"></div>
+   <div class="ctrl"><button class="main" data-play="${id}">▶ 播放</button>
+   <label>速度 <input type="range" min="40" max="160" value="${(rec&&rec.bpm)||p.bpm[0]}" data-bpm="${id}"> <span id="${id}-bv">${(rec&&rec.bpm)||p.bpm[0]}</span></label>
+   <label><input type="checkbox" data-loop="${id}"> 循環</label><label><input type="checkbox" data-click="${id}" checked> 節拍器</label>
+   <button class="${rec?'ok':''}" data-done="${id}">${rec?`練好了 ✓（${rec.bpm} BPM）`:'練好了'}</button></div>
+   ${p.tip?`<p class="tip">${p.tip}</p>`:''}</div>`;});
+  h+=`<div class="box dash"><b>沒帶琴的時候</b><br>${u.nog}</div>
+  <div class="quiz"><b>小測驗</b><p>${u.q.q}</p>${u.q.o.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"> ${o}</label>`).join('')}
+  <div class="ctrl"><button data-check="${i}">檢查答案</button></div><div class="fb" id="fb${i}"></div></div>
+  <div class="ctrl"><button class="${doneU.has(i)?'ok':'main'}" data-unit="${i}">${doneU.has(i)?'這個單元完成了 ✓':'完成這個單元'}</button></div>
+  <div class="navbtns">${i>0?`<a class="btn" href="#u${i}">← ${U[i-1].t}</a>`:'<span></span>'}${i<U.length-1?`<a class="btn" href="#u${i+2}">${U[i+1].t} →</a>`:''}</div>`;
+  sec.innerHTML=h;units.appendChild(sec);
+  u.p.forEach((p,j)=>{const id=`u${i}p${j}`;p._ms=drawTab(document.getElementById(id+'-tab'),p.tab,id);});
+ });
+}
+function show(){
+ const v=(location.hash||'#plan').slice(1);
+ document.querySelectorAll('section.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+v));
+ if(!document.getElementById('v-'+v))document.getElementById('v-plan').classList.add('on');
+ markNav();if(v==='plan')renderPlan();window.scrollTo(0,0);
+}
+function markNav(){const v=(location.hash||'#plan').slice(1);nav.querySelectorAll('a').forEach(a=>a.classList.toggle('on',a.dataset.v===v));}
+
+/* ========== 今天練什麼 ========== */
+function renderPlan(){
+ let total=0,done=0;U.forEach((u,i)=>u.p.forEach((p,j)=>{total++;if(doneP['u'+i+'p'+j])done++;}));
+ document.getElementById('pbar').style.width=(done/total*100)+'%';
+ document.getElementById('plabel').textContent=`練好 ${done} / ${total} 個練習主題　·　完成 ${doneU.size} / 17 單元`;
+ let cu=U.findIndex((u,i)=>!doneU.has(i));if(cu<0)cu=U.length-1;
+ const todo=U[cu].p.map((p,j)=>({p,j})).filter(x=>!doneP['u'+cu+'p'+x.j]);
+ const warm=cu<3?{i:0,j:1}:{i:2,j:2};
+ const rev=cu>0?{i:cu-1,j:U[cu-1].p.length-1}:null;
+ let h=`<p class="small">目前進行到</p><div class="big">${String(cu+1).padStart(2,'0')}｜${U[cu].t}</div><ul class="today">`;
+ h+=`<li><b>暖身 5 分鐘：</b><a href="#u${warm.i+1}">${U[warm.i].p[warm.j].n}</a></li>`;
+ h+=`<li><b>主題 15 分鐘：</b>${(todo.length?todo:U[cu].p.map((p,j)=>({p,j}))).slice(0,2).map(x=>`<a href="#u${cu+1}">${x.p.n}</a>`).join('、')}</li>`;
+ if(rev)h+=`<li><b>複習 5 分鐘：</b><a href="#u${rev.i+1}">${U[rev.i].p[rev.j].n}</a>（單元 ${rev.i+1}）</li>`;
+ h+=`<li><b>沒帶琴：</b>到<a href="#tools">工具箱</a>做 10 題耳朵練習，或完成單元 ${cu+1} 的小測驗。</li></ul>`;
+ document.getElementById('today').innerHTML=h;
+ let t='<table><tr><th>單元</th><th>練習主題</th><th>狀態</th></tr>';
+ U.forEach((u,i)=>u.p.forEach((p,j)=>{const r=doneP['u'+i+'p'+j];
+  t+=`<tr><td>${j===0?`<a href="#u${i+1}">${String(i+1).padStart(2,'0')} ${u.t}</a>`:''}</td><td>${p.n}</td><td>${r?`✓ ${r.bpm} BPM`:'<span class="small">還沒</span>'}</td></tr>`;}));
+ document.getElementById('plist').innerHTML=t+'</table>';
+}
+
+/* ========== 事件 ========== */
+document.addEventListener('input',e=>{const b=e.target.dataset.bpm;if(b)document.getElementById(b+'-bv').textContent=e.target.value;});
+document.addEventListener('click',e=>{
+ const t=e.target.closest('button');if(!t)return;
+ if(t.dataset.play){const id=t.dataset.play;if(t.dataset.playing){stopAll();return;}
+  const [i,j]=id.slice(1).split('p').map(Number),p=U[i].p[j];
+  const bpm=+document.querySelector(`[data-bpm="${id}"]`).value;
+  playSteps(id,p._ms,bpm,p.beat,{loop:document.querySelector(`[data-loop="${id}"]`).checked,click:document.querySelector(`[data-click="${id}"]`).checked,countin:true,capo:p.capo});
+  t.textContent='■ 停止';t.dataset.playing=1;}
+ if(t.dataset.done){const id=t.dataset.done;const bpm=+document.querySelector(`[data-bpm="${id}"]`).value;
+  if(doneP[id]&&doneP[id].bpm===bpm){delete doneP[id];t.textContent='練好了';t.className='';}
+  else{doneP[id]={bpm,at:new Date().toISOString().slice(0,10)};t.textContent=`練好了 ✓（${bpm} BPM）`;t.className='ok';}
+  document.getElementById(id+'-wrap').classList.toggle('done',!!doneP[id]);SV('guitarPracDone',doneP);buildNav();}
+ if(t.dataset.check!==undefined){const i=+t.dataset.check,el=document.querySelector(`input[name="q${i}"]:checked`),fb=document.getElementById('fb'+i);
+  if(!el){fb.textContent='先選一個答案。';fb.style.color='var(--pencil)';return;}
+  if(+el.value===U[i].q.a){fb.textContent='答對了！'+U[i].q.e;fb.style.color='var(--third)';}
+  else{fb.textContent='再想一下。提示：'+U[i].q.e.split('，')[0]+'……';fb.style.color='var(--marker)';}}
+ if(t.dataset.unit!==undefined){const i=+t.dataset.unit;if(doneU.has(i))doneU.delete(i);else doneU.add(i);SV('guitarDone17',[...doneU]);
+  t.textContent=doneU.has(i)?'這個單元完成了 ✓':'完成這個單元';t.className=doneU.has(i)?'ok':'main';buildNav();}
+});
+window.addEventListener('hashchange',()=>{stopAll();show();});
+
+/* ========== 工具①：指板 ========== */
+const CHT={'大三和弦':[0,4,7],'小三和弦':[0,3,7],'屬七 7':[0,4,7,10],'大七 maj7':[0,4,7,11],'小七 m7':[0,3,7,10]};
+const SCT={'大調':[0,2,4,5,7,9,11],'自然小調':[0,2,3,5,7,8,10],'大調五聲':[0,2,4,7,9],'小調五聲':[0,3,5,7,10]};
+const fbRoot=document.getElementById('fbRoot'),fbType=document.getElementById('fbType'),fbMode=document.getElementById('fbMode'),fbDeg=document.getElementById('fbDeg');
+SHARP.forEach((n,i)=>fbRoot.add(new Option(FLATKEYS.includes(i)?FLAT[i]:n,i)));
+function fbTypes(){fbType.innerHTML='';const src=fbMode.value==='scale'?SCT:CHT;Object.keys(src).forEach(k=>fbType.add(new Option(k,k)));fbType.disabled=fbMode.value==='none';fbRoot.disabled=fbMode.value==='none';}
+function drawFret(){
+ const mode=fbMode.value,root=+fbRoot.value,set=mode==='chord'?CHT[fbType.value]:mode==='scale'?SCT[fbType.value]:null;
+ let h='<table><tr><th></th>'+Array.from({length:16},(_,f)=>`<th>${f}${[3,5,7,9,15].includes(f)?'·':f===12?'··':''}</th>`).join('')+'</tr>';
+ for(let s=1;s<=6;s++){h+=`<tr><th>${s}弦</th>`;
+  for(let f=0;f<=15;f++){const pc=(OPENPC[s]+f)%12,iv=(pc-root+12)%12;let cls='fc'+(f===0?' open':''),lab=nameOf(pc,root);
+   if(set){if(set.includes(iv)){cls+=iv===0?' root':(iv===3||iv===4)?' third':iv===7?' fifth':' mk';if(fbDeg.checked)lab=DEG[iv];}else lab=mode==='none'?lab:'';}
+   h+=`<td><button class="${cls}" data-s="${s}" data-f="${f}">${lab}</button></td>`;}
+  h+='</tr>';}
+ document.getElementById('fretboard').innerHTML=h+'</table>';
+}
+document.getElementById('fretboard').addEventListener('click',e=>{const b=e.target.closest('.fc');if(!b)return;e.stopPropagation();
+ const s=+b.dataset.s,f=+b.dataset.f,pc=(OPENPC[s]+f)%12,root=+fbRoot.value,iv=(pc-root+12)%12;
+ pluck(OPEN[s]+f,ac().currentTime+0.02);
+ document.getElementById('fbInfo').innerHTML=`<b>第 ${s} 弦第 ${f} 格：${nameOf(pc,root)}</b>`+(fbMode.value!=='none'?`　·　距離根音 ${nameOf(root,root)}：${DEG[iv]}（${INTNAME[iv]}）`:'')+(f===12?'　·　空弦音高八度':'');});
+[fbMode,fbRoot,fbType,fbDeg].forEach(x=>x.addEventListener('change',()=>{if(x===fbMode)fbTypes();drawFret();}));
+fbTypes();drawFret();
+
+/* ========== 工具②：伴奏機 ========== */
+const MAJ=[0,2,4,5,7,9,11],QUAL=['','m','m','','','m','dim'];
+const PROGS={'I–V–vi–IV':[[0],[4],[5],[3]],'vi–IV–I–V':[[5],[3],[0],[4]],'I–vi–IV–V':[[0],[5],[3],[4]],'ii–V–I–I':[[1,'m7'],[4,'7'],[0,'maj7'],[0,'maj7']],'I–IV–V–IV':[[0],[3],[4],[3]],'小調 vi–V–IV–V（A 小調在 C）':[[5],[4],[3],[4]]};
+const QIV={'':[0,4,7],'m':[0,3,7],'dim':[0,3,6],'7':[0,4,7,10],'m7':[0,3,7,10],'maj7':[0,4,7,11]};
+const bkKey=document.getElementById('bkKey'),bkProg=document.getElementById('bkProg');
+FLAT.forEach((n,i)=>bkKey.add(new Option((FLATKEYS.includes(i)?FLAT:SHARP)[i]+' 大調',i)));
+Object.keys(PROGS).forEach(k=>bkProg.add(new Option(k,k)));
+function progChords(key,prog){return PROGS[prog].map(([d,q])=>{const r=(key+MAJ[d])%12;q=q??QUAL[d];return{r,q,name:nameOf(r,key)+(q==='dim'?'dim':q)};});}
+function bkShow(){const cs=progChords(+bkKey.value,bkProg.value);document.getElementById('bkSeq').textContent=cs.map(c=>c.name).join(' → ');}
+bkKey.onchange=bkProg.onchange=bkShow;bkShow();
+document.getElementById('bkBpm').oninput=e=>document.getElementById('bkBpmV').textContent=e.target.value;
+document.getElementById('bkStop').onclick=()=>{stopAll();document.getElementById('bkNow').textContent='–';};
+document.getElementById('bkPlay').onclick=()=>{stopAll();const c=ac();live.id='bk';
+ const run=start=>{const bpm=+document.getElementById('bkBpm').value,e8=30/bpm,cs=progChords(+bkKey.value,bkProg.value);let t=start;
+  cs.forEach(ch=>{const bass=40+((ch.r-4+12)%12),tones=QIV[ch.q].map(iv=>52+((ch.r+iv-4+120)%12)).sort((a,b)=>a-b);
+   live.timers.push(setTimeout(()=>{if(live.id==='bk')document.getElementById('bkNow').textContent=ch.name;},(t-c.currentTime)*1000));
+   ['v','-','v','^','-','^','v','^'].forEach((p,j)=>{const tt=t+j*e8;
+    if(j===0||j===4)pluck(bass+(j===4&&ch.q!=='dim'?0:0),tt,0.9,e8*4);
+    if(p!=='-'){const ns=p==='v'?tones:tones.slice().reverse();ns.forEach((m,i)=>pluck(m,tt+i*0.012,p==='v'?0.45:0.3,e8*1.8));}});
+   t+=e8*8;});
+  live.timers.push(setTimeout(()=>{if(live.id==='bk')run(t);},(t-c.currentTime-0.3)*1000));};
+ run(c.currentTime+0.1);};
+
+/* ========== 工具③：耳朵練習 ========== */
+let ear=null,earOk=0,earN=0;
+function earPlay(){if(!ear)return;stopAll();const c=ac(),t=c.currentTime+0.05;
+ if(ear.mode==='tri'){ear.notes.forEach((m,i)=>pluck(m,t+i*0.45,0.9,1.2));ear.notes.forEach((m,i)=>pluck(m,t+1.5+i*0.015,0.6,2));}
+ else{pluck(ear.notes[0],t,0.9,1.2);pluck(ear.notes[1],t+0.7,0.9,1.4);pluck(ear.notes[0],t+1.6,0.6,2);pluck(ear.notes[1],t+1.6,0.6,2);}}
+document.getElementById('earNew').onclick=()=>{const mode=document.getElementById('earMode').value,r=45+Math.floor(Math.random()*12);
+ if(mode==='tri'){const q=Math.random()<.5?'大三和弦':'小三和弦';ear={mode,ans:q,notes:[r,r+(q==='大三和弦'?4:3),r+7],opts:['大三和弦','小三和弦']};}
+ else{const ivs=[3,4,5,7,12],iv=ivs[Math.floor(Math.random()*ivs.length)];ear={mode,ans:INTNAME[iv],notes:[r,r+iv],opts:ivs.map(x=>INTNAME[x])};}
+ document.getElementById('earAns').innerHTML=ear.opts.map(o=>`<button data-ear="${o}">${o}</button>`).join('');document.getElementById('earFb').textContent='';earPlay();};
+document.getElementById('earAgain').onclick=earPlay;
+document.getElementById('earAns').addEventListener('click',e=>{const b=e.target.closest('[data-ear]');if(!b||!ear||ear.done)return;ear.done=1;earN++;
+ const ok=b.dataset.ear===ear.ans;if(ok)earOk++;const fb=document.getElementById('earFb');fb.textContent=ok?'答對了！':'答案是：'+ear.ans+'。按「再聽一次」對照看看。';fb.style.color=ok?'var(--third)':'var(--marker)';
+ document.getElementById('earScore').textContent=`${earOk} / ${earN}`;});
+
+/* ========== 工具④⑤⑥ ========== */
+const trProg=document.getElementById('trProg'),trKey=document.getElementById('trKey');
+Object.keys(PROGS).forEach(k=>trProg.add(new Option(k,k)));FLAT.forEach((n,i)=>trKey.add(new Option((FLATKEYS.includes(i)?FLAT:SHARP)[i]+' 大調',i)));
+const trShow=()=>document.getElementById('trOut').textContent=progChords(+trKey.value,trProg.value).map(c=>c.name).join(' – ');
+trProg.onchange=trKey.onchange=trShow;trShow();
+const inA=document.getElementById('inA'),inB=document.getElementById('inB');
+SHARP.forEach((n,i)=>{inA.add(new Option(n,i));inB.add(new Option(n,i));});inA.value=0;inB.value=4;
+const inShow=()=>{const a=+inA.value,b=+inB.value,d=(b-a+12)%12;document.getElementById('inOut').innerHTML=`${SHARP[a]} 往上到 ${SHARP[b]}：<b>${d} 個半音，${INTNAME[d]}</b>`;};
+inA.onchange=inB.onchange=inShow;inShow();
+const CIR=[[0,'C','Am',0],[7,'G','Em',1],[2,'D','Bm',2],[9,'A','F♯m',3],[4,'E','C♯m',4],[11,'B','G♯m',5],[6,'F♯／G♭','D♯m／E♭m',6],[1,'D♭','B♭m',-5],[8,'A♭','Fm',-4],[3,'E♭','Cm',-3],[10,'B♭','Gm',-2],[5,'F','Dm',-1]];
+document.getElementById('circle').innerHTML=CIR.map((c,i)=>`<button data-ci="${i}"><b>${c[1].split('／')[0]}</b><span class="small">${c[3]>0?c[3]+' ♯':c[3]<0?(-c[3])+' ♭':'0'}</span></button>`).join('');
+document.getElementById('circle').addEventListener('click',e=>{const b=e.target.closest('[data-ci]');if(!b)return;const i=+b.dataset.ci,c=CIR[i],l=CIR[(i+11)%12],r=CIR[(i+1)%12];
+ const sc=MAJ.map(x=>nameOf(c[0]+x,c[0])).join(' ');
+ document.getElementById('circleOut').innerHTML=`<b>${c[1]} 大調</b>　${c[3]>0?c[3]+' 個升記號':c[3]<0?(-c[3])+' 個降記號':'沒有升降記號'}　·　關係小調 ${c[2]}<br>音階：${sc}<br>鄰居：${l[1]}（IV 級方向）與 ${r[1]}（V 級方向）　·　順階和弦：${MAJ.map((x,d)=>nameOf(c[0]+x,c[0])+(QUAL[d]==='dim'?'dim':QUAL[d])).join('、')}`;});
+
+/* ========== 工具⑦：六線譜筆記 ========== */
+const nbSrc=document.getElementById('nbSrc');
+nbSrc.value=LS_('guitarTabNote','[Am] 1:5 - 1:8 1:5 2:8 - - - | [G] 2:5 - 2:8 2:5 3:7 - - - | [F] 3:5 3:7 2:5 3:7 3:5 - - - | [E] 4:7 4:5 4:7 - - - - -');
+let nbMs=null;
+function nbDraw(){const out=document.getElementById('nbOut');out.innerHTML='<div class="prac" id="nb-wrap"><div class="tabwrap" id="nb-tab"></div><div class="ctrl"><button class="main" id="nbPlay">▶ 播放</button><label>速度 <input type="range" min="40" max="160" value="80" id="nbBpm"> <span id="nbBv">80</span></label><label><input type="checkbox" id="nbLoop"> 循環</label></div></div>';
+ nbMs=drawTab(document.getElementById('nb-tab'),nbSrc.value,'nb');
+ document.getElementById('nbBpm').oninput=e=>document.getElementById('nbBv').textContent=e.target.value;
+ document.getElementById('nbPlay').onclick=e=>{const b=e.target;if(b.dataset.playing){stopAll();return;}playSteps('nb',nbMs,+document.getElementById('nbBpm').value,+document.getElementById('nbBeat').value,{loop:document.getElementById('nbLoop').checked,click:true,countin:true});b.textContent='■ 停止';b.dataset.playing=1;};}
+document.getElementById('nbRender').onclick=nbDraw;
+document.getElementById('nbSave').onclick=e=>{SV('guitarTabNote',nbSrc.value);e.target.textContent='存好了';setTimeout(()=>e.target.textContent='存起來',1200);};
+nbDraw();
+
+/* ========== 啟動 ========== */
+drawTab(document.getElementById('legendTab'),'[C] 5:3@C 4:2@E 3:0@G 2:1@C | v - v ^ | 3:0 3:2h 2:3 2:1p | 3:2 3:4/ - -','lg');
+buildUnits();buildNav();show();
+</script>
+</body>
+</html>
