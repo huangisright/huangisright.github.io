@@ -209,6 +209,12 @@
        "stu": 1
       },
       {
+       "t": "看詳解",
+       "d": "老師開放後，學生用隊伍代碼登入看整份詳解",
+       "u": "https://huangisright.github.io/GiftedMath/trml/sol.html",
+       "stu": 1
+      },
+      {
        "t": "老師統計頁",
        "d": "成績、熱圖、學生檔案、回饋、證明題批改；講解一鍵產生講解包",
        "u": "https://huangisright.github.io/GiftedMath/trml/teacher.html"
