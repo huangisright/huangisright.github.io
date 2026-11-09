@@ -191,6 +191,31 @@
      ]
     },
     {
+     "id": "contest",
+     "name": "競賽培訓（TRML）",
+     "dz": "list",
+     "note": "週一一起寫，週四分兩邊講，其他回家練。",
+     "items": [
+      {
+       "t": "TRML 線上練習（學生首頁）",
+       "d": "競速、個人、團體賽，交卷後看詳解與留回饋",
+       "u": "https://huangisright.github.io/GiftedMath/trml/",
+       "stu": 1
+      },
+      {
+       "t": "我的分析",
+       "d": "學生用分析密碼看自己的題型強弱與錯題",
+       "u": "https://huangisright.github.io/GiftedMath/trml/me.html",
+       "stu": 1
+      },
+      {
+       "t": "老師統計頁",
+       "d": "成績、熱圖、學生檔案、回饋、證明題批改；週四講解一鍵產生講解包",
+       "u": "https://huangisright.github.io/GiftedMath/trml/teacher.html"
+      }
+     ]
+    },
+    {
      "id": "kinmen",
      "name": "金門等時線",
      "dz": "iso",
