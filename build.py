@@ -72,6 +72,16 @@ ul.items a:hover{background-size:100% 2px}
 .copy:hover{color:var(--ink)}
 .box{border:2px dashed var(--pencil);border-radius:var(--wob2);padding:12px 16px;color:var(--pencil);font-size:15px;margin-top:18px}
 #results{margin-top:10px}
+ul.items li.pg a{font-weight:700}
+details.sem{border:2px solid var(--ink);border-radius:var(--wob);padding:4px 16px;margin:14px 0}
+details.sem:nth-of-type(even){border-radius:var(--wob2)}
+details.sem summary{font-family:var(--title);font-size:24px;font-weight:700;cursor:pointer;padding:6px 0;list-style:none}
+details.sem summary::-webkit-details-marker{display:none}
+details.sem summary::before{content:"＋";display:inline-block;width:1.3em;color:var(--marker)}
+details.sem[open] summary::before{content:"－"}
+details.sem ul.items li:last-child{border-bottom:none}
+.ctl{margin:4px 0 0;font-size:15px}.tog{font:inherit;font-size:15px;color:var(--pencil);background:none;border:none;cursor:pointer;text-decoration:underline dotted;padding:0}
+.tog:hover{color:var(--ink)}
 footer{margin-top:50px;color:var(--pencil);font-size:14px;border-top:1.5px dashed var(--faint);padding-top:14px}
 """
 
@@ -102,6 +112,9 @@ def href(u, root):
 def li(it, root):
     if "h" in it:
         return f'<li class="sub">{esc(it["h"])}</li>'
+    if it.get("page"):
+        d = f'<span class="d">{esc(it["d"])}</span>' if it.get("d") else ""
+        return f'<li class="pg"><a href="{esc(it["page"])}.html">{esc(it["t"])}　›</a>{d}</li>'
     u = href(it["u"], root)
     tags = ""
     if it.get("stu"):
@@ -114,7 +127,38 @@ def li(it, root):
 
 
 def count(items):
-    return sum(1 for i in items if "h" not in i)
+    return sum(count(i["items"]) if i.get("page") else 1 for i in items if "h" not in i)
+
+
+def flat(items):
+    for i in items:
+        if i.get("page"):
+            yield from flat(i["items"])
+        elif "h" not in i:
+            yield i
+
+
+def subpage(parent, it, root):
+    """子頁面：依 {"h": ...} 分組，每組一個可收合的 details。"""
+    groups, cur = [], None
+    for x in it["items"]:
+        if "h" in x:
+            cur = (x["h"], []); groups.append(cur)
+        else:
+            if cur is None:
+                cur = ("", []); groups.append(cur)
+            cur[1].append(x)
+    body = (f'<div class="crumb"><a href="{root}index.html">← IsRight 入口</a>　／　'
+            f'<a href="{parent["id"]}.html">{esc(parent["name"])}</a>　／　{esc(it["t"])}</div>'
+            f'<header><h1>{esc(it["t"])}</h1></header><p class="note">{esc(it.get("d", ""))}</p>{SCRIBBLE}'
+            '<p class="ctl"><button class="tog" data-o="1">全部展開</button>　<button class="tog" data-o="0">全部收起</button></p>')
+    for name, xs in groups:
+        body += (f'<details class="sem"><summary>{esc(name)}<span class="d">　{len(xs)} 個</span></summary>'
+                 '<ul class="items">' + "".join(li(x, root) for x in xs) + "</ul></details>")
+    body += ('<script>document.addEventListener("click",e=>{const b=e.target.closest(".tog");if(!b)return;'
+             'document.querySelectorAll("details.sem").forEach(d=>d.open=b.dataset.o==="1");});</script>')
+    open(os.path.join(HERE, "c", it["page"] + ".html"), "w", encoding="utf-8").write(
+        page(it["t"] + "｜IsRight 入口", body, root))
 
 
 def card(href_, name, dz, sub, dashed=False):
@@ -149,8 +193,10 @@ for shelf in D["shelves"]:
             body += f'<p class="box">另有 {nd} 個試作版在<a href="draft.html#{c["id"]}">「未完成」</a>，確認後會搬過來。</p>'
         open(os.path.join(HERE, "c", c["id"] + ".html"), "w", encoding="utf-8").write(page(c["name"] + "｜IsRight 入口", body, root))
         for i in c["items"]:
-            if "h" not in i:
-                search_index.append({"t": i["t"], "d": i.get("d", ""), "u": href(i["u"], ""), "c": c["name"], "stu": i.get("stu", 0)})
+            if i.get("page"):
+                subpage(c, i, root)
+        for i in flat(c["items"]):
+            search_index.append({"t": i["t"], "d": i.get("d", ""), "u": href(i["u"], ""), "c": c["name"], "stu": i.get("stu", 0)})
 
 # ---- 未完成 ----
 root = "../"

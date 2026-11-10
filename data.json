@@ -38,171 +38,179 @@
        "stu": 1
       },
       {
-       "h": "七上"
-      },
-      {
-       "t": "一條數線，兩把尺",
-       "u": "https://huangisright.github.io/GiftedMath/units/g7a-ch1-number-line.html",
-       "stu": 1
-      },
-      {
-       "t": "拆開來看",
-       "u": "https://huangisright.github.io/GiftedMath/units/g7a-ch2-skeleton.html",
-       "stu": 1
-      },
-      {
-       "t": "把數線捲起來",
-       "u": "https://huangisright.github.io/GiftedMath/units/g7a-ch2-modular.html",
-       "stu": 1
-      },
-      {
-       "t": "分母是單位",
-       "u": "https://huangisright.github.io/GiftedMath/units/g7a-ch2-fraction-unit.html",
-       "stu": 1
-      },
-      {
-       "t": "先給它一個名字",
-       "u": "https://huangisright.github.io/GiftedMath/units/g7a-ch3-naming.html",
-       "stu": 1
-      },
-      {
-       "h": "七下"
-      },
-      {
-       "t": "一條不夠",
-       "u": "https://huangisright.github.io/GiftedMath/units/g7b-ch1-simultaneous.html",
-       "stu": 1
-      },
-      {
-       "t": "一個數不夠",
-       "u": "https://huangisright.github.io/GiftedMath/units/g7b-ch2-coordinates.html",
-       "stu": 1
-      },
-      {
-       "t": "換一個基準看",
-       "u": "https://huangisright.github.io/GiftedMath/units/g7b-ch3-ratio.html",
-       "stu": 1
-      },
-      {
-       "t": "答案是一整段",
-       "u": "https://huangisright.github.io/GiftedMath/units/g7b-ch4-inequality.html",
-       "stu": 1
-      },
-      {
-       "t": "誰能代表大家",
-       "u": "https://huangisright.github.io/GiftedMath/units/g7b-ch5-statistics.html",
-       "stu": 1
-      },
-      {
-       "t": "正對著看",
-       "u": "https://huangisright.github.io/GiftedMath/units/g7b-ch6-geometry.html",
-       "stu": 1
-      },
-      {
-       "h": "八上"
-      },
-      {
-       "t": "把十換成 x",
-       "u": "https://huangisright.github.io/GiftedMath/units/g8a-ch1-polynomial.html",
-       "stu": 1
-      },
-      {
-       "t": "不要乘，用數的",
-       "u": "https://huangisright.github.io/GiftedMath/units/g8a-s1-1-binomial.html",
-       "stu": 1
-      },
-      {
-       "t": "把面積翻回邊長",
-       "u": "https://huangisright.github.io/GiftedMath/units/g8a-ch2-sqrt-pythagoras.html",
-       "stu": 1
-      },
-      {
-       "t": "拆成乘法才看得見",
-       "u": "https://huangisright.github.io/GiftedMath/units/g8a-ch3-factoring.html",
-       "stu": 1
-      },
-      {
-       "t": "係數才是主角",
-       "u": "https://huangisright.github.io/GiftedMath/units/g8a-ch3-genfunc-1.html",
-       "stu": 1
-      },
-      {
-       "t": "一直加下去",
-       "u": "https://huangisright.github.io/GiftedMath/units/g8a-ch3-genfunc-2.html",
-       "stu": 1
-      },
-      {
-       "t": "變回你會解的樣子",
-       "u": "https://huangisright.github.io/GiftedMath/units/g8a-ch4-quadratic.html",
-       "stu": 1
-      },
-      {
-       "t": "中間的那個人在哪裡",
-       "u": "https://huangisright.github.io/GiftedMath/units/g8a-ch5-statistics.html",
-       "stu": 1
-      },
-      {
-       "h": "八下"
-      },
-      {
-       "t": "規則才是數列",
-       "u": "https://huangisright.github.io/GiftedMath/units/g8b-ch1-sequences.html",
-       "stu": 1
-      },
-      {
-       "t": "裡面有一個小的自己",
-       "u": "https://huangisright.github.io/GiftedMath/units/g8b-ch1-recursion.html",
-       "stu": 1
-      },
-      {
-       "t": "它不會改口",
-       "u": "https://huangisright.github.io/GiftedMath/units/g8b-ch2-functions.html",
-       "stu": 1
-      },
-      {
-       "t": "不能再動了",
-       "u": "https://huangisright.github.io/GiftedMath/units/g8b-ch3-triangle.html",
-       "stu": 1
-      },
-      {
-       "t": "那條線本來不在圖上",
-       "u": "https://huangisright.github.io/GiftedMath/units/g8b-ch4-parallel.html",
-       "stu": 1
-      },
-      {
-       "h": "九上"
-      },
-      {
-       "t": "兩個角就夠了",
-       "u": "https://huangisright.github.io/GiftedMath/units/g9a-ch1-similar.html",
-       "stu": 1
-      },
-      {
-       "t": "怎麼看都一樣",
-       "u": "https://huangisright.github.io/GiftedMath/units/g9a-ch2-circle.html",
-       "stu": 1
-      },
-      {
-       "t": "不是剛好",
-       "u": "https://huangisright.github.io/GiftedMath/units/g9a-ch3-proof.html",
-       "stu": 1
-      },
-      {
-       "h": "九下"
-      },
-      {
-       "t": "同一條，搬了家",
-       "u": "https://huangisright.github.io/GiftedMath/units/g9b-ch1-quadratic.html",
-       "stu": 1
-      },
-      {
-       "t": "算出來之前，先問",
-       "u": "https://huangisright.github.io/GiftedMath/units/g9b-ch2-statprob.html",
-       "stu": 1
-      },
-      {
-       "t": "多出來的那個方向",
-       "u": "https://huangisright.github.io/GiftedMath/units/g9b-ch3-solids.html",
+       "t": "各單元探索頁",
+       "d": "七上到九下 30 個主題，依學期收合",
+       "page": "math-units",
+       "items": [
+        {
+         "h": "七上"
+        },
+        {
+         "t": "一條數線，兩把尺",
+         "u": "https://huangisright.github.io/GiftedMath/units/g7a-ch1-number-line.html",
+         "stu": 1
+        },
+        {
+         "t": "拆開來看",
+         "u": "https://huangisright.github.io/GiftedMath/units/g7a-ch2-skeleton.html",
+         "stu": 1
+        },
+        {
+         "t": "把數線捲起來",
+         "u": "https://huangisright.github.io/GiftedMath/units/g7a-ch2-modular.html",
+         "stu": 1
+        },
+        {
+         "t": "分母是單位",
+         "u": "https://huangisright.github.io/GiftedMath/units/g7a-ch2-fraction-unit.html",
+         "stu": 1
+        },
+        {
+         "t": "先給它一個名字",
+         "u": "https://huangisright.github.io/GiftedMath/units/g7a-ch3-naming.html",
+         "stu": 1
+        },
+        {
+         "h": "七下"
+        },
+        {
+         "t": "一條不夠",
+         "u": "https://huangisright.github.io/GiftedMath/units/g7b-ch1-simultaneous.html",
+         "stu": 1
+        },
+        {
+         "t": "一個數不夠",
+         "u": "https://huangisright.github.io/GiftedMath/units/g7b-ch2-coordinates.html",
+         "stu": 1
+        },
+        {
+         "t": "換一個基準看",
+         "u": "https://huangisright.github.io/GiftedMath/units/g7b-ch3-ratio.html",
+         "stu": 1
+        },
+        {
+         "t": "答案是一整段",
+         "u": "https://huangisright.github.io/GiftedMath/units/g7b-ch4-inequality.html",
+         "stu": 1
+        },
+        {
+         "t": "誰能代表大家",
+         "u": "https://huangisright.github.io/GiftedMath/units/g7b-ch5-statistics.html",
+         "stu": 1
+        },
+        {
+         "t": "正對著看",
+         "u": "https://huangisright.github.io/GiftedMath/units/g7b-ch6-geometry.html",
+         "stu": 1
+        },
+        {
+         "h": "八上"
+        },
+        {
+         "t": "把十換成 x",
+         "u": "https://huangisright.github.io/GiftedMath/units/g8a-ch1-polynomial.html",
+         "stu": 1
+        },
+        {
+         "t": "不要乘，用數的",
+         "u": "https://huangisright.github.io/GiftedMath/units/g8a-s1-1-binomial.html",
+         "stu": 1
+        },
+        {
+         "t": "把面積翻回邊長",
+         "u": "https://huangisright.github.io/GiftedMath/units/g8a-ch2-sqrt-pythagoras.html",
+         "stu": 1
+        },
+        {
+         "t": "拆成乘法才看得見",
+         "u": "https://huangisright.github.io/GiftedMath/units/g8a-ch3-factoring.html",
+         "stu": 1
+        },
+        {
+         "t": "係數才是主角",
+         "u": "https://huangisright.github.io/GiftedMath/units/g8a-ch3-genfunc-1.html",
+         "stu": 1
+        },
+        {
+         "t": "一直加下去",
+         "u": "https://huangisright.github.io/GiftedMath/units/g8a-ch3-genfunc-2.html",
+         "stu": 1
+        },
+        {
+         "t": "變回你會解的樣子",
+         "u": "https://huangisright.github.io/GiftedMath/units/g8a-ch4-quadratic.html",
+         "stu": 1
+        },
+        {
+         "t": "中間的那個人在哪裡",
+         "u": "https://huangisright.github.io/GiftedMath/units/g8a-ch5-statistics.html",
+         "stu": 1
+        },
+        {
+         "h": "八下"
+        },
+        {
+         "t": "規則才是數列",
+         "u": "https://huangisright.github.io/GiftedMath/units/g8b-ch1-sequences.html",
+         "stu": 1
+        },
+        {
+         "t": "裡面有一個小的自己",
+         "u": "https://huangisright.github.io/GiftedMath/units/g8b-ch1-recursion.html",
+         "stu": 1
+        },
+        {
+         "t": "它不會改口",
+         "u": "https://huangisright.github.io/GiftedMath/units/g8b-ch2-functions.html",
+         "stu": 1
+        },
+        {
+         "t": "不能再動了",
+         "u": "https://huangisright.github.io/GiftedMath/units/g8b-ch3-triangle.html",
+         "stu": 1
+        },
+        {
+         "t": "那條線本來不在圖上",
+         "u": "https://huangisright.github.io/GiftedMath/units/g8b-ch4-parallel.html",
+         "stu": 1
+        },
+        {
+         "h": "九上"
+        },
+        {
+         "t": "兩個角就夠了",
+         "u": "https://huangisright.github.io/GiftedMath/units/g9a-ch1-similar.html",
+         "stu": 1
+        },
+        {
+         "t": "怎麼看都一樣",
+         "u": "https://huangisright.github.io/GiftedMath/units/g9a-ch2-circle.html",
+         "stu": 1
+        },
+        {
+         "t": "不是剛好",
+         "u": "https://huangisright.github.io/GiftedMath/units/g9a-ch3-proof.html",
+         "stu": 1
+        },
+        {
+         "h": "九下"
+        },
+        {
+         "t": "同一條，搬了家",
+         "u": "https://huangisright.github.io/GiftedMath/units/g9b-ch1-quadratic.html",
+         "stu": 1
+        },
+        {
+         "t": "算出來之前，先問",
+         "u": "https://huangisright.github.io/GiftedMath/units/g9b-ch2-statprob.html",
+         "stu": 1
+        },
+        {
+         "t": "多出來的那個方向",
+         "u": "https://huangisright.github.io/GiftedMath/units/g9b-ch3-solids.html",
+         "stu": 1
+        }
+       ],
        "stu": 1
       }
      ]
