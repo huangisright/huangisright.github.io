@@ -16,6 +16,23 @@
        "stu": 1
       },
       {
+       "t": "數學探索島（入口地圖）",
+       "d": "先預測、再操作、寫下紀錄，完成蓋單元章；登入後紀錄存雲端",
+       "u": "https://huangisright.github.io/explore-island/",
+       "stu": 1
+      },
+      {
+       "t": "探索紀錄本",
+       "d": "看自己走過哪些島、蓋了哪些章",
+       "u": "https://huangisright.github.io/explore-island/passport.html",
+       "stu": 1
+      },
+      {
+       "t": "探索島老師頁面",
+       "d": "全班紀錄、學生名單、加入碼",
+       "u": "https://huangisright.github.io/explore-island/teacher.html"
+      },
+      {
        "t": "章後延伸報告",
        "u": "https://huangisright.github.io/GiftedMath/extend.html",
        "stu": 1
@@ -584,6 +601,11 @@
    "name": "GiftedMath",
    "t": "數理資優班　互動探索站",
    "site": "https://huangisright.github.io/GiftedMath/"
+  },
+  {
+   "name": "explore-island",
+   "t": "數學探索島",
+   "site": "https://huangisright.github.io/explore-island/"
   },
   {
    "name": "isright-tools",
