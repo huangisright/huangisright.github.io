@@ -212,6 +212,178 @@
         }
        ],
        "stu": 1
+      },
+      {
+       "t": "幾何明珠",
+       "d": "8 個單元・28 節動態頁，依單元收合",
+       "page": "geo",
+       "items": [
+        {
+         "h": "單元一"
+        },
+        {
+         "t": "一個不會變的數",
+         "u": "https://huangisright.github.io/GiftedMath/units/gp-u1-1.html",
+         "stu": 1
+        },
+        {
+         "t": "空白搬了家",
+         "u": "https://huangisright.github.io/GiftedMath/units/gp-u1-2.html",
+         "stu": 1
+        },
+        {
+         "t": "三條線，交在一點",
+         "u": "https://huangisright.github.io/GiftedMath/units/gp-u1-3.html",
+         "stu": 1
+        },
+        {
+         "h": "單元二"
+        },
+        {
+         "t": "光走的那一條",
+         "u": "https://huangisright.github.io/GiftedMath/units/gp-u2-1.html",
+         "stu": 1
+        },
+        {
+         "t": "最短的那一圈",
+         "u": "https://huangisright.github.io/GiftedMath/units/gp-u2-2.html",
+         "stu": 1
+        },
+        {
+         "t": "三條路接成一條",
+         "u": "https://huangisright.github.io/GiftedMath/units/gp-u2-3.html",
+         "stu": 1
+        },
+        {
+         "h": "單元三"
+        },
+        {
+         "t": "離 A 是離 B 的兩倍",
+         "u": "https://huangisright.github.io/GiftedMath/units/gp-u3-1.html",
+         "stu": 1
+        },
+        {
+         "t": "從頂點到底邊的那一條",
+         "u": "https://huangisright.github.io/GiftedMath/units/gp-u3-2.html",
+         "stu": 1
+        },
+        {
+         "t": "切下來的那一塊",
+         "u": "https://huangisright.github.io/GiftedMath/units/gp-u3-3.html",
+         "stu": 1
+        },
+        {
+         "h": "單元四"
+        },
+        {
+         "t": "又交在一點",
+         "u": "https://huangisright.github.io/GiftedMath/units/gp-u4-1.html",
+         "stu": 1
+        },
+        {
+         "t": "一條線穿過去",
+         "u": "https://huangisright.github.io/GiftedMath/units/gp-u4-2.html",
+         "stu": 1
+        },
+        {
+         "t": "三組對邊，交在一條線上",
+         "u": "https://huangisright.github.io/GiftedMath/units/gp-u4-3.html",
+         "stu": 1
+        },
+        {
+         "h": "單元五"
+        },
+        {
+         "t": "三個點排成一列",
+         "u": "https://huangisright.github.io/GiftedMath/units/gp-u5-1.html",
+         "stu": 1
+        },
+        {
+         "t": "九個點，一個圓",
+         "u": "https://huangisright.github.io/GiftedMath/units/gp-u5-2.html",
+         "stu": 1
+        },
+        {
+         "t": "三個尖，一條線",
+         "u": "https://huangisright.github.io/GiftedMath/units/gp-u5-3.html",
+         "stu": 1
+        },
+        {
+         "h": "單元六"
+        },
+        {
+         "t": "乘起來還是那個數",
+         "u": "https://huangisright.github.io/GiftedMath/units/gp-u6-1.html",
+         "stu": 1
+        },
+        {
+         "t": "站在兩個圓中間",
+         "u": "https://huangisright.github.io/GiftedMath/units/gp-u6-2.html",
+         "stu": 1
+        },
+        {
+         "t": "中點兩邊一樣長",
+         "u": "https://huangisright.github.io/GiftedMath/units/gp-u6-3.html",
+         "stu": 1
+        },
+        {
+         "t": "對角線乘起來",
+         "u": "https://huangisright.github.io/GiftedMath/units/gp-u6-4.html",
+         "stu": 1
+        },
+        {
+         "h": "單元七"
+        },
+        {
+         "t": "轉兩次",
+         "u": "https://huangisright.github.io/GiftedMath/units/gp-u7-1.html",
+         "stu": 1
+        },
+        {
+         "t": "三個中心",
+         "u": "https://huangisright.github.io/GiftedMath/units/gp-u7-2.html",
+         "stu": 1
+        },
+        {
+         "t": "中點又是正三角形",
+         "u": "https://huangisright.github.io/GiftedMath/units/gp-u7-3.html",
+         "stu": 1
+        },
+        {
+         "t": "轉回原樣",
+         "u": "https://huangisright.github.io/GiftedMath/units/gp-u7-4.html",
+         "stu": 1
+        },
+        {
+         "h": "單元八"
+        },
+        {
+         "t": "畫出來的地板",
+         "u": "https://huangisright.github.io/GiftedMath/units/gp-u8-1.html",
+         "stu": 1
+        },
+        {
+         "t": "一個數都不用算",
+         "u": "https://huangisright.github.io/GiftedMath/units/gp-u8-2.html",
+         "stu": 1
+        },
+        {
+         "t": "圓上六個點",
+         "u": "https://huangisright.github.io/GiftedMath/units/gp-u8-3.html",
+         "stu": 1
+        },
+        {
+         "t": "翻譯過來的句子",
+         "u": "https://huangisright.github.io/GiftedMath/units/gp-u8-4.html",
+         "stu": 1
+        },
+        {
+         "t": "最後一題",
+         "u": "https://huangisright.github.io/GiftedMath/units/gp-u8-5.html",
+         "stu": 1
+        }
+       ],
+       "stu": 1
       }
      ]
     },
@@ -332,184 +504,6 @@
       {
        "t": "虛擬風洞模擬系統",
        "u": "https://huangisright.github.io/virtual_wind_tunnel/",
-       "stu": 1
-      }
-     ]
-    },
-    {
-     "id": "geo",
-     "name": "幾何明珠",
-     "dz": "geo",
-     "note": "每一頁都在問同一件事：什麼沒有變？",
-     "items": [
-      {
-       "t": "互動探索站（幾何明珠在最下面）",
-       "d": "28 節動態頁，依單元收合",
-       "u": "https://huangisright.github.io/GiftedMath/",
-       "stu": 1
-      },
-      {
-       "h": "單元一"
-      },
-      {
-       "t": "一個不會變的數",
-       "u": "https://huangisright.github.io/GiftedMath/units/gp-u1-1.html",
-       "stu": 1
-      },
-      {
-       "t": "空白搬了家",
-       "u": "https://huangisright.github.io/GiftedMath/units/gp-u1-2.html",
-       "stu": 1
-      },
-      {
-       "t": "三條線，交在一點",
-       "u": "https://huangisright.github.io/GiftedMath/units/gp-u1-3.html",
-       "stu": 1
-      },
-      {
-       "h": "單元二"
-      },
-      {
-       "t": "光走的那一條",
-       "u": "https://huangisright.github.io/GiftedMath/units/gp-u2-1.html",
-       "stu": 1
-      },
-      {
-       "t": "最短的那一圈",
-       "u": "https://huangisright.github.io/GiftedMath/units/gp-u2-2.html",
-       "stu": 1
-      },
-      {
-       "t": "三條路接成一條",
-       "u": "https://huangisright.github.io/GiftedMath/units/gp-u2-3.html",
-       "stu": 1
-      },
-      {
-       "h": "單元三"
-      },
-      {
-       "t": "離 A 是離 B 的兩倍",
-       "u": "https://huangisright.github.io/GiftedMath/units/gp-u3-1.html",
-       "stu": 1
-      },
-      {
-       "t": "從頂點到底邊的那一條",
-       "u": "https://huangisright.github.io/GiftedMath/units/gp-u3-2.html",
-       "stu": 1
-      },
-      {
-       "t": "切下來的那一塊",
-       "u": "https://huangisright.github.io/GiftedMath/units/gp-u3-3.html",
-       "stu": 1
-      },
-      {
-       "h": "單元四"
-      },
-      {
-       "t": "又交在一點",
-       "u": "https://huangisright.github.io/GiftedMath/units/gp-u4-1.html",
-       "stu": 1
-      },
-      {
-       "t": "一條線穿過去",
-       "u": "https://huangisright.github.io/GiftedMath/units/gp-u4-2.html",
-       "stu": 1
-      },
-      {
-       "t": "三組對邊，交在一條線上",
-       "u": "https://huangisright.github.io/GiftedMath/units/gp-u4-3.html",
-       "stu": 1
-      },
-      {
-       "h": "單元五"
-      },
-      {
-       "t": "三個點排成一列",
-       "u": "https://huangisright.github.io/GiftedMath/units/gp-u5-1.html",
-       "stu": 1
-      },
-      {
-       "t": "九個點，一個圓",
-       "u": "https://huangisright.github.io/GiftedMath/units/gp-u5-2.html",
-       "stu": 1
-      },
-      {
-       "t": "三個尖，一條線",
-       "u": "https://huangisright.github.io/GiftedMath/units/gp-u5-3.html",
-       "stu": 1
-      },
-      {
-       "h": "單元六"
-      },
-      {
-       "t": "乘起來還是那個數",
-       "u": "https://huangisright.github.io/GiftedMath/units/gp-u6-1.html",
-       "stu": 1
-      },
-      {
-       "t": "站在兩個圓中間",
-       "u": "https://huangisright.github.io/GiftedMath/units/gp-u6-2.html",
-       "stu": 1
-      },
-      {
-       "t": "中點兩邊一樣長",
-       "u": "https://huangisright.github.io/GiftedMath/units/gp-u6-3.html",
-       "stu": 1
-      },
-      {
-       "t": "對角線乘起來",
-       "u": "https://huangisright.github.io/GiftedMath/units/gp-u6-4.html",
-       "stu": 1
-      },
-      {
-       "h": "單元七"
-      },
-      {
-       "t": "轉兩次",
-       "u": "https://huangisright.github.io/GiftedMath/units/gp-u7-1.html",
-       "stu": 1
-      },
-      {
-       "t": "三個中心",
-       "u": "https://huangisright.github.io/GiftedMath/units/gp-u7-2.html",
-       "stu": 1
-      },
-      {
-       "t": "中點又是正三角形",
-       "u": "https://huangisright.github.io/GiftedMath/units/gp-u7-3.html",
-       "stu": 1
-      },
-      {
-       "t": "轉回原樣",
-       "u": "https://huangisright.github.io/GiftedMath/units/gp-u7-4.html",
-       "stu": 1
-      },
-      {
-       "h": "單元八"
-      },
-      {
-       "t": "畫出來的地板",
-       "u": "https://huangisright.github.io/GiftedMath/units/gp-u8-1.html",
-       "stu": 1
-      },
-      {
-       "t": "一個數都不用算",
-       "u": "https://huangisright.github.io/GiftedMath/units/gp-u8-2.html",
-       "stu": 1
-      },
-      {
-       "t": "圓上六個點",
-       "u": "https://huangisright.github.io/GiftedMath/units/gp-u8-3.html",
-       "stu": 1
-      },
-      {
-       "t": "翻譯過來的句子",
-       "u": "https://huangisright.github.io/GiftedMath/units/gp-u8-4.html",
-       "stu": 1
-      },
-      {
-       "t": "最後一題",
-       "u": "https://huangisright.github.io/GiftedMath/units/gp-u8-5.html",
        "stu": 1
       }
      ]
@@ -652,7 +646,7 @@
   }
  ],
  "draft_cats": {
-  "幾何明珠": "geo",
+  "幾何明珠": "math",
   "金門等時線": "kinmen",
   "密室逃脫": "escape",
   "數學教材": "misc",
