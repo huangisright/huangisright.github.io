@@ -33,7 +33,20 @@
        "u": "https://huangisright.github.io/explore-island/teacher.html"
       },
       {
-       "t": "章後延伸報告",
+       "t": "報告島（章後延伸報告）",
+       "d": "選一題做一頁海報、交照片；截止前都能改，看得到老師回饋",
+       "u": "https://huangisright.github.io/explore-island/report.html",
+       "stu": 1
+      },
+      {
+       "t": "報告島展示廳",
+       "d": "海報展示、上台報告時給同學星星；老師在這裡排順序、投影報告、評分",
+       "u": "https://huangisright.github.io/explore-island/report-show.html",
+       "stu": 1
+      },
+      {
+       "t": "章後延伸報告（題庫）",
+       "d": "144 題一覽，可列印單題",
        "u": "https://huangisright.github.io/GiftedMath/extend.html",
        "stu": 1
       },
