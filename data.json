@@ -16,7 +16,7 @@
        "stu": 1
       },
       {
-       "t": "數學探索島（入口地圖）",
+       "t": "一線數光（入口地圖）",
        "d": "先預測、再操作、寫下紀錄，完成蓋單元章；登入後紀錄存雲端",
        "u": "https://huangisright.github.io/explore-island/",
        "stu": 1
@@ -228,12 +228,12 @@
       },
       {
        "t": "幾何拾光",
-       "d": "群島海圖・8 個單元・28 節，每節都是數學探索島的紀錄版",
+       "d": "群島海圖・8 個單元・28 節，每節都是一線數光的紀錄版",
        "page": "geo",
        "items": [
         {
          "t": "幾何拾光群島（海圖）",
-         "d": "在數學探索島裡：八座島、28 節，點島看節次與動態頁",
+         "d": "在一線數光裡：八座島、28 節，點島看節次與動態頁",
          "u": "https://huangisright.github.io/explore-island/geo.html",
          "stu": 1
         },
@@ -631,7 +631,7 @@
   },
   {
    "name": "explore-island",
-   "t": "數學探索島",
+   "t": "一線數光",
    "site": "https://huangisright.github.io/explore-island/"
   },
   {
