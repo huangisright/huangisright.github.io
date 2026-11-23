@@ -228,19 +228,13 @@
       },
       {
        "t": "幾何拾光",
-       "d": "群島海圖＋星座圖・8 個單元・28 節動態頁，依單元收合",
+       "d": "群島海圖・8 個單元・28 節動態頁，依單元收合",
        "page": "geo",
        "items": [
         {
          "t": "幾何拾光群島（海圖）",
          "d": "在數學探索島裡：八座島、28 節，點島看節次與動態頁",
          "u": "https://huangisright.github.io/explore-island/geo.html",
-         "stu": 1
-        },
-        {
-         "t": "幾何拾光星座圖",
-         "d": "同一招在哪幾節又出現；老師翻開一張，學生替它取名",
-         "u": "https://huangisright.github.io/explore-island/geo-stars.html",
          "stu": 1
         },
         {
