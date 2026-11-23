@@ -228,9 +228,21 @@
       },
       {
        "t": "幾何拾光",
-       "d": "8 個單元・28 節動態頁，依單元收合",
+       "d": "群島海圖＋星座圖・8 個單元・28 節動態頁，依單元收合",
        "page": "geo",
        "items": [
+        {
+         "t": "幾何拾光群島（海圖）",
+         "d": "在數學探索島裡：八座島、28 節，點島看節次與動態頁",
+         "u": "https://huangisright.github.io/explore-island/geo.html",
+         "stu": 1
+        },
+        {
+         "t": "幾何拾光星座圖",
+         "d": "同一招在哪幾節又出現；老師翻開一張，學生替它取名",
+         "u": "https://huangisright.github.io/explore-island/geo-stars.html",
+         "stu": 1
+        },
         {
          "h": "單元一"
         },
@@ -673,24 +685,6 @@
   "資優行政與科展": "admin"
  },
  "drafts": [
-  {
-   "slug": "gp-map-3d",
-   "t": "幾何拾光群島 3D",
-   "cat": "幾何拾光",
-   "d": "課程地圖",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/KEcLYjBxb4PYnjuh7gWWiP",
-   "u": "draft/gp-map-3d.html"
-  },
-  {
-   "slug": "gp-map-2d",
-   "t": "幾何拾光群島 2D",
-   "cat": "幾何拾光",
-   "d": "課程地圖",
-   "type": "html",
-   "claude": "https://claude.ai/artifact/BTHNULA1nw9oKYaL9Fz8HY",
-   "u": "draft/gp-map-2d.html"
-  },
   {
    "slug": "kinmen-isochrone-unit",
    "t": "金門有多大？等時線單元",
