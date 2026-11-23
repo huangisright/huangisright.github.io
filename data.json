@@ -227,7 +227,7 @@
        "stu": 1
       },
       {
-       "t": "幾何明珠",
+       "t": "幾何拾光",
        "d": "8 個單元・28 節動態頁，依單元收合",
        "page": "geo",
        "items": [
@@ -665,7 +665,7 @@
   }
  ],
  "draft_cats": {
-  "幾何明珠": "math",
+  "幾何拾光": "math",
   "金門等時線": "kinmen",
   "密室逃脫": "escape",
   "數學教材": "misc",
@@ -675,8 +675,8 @@
  "drafts": [
   {
    "slug": "gp-map-3d",
-   "t": "幾何明珠群島 3D",
-   "cat": "幾何明珠",
+   "t": "幾何拾光群島 3D",
+   "cat": "幾何拾光",
    "d": "課程地圖",
    "type": "html",
    "claude": "https://claude.ai/artifact/KEcLYjBxb4PYnjuh7gWWiP",
@@ -684,8 +684,8 @@
   },
   {
    "slug": "gp-map-2d",
-   "t": "幾何明珠群島 2D",
-   "cat": "幾何明珠",
+   "t": "幾何拾光群島 2D",
+   "cat": "幾何拾光",
    "d": "課程地圖",
    "type": "html",
    "claude": "https://claude.ai/artifact/BTHNULA1nw9oKYaL9Fz8HY",
