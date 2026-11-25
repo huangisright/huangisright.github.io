@@ -549,6 +549,11 @@
        "u": "https://huangisright.github.io/isright-tools/"
       },
       {
+       "t": "所有內容心智圖",
+       "d": "我手上所有專案的總覽；超過 3 天沒動自動標擱置，點節點可跳到相關對話",
+       "u": "https://claude.ai/artifact/HFRf5874BAKE3ZFvWjCGBM"
+      },
+      {
        "t": "題目變形工坊",
        "d": "參數化出卷",
        "u": "https://huangisright.github.io/isright-tools/question-variant/"
