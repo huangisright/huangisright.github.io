@@ -403,6 +403,30 @@
         }
        ],
        "stu": 1
+      },
+      {
+       "t": "代數拾光",
+       "d": "同一件事換一種寫法就看見了・目前 2 個單元，每單元都是一線數光的紀錄版",
+       "page": "alg",
+       "items": [
+        {
+         "t": "代數拾光（入口）",
+         "d": "在一線數光裡：列出做好的單元",
+         "u": "https://huangisright.github.io/explore-island/alg.html",
+         "stu": 1
+        },
+        {
+         "t": "遮住頂點以後",
+         "u": "https://huangisright.github.io/explore-island/alg-u1.html",
+         "stu": 1
+        },
+        {
+         "t": "同一塊面積，兩種算法",
+         "u": "https://huangisright.github.io/explore-island/alg-u2.html",
+         "stu": 1
+        }
+       ],
+       "stu": 1
       }
      ]
     },
